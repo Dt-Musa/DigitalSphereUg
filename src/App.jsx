@@ -33,6 +33,27 @@ import {
 } from "react-icons/bs";
 import musaImage from "./assets/images/Musa.jpeg";
 import brightImage from "./assets/images/Bright.jpeg";
+import ethnileGroupHero from "./assets/hero/ethnile-group.jpg.jpg";
+import filecoinGroupPhoto from "./assets/gallery/filecoin-group.jpg.jpg";
+import stellarGroupPhoto from "./assets/about/stellar-group.jpg.jpg";
+import kyambogoLecturePhoto from "./assets/story/kyambongo-lecture.jpg.jpg";
+import chainlinkRooftopPhoto from "./assets/community/chainlink-rooftop.jpg.jpg";
+import chainlinkStreetGroupPhoto from "./assets/community/chainlink.jpg.jpg";
+import bauLogoImage from "./assets/community/blockchain-association of Uganda.jpg";
+import celoLogoImage from "./assets/community/celo.jpg";
+import ethnileLogoImage from "./assets/community/ethnile.jpg";
+import chainlinkEaLogoImage from "./assets/community/20260325_020845.jpg";
+import stellarEaLogoImage from "./assets/community/stellar.jpg";
+import developerDaoLogoImage from "./assets/community/develperDAO.png";
+import learnWeb3LogoImage from "./assets/community/learnWeb3.jpg";
+import algorandAfricaLogoImage from "./assets/community/algorand.jpg";
+import web3AfricaLogoImage from "./assets/community/web3Africa.jpg";
+import ethnileVenuePhoto from "./assets/gallery/ethnile-sponserbanner.jpg.jpg";
+import devfestFlyerPhoto from "./assets/events/devfest-2026-flyer.jpeg";
+import buildlSessionPhoto from "./assets/gallery/buildl-session group.jpg";
+import outdoorLaptopPhoto from "./assets/gallery/outdoor-laptop session.jpg";
+import devfestCrowdPhoto from "./assets/gallery/devfest-crowd.jpg.jpg";
+import kyambogoRoomPhoto from "./assets/gallery/kyambongo-lecture -room.jpg.jpg";
 
 // ─── Colors ───────────────────────────────────────────────────────
 const THEMES = {
@@ -40,15 +61,15 @@ const THEMES = {
     bg:"#05070f", bg2:"#080c18", surface:"#0d1120", card:"#101525", cardHov:"#141a2e",
     border:"#1c2540", borderHi:"#2847D4", navy:"#0a1128",
     blue:"#2847D4", blueLt:"#4d6ff0", blueDim:"#1a35b0",
-    cyan:"#38bdf8", green:"#34d399", amber:"#38bdf8", purple:"#818cf8",
-    text:"#eef2ff", textSub:"#94a3b8", textDim:"#475569", white:"#ffffff",
+    cyan:"#38bdf8", green:"#34d399", amber:"#38bdf8", purple:"#818cf8", accent:"#f0b429",
+    text:"#eef2ff", textSub:"#a4b2ca", textDim:"#6f82a0", white:"#ffffff",
   },
   light: {
     bg:"#f6f8fc", bg2:"#eef2fb", surface:"#ffffff", card:"#ffffff", cardHov:"#f2f5fd",
     border:"#d6ddf0", borderHi:"#2847D4", navy:"#dfe7fa",
     blue:"#2847D4", blueLt:"#4d6ff0", blueDim:"#1a35b0",
-    cyan:"#0ea5e9", green:"#10b981", amber:"#0ea5e9", purple:"#6d78e8",
-    text:"#0b1220", textSub:"#334155", textDim:"#64748b", white:"#ffffff",
+    cyan:"#0ea5e9", green:"#10b981", amber:"#0ea5e9", purple:"#6d78e8", accent:"#9f5a00",
+    text:"#0b1220", textSub:"#334155", textDim:"#55657d", white:"#ffffff",
   },
 };
 
@@ -56,7 +77,7 @@ let C = THEMES.dark;
 
 // ─── Data ─────────────────────────────────────────────────────────
 const TRACKS = [
-  { id:1, icon:BsLink45Deg, color:C.green, label:"TRACK 01", title:"Blockchain Basics", sub:"No code required", level:"Beginner", time:"2–3 weeks", desc:"Understand how blockchain works from the ground up — concepts, use cases, and why it matters for Africa.", resources:[
+  { id:1, icon:BsLink45Deg, color:C.green, label:"TRACK 01", title:"Blockchain Basics", sub:"No code required", level:"Beginner", time:"2–3 weeks", desc:"Understand how blockchain works from the ground up — concepts, use cases, and why it matters for Africa. Used by students at Makerere, Kyambogo & beyond.", resources:[
     { title:"But How Does Bitcoin Actually Work?", url:"https://www.youtube.com/watch?v=bBC-nXj3Ng4", time:"26 min", type:"Video" },
     { title:"Blockchain 101 — Anders Brownworth", url:"https://andersbrownworth.com/blockchain/", time:"30 min", type:"Interactive" },
     { title:"IBM — What is Blockchain?", url:"https://www.ibm.com/topics/blockchain", time:"1 hr", type:"Article" },
@@ -87,11 +108,11 @@ const TRACKS = [
 ];
 
 const EVENTS = [
-  { title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
-  { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBONGO UNIVERSITY", tag:"University Session", color:C.cyan, featured:true, desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications. Discover how DeFi is reshaping finance through secure, transparent, and intermediary-free systems. Theme: Unlocking the Future of Finance: Exploring DeFi with Chainlink Oracles", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
-  { title:"Kampala Blockchain Summit 2026", date:"Late 2026 — TBC", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, featured:false, desc:"Annual flagship summit by the Blockchain Association of Uganda (BAU). The leading policy and innovation event for Uganda's blockchain ecosystem.", link:"https://bau.ug" },
-  { title:"GDG Kampala Web3 Meetup", date:"Recurring 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, featured:false, desc:"Regular community meetups by Google Developer Group Kampala. Beginner-friendly talks, networking, and hands-on sessions.", link:"https://gdg.community.dev/gdg-kampala/" },
-  { title:"BAU Youth Blockchain Innovation", date:"Ongoing 2026", location:"Uganda", tag:"Programme", color:C.purple, featured:false, desc:"Blockchain Association of Uganda programme focused on empowering youth through blockchain technology across Uganda.", link:"https://bau.ug" },
+  { title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
+  { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"chainlinkflyer", tag:"University Session", color:C.cyan, featured:true, image:chainlinkRooftopPhoto, desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
+  { title:"Kampala Blockchain Summit 2026", date:"Late 2026 — TBC", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, featured:false, image:ethnileVenuePhoto, desc:"Annual flagship summit by the Blockchain Association of Uganda (BAU). The leading policy and innovation event for Uganda's blockchain ecosystem.", link:"https://bau.ug" },
+  { title:"GDG Kampala Web3 Meetup", date:"Recurring 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, featured:false, image:chainlinkStreetGroupPhoto, desc:"Regular community meetups by Google Developer Group Kampala. Beginner-friendly talks, networking, and hands-on sessions.", link:"https://gdg.community.dev/gdg-kampala/" },
+  { title:"BAU Youth Blockchain Innovation", date:"Ongoing 2026", location:"Uganda", tag:"Programme", color:C.purple, featured:false, image:buildlSessionPhoto, desc:"Blockchain Association of Uganda programme focused on empowering youth through blockchain technology across Uganda.", link:"https://bau.ug" },
 ];
 
 const OPPS = [
@@ -117,9 +138,23 @@ const OPPS = [
 ];
 
 const POSTS = [
-  { id:1, tag:"Education", tagColor:C.green, title:"What is Blockchain — Explained for Ugandans", excerpt:"Forget the jargon. Here's what blockchain actually is, why it matters for Africa, and why Uganda is positioned to benefit more than most.", date:"March 2026", read:"5 min read", body:"Blockchain is simply a digital record book that nobody owns but everyone can see. Instead of a bank keeping your transaction history on their private servers, blockchain stores it across thousands of computers worldwide. No single person, company or government can change it.\n\nFor Uganda and Africa broadly, this is significant. Think about land ownership disputes, remittances from the diaspora eating 10% in fees, or the difficulty of building a credit history when you're unbanked. Blockchain has practical, near-term answers to all of these.\n\nThe opportunity is real. East Africa already leads the world in mobile money adoption. Adding blockchain on top of that existing infrastructure is a natural next step — and young Ugandans who understand both worlds will be the ones who build it.\n\nYou don't need to be a programmer to be part of this. Understanding the technology, the ecosystem, and the problems it solves is itself a skill the industry desperately needs." },
-  { id:2, tag:"Resources", tagColor:C.blueLt, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
-  { id:3, tag:"Opportunities", tagColor:C.cyan, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
+  { id:1, author:"Irankunda Musa", tag:"Education", tagColor:C.green, title:"What is Blockchain — Explained for Ugandans", excerpt:"Forget the jargon. Here's what blockchain actually is, why it matters for Africa, and why Uganda is positioned to benefit more than most.", date:"March 2026", read:"5 min read", body:"Blockchain is simply a digital record book that nobody owns but everyone can see. Instead of a bank keeping your transaction history on their private servers, blockchain stores it across thousands of computers worldwide. No single person, company or government can change it.\n\nFor Uganda and Africa broadly, this is significant. Think about land ownership disputes, remittances from the diaspora eating 10% in fees, or the difficulty of building a credit history when you're unbanked. Blockchain has practical, near-term answers to all of these.\n\nThe opportunity is real. East Africa already leads the world in mobile money adoption. Adding blockchain on top of that existing infrastructure is a natural next step — and young Ugandans who understand both worlds will be the ones who build it.\n\nYou don't need to be a programmer to be part of this. Understanding the technology, the ecosystem, and the problems it solves is itself a skill the industry desperately needs." },
+  { id:2, author:"Irinatwe Bright", tag:"Resources", tagColor:C.blueLt, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
+  { id:3, author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
+];
+
+const GALLERY_ITEMS = [
+  { src:ethnileGroupHero, caption:"ETHNile Outdoor Group — Kampala" },
+  { src:filecoinGroupPhoto, caption:"Filecoin Session — Kampala" },
+  { src:chainlinkRooftopPhoto, caption:"Chainlink Rooftop Session — Kampala" },
+  { src:chainlinkStreetGroupPhoto, caption:"Chainlink Kampala Group — Kampala" },
+  { src:buildlSessionPhoto, caption:"BUIDL Africa Session — Kampala" },
+  { src:outdoorLaptopPhoto, caption:"Outdoor Laptop Session — Kampala" },
+  { src:kyambogoLecturePhoto, caption:"Kyambogo Lecture Hall — Kampala" },
+  { src:stellarGroupPhoto, caption:"Stellar Group — Kampala" },
+  { src:devfestCrowdPhoto, caption:"DevFest Hackathon Crowd — Kampala" },
+  { src:ethnileVenuePhoto, caption:"ETHNile Venue — Kampala" },
+  { src:kyambogoRoomPhoto, caption:"Kyambogo Session Room — Kampala" },
 ];
 
 // ─── Team Data ────────────────────────────────────────────────────
@@ -181,15 +216,15 @@ const RESOURCES_DATA = [
   { cat:"Learning Platforms", icon:BsBook, color:C.green, items:[
     { title:"Cyfrin Updraft", desc:"The best structured Solidity course available — completely free and built for beginners.", link:"https://updraft.cyfrin.io/", tag:"Free" },
     { title:"Alchemy University", desc:"Road to Web3 — structured learning path from zero to deployed dApp.", link:"https://university.alchemy.com/", tag:"Free" },
-    { title:"LearnWeb3 DAO", desc:"Community-driven platform with beginner to advanced Web3 development tracks.", link:"https://learnweb3.io/", tag:"Free" },
+    { title:"LearnWeb3 DAO", desc:"Community-driven platform with beginner to advanced Web3 development tracks.", link:"https://learnweb3.io/", tag:"Free", logo:learnWeb3LogoImage },
     { title:"CryptoZombies", desc:"Learn Solidity by building a zombie game — the most fun way to start coding on Ethereum.", link:"https://cryptozombies.io/", tag:"Free" },
     { title:"Ethereum.org Learn", desc:"Official Ethereum Foundation learning resources — concepts, tutorials, and documentation.", link:"https://ethereum.org/en/learn/", tag:"Free" },
   ]},
   { cat:"Uganda & Africa Blockchain", icon:BsGlobeEuropeAfrica, color:C.cyan, items:[
     { title:"Blockchain Association Uganda (BAU)", desc:"The official industry body for blockchain in Uganda. Events, programmes, and policy.", link:"https://bau.ug/", tag:"Uganda" },
     { title:"Blockchain DevFest Kampala", desc:"Uganda's premier annual Web3 developer conference. Hackathon, workshops, speakers.", link:"https://devfestkampala.com/", tag:"Uganda" },
-    { title:"Web3 Africa", desc:"Pan-African Web3 community connecting builders, developers and founders across the continent.", link:"https://web3africa.com/", tag:"Africa" },
-    { title:"Algorand Africa", desc:"Algorand Foundation's initiative to grow blockchain development across Africa.", link:"https://algorand.foundation/", tag:"Africa" },
+    { title:"Web3 Africa", desc:"Pan-African Web3 community connecting builders, developers and founders across the continent.", link:"https://www.web3afrika.com/", tag:"Africa", logo:web3AfricaLogoImage },
+    { title:"Algorand Africa", desc:"Algorand Foundation's initiative to grow blockchain development across Africa.", link:"https://algorand.foundation/", tag:"Africa", logo:algorandAfricaLogoImage },
   ]},
   { cat:"Wallets & Testnet Tools", icon:BsKey, color:C.purple, items:[
     { title:"MetaMask", desc:"Install this first — it is your gateway to every blockchain application.", link:"https://metamask.io/", tag:"Essential" },
@@ -221,25 +256,14 @@ const ICON = {
 };
 
 function getAccentTextStyle(theme) {
-  if (theme === "light") {
-    return {
-      color: C.blueDim,
-    };
-  }
-
   return {
-    background: `linear-gradient(135deg,${C.blue} 0%,${C.blueLt} 50%,${C.cyan} 100%)`,
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    color: "transparent",
-    WebkitTextFillColor: "transparent",
-    display: "inline-block",
+    color: C.accent,
   };
 }
 
 // ─── Global Styles ────────────────────────────────────────────────
 const GStyles = `
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
 body{background:${C.bg};font-family:'Manrope',sans-serif;color:${C.text};max-width:100%;overflow-x:hidden}
@@ -269,6 +293,8 @@ img,svg{max-width:100%}
 .team-head{display:flex;align-items:center;gap:16px;min-width:0}
 .team-meta{min-width:0;flex:1}
 .team-role{max-width:100%;white-space:normal!important;line-height:1.3;text-transform:none!important;letter-spacing:.2px!important}
+.photo-masonry{columns:3 280px;column-gap:14px}
+.photo-item{break-inside:avoid;margin-bottom:14px}
 @media(max-width:1050px){.desktop-nav{display:none!important}}
 @media(min-width:1100px){.team-avatar{width:132px;height:132px;border-radius:24px}}
 @media(min-width:1051px){.mob-menu{display:none!important}.mob-btn{display:none!important}.mob-actions{display:none!important}}
@@ -283,16 +309,28 @@ img,svg{max-width:100%}
   .team-head{align-items:flex-start}
   .team-meta{display:flex;flex-direction:column;gap:6px}
   .team-role{white-space:normal!important;line-height:1.35}
+  .photo-masonry{columns:1 240px}
+  .home-track-featured,.home-event-featured,.events-featured-card,.op-featured-card,.res-featured-card{grid-column:span 1!important}
+  .op-grid,.res-grid{grid-template-columns:1fr!important}
 }
 @media(max-width:420px){
   .brand-text{font-size:14px!important;letter-spacing:-0.2px!important}
+  .hero-shell{padding-right:0!important}
+  .hero-btns button{width:100%!important}
+  .stats-row{padding:12px!important;gap:14px!important}
+  .gallery-title{font-size:clamp(24px,7vw,30px)!important}
+}
+@media(max-width:360px){
+  .brand-text{font-size:13px!important}
+  .hero-btns{gap:8px!important}
+  .stats-row{gap:10px!important}
 }
 `;
 
 // ─── Shared Components ────────────────────────────────────────────
 function Pill({ label, color, small, nowrap = true, uppercase = true, className }) {
   return (
-    <span className={className} style={{ display:"inline-block", background:`${color}18`, color, border:`1px solid ${color}35`, padding:small?"2px 8px":"4px 12px", borderRadius:99, fontSize:small?10:11, fontWeight:700, fontFamily:"'Outfit',sans-serif", letterSpacing:"0.5px", textTransform:uppercase?"uppercase":"none", whiteSpace:nowrap?"nowrap":"normal" }}>
+    <span className={className} style={{ display:"inline-block", background:`${color}18`, color, border:`1px solid ${color}35`, padding:small?"2px 8px":"4px 12px", borderRadius:99, fontSize:small?11:12, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"0.5px", textTransform:uppercase?"uppercase":"none", whiteSpace:nowrap?"nowrap":"normal" }}>
       {label}
     </span>
   );
@@ -302,7 +340,7 @@ function SectionLabel({ children }) {
   return (
     <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:14 }}>
       <div style={{ width:20, height:2, background:C.blue, borderRadius:2 }} />
-      <span style={{ fontSize:11, fontWeight:700, color:C.blue, fontFamily:"'Outfit',sans-serif", letterSpacing:"2.5px", textTransform:"uppercase" }}>{children}</span>
+      <span style={{ fontSize:12, fontWeight:700, color:C.blue, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"2.5px", textTransform:"uppercase" }}>{children}</span>
     </div>
   );
 }
@@ -311,7 +349,7 @@ function PageHero({ label, h1, sub }) {
   return (
     <div style={{ marginBottom:52 }}>
       <SectionLabel>{label}</SectionLabel>
-      <h1 style={{ fontSize:"clamp(34px,5.5vw,64px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1.5px", lineHeight:1.05, marginBottom:14 }}>{h1}</h1>
+      <h1 style={{ fontSize:"clamp(34px,5.5vw,64px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.05, marginBottom:14 }}>{h1}</h1>
       {sub && <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", maxWidth:540, lineHeight:1.75 }}>{sub}</p>}
     </div>
   );
@@ -321,7 +359,7 @@ function PageHero({ label, h1, sub }) {
 function SocialBtn({ href, label, Icon }) {
   if (!href) return null;
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="social-btn" style={{ display:"inline-flex", alignItems:"center", gap:6, background:C.surface, border:`1px solid ${C.border}`, color:C.textSub, padding:"6px 14px", borderRadius:8, fontSize:12, fontWeight:600, textDecoration:"none", fontFamily:"'Outfit',sans-serif" }}>
+    <a href={href} target="_blank" rel="noopener noreferrer" className="social-btn" style={{ display:"inline-flex", alignItems:"center", gap:6, background:C.surface, border:`1px solid ${C.border}`, color:C.textSub, padding:"6px 14px", borderRadius:8, fontSize:12, fontWeight:600, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>
       <Icon size={ICON.sm} />{label}
     </a>
   );
@@ -337,34 +375,34 @@ function Nav({ page, setPage, theme, toggleTheme }) {
         <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,4vw,40px)", display:"flex", alignItems:"center", justifyContent:"space-between", height:64 }}>
           <button onClick={() => setPage("Home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
             {/* Logo image is temporarily disabled. Replace this placeholder with your SVG logo later. */}
-            <div style={{ width:48, height:48, borderRadius:10, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:12, fontWeight:800, fontFamily:"'Outfit',sans-serif" }}>
+            <div style={{ width:48, height:48, borderRadius:10, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:12, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif" }}>
               DS
             </div>
-            <span className="brand-text" style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-0.5px" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
+            <span className="brand-text" style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
           </button>
           <div className="desktop-nav" style={{ display:"flex", gap:1, alignItems:"center" }}>
             {NAV_LINKS.map(l => (
-              <button key={l} onClick={() => setPage(l)} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${page===l?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:page===l?C.text:C.textSub, fontSize:13, fontWeight:page===l?700:500, fontFamily:"'Outfit',sans-serif" }}>{l}</button>
+              <button key={l} onClick={() => setPage(l)} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${page===l?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:page===l?C.text:C.textSub, fontSize:13, fontWeight:page===l?700:500, fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
             ))}
             <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="hover-lift" style={{ marginLeft:8, background:C.surface, border:`1px solid ${C.border}`, cursor:"pointer", width:36, height:36, borderRadius:9, color:C.text, display:"inline-flex", alignItems:"center", justifyContent:"center" }}>
               {theme === "dark" ? <BsSun size={ICON.md} /> : <BsMoonStars size={ICON.md} />}
             </button>
-            <button onClick={() => setPage("Community")} className="hover-lift" style={{ marginLeft:10, background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", cursor:"pointer", padding:"9px 20px", borderRadius:9, color:C.white, fontSize:13, fontWeight:700, fontFamily:"'Outfit',sans-serif" }}>Join Free</button>
+            <button onClick={() => setPage("Community")} className="hover-lift" style={{ marginLeft:10, background:C.blue, border:"none", cursor:"pointer", padding:"9px 20px", borderRadius:9, color:C.white, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Join Free →</button>
           </div>
           <div className="mob-actions" style={{ display:"flex", alignItems:"center", gap:8 }}>
             <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="hover-lift" style={{ background:C.surface, border:`1px solid ${C.border}`, cursor:"pointer", width:36, height:36, borderRadius:9, color:C.text, display:"inline-flex", alignItems:"center", justifyContent:"center" }}>
               {theme === "dark" ? <BsSun size={ICON.md} /> : <BsMoonStars size={ICON.md} />}
             </button>
-            <button className="mob-btn" onClick={() => setMob(!mob)} style={{ background:"none", border:`1px solid ${C.border}`, cursor:"pointer", color:C.text, fontSize:15, padding:"8px 13px", borderRadius:8, fontFamily:"'Outfit',sans-serif", display:"inline-flex", alignItems:"center", justifyContent:"center" }}>{mob?<BsX size={ICON.lg} />:<BsList size={ICON.lg} />}</button>
+            <button className="mob-btn" onClick={() => setMob(!mob)} style={{ background:"none", border:`1px solid ${C.border}`, cursor:"pointer", color:C.text, fontSize:15, padding:"8px 13px", borderRadius:8, fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", justifyContent:"center" }}>{mob?<BsX size={ICON.lg} />:<BsList size={ICON.lg} />}</button>
           </div>
         </div>
         {mob && (
           <div className="mob-menu" style={{ background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px" }}>
             {NAV_LINKS.map(l => (
-              <button key={l} onClick={() => { setPage(l); setMob(false); }} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:page===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Outfit',sans-serif" }}>{l}</button>
+              <button key={l} onClick={() => { setPage(l); setMob(false); }} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:page===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
             ))}
             <div style={{ padding:`10px clamp(16px,4vw,40px) 0` }}>
-              <button onClick={() => { setPage("Community"); setMob(false); }} style={{ background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Outfit',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6 }}>Join Free <BsArrowRight size={ICON.sm} /></button>
+              <button onClick={() => { setPage("Community"); setMob(false); }} style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6 }}>Join Free →</button>
             </div>
           </div>
         )}
@@ -375,37 +413,38 @@ function Nav({ page, setPage, theme, toggleTheme }) {
 
 // ─── Home ─────────────────────────────────────────────────────────
 function Home({ setPage, theme }) {
-  const isLight = theme === "light";
   const heroAccentStyle = getAccentTextStyle(theme);
+  const heroText = "#eef2ff";
+  const heroSub = "#dbe5f4";
+  const heroBorder = "rgba(238,242,255,.35)";
 
   return (
     <div>
       {/* HERO */}
-      <section style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", position:"relative", overflow:"hidden", padding:"clamp(100px,14vh,140px) clamp(16px,4vw,40px) 80px", textAlign:"center" }}>
-        <div style={{ position:"absolute", top:"18%", left:"50%", transform:"translateX(-50%)", width:"min(800px,95vw)", height:420, background:`radial-gradient(ellipse,${C.blue}${isLight ? "10" : "1c"} 0%,transparent 65%)`, pointerEvents:"none" }} />
-        <div style={{ position:"absolute", inset:0, backgroundImage:`linear-gradient(${C.border}45 1px,transparent 1px),linear-gradient(90deg,${C.border}45 1px,transparent 1px)`, backgroundSize:"56px 56px", opacity:.2, pointerEvents:"none" }} />
-        <div style={{ position:"absolute", top:"8%", right:"8%", width:180, height:180, background:`radial-gradient(circle,${C.purple}${isLight ? "08" : "10"},transparent 70%)`, pointerEvents:"none" }} />
-        <div style={{ position:"relative", maxWidth:820 }}>
-          <div className="fade-up" style={{ display:"inline-flex", alignItems:"center", gap:8, background:C.surface, border:`1px solid ${C.border}`, padding:"7px 18px", borderRadius:99, marginBottom:32 }}>
+      <section style={{ minHeight:"100vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", padding:"clamp(100px,14vh,140px) clamp(16px,4vw,40px) 80px" }}>
+        <img src={ethnileGroupHero} alt="ETHNile outdoor group photo in Kampala" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} />
+        <div style={{ position:"absolute", inset:0, background:"rgba(5,7,15,0.60)" }} />
+        <div className="hero-shell" style={{ position:"relative", maxWidth:1280, width:"100%", margin:"0 auto", display:"grid", gridTemplateColumns:"minmax(0,760px)", justifyContent:"start" }}>
+          <div className="fade-up" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(5,7,15,.75)", border:`1px solid ${heroBorder}`, padding:"7px 18px", borderRadius:99, marginBottom:26 }}>
             <span style={{ width:7, height:7, borderRadius:"50%", background:C.green, display:"inline-block", animation:"pulse 2s infinite" }} />
-            <span style={{ fontSize:11, color:C.textSub, fontFamily:"'Outfit',sans-serif", fontWeight:600, letterSpacing:"1.5px", textTransform:"uppercase" }}>Uganda's Student Blockchain Community</span>
+            <span style={{ fontSize:12, color:heroSub, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, letterSpacing:"1.5px", textTransform:"uppercase" }}>Uganda's Student Blockchain Community</span>
           </div>
-          <h1 className="fade-up-2" style={{ fontSize:"clamp(38px,7vw,80px)", fontWeight:900, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-2.5px", lineHeight:1.03, margin:"0 0 24px" }}>
+          <h1 className="fade-up-2" style={{ fontSize:"clamp(38px,7vw,80px)", fontWeight:900, color:heroText, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-2.5px", lineHeight:1.03, margin:"0 0 24px" }}>
             Uganda's Home<br />for <span style={heroAccentStyle}>Blockchain & Web3</span>
           </h1>
-          <p className="fade-up-3" style={{ fontSize:"clamp(15px,2.3vw,18px)", color:C.textSub, lineHeight:1.8, margin:"0 auto 44px", maxWidth:500, fontFamily:"'Manrope',sans-serif" }}>
-            Free education, local events,real opportunities and supportive network of peers — built by Ugandan students, for every Ugandan ready to enter the Web3 ecosystem.
+          <p className="fade-up-3" style={{ fontSize:"clamp(15px,2.3vw,18px)", color:heroSub, lineHeight:1.8, margin:"0 0 34px", maxWidth:560, fontFamily:"'Manrope',sans-serif" }}>
+            Free education, local events, real opportunities and supportive network of peers — built by Ugandan students, for every Ugandan ready to enter the Web3 ecosystem.
           </p>
-          <div className="fade-up-3 hero-btns" style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap", marginBottom:68 }}>
-            <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.white, fontSize:15, fontWeight:700, fontFamily:"'Outfit',sans-serif", boxShadow:`0 4px 24px ${C.blue}40`, display:"inline-flex", alignItems:"center", justifyContent:"center", gap:7 }}>Explorer Free Tracks <BsArrowRight size={ICON.sm} /></button>
-            <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.border}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.text, fontSize:15, fontWeight:600, fontFamily:"'Outfit',sans-serif" }}>See Upcoming Events</button>
-            <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.border}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.text, fontSize:15, fontWeight:600, fontFamily:"'Outfit',sans-serif" }}>Join Community</button>
+          <div className="fade-up-3 hero-btns" style={{ display:"flex", gap:12, justifyContent:"flex-start", flexWrap:"wrap", marginBottom:42 }}>
+            <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:C.blue, border:"none", cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.white, fontSize:15, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:7 }}>Explore Free Tracks <BsArrowRight size={ICON.sm} /></button>
+            <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${heroBorder}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:heroText, fontSize:15, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>See Upcoming Events</button>
+            <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${heroBorder}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:heroText, fontSize:15, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>Join Community</button>
           </div>
-          <div className="stats-row" style={{ display:"flex", gap:"clamp(28px,7vw,72px)", justifyContent:"center", flexWrap:"wrap" }}>
+          <div className="stats-row" style={{ display:"flex", gap:"clamp(18px,3vw,26px)", justifyContent:"flex-start", flexWrap:"wrap", background:"rgba(5,7,15,.76)", border:`1px solid ${heroBorder}`, borderRadius:14, padding:"14px 18px", maxWidth:640 }}>
             {[{n:"313+",l:"Members"},{n:"4",l:"Learning Tracks"},{n:"Free",l:"Always Free"},{n:<BsGeoAlt size={ICON.stat} />,l:"Uganda-Built"}].map(s => (
               <div key={s.l} style={{ textAlign:"center" }}>
-                <div style={{ fontSize:"clamp(26px,4vw,38px)", fontWeight:900, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px" }}>{s.n}</div>
-                <div style={{ fontSize:11, color:C.textDim, fontFamily:"'Outfit',sans-serif", marginTop:5, letterSpacing:"0.5px", textTransform:"uppercase" }}>{s.l}</div>
+                <div style={{ fontSize:"clamp(26px,4vw,38px)", fontWeight:900, color:heroText, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px" }}>{s.n}</div>
+                <div style={{ fontSize:12, color:heroSub, fontFamily:"'Space Grotesk',sans-serif", marginTop:5, letterSpacing:"0.5px", textTransform:"uppercase" }}>{s.l}</div>
               </div>
             ))}
           </div>
@@ -414,17 +453,22 @@ function Home({ setPage, theme }) {
 
       {/* TRACKS PREVIEW */}
       <section style={{ padding:"clamp(56px,8vw,96px) clamp(16px,4vw,40px)", maxWidth:1280, margin:"0 auto" }}>
-        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:36, flexWrap:"wrap", gap:16 }}>
-          <div><SectionLabel>Learning Tracks</SectionLabel><h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px" }}>Your path into blockchain</h2></div>
-          <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, padding:"10px 22px", borderRadius:9, fontSize:13, fontWeight:600, cursor:"pointer", fontFamily:"'Outfit',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>All tracks <BsArrowRight size={ICON.xs} /></button>
+        <div style={{ display:"grid", gridTemplateColumns:"minmax(0,1.2fr) minmax(0,.8fr)", marginBottom:26, gap:18, alignItems:"end" }}>
+          <div><SectionLabel>Learning Tracks</SectionLabel><h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", maxWidth:520 }}>Your path into blockchain</h2></div>
+          <div style={{ border:`1px solid ${C.border}`, borderRadius:14, overflow:"hidden", minHeight:180 }}>
+            <img src={chainlinkRooftopPhoto} alt="Chainlink rooftop study session in Kampala" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+          </div>
+        </div>
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:22, flexWrap:"wrap", gap:16 }}>
+          <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, padding:"10px 22px", borderRadius:9, fontSize:13, fontWeight:600, cursor:"pointer", fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>All tracks <BsArrowRight size={ICON.xs} /></button>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(255px,1fr))", gap:14 }}>
-          {TRACKS.map(t => (
-            <div key={t.id} onClick={() => setPage("Learn")} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,2.5vw,28px)", cursor:"pointer", position:"relative", overflow:"hidden" }}>
+          {TRACKS.map((t, i) => (
+            <div key={t.id} onClick={() => setPage("Learn")} className={`hover-card ${i===0?"home-track-featured":""}`} style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,2.5vw,28px)", cursor:"pointer", position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}>
               <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${t.color},${t.color}50)` }} />
               <div style={{ fontSize:26, marginBottom:14, display:"inline-flex" }}><t.icon size={ICON.hero} /></div>
-              <div style={{ fontSize:10, fontWeight:700, color:t.color, fontFamily:"'Outfit',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:5 }}>{t.label}</div>
-              <div style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:3 }}>{t.title}</div>
+              <div style={{ fontSize:10, fontWeight:700, color:t.color, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:5 }}>{t.label}</div>
+              <div style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:3 }}>{t.title}</div>
               <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", marginBottom:12 }}>{t.sub}</div>
               <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, margin:"0 0 18px", fontFamily:"'Manrope',sans-serif" }}>{t.desc}</p>
               <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}><Pill label={t.level} color={t.color} /><Pill label={t.time} color={C.textDim} /></div>
@@ -436,39 +480,58 @@ function Home({ setPage, theme }) {
       {/* EVENTS PREVIEW */}
       <section style={{ padding:"0 clamp(16px,4vw,40px) clamp(56px,8vw,96px)", maxWidth:1280, margin:"0 auto" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:32, flexWrap:"wrap", gap:16 }}>
-          <div><SectionLabel>2026 Calendar</SectionLabel><h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px" }}>Upcoming Events</h2></div>
-          <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, padding:"10px 22px", borderRadius:9, fontSize:13, fontWeight:600, cursor:"pointer", fontFamily:"'Outfit',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>All events <BsArrowRight size={ICON.xs} /></button>
+          <div><SectionLabel>2026 Calendar</SectionLabel><h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px" }}>Upcoming Events</h2></div>
+          <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, padding:"10px 22px", borderRadius:9, fontSize:13, fontWeight:600, cursor:"pointer", fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>All events <BsArrowRight size={ICON.xs} /></button>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:14 }}>
           {EVENTS.filter(e => e && typeof e === "object").map((e, i) => {
             const color = e.color || C.blueLt;
             const featured = Boolean(e.featured);
             return (
-            <div key={e.title || i} className="hover-card" style={{ background:C.card, border:`1px solid ${featured?C.blue+"55":C.border}`, borderRadius:14, padding:22, position:"relative", overflow:"hidden", display:"flex", flexDirection:"column", gap:12 }}>
+            <div key={e.title || i} className={`hover-card ${i===0?"home-event-featured":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"55":C.border}`, borderRadius:14, padding:22, position:"relative", overflow:"hidden", display:"flex", flexDirection:"column", gap:12, gridColumn:i===0?"span 2":"span 1" }}>
               {featured && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.blueLt})` }} />}
+              {e.image && <img src={e.image} alt={e.title || "Event visual"} style={{ width:"100%", height:i===0?190:140, objectFit:"cover", borderRadius:10 }} />}
               <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:6 }}>
                 <Pill label={e.tag || "Event"} color={color} />
                 {featured && <Pill label="Featured" color={C.cyan} />}
               </div>
-              <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", lineHeight:1.3 }}>{e.title || "Upcoming Event"}</div>
+              <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3 }}>{e.title || "Upcoming Event"}</div>
               <div style={{ fontSize:12, color:color, fontFamily:"'Manrope',sans-serif", fontWeight:600, display:"flex", alignItems:"center", gap:6 }}><BsCalendarEvent size={ICON.xxs} /> {e.date || "Date TBC"}</div>
               <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xxs} /> {e.location || "Location TBC"}</div>
-              <a href={e.link || "#"} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ marginTop:"auto", display:"inline-flex", alignItems:"center", gap:6, background:featured?`linear-gradient(135deg,${C.blue},${C.blueLt})`:"transparent", border:featured?"none":`1px solid ${C.border}`, color:featured?C.white:C.text, padding:"9px 18px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif" }}>{featured?"Register":"Details"}<BsArrowRight size={ICON.xxs} /></a>
+              <a href={e.link || "#"} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ marginTop:"auto", display:"inline-flex", alignItems:"center", gap:6, background:featured?C.blue:"transparent", border:featured?"none":`1px solid ${C.border}`, color:featured?C.white:C.text, padding:"9px 18px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{featured?"Register":"Details"}<BsArrowRight size={ICON.xxs} /></a>
             </div>
           )})}
         </div>
       </section>
 
+      {/* GALLERY */}
+      <section style={{ background:"#f4efe4", color:"#1e293b", padding:"clamp(52px,7vw,90px) clamp(16px,4vw,40px)", borderTop:"1px solid #ddd0b7", borderBottom:"1px solid #ddd0b7" }}>
+        <div style={{ maxWidth:1280, margin:"0 auto" }}>
+          <div style={{ marginBottom:20 }}>
+            <div style={{ fontSize:11, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:"#7c4a03", marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>In The Community</div>
+            <h2 className="gallery-title" style={{ fontSize:"clamp(26px,4vw,42px)", lineHeight:1.08, margin:0, fontFamily:"'Space Grotesk',sans-serif" }}>We show up</h2>
+          </div>
+          <div className="photo-masonry">
+            {GALLERY_ITEMS.map((item, i) => (
+              <figure key={i} className="photo-item" style={{ margin:0 }}>
+                <img src={item.src} alt={item.caption} style={{ width:"100%", display:"block", borderRadius:12, objectFit:"cover" }} />
+                <figcaption style={{ fontSize:12, marginTop:8, color:"#334155", fontFamily:"'Manrope',sans-serif" }}>{item.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p style={{ margin:"10px 0 0", fontSize:13, color:"#475569", fontFamily:"'Manrope',sans-serif" }}>More events coming. Gallery updates as we grow.</p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section style={{ padding:"0 clamp(16px,4vw,40px) 60px", maxWidth:1280, margin:"0 auto" }}>
-        <div style={{ background:`linear-gradient(135deg,${C.blue}1a,${C.purple}10)`, border:`1px solid ${C.blue}40`, borderRadius:20, padding:"clamp(40px,6vw,72px) clamp(24px,5vw,56px)", textAlign:"center", position:"relative", overflow:"hidden" }}>
-          <div style={{ position:"absolute", top:-120, left:"50%", transform:"translateX(-50%)", width:500, height:320, background:`radial-gradient(ellipse,${C.blue}18,transparent 65%)`, pointerEvents:"none" }} />
-          <div style={{ position:"relative" }}>
-            <h2 style={{ fontSize:"clamp(28px,4.5vw,52px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1.5px", lineHeight:1.1, marginBottom:16 }}>Ready to start your<br /><span style={{ color:C.blueLt }}>Web3 journey?</span></h2>
-            <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:"0 auto 36px", maxWidth:400 }}>Join 313+ Ugandans already in the community. Free. No sign-up needed to browse.</p>
-            <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
-              <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.white, fontSize:15, fontWeight:700, fontFamily:"'Outfit',sans-serif", boxShadow:`0 4px 24px ${C.blue}40` }}>Start Learning Free</button>
-              <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.blue}50`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.text, fontSize:15, fontWeight:600, fontFamily:"'Outfit',sans-serif" }}>Join Community</button>
+        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(36px,6vw,64px) clamp(24px,5vw,56px)", textAlign:"left" }}>
+          <div>
+            <h2 style={{ fontSize:"clamp(28px,4.5vw,52px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.1, marginBottom:16 }}>313 of us already.<br /><span style={{ color:C.blueLt }}>Come be 314.</span></h2>
+            <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:"0 0 28px", maxWidth:420 }}>If you're in Kampala and curious about blockchain, this is your lane.</p>
+            <div style={{ display:"flex", gap:12, justifyContent:"flex-start", flexWrap:"wrap" }}>
+              <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:C.blue, border:"none", cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.white, fontSize:15, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Start Learning Free</button>
+              <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.blueLt}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.text, fontSize:15, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>Join Community</button>
             </div>
           </div>
         </div>
@@ -501,11 +564,14 @@ function Learn() {
   return (
     <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Free Learning Tracks" h1="Your Blockchain Education" sub="4 structured tracks. All free. No account needed. Progress saved locally on your device." />
+      <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}`, marginBottom:24 }}>
+        <img src={chainlinkRooftopPhoto} alt="Chainlink rooftop learning session in Kampala" style={{ width:"100%", height:"clamp(200px,30vw,320px)", objectFit:"cover" }} />
+      </div>
       {nDone > 0 && (
         <div style={{ background:C.card, border:`1px solid ${C.green}40`, borderRadius:12, padding:"14px 20px", marginBottom:32, display:"flex", alignItems:"center", gap:14 }}>
           <span style={{ fontSize:18, display:"inline-flex" }}><BsTrophy size={ICON.lg} color={C.green} /></span>
           <div style={{ flex:1 }}>
-            <div style={{ fontSize:13, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:6 }}>{nDone} of {total} resources completed</div>
+            <div style={{ fontSize:13, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:6 }}>{nDone} of {total} resources completed</div>
             <div style={{ height:4, background:C.surface, borderRadius:4 }}><div style={{ width:`${(nDone/total)*100}%`, height:"100%", background:C.green, borderRadius:4, transition:"width .4s" }} /></div>
           </div>
         </div>
@@ -519,12 +585,12 @@ function Learn() {
               <button onClick={() => setOpen(isOpen ? null : t.id)} style={{ width:"100%", background:"none", border:"none", cursor:"pointer", padding:"clamp(16px,2.5vw,22px) clamp(18px,3vw,28px)", display:"flex", alignItems:"center", gap:14, textAlign:"left" }}>
                 <div style={{ width:46, height:46, borderRadius:12, background:`${t.color}15`, border:`1px solid ${t.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20, flexShrink:0 }}><t.icon size={ICON.xl} /></div>
                 <div style={{ flex:1, minWidth:0 }}>
-                  <div style={{ fontSize:10, fontWeight:700, color:t.color, fontFamily:"'Outfit',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:3 }}>{t.label}</div>
-                  <div style={{ fontSize:16, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{t.title} <span style={{ color:C.textDim, fontWeight:400, fontSize:13 }}>— {t.sub}</span></div>
+                  <div style={{ fontSize:10, fontWeight:700, color:t.color, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:3 }}>{t.label}</div>
+                  <div style={{ fontSize:16, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{t.title} <span style={{ color:C.textDim, fontWeight:400, fontSize:13 }}>— {t.sub}</span></div>
                 </div>
                 <div style={{ display:"flex", alignItems:"center", gap:12, flexShrink:0 }}>
                   <div style={{ textAlign:"right" }}>
-                    <span style={{ fontSize:12, fontWeight:700, color:td>0?t.color:C.textDim, fontFamily:"'Outfit',sans-serif" }}>{td}/{t.resources.length}</span>
+                    <span style={{ fontSize:12, fontWeight:700, color:td>0?t.color:C.textDim, fontFamily:"'Space Grotesk',sans-serif" }}>{td}/{t.resources.length}</span>
                     <div style={{ width:56, height:3, background:C.surface, borderRadius:3, marginTop:4 }}><div style={{ width:`${(td/t.resources.length)*100}%`, height:"100%", background:t.color, borderRadius:3, transition:"width .4s" }} /></div>
                   </div>
                   <span style={{ fontSize:18, color:C.textDim, display:"inline-flex", transition:"transform .2s", transform:isOpen?"rotate(180deg)":"none" }}><BsChevronDown size={ICON.lg} /></span>
@@ -539,12 +605,12 @@ function Learn() {
                       const k = `${t.id}-${i}`; const isDone = done[k];
                       return (
                         <div key={i} className="res-item" style={{ background:isDone?`${t.color}0a`:C.surface, border:`1px solid ${isDone?t.color+"40":C.border}`, borderRadius:11, padding:"12px 16px", display:"flex", alignItems:"center", gap:12 }}>
-                          <button onClick={() => toggle(k)} style={{ width:22, height:22, borderRadius:6, flexShrink:0, cursor:"pointer", border:`2px solid ${isDone?t.color:C.textDim}`, background:isDone?t.color:"transparent", display:"flex", alignItems:"center", justifyContent:"center", color:"#000", fontSize:12, fontWeight:900, transition:"all .15s" }}>{isDone?<BsCheckLg size={ICON.xxs} />:null}</button>
+                          <button onClick={() => toggle(k)} style={{ width:22, height:22, borderRadius:6, flexShrink:0, cursor:"pointer", border:`2px solid ${isDone?t.color:C.textDim}`, background:isDone?t.color:"transparent", display:"flex", alignItems:"center", justifyContent:"center", color:C.text, fontSize:12, fontWeight:900, transition:"all .15s" }}>{isDone?<BsCheckLg size={ICON.xxs} />:null}</button>
                           <div style={{ flex:1, minWidth:0 }}>
-                            <div style={{ fontSize:14, fontWeight:600, color:isDone?C.textDim:C.text, fontFamily:"'Outfit',sans-serif", textDecoration:isDone?"line-through":"none", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{r.title}</div>
+                            <div style={{ fontSize:14, fontWeight:600, color:isDone?C.textDim:C.text, fontFamily:"'Space Grotesk',sans-serif", textDecoration:isDone?"line-through":"none", overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>{r.title}</div>
                             <div style={{ display:"flex", gap:8, marginTop:4, alignItems:"center", flexWrap:"wrap" }}><Pill label={r.type} color={t.color} small /><span style={{ fontSize:11, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{r.time}</span></div>
                           </div>
-                          <a href={r.url} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:C.card, border:`1px solid ${C.border}`, color:C.text, padding:"7px 14px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif", flexShrink:0, whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Open <BsArrowRight size={ICON.xxs} /></a>
+                          <a href={r.url} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:C.card, border:`1px solid ${C.border}`, color:C.text, padding:"7px 14px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", flexShrink:0, whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Open <BsArrowRight size={ICON.xxs} /></a>
                         </div>
                       );
                     })}
@@ -564,24 +630,28 @@ function Events() {
   return (
     <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="2026 Calendar" h1="Upcoming Events" sub="Blockchain events in Uganda and across Africa. Every event is a door — show up." />
+      <div style={{ marginBottom:20, borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
+        <img src={ethnileVenuePhoto} alt="ETHNile venue with sponsor banners" style={{ width:"100%", height:"clamp(200px,30vw,340px)", objectFit:"cover" }} />
+      </div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:18, marginBottom:32 }}>
         {EVENTS.filter(e => e && typeof e === "object").map((e, i) => {
           const color = e.color || C.blueLt;
           const featured = Boolean(e.featured);
           return (
-          <div key={e.title || i} className="hover-card" style={{ background:C.card, border:`1px solid ${featured?C.blue+"60":C.border}`, borderRadius:18, padding:"clamp(20px,3vw,30px)", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
+            <div key={e.title || i} className={`hover-card ${i===0?"events-featured-card":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"60":C.border}`, borderRadius:18, padding:"clamp(18px,2.6vw,24px)", display:"flex", flexDirection:"column", gap:12, position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}>
             {featured && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.blueLt})` }} />}
+            {e.image && <img src={e.image} alt={e.title || "Event"} style={{ width:"100%", height:i===0?220:160, objectFit:"cover", borderRadius:10 }} />}
             <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:6 }}><Pill label={e.tag || "Event"} color={color} />{featured && <Pill label="Featured" color={C.cyan} />}</div>
-            <h3 style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", lineHeight:1.3 }}>{e.title || "Upcoming Event"}</h3>
+            <h3 style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3 }}>{e.title || "Upcoming Event"}</h3>
             <div><div style={{ fontSize:13, color:color, fontFamily:"'Manrope',sans-serif", fontWeight:600, marginBottom:3, display:"flex", alignItems:"center", gap:6 }}><BsCalendarEvent size={ICON.xs} /> {e.date || "Date TBC"}</div><div style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xs} /> {e.location || "Location TBC"}</div></div>
             <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{e.desc || "Event details will be shared soon."}</p>
-            <a href={e.link || "#"} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:featured?`linear-gradient(135deg,${C.blue},${C.blueLt})`:"transparent", border:featured?"none":`1px solid ${C.border}`, color:featured?C.white:C.text, padding:"11px 18px", borderRadius:10, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif" }}>{featured?"Register Now":"Learn More"}<BsArrowRight size={ICON.xs} /></a>
+            <a href={e.link || "#"} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:featured?C.blue:"transparent", border:featured?"none":`1px solid ${C.border}`, color:featured?C.white:C.text, padding:"11px 18px", borderRadius:10, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{featured?"Register Now":"Learn More"}<BsArrowRight size={ICON.xs} /></a>
           </div>
         )})}
       </div>
       <div style={{ background:C.card, border:`1px dashed ${C.border}`, borderRadius:14, padding:"clamp(18px,3vw,28px)", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
-        <div><div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:4 }}>Know an event we haven't listed?</div><p style={{ fontSize:13, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:0 }}>Share it in the community and we'll add it to the calendar.</p></div>
-        <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif", whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Share in Telegram <BsArrowRight size={ICON.xs} /></a>
+        <div><div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:4 }}>Know an event we haven't listed?</div><p style={{ fontSize:13, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:0 }}>Share it in the community and we'll add it to the calendar.</p></div>
+        <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Share in Telegram <BsArrowRight size={ICON.xs} /></a>
       </div>
     </div>
   );
@@ -592,19 +662,32 @@ function Opportunities() {
   return (
     <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Opportunities" h1="Earn, Build & Grow" sub="Jobs, grants, hackathons, and earn opportunities available to Ugandans right now." />
+
+      <div style={{ display:"grid", gridTemplateColumns:"minmax(0,1.1fr) minmax(0,.9fr)", gap:16, marginBottom:30 }}>
+        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
+            <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>Built For Uganda</div>
+          <h2 style={{ fontSize:"clamp(22px,3vw,34px)", color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.1, margin:"0 0 10px" }}>Remote opportunities, local momentum</h2>
+          <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>Grants, bounties, internships, and jobs that Ugandan students can actually access now. Start with one, keep stacking your wins.</p>
+        </div>
+        <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
+          <img src={outdoorLaptopPhoto} alt="Outdoor laptop session for builders in Kampala" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
+        </div>
+      </div>
+
       <div style={{ display:"flex", flexDirection:"column", gap:48 }}>
         {OPPS.map((cat, ci) => (
           <div key={ci}>
             <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:18 }}>
               <div style={{ width:42, height:42, borderRadius:11, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}><cat.icon size={ICON.lg} /></div>
-              <h2 style={{ fontSize:20, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", margin:0 }}>{cat.cat}</h2>
+              <h2 style={{ fontSize:20, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0 }}>{cat.cat}</h2>
             </div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:12 }}>
+            <div className="op-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:12 }}>
               {cat.items.map((item, ii) => (
-                <div key={ii} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:22, display:"flex", flexDirection:"column", gap:12 }}>
-                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}><h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3><Pill label={item.level} color={cat.color} small /></div>
+                <div key={ii} className={`hover-card ${ii===0?"op-featured-card":""}`} style={{ background:ii===0?C.surface:C.card, border:`1px solid ${ii===0?cat.color+"55":C.border}`, borderRadius:14, padding:ii===0?"26px 24px":"22px", display:"flex", flexDirection:"column", gap:12, gridColumn:ii===0?"span 2":"span 1", position:"relative", overflow:"hidden" }}>
+                  {ii===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:cat.color }} />}
+                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}><h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3><Pill label={item.level} color={cat.color} small /></div>
                   <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{item.desc}</p>
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif", alignSelf:"flex-start" }}>Explore <BsArrowRight size={ICON.xxs} /></a>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>Explore <BsArrowRight size={ICON.xxs} /></a>
                 </div>
               ))}
             </div>
@@ -620,23 +703,42 @@ function Resources() {
   return (
     <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Tools & Resources" h1="Everything You Need" sub="Curated tools, platforms, and links for every stage of your blockchain journey — from first steps to building on mainnet." />
+
+      <div style={{ display:"grid", gridTemplateColumns:"minmax(0,.95fr) minmax(0,1.05fr)", gap:16, marginBottom:30 }}>
+        <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
+          <img src={kyambogoRoomPhoto} alt="Kyambogo blockchain session room" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
+        </div>
+        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
+          <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>No Gatekeeping</div>
+          <h2 style={{ fontSize:"clamp(22px,3vw,34px)", color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.1, margin:"0 0 10px" }}>Real tools. Free access. Start now.</h2>
+          <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>A practical stack Ugandan learners can use immediately, from browser-based editors to grants and local communities.</p>
+        </div>
+      </div>
+
       <div style={{ display:"flex", flexDirection:"column", gap:52 }}>
         {RESOURCES_DATA.map((cat, ci) => (
           <div key={ci}>
             <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:20 }}>
               <div style={{ width:44, height:44, borderRadius:12, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20 }}><cat.icon size={ICON.xl} /></div>
-              <h2 style={{ fontSize:21, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", margin:0 }}>{cat.cat}</h2>
+              <h2 style={{ fontSize:21, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0 }}>{cat.cat}</h2>
             </div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:14 }}>
+            <div className="res-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:14 }}>
               {cat.items.map((item, ii) => (
-                <div key={ii} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:24, display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
-                  <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:`${cat.color}50` }} />
+                <div key={ii} className={`hover-card ${ii===0?"res-featured-card":""}`} style={{ background:ii===0?C.surface:C.card, border:`1px solid ${ii===0?cat.color+"55":C.border}`, borderRadius:14, padding:ii===0?"28px 24px":"24px", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden", gridColumn:ii===0?"span 2":"span 1" }}>
+                  <div style={{ position:"absolute", top:0, left:0, right:0, height:ii===0?3:2, background:`${cat.color}70` }} />
                   <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}>
-                    <h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", margin:0, lineHeight:1.3 }}>{item.title}</h3>
+                    <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+                      {item.logo && (
+                        <div style={{ width:28, height:28, borderRadius:8, overflow:"hidden", border:`1px solid ${C.border}`, background:C.surface, display:"inline-flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                          <img src={item.logo} alt={`${item.title} logo`} style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                        </div>
+                      )}
+                      <h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3 }}>{item.title}</h3>
+                    </div>
                     <Pill label={item.tag} color={cat.color} small />
                   </div>
                   <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{item.desc}</p>
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"9px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif", alignSelf:"flex-start" }}>Visit Resource <BsArrowRight size={ICON.xxs} /></a>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"9px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>Visit Resource <BsArrowRight size={ICON.xxs} /></a>
                 </div>
               ))}
             </div>
@@ -647,10 +749,10 @@ function Resources() {
       {/* Suggest a resource */}
       <div style={{ marginTop:52, background:C.card, border:`1px dashed ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,32px)", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
         <div>
-          <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:4 }}>Know a resource we're missing?</div>
+          <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:4 }}>Know a resource we're missing?</div>
           <p style={{ fontSize:13, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:0 }}>Send it to us on Telegram and we'll review and add it.</p>
         </div>
-        <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif", whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Suggest on Telegram <BsArrowRight size={ICON.xs} /></a>
+        <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Suggest on Telegram <BsArrowRight size={ICON.xs} /></a>
       </div>
     </div>
   );
@@ -661,16 +763,18 @@ function Blog({ setPost }) {
   return (
     <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Insights & Perspectives" h1="The Blog" sub="Written for Ugandans. Honest, practical, no hype." />
+      <p style={{ margin:"-24px 0 24px", fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Upcoming topics: Bank of Uganda crypto stance, mobile money x Web3 integration, and local startup stories.</p>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:18 }}>
         {POSTS.map((p, i) => (
           <div key={p.id} onClick={() => setPost(p)} className="hover-card" style={{ background:C.card, border:`1px solid ${i===0?C.blue+"45":C.border}`, borderRadius:18, padding:"clamp(20px,3vw,30px)", cursor:"pointer", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
             {i===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.purple})` }} />}
             <Pill label={p.tag} color={p.tagColor} />
-            <h2 style={{ fontSize:18, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", lineHeight:1.3, margin:0 }}>{p.title}</h2>
+            <h2 style={{ fontSize:18, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3, margin:0 }}>{p.title}</h2>
+            <div style={{ fontSize:13, color:C.blueLt, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700 }}>{p.author}</div>
             <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{p.excerpt}</p>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:12, borderTop:`1px solid ${C.border}` }}>
               <div style={{ display:"flex", gap:12 }}><span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.date}</span><span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.read}</span></div>
-              <span style={{ fontSize:13, color:C.blueLt, fontWeight:700, fontFamily:"'Outfit',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>Read <BsArrowRight size={ICON.xs} /></span>
+              <span style={{ fontSize:13, color:C.blueLt, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>Read <BsArrowRight size={ICON.xs} /></span>
             </div>
           </div>
         ))}
@@ -682,15 +786,15 @@ function Blog({ setPost }) {
 function BlogPost({ post, back }) {
   return (
     <div style={{ maxWidth:720, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
-      <button onClick={back} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, cursor:"pointer", fontSize:13, fontFamily:"'Outfit',sans-serif", fontWeight:600, marginBottom:40, padding:"9px 18px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}><BsArrowLeft size={ICON.sm} /> Back to Blog</button>
+      <button onClick={back} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, marginBottom:40, padding:"9px 18px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}><BsArrowLeft size={ICON.sm} /> Back to Blog</button>
       <Pill label={post.tag} color={post.tagColor} />
-      <h1 style={{ fontSize:"clamp(26px,4vw,42px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", margin:"18px 0 14px", lineHeight:1.15 }}>{post.title}</h1>
+      <h1 style={{ fontSize:"clamp(26px,4vw,42px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", margin:"18px 0 14px", lineHeight:1.15 }}>{post.title}</h1>
       <div style={{ display:"flex", gap:20, marginBottom:36, paddingBottom:28, borderBottom:`1px solid ${C.border}`, flexWrap:"wrap" }}>
-        <span style={{ fontSize:13, color:C.textSub, fontFamily:"'Manrope',sans-serif" }}>DigitalSphereUg</span>
+        <span style={{ fontSize:14, color:C.blueLt, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700 }}>{post.author || "DigitalSphereUg"}</span>
         <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.date}</span>
         <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span>
       </div>
-      {post.body.split("\n\n").map((para, i) => <p key={i} style={{ fontSize:16, color:"#c0ceea", lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{para}</p>)}
+      {post.body.split("\n\n").map((para, i) => <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{para}</p>)}
     </div>
   );
 }
@@ -698,34 +802,40 @@ function BlogPost({ post, back }) {
 // ─── Community ────────────────────────────────────────────────────
 function Community() {
   const otherCommunities = [
-    { name:"Blockchain Association Uganda", desc:"The official industry body for blockchain in Uganda. Events, policy, and innovation programmes.", link:"https://bau.ug", icon:BsGeoAlt, tag:"Uganda" },
-    { name:"GDG Kampala", desc:"Google Developer Group Kampala — regular tech meetups with a strong Web3 track.", link:"https://gdg.community.dev/gdg-kampala/", icon:BsCodeSlash, tag:"Uganda" },
-    { name:"Developer DAO", desc:"Global community of Web3 builders and developers. Open to all skill levels.", link:"https://www.developerdao.com/", icon:BsGlobe2, tag:"Global" },
-    { name:"LearnWeb3 DAO", desc:"Community-first learning platform for Web3 developers at every stage.", link:"https://learnweb3.io/", icon:BsBook, tag:"Global" },
-    { name:"Algorand Africa", desc:"Algorand Foundation's initiative to grow blockchain across Africa.", link:"https://algorand.foundation/", icon:BsGlobeEuropeAfrica, tag:"Africa" },
-    { name:"Web3 Africa", desc:"Pan-African community connecting blockchain builders across the continent.", link:"https://web3africa.com/", icon:BsLink45Deg, tag:"Africa" },
+    { name:"Blockchain Association Uganda", desc:"The official industry body for blockchain in Uganda. Events, policy, and innovation programmes.", link:"https://bau.ug", icon:BsGeoAlt, logo:bauLogoImage, tag:"Uganda" },
+    { name:"GDG Kampala", desc:"Google Developer Group Kampala — regular tech meetups with a strong Web3 track.", link:"https://gdg.community.dev/gdg-kampala/", icon:BsCodeSlash, logo:null, tag:"Uganda" },
+    { name:"Celo Uganda", desc:"Fostering Web3 growth and adoption in Uganda. Hosts workshops, block parties and events including Kampala Blockchain Happy Hour.", link:"https://x.com/CeloUganda", icon:BsGlobe2, logo:celoLogoImage, tag:"Uganda" },
+    { name:"ETHNile", desc:"Uganda's first major Ethereum event series — conference, hackathon, and community activities in Kampala. Uganda's biggest Web3 community event.", link:"https://ethnileug.xyz/", icon:BsLightningCharge, logo:ethnileLogoImage, tag:"Uganda" },
+    { name:"Chainlink East Africa", desc:"Official Chainlink East Africa community covering Uganda and the region. Oracle and Web3 developer updates, regional events.", link:"https://x.com/Chainlink__EA", icon:BsLink45Deg, logo:chainlinkEaLogoImage, tag:"Uganda / East Africa" },
+    { name:"Stellar East Africa", desc:"Active across East Africa including Uganda. Weekly community calls, builders bootcamps and Soroban smart contract workshops.", link:"https://x.com/StellarEastAfri", icon:BsGlobeEuropeAfrica, logo:stellarEaLogoImage, tag:"East Africa" },
+    { name:"Developer DAO", desc:"Global community of Web3 builders and developers. Open to all skill levels.", link:"https://www.developerdao.com/", icon:BsGlobe2, logo:developerDaoLogoImage, tag:"Global" },
+    { name:"LearnWeb3 DAO", desc:"Community-first learning platform for Web3 developers at every stage.", link:"https://learnweb3.io/", icon:BsBook, logo:learnWeb3LogoImage, tag:"Global" },
+    { name:"Algorand Africa", desc:"Algorand Foundation's initiative to grow blockchain across Africa.", link:"https://algorand.foundation/", icon:BsGlobeEuropeAfrica, logo:algorandAfricaLogoImage, tag:"Africa" },
+    { name:"Web3 Africa", desc:"Pan-African community connecting blockchain builders across the continent.", link:"https://www.web3afrika.com/", icon:BsLink45Deg, logo:web3AfricaLogoImage, tag:"Africa" },
   ];
   return (
     <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Join The Movement" h1="Community" sub="Start with us. Connect with the world." />
 
+      <div style={{ borderRadius:18, overflow:"hidden", border:`1px solid ${C.border}`, marginBottom:16 }}>
+        <img src={chainlinkStreetGroupPhoto} alt="Chainlink Kampala community group outside Ponnus" style={{ width:"100%", height:"clamp(220px,32vw,380px)", objectFit:"cover" }} />
+      </div>
+      <p style={{ margin:"0 0 24px", fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>313 members across Telegram, WhatsApp and X combined</p>
+
       {/* PRIMARY — Telegram */}
-      <div style={{ background:`linear-gradient(135deg,${C.card},${C.navy})`, border:`1px solid #2AABEE50`, borderRadius:20, padding:"clamp(28px,4vw,44px)", marginBottom:20, position:"relative", overflow:"hidden" }}>
+      <div style={{ background:C.card, border:`1px solid #2AABEE50`, borderRadius:20, padding:"clamp(28px,4vw,44px)", marginBottom:20, position:"relative", overflow:"hidden" }}>
         <div style={{ position:"absolute", top:-60, right:-60, width:200, height:200, background:"radial-gradient(circle,#2AABEE10,transparent 70%)", pointerEvents:"none" }} />
         <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20 }}>
           <div style={{ width:52, height:52, borderRadius:14, background:"#2AABEE18", border:"1px solid #2AABEE35", display:"flex", alignItems:"center", justifyContent:"center", fontSize:24 }}><BsTelegram size={ICON.xxl} /></div>
           <div>
-            <div style={{ fontSize:11, fontWeight:700, color:"#2AABEE", fontFamily:"'Outfit',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:3 }}>Primary Community</div>
-            <div style={{ fontSize:20, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif" }}>Telegram Channel</div>
-          </div>
-          <div style={{ marginLeft:"auto", background:C.surface, border:`1px solid ${C.border}`, padding:"5px 14px", borderRadius:99 }}>
-            <span style={{ fontSize:12, color:C.textSub, fontFamily:"'Outfit',sans-serif", fontWeight:600 }}>38 members</span>
+            <div style={{ fontSize:12, fontWeight:700, color:"#2AABEE", fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:3 }}>Primary Community</div>
+            <div style={{ fontSize:20, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif" }}>Telegram Channel</div>
           </div>
         </div>
         <p style={{ fontSize:15, color:C.textSub, lineHeight:1.8, fontFamily:"'Manrope',sans-serif", margin:"0 0 24px", maxWidth:580 }}>
           Our main learning hub. Daily blockchain resources, free course links, curated opportunities, and the most active conversations about Web3 in Uganda. This is where you start.
         </p>
-        <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#2AABEE", border:"none", color:"#000", padding:"13px 28px", borderRadius:11, fontSize:14, fontWeight:800, textDecoration:"none", fontFamily:"'Outfit',sans-serif" }}>
+        <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#2AABEE", border:"none", color:"#051326", padding:"13px 28px", borderRadius:11, fontSize:14, fontWeight:800, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>
           Join on Telegram <BsArrowRight size={ICON.sm} />
         </a>
       </div>
@@ -739,11 +849,10 @@ function Community() {
           <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:24, display:"flex", flexDirection:"column", gap:14 }}>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
               <div style={{ width:44, height:44, borderRadius:12, background:`${p.color}18`, border:`1px solid ${p.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}><p.icon size={ICON.lg} /></div>
-              <div style={{ background:C.surface, border:`1px solid ${C.border}`, padding:"4px 12px", borderRadius:99 }}><span style={{ fontSize:11, color:C.textSub, fontFamily:"'Outfit',sans-serif", fontWeight:600 }}>{p.members} followers</span></div>
             </div>
-            <div><div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif" }}>{p.name}</div><div style={{ fontSize:12, color:p.color, fontFamily:"'Manrope',sans-serif", marginTop:2 }}>{p.handle}</div></div>
+            <div><div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif" }}>{p.name}</div><div style={{ fontSize:12, color:p.color, fontFamily:"'Manrope',sans-serif", marginTop:2 }}>{p.handle}</div></div>
             <p style={{ fontSize:13, color:C.textSub, lineHeight:1.6, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{p.desc}</p>
-            <a href={p.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:`${p.color}12`, border:`1px solid ${p.color}35`, color:p.color, padding:"10px 16px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif" }}>Follow <BsArrowRight size={ICON.xs} /></a>
+            <a href={p.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:`${p.color}12`, border:`1px solid ${p.color}35`, color:p.color, padding:"10px 16px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>Follow <BsArrowRight size={ICON.xs} /></a>
           </div>
         ))}
       </div>
@@ -751,18 +860,24 @@ function Community() {
       {/* OTHER COMMUNITIES */}
       <div style={{ marginBottom:52 }}>
         <SectionLabel>Wider Ecosystem</SectionLabel>
-        <h2 style={{ fontSize:"clamp(22px,3.5vw,34px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-0.5px", marginBottom:8 }}>More Communities to Join</h2>
+        <h2 style={{ fontSize:"clamp(22px,3.5vw,34px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px", marginBottom:8 }}>More Communities to Join</h2>
         <p style={{ fontSize:14, color:C.textSub, fontFamily:"'Manrope',sans-serif", marginBottom:28 }}>DigitalSphereUg is your starting point. These are the communities that connect you to the wider world.</p>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:14 }}>
           {otherCommunities.map((c, i) => (
             <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:22, display:"flex", flexDirection:"column", gap:12 }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
-                <div style={{ fontSize:24, display:"inline-flex" }}><c.icon size={ICON.xxl} /></div>
-                <Pill label={c.tag} color={c.tag==="Uganda"?C.green:c.tag==="Africa"?C.cyan:C.purple} small />
+                <div style={{ width:44, height:44, borderRadius:12, overflow:"hidden", border:`1px solid ${C.border}`, background:C.surface, display:"inline-flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  {c.logo ? (
+                    <img src={c.logo} alt={`${c.name} logo`} style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                  ) : (
+                    <c.icon size={ICON.lg} />
+                  )}
+                </div>
+                <Pill label={c.tag} color={c.tag.toLowerCase().includes("uganda")?C.green:c.tag.toLowerCase().includes("africa")?C.cyan:C.purple} small />
               </div>
-              <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif" }}>{c.name}</div>
+              <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif" }}>{c.name}</div>
               <p style={{ fontSize:13, color:C.textSub, lineHeight:1.6, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{c.desc}</p>
-              <a href={c.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${C.blue}12`, border:`1px solid ${C.border}`, color:C.blueLt, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif", alignSelf:"flex-start" }}>Visit <BsArrowRight size={ICON.xxs} /></a>
+              <a href={c.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${C.blue}12`, border:`1px solid ${C.border}`, color:C.blueLt, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>Visit <BsArrowRight size={ICON.xxs} /></a>
             </div>
           ))}
         </div>
@@ -771,11 +886,11 @@ function Community() {
       {/* University Chapters */}
       <div style={{ background:C.card, border:`1px dashed ${C.blue}45`, borderRadius:20, padding:"clamp(24px,4vw,40px)" }}>
         <div style={{ display:"flex", gap:10, alignItems:"center", marginBottom:8 }}><BsMortarboard size={ICON.xl} /><Pill label="Coming Soon" color={C.blue} /></div>
-        <h3 style={{ fontSize:22, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", margin:"14px 0 10px" }}>University Chapters Programme</h3>
+        <h3 style={{ fontSize:22, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:"14px 0 10px" }}>University Chapters Programme</h3>
         <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif", margin:"0 0 22px", maxWidth:560 }}>We're building a programme for students to start DigitalSphereUg chapters at their universities across Uganda — each with its own lead, events, and campus community.</p>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
-          {["Makerere University","Kyambogo University","MUBS","UCU","Ndejje University","Your University"].map(u => (
-            <span key={u} style={{ background:u.includes("Your University")?`${C.blue}15`:C.surface, border:`1px solid ${u.includes("Your University")?C.blue+"40":C.border}`, padding:"7px 16px", borderRadius:99, fontSize:12, color:u.includes("Your University")?C.blueLt:C.textSub, fontFamily:"'Outfit',sans-serif", fontWeight:600, display:"inline-flex", alignItems:"center", gap:6 }}>{u}{u.includes("Your University") && <BsArrowRight size={ICON.xxs} />}</span>
+          {["Makerere University","Kyambogo University","MUBS","UCU","Ndejje University","Your University →"].map(u => (
+            <span key={u} style={{ background:u.includes("Your University")?`${C.blue}15`:C.surface, border:`1px solid ${u.includes("Your University")?C.blue+"40":C.border}`, padding:"7px 16px", borderRadius:99, fontSize:12, color:u.includes("Your University")?C.blueLt:C.textSub, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, display:"inline-flex", alignItems:"center", gap:6 }}>{u}{u.includes("Your University") && <BsArrowRight size={ICON.xxs} />}</span>
           ))}
         </div>
       </div>
@@ -791,7 +906,6 @@ function About({ setPage }) {
     { n:"4", l:"Free Learning Tracks" },
     { n:"3", l:"Blog Posts Published" },
     { n:"2", l:"Major Events in 2026" },
-    { n:"1", l:"University Chapter — Growing" },
   ];
   const VALUES = [
     { icon:BsPatchCheck, title:"Always Free", color:C.green, desc:"Every course, resource, event listing, and opportunity on this platform is free. No subscription, no paywall, no catch. We believe the barrier to blockchain in Uganda should be zero." },
@@ -805,24 +919,35 @@ function About({ setPage }) {
       {/* MISSION */}
        <div style={{ marginBottom:72 }}>
         <SectionLabel>Who We Are</SectionLabel>
-        <h1 style={{ fontSize:"clamp(34px,5.5vw,64px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1.5px", lineHeight:1.05, marginBottom:24 }}>
-          Built by students.<br />
-          <span style={{ background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Built for Uganda.</span>
-        </h1>
-        <p style={{ fontSize:18, color:C.text, lineHeight:1.85, fontFamily:"'Manrope',sans-serif", maxWidth:680, marginBottom:16, fontWeight:500 }}>
-          DigitalSphereUg exists to accelerate blockchain education and opportunities for Ugandan students — and contribute Uganda's voice to the global Web3 conversation.
-        </p>
+        <div className="about-grid" style={{ display:"grid", gridTemplateColumns:"minmax(0,1.05fr) minmax(0,.95fr)", gap:20, alignItems:"stretch" }}>
+          <div>
+            <h1 style={{ fontSize:"clamp(34px,5.5vw,64px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.05, marginBottom:24 }}>
+              Built by students.<br />
+              <span style={{ color:C.accent }}>Built for Uganda.</span>
+            </h1>
+            <p style={{ fontSize:18, color:C.text, lineHeight:1.85, fontFamily:"'Manrope',sans-serif", maxWidth:680, marginBottom:16, fontWeight:500 }}>
+              DigitalSphereUg exists to accelerate blockchain education and opportunities for Ugandan students — and contribute Uganda's voice to the global Web3 conversation.
+            </p>
+          </div>
+          <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
+            <img src={filecoinGroupPhoto} alt="Filecoin boardroom group photo in Kampala" style={{ width:"100%", height:"100%", minHeight:320, objectFit:"cover" }} />
+          </div>
+        </div>
+        <div style={{ marginTop:14, borderRadius:14, overflow:"hidden", border:`1px solid ${C.border}` }}>
+          <img src={stellarGroupPhoto} alt="Stellar group photo in Kampala" style={{ width:"100%", height:"clamp(180px,32vw,300px)", objectFit:"cover" }} />
+        </div>
       </div>
        {/* 2. OUR STORY */}
       <div style={{ marginBottom:72 }}>
         <SectionLabel>Our Story</SectionLabel>
-        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>How it started</h2>
-        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(28px,4vw,48px)", position:"relative", overflow:"hidden" }}>
-          <div style={{ position:"absolute", top:-60, right:-60, width:220, height:220, background:`radial-gradient(circle,${C.blue}0c,transparent 70%)`, pointerEvents:"none" }} />
-          <p style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", margin:"0 0 20px", maxWidth:680, position:"relative" }}>
+        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>How it started</h2>
+        <div style={{ border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(28px,4vw,48px)", position:"relative", overflow:"hidden" }}>
+          <img src={kyambogoLecturePhoto} alt="Kyambogo lecture hall blockchain session" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover" }} />
+          <div style={{ position:"absolute", inset:0, background:"rgba(5,7,15,0.64)" }} />
+          <p style={{ fontSize:16, color:"#dbe5f4", lineHeight:1.9, fontFamily:"'Manrope',sans-serif", margin:"0 0 20px", maxWidth:680, position:"relative" }}>
             DigitalSphereUg started as a simple idea — a Ugandan student who believed blockchain was the biggest opportunity of our generation and couldn't find a local community to learn with. So instead of waiting for one to exist, we built it.
           </p>
-          <p style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", margin:0, maxWidth:680, position:"relative" }}>
+          <p style={{ fontSize:16, color:"#dbe5f4", lineHeight:1.9, fontFamily:"'Manrope',sans-serif", margin:0, maxWidth:680, position:"relative" }}>
             What started as a WhatsApp group and an X page with a few followers is now a growing platform with structured learning tracks, local events coverage, and a community of over 300 Ugandans building their Web3 future together. We are just getting started.
           </p>
         </div>
@@ -831,7 +956,7 @@ function About({ setPage }) {
       {/* 3. WHY UGANDA */}
       <div style={{ marginBottom:72 }}>
         <SectionLabel>Why Uganda</SectionLabel>
-        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>The opportunity is right here</h2>
+        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>The opportunity is right here</h2>
         <div style={{ background:`linear-gradient(135deg,${C.blue}15,${C.purple}0a)`, border:`1px solid ${C.blue}35`, borderRadius:20, padding:"clamp(28px,4vw,48px)" }}>
           <p style={{ fontSize:"clamp(16px,2.5vw,20px)", color:C.text, lineHeight:1.85, fontFamily:"'Manrope',sans-serif", margin:0, maxWidth:680, fontWeight:500, fontStyle:"italic" }}>
             "Uganda is one of the youngest countries in the world by median age. Over 75% of the population is under 30. We are not late to blockchain — we are early. And DigitalSphereUg exists to make sure Ugandan students are builders in this space, not just observers."
@@ -842,14 +967,14 @@ function About({ setPage }) {
       {/* 4. OUR VALUES */}
       <div style={{ marginBottom:72 }}>
         <SectionLabel>Our Values</SectionLabel>
-        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>What we stand for</h2>
+        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>What we stand for</h2>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))", gap:14 }}>
           {VALUES.map((item, i) => (
             <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"22px 20px", display:"flex", flexDirection:"column", gap:12 }}>
               <div style={{ width:44, height:44, borderRadius:12, display:"inline-flex", alignItems:"center", justifyContent:"center", background:`${item.color}16`, border:`1px solid ${item.color}35`, color:item.color }}>
                 <item.icon size={ICON.lg} />
               </div>
-              <div style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-0.2px" }}>{item.title}</div>
+              <div style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.2px" }}>{item.title}</div>
               <p style={{ margin:0, fontSize:13, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif" }}>{item.desc}</p>
             </div>
           ))}
@@ -859,12 +984,16 @@ function About({ setPage }) {
       {/* 5. IMPACT NUMBERS */}
       <div style={{ marginBottom:72 }}>
         <SectionLabel>Our Impact</SectionLabel>
-        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>Growing every day</h2>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))", gap:14 }}>
-          {IMPACT.map((s, i) => (
-            <div key={i} style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,28px)", textAlign:"center" }}>
-              <div style={{ fontSize:"clamp(28px,4vw,44px)", fontWeight:900, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1.5px", marginBottom:8, background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{s.n}</div>
-              <div style={{ fontSize:12, color:C.textSub, fontFamily:"'Outfit',sans-serif", letterSpacing:"0.3px", lineHeight:1.4 }}>{s.l}</div>
+        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>Growing every day</h2>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))", gap:14 }}>
+          <div style={{ gridColumn:"span 2", background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(24px,4vw,34px)", textAlign:"left" }}>
+            <div style={{ fontSize:"clamp(52px,9vw,96px)", fontWeight:900, color:C.accent, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-2px", lineHeight:1 }}>{IMPACT[0].n}</div>
+            <div style={{ fontSize:14, color:C.textSub, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"0.3px", lineHeight:1.4, marginTop:6 }}>{IMPACT[0].l}</div>
+          </div>
+          {IMPACT.slice(1).map((s, i) => (
+            <div key={i} style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(18px,3vw,22px)", textAlign:"left" }}>
+              <div style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:900, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:6 }}>{s.n}</div>
+              <div style={{ fontSize:12, color:C.textSub, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"0.3px", lineHeight:1.4 }}>{s.l}</div>
             </div>
           ))}
         </div>
@@ -873,7 +1002,7 @@ function About({ setPage }) {
       {/* TEAM */}
       <div style={{ marginBottom:72 }}>
         <SectionLabel>The Team</SectionLabel>
-        <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>The people behind the platform</h2>
+        <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>The people behind the platform</h2>
         <div className="team-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:20 }}>
           {TEAM.map((member, i) => (
             <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${member.active?C.border:C.border+"60"}`, borderRadius:20, padding:"clamp(24px,3.5vw,36px)", display:"flex", flexDirection:"column", gap:20, opacity:member.active?1:0.55, position:"relative", overflow:"hidden" }}>
@@ -886,14 +1015,14 @@ function About({ setPage }) {
                 ) : (
                   <div className="team-avatar" style={{ background:`${member.color}15`, border:`2px dashed ${member.color}40`, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
                     {member.active ? (
-                      <span style={{ fontSize:28, color:member.color, fontWeight:800, fontFamily:"'Outfit',sans-serif" }}>{member.initials}</span>
+                      <span style={{ fontSize:28, color:member.color, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif" }}>{member.initials}</span>
                     ) : (
                       <BsPlus size={ICON.stat} color={C.textDim} />
                     )}
                   </div>
                 )}
                 <div className="team-meta">
-                  <div style={{ fontSize:18, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:4, lineHeight:1.25, overflowWrap:"anywhere" }}>{member.name}</div>
+                  <div style={{ fontSize:18, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:4, lineHeight:1.25, overflowWrap:"anywhere" }}>{member.name}</div>
                   <Pill className="team-role" label={member.role} color={member.color} small nowrap={false} uppercase={false} />
                 </div>
               </div>
@@ -919,31 +1048,31 @@ function About({ setPage }) {
         {/* Join the team CTA */}
         <div style={{ marginTop:24, background:`${C.blue}10`, border:`1px solid ${C.blue}30`, borderRadius:14, padding:"20px 28px", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
           <div>
-            <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:3 }}>Want to join the team?</div>
+            <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:3 }}>Want to join the team?</div>
             <p style={{ fontSize:13, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:0 }}>We're always looking for passionate students to contribute to content, design, development, and campus chapters.</p>
             
           </div>
-          <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif", whiteSpace:"nowrap" }}>Get Involved →</a>
+          <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap" }}>Get Involved →</a>
         </div>
       </div>
             {/* 6. CAMPUS AMBASSADOR */}
       <div style={{ marginBottom:72 }}>
         <SectionLabel>Campus Ambassadors</SectionLabel>
-        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>Lead at your university</h2>
+        <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>Lead at your university</h2>
         <div style={{ background:C.card, border:`1px dashed ${C.blue}45`, borderRadius:20, padding:"clamp(28px,4vw,44px)" }}>
           <div style={{ display:"flex", gap:10, alignItems:"center", marginBottom:16 }}>
             <span style={{ display:"inline-flex", color:C.blueLt }}><BsMortarboard size={ICON.xl} /></span>
             <Pill label="Coming Soon" color={C.blue} />
           </div>
           <p style={{ fontSize:16, color:C.textSub, lineHeight:1.85, fontFamily:"'Manrope',sans-serif", margin:"0 0 24px", maxWidth:640 }}>
-            DigitalSphereUg is building a network of Campus Ambassadors — one student per university who leads the blockchain conversation on their campus. Each Ambassador organises local events, onboards new members, and represents DigitalSphereUg at their institution. If you are a student who wants to lead at your university, we want to hear from you.
+            One student lead per university. Local events, new member onboarding, real campus momentum.
           </p>
           <div style={{ display:"flex", gap:8, flexWrap:"wrap", marginBottom:24 }}>
             {["Makerere University","Kyambogo University","MUBS","UCU","Ndejje University","Your University →"].map(u => (
-              <span key={u} style={{ background:u.includes("→")?`${C.blue}15`:C.surface, border:`1px solid ${u.includes("→")?C.blue+"40":C.border}`, padding:"7px 16px", borderRadius:99, fontSize:12, color:u.includes("→")?C.blueLt:C.textSub, fontFamily:"'Outfit',sans-serif", fontWeight:600 }}>{u}</span>
+              <span key={u} style={{ background:u.includes("→")?`${C.blue}15`:C.surface, border:`1px solid ${u.includes("→")?C.blue+"40":C.border}`, padding:"7px 16px", borderRadius:99, fontSize:12, color:u.includes("→")?C.blueLt:C.textSub, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600 }}>{u}</span>
             ))}
           </div>
-          <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:8, background:`linear-gradient(135deg,${C.blue},${C.blueLt})`, border:"none", color:C.white, padding:"12px 24px", borderRadius:10, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Outfit',sans-serif" }}>
+          <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:8, background:C.blue, border:"none", color:C.white, padding:"12px 24px", borderRadius:10, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>
             Apply as Campus Ambassador →
           </a>
         </div>
@@ -952,14 +1081,14 @@ function About({ setPage }) {
       {/* FAQ */}
       <div style={{ marginBottom:72 }}>
         <SectionLabel>FAQ</SectionLabel>
-        <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>Frequently asked questions</h2>
+        <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>Frequently asked questions</h2>
         <div style={{ display:"flex", flexDirection:"column", gap:8, maxWidth:760 }}>
           {FAQS.map((faq, i) => {
             const isOpen = openFaq === i;
             return (
               <div key={i} className="faq-item" style={{ background:C.card, border:`1px solid ${isOpen?C.blue:C.border}`, borderRadius:14, overflow:"hidden" }}>
                 <button onClick={() => setOpenFaq(isOpen?null:i)} style={{ width:"100%", background:"none", border:"none", cursor:"pointer", padding:"18px 22px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:16, textAlign:"left" }}>
-                  <span style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", lineHeight:1.4 }}>{faq.q}</span>
+                  <span style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.4 }}>{faq.q}</span>
                   <span style={{ fontSize:20, color:isOpen?C.blueLt:C.textDim, flexShrink:0, transition:"transform .2s", display:"inline-flex", transform:isOpen?"rotate(180deg)":"none" }}><BsChevronDown size={ICON.xl} /></span>
                 </button>
                 {isOpen && (
@@ -973,25 +1102,7 @@ function About({ setPage }) {
         </div>
       </div>
 
-      {/* VALUES */}
-      <div>
-        <SectionLabel>Our Values</SectionLabel>
-        <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"-1px", marginBottom:28 }}>What we stand for</h2>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))", gap:14 }}>
-          {[
-            { icon:BsPatchCheck, title:"Always Free", desc:"Every resource, course, and opportunity on this platform is free. Always.", color:C.green },
-            { icon:BsGeoAlt, title:"Uganda First", desc:"Built with the Ugandan context in mind — local events, local opportunities, local community.", color:C.blue },
-            { icon:BsMortarboard, title:"Student-Led", desc:"Founded and run by students. We understand the learner's perspective because we are learners.", color:C.cyan },
-            { icon:BsGlobeEuropeAfrica, title:"Africa to the World", desc:"We start in Uganda but our community and ambition is pan-African and globally connected.", color:C.purple },
-          ].map((v, i) => (
-            <div key={i} style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:24 }}>
-              <div style={{ fontSize:28, marginBottom:12, display:"inline-flex" }}><v.icon size={ICON.stat} color={v.color} /></div>
-              <div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:8 }}>{v.title}</div>
-              <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0 }}>{v.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      
     </div>
   );
 }
@@ -1007,10 +1118,10 @@ function Footer({ setPage }) {
           <div>
             <button onClick={() => setPage("Home")} className="hover-lift" style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14, background:"none", border:"none", cursor:"pointer", padding:0 }}>
               {/* Logo image is temporarily disabled. Replace this placeholder with your SVG logo later. */}
-              <div style={{ width:40, height:40, borderRadius:8, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:11, fontWeight:800, fontFamily:"'Outfit',sans-serif", flexShrink:0 }}>
+              <div style={{ width:40, height:40, borderRadius:8, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:11, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif", flexShrink:0 }}>
                 DS
               </div>
-              <span style={{ fontSize:16, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", whiteSpace:"nowrap" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
+              <span style={{ fontSize:16, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
             </button>
             <p style={{ fontSize:13, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif", margin:"0 0 20px", maxWidth:240 }}>Student-led. Uganda-built. Web3-ready.</p>
             {/* Social links in footer */}
@@ -1023,7 +1134,7 @@ function Footer({ setPage }) {
 
           {/* Platform links */}
           <div>
-            <div style={{ fontSize:11, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"1.5px", textTransform:"uppercase", marginBottom:14 }}>Platform</div>
+            <div style={{ fontSize:12, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"1.5px", textTransform:"uppercase", marginBottom:14 }}>Platform</div>
             {FOOTER_LINKS.map(l => (
               <button key={l} onClick={() => setPage(l)} style={{ display:"block", background:"none", border:"none", cursor:"pointer", padding:"5px 0", color:C.textSub, fontSize:13, fontFamily:"'Manrope',sans-serif", textAlign:"left" }}>{l}</button>
             ))}
@@ -1031,7 +1142,7 @@ function Footer({ setPage }) {
 
           {/* Resources links */}
           <div>
-            <div style={{ fontSize:11, fontWeight:700, color:C.text, fontFamily:"'Outfit',sans-serif", letterSpacing:"1.5px", textTransform:"uppercase", marginBottom:14 }}>Resources</div>
+            <div style={{ fontSize:12, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"1.5px", textTransform:"uppercase", marginBottom:14 }}>Resources</div>
             {[
               { l:"BAU Uganda", h:"https://bau.ug" },
               { l:"DevFest Kampala", h:"https://devfestkampala.com" },
@@ -1045,11 +1156,10 @@ function Footer({ setPage }) {
         </div>
 
         <div style={{ borderTop:`1px solid ${C.border}`, paddingTop:20, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:10 }}>
-          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>© 2026 DigitalSphereUg. All right reserved.</span>
-          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Free. Always free.</span>
+          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>© 2026 DigitalSphereUg — Built in Uganda 🇺🇬 Free. Always free.</span>
         </div>
           <div style={{ marginTop:14, paddingTop:14, borderTop:`1px solid ${C.border}` }}>
-          <p style={{ fontSize:11, color:C.textDim, fontFamily:"'Manrope',sans-serif", margin:0, lineHeight:1.6 }}>DigitalSphereUg curates links to free external resources. We do not own or host any third-party content. All linked resources belong to their respective owners.</p>
+          <p style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", margin:0, lineHeight:1.6 }}>DigitalSphereUg curates links to free external resources. We do not own or host any third-party content. All linked resources belong to their respective owners.</p>
         </div>
       </div>
     </footer>
