@@ -263,7 +263,12 @@ body{background:${C.bg};font-family:'Manrope',sans-serif;color:${C.text}}
 .faq-item{transition:all .2s}
 .social-btn:hover{transform:translateY(-2px);opacity:.85}
 .social-btn{transition:all .15s}
+.team-avatar{width:96px;height:96px;border-radius:20px}
+.team-head{display:flex;align-items:center;gap:16px;min-width:0}
+.team-meta{min-width:0;flex:1}
+.team-role{max-width:100%;white-space:normal!important;line-height:1.3;text-transform:none!important;letter-spacing:.2px!important}
 @media(max-width:1050px){.desktop-nav{display:none!important}}
+@media(min-width:1100px){.team-avatar{width:132px;height:132px;border-radius:24px}}
 @media(min-width:1051px){.mob-menu{display:none!important}.mob-btn{display:none!important}.mob-actions{display:none!important}}
 @media(max-width:640px){
   .hero-btns{flex-direction:column;align-items:stretch!important}
@@ -271,13 +276,17 @@ body{background:${C.bg};font-family:'Manrope',sans-serif;color:${C.text}}
   .about-grid{grid-template-columns:1fr!important}
   .footer-grid{grid-template-columns:1fr!important}
   .team-grid{grid-template-columns:1fr!important}
+  .team-avatar{width:84px;height:84px;border-radius:18px}
+  .team-head{align-items:flex-start}
+  .team-meta{display:flex;flex-direction:column;gap:6px}
+  .team-role{white-space:normal!important;line-height:1.35}
 }
 `;
 
 // ─── Shared Components ────────────────────────────────────────────
-function Pill({ label, color, small }) {
+function Pill({ label, color, small, nowrap = true, uppercase = true, className }) {
   return (
-    <span style={{ display:"inline-block", background:`${color}18`, color, border:`1px solid ${color}35`, padding:small?"2px 8px":"4px 12px", borderRadius:99, fontSize:small?10:11, fontWeight:700, fontFamily:"'Outfit',sans-serif", letterSpacing:"0.5px", textTransform:"uppercase", whiteSpace:"nowrap" }}>
+    <span className={className} style={{ display:"inline-block", background:`${color}18`, color, border:`1px solid ${color}35`, padding:small?"2px 8px":"4px 12px", borderRadius:99, fontSize:small?10:11, fontWeight:700, fontFamily:"'Outfit',sans-serif", letterSpacing:"0.5px", textTransform:uppercase?"uppercase":"none", whiteSpace:nowrap?"nowrap":"normal" }}>
       {label}
     </span>
   );
@@ -793,11 +802,11 @@ function About({ setPage, theme }) {
               <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:member.active?`linear-gradient(90deg,${member.color},${member.color}50)`:`${C.textDim}40` }} />
 
               {/* Avatar */}
-              <div style={{ display:"flex", alignItems:"center", gap:16 }}>
+              <div className="team-head">
                 {member.avatar ? (
-                  <img src={member.avatar} alt={member.name} style={{ width:72, height:72, borderRadius:16, objectFit:"cover", objectPosition:"center 20%", background:"transparent", border:`2px solid ${member.color}40`, padding:0, flexShrink:0 }} />
+                  <img className="team-avatar" src={member.avatar} alt={member.name} style={{ objectFit:"cover", objectPosition:"center 20%", background:"transparent", border:`2px solid ${member.color}40`, padding:0, flexShrink:0 }} />
                 ) : (
-                  <div style={{ width:72, height:72, borderRadius:16, background:`${member.color}15`, border:`2px dashed ${member.color}40`, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
+                  <div className="team-avatar" style={{ background:`${member.color}15`, border:`2px dashed ${member.color}40`, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
                     {member.active ? (
                       <span style={{ fontSize:28, color:member.color, fontWeight:800, fontFamily:"'Outfit',sans-serif" }}>{member.initials}</span>
                     ) : (
@@ -805,9 +814,9 @@ function About({ setPage, theme }) {
                     )}
                   </div>
                 )}
-                <div>
-                  <div style={{ fontSize:18, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:4 }}>{member.name}</div>
-                  <Pill label={member.role} color={member.color} small />
+                <div className="team-meta">
+                  <div style={{ fontSize:18, fontWeight:800, color:C.text, fontFamily:"'Outfit',sans-serif", marginBottom:4, lineHeight:1.25, overflowWrap:"anywhere" }}>{member.name}</div>
+                  <Pill className="team-role" label={member.role} color={member.color} small nowrap={false} uppercase={false} />
                 </div>
               </div>
 
