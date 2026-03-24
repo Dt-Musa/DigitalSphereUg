@@ -122,17 +122,16 @@ const POSTS = [
 ];
 
 // ─── Team Data ────────────────────────────────────────────────────
-// TODO: Replace placeholder details with your real info when ready
 const TEAM = [
   {
     name: "Irankunda Musa",
     role: "Founder & Community Lead",
-    bio: "Founded DigitalSphereUg to create a free student-led platform that gives every Ugandan a clear, free path into blockchain and Web3 ecosystem. Passionate about building and accesible and local community.",
+    bio: "Founded DigitalSphereUg to create a free student-led platform that gives every Ugandan a clear, free path into the blockchain and Web3 ecosystem. Passionate about building an accessible and local community.",
     avatar: musaImage,
     initials: "M",
     color: C.blueLt,
-    linkedin: "https://www.linkedin.com/in/musa-irankunda-2073a2322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", // TODO: Replace with your real LinkedIn URL
-    x: "https://x.com/irankundaMusa", // TODO: Replace with your real X URL
+    linkedin: "https://www.linkedin.com/in/musa-irankunda-2073a2322?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    x: "https://x.com/irankundaMusa",
     active: true,
   },
   {
@@ -142,8 +141,8 @@ const TEAM = [
     avatar: brightImage,
     initials: "CL",
     color: C.green,
-    linkedin: "https://linkedin.com/in/your-linkedin-here", // TODO: Replace
-    x: "https://x.com/your-x-handle-here", // TODO: Replace
+    linkedin: "https://linkedin.com/in/your-linkedin-here",
+    x: "https://x.com/your-x-handle-here",
     active: true,
   },
   {

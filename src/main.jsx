@@ -1,19 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.getRegistrations().then((registrations) => {
-      registrations.forEach((registration) => {
-        registration.unregister()
-      })
-    })
-  })
+const unregisterServiceWorkers = async () => {
+  if (!('serviceWorker' in navigator)) {
+    return
+  }
+
+  try {
+    const registrations = await navigator.serviceWorker.getRegistrations()
+    await Promise.all(registrations.map((registration) => registration.unregister()))
+  } catch (error) {
+    // Avoid blocking app startup if browser APIs are unavailable.
+    console.warn('Failed to unregister service workers:', error)
+  }
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+window.addEventListener('load', () => {
+  unregisterServiceWorkers()
+})
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <App />
-  </React.StrictMode>
+  </StrictMode>
 )
