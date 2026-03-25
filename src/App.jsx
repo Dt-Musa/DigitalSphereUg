@@ -698,13 +698,44 @@ function Home({ setPage }) {
 }
 
 function Gallery({ setPage }) {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  useEffect(() => {
+    if (activeIndex === null) return;
+
+    const onKeyDown = e => {
+      if (e.key === "Escape") {
+        setActiveIndex(null);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [activeIndex]);
+
+  const prevItem = () => {
+    setActiveIndex(prev => {
+      if (prev === null) return prev;
+      return prev === 0 ? GALLERY_ITEMS.length - 1 : prev - 1;
+    });
+  };
+
+  const nextItem = () => {
+    setActiveIndex(prev => {
+      if (prev === null) return prev;
+      return prev === GALLERY_ITEMS.length - 1 ? 0 : prev + 1;
+    });
+  };
+
+  const activeItem = activeIndex === null ? null : GALLERY_ITEMS[activeIndex];
+
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Community Archive" h1="Uganda Shows Up for Web3" sub="From campus sessions to major conferences, this is how DigitalSphereUg shows up." />
 
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:16, marginBottom:40 }}>
         {GALLERY_ITEMS.map((item, i) => (
-          <article key={item.title + i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:12, display:"flex", flexDirection:"column", gap:10 }}>
+          <article key={item.title + i} onClick={() => setActiveIndex(i)} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:12, display:"flex", flexDirection:"column", gap:10, cursor:"pointer" }}>
             <div className="image-zoom" style={{ borderRadius:10 }}>
               <img src={item.image} alt={item.title} style={{ width:"100%", height:190, objectFit:"cover", borderRadius:10 }} />
             </div>
@@ -725,6 +756,31 @@ function Gallery({ setPage }) {
           <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"11px 18px", borderRadius:9, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", display:"inline-flex", alignItems:"center", gap:6 }}>Join The Community <BsArrowRight size={ICON.xs} /></button>
         </div>
       </div>
+
+      {activeItem && (
+        <div onClick={() => setActiveIndex(null)} style={{ position:"fixed", inset:0, background:"rgba(5, 7, 15, 0.82)", zIndex:700, display:"flex", alignItems:"center", justifyContent:"center", padding:"20px" }}>
+          <div onClick={e => e.stopPropagation()} style={{ width:"min(100%, 980px)", background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:14, display:"flex", flexDirection:"column", gap:12 }}>
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:10 }}>
+              <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"1.2px", textTransform:"uppercase" }}>Gallery Preview</div>
+              <button type="button" onClick={() => setActiveIndex(null)} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.text, width:32, height:32, borderRadius:8, cursor:"pointer", fontSize:16, lineHeight:1 }}>×</button>
+            </div>
+
+            <img src={activeItem.image} alt={activeItem.title} style={{ width:"100%", maxHeight:"70vh", objectFit:"cover", borderRadius:12 }} />
+
+            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:14, flexWrap:"wrap" }}>
+              <div style={{ flex:1, minWidth:220 }}>
+                <h3 style={{ margin:"0 0 6px", fontSize:20, color:C.text, fontFamily:"'Space Grotesk',sans-serif" }}>{activeItem.title}</h3>
+                <div style={{ fontSize:13, color:C.blueLt, fontFamily:"'Manrope',sans-serif", fontWeight:700, marginBottom:8 }}>{activeItem.date} — {activeItem.location}</div>
+                <p style={{ margin:0, fontSize:14, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif" }}>{activeItem.summary}</p>
+              </div>
+              <div style={{ display:"flex", gap:8 }}>
+                <button type="button" onClick={prevItem} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"9px 14px", borderRadius:9, cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Prev</button>
+                <button type="button" onClick={nextItem} className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"9px 14px", borderRadius:9, cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
