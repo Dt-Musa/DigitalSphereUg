@@ -283,13 +283,23 @@ img,svg{max-width:100%}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 #2847D400}50%{box-shadow:0 0 28px #2847D433}}
 .fade-up{animation:fadeUp .7s ease both}
 .fade-up-2{animation:fadeUp .7s .1s ease both}
 .fade-up-3{animation:fadeUp .7s .2s ease both}
+.section-appear{animation:fadeUp .72s ease both}
+.section-appear-2{animation:fadeUp .72s .08s ease both}
 .hover-card{transition:transform .2s,border-color .2s,box-shadow .2s}
 .hover-card:hover{transform:translateY(-3px);border-color:#2847D480!important;box-shadow:0 8px 32px #2847D415}
 .hover-lift{transition:all .15s}
 .hover-lift:hover{opacity:.85;transform:translateY(-1px)}
+.image-zoom{overflow:hidden;border-radius:10px}
+.image-zoom img{transition:transform .55s ease,filter .3s ease}
+.image-zoom:hover img{transform:scale(1.05);filter:saturate(1.08)}
+.glass-pulse{animation:glowPulse 3s ease-in-out infinite, floatY 6s ease-in-out infinite}
+.cta-pop{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+.cta-pop:hover{transform:translateY(-4px);box-shadow:0 14px 30px #2847D433;border-color:#2847D466}
 .res-item{transition:all .15s}
 .res-item:hover{background:${C.cardHov}!important;border-color:${C.blue}60!important}
 .nav-btn{transition:all .15s;border-bottom:2px solid transparent}
@@ -302,7 +312,8 @@ img,svg{max-width:100%}
 .team-meta{min-width:0;flex:1}
 .team-role{max-width:100%;white-space:normal!important;line-height:1.3;text-transform:none!important;letter-spacing:.2px!important}
 .photo-masonry{columns:3 280px;column-gap:14px}
-.photo-item{break-inside:avoid;margin-bottom:14px}
+.photo-item{break-inside:avoid;margin-bottom:14px;transition:transform .25s ease,filter .25s ease}
+.photo-item:hover{transform:translateY(-4px);filter:saturate(1.04)}
 @media(max-width:1050px){.desktop-nav{display:none!important}}
 @media(min-width:1100px){.team-avatar{width:132px;height:132px;border-radius:24px}}
 @media(min-width:1051px){.mob-menu{display:none!important}.mob-btn{display:none!important}.mob-actions{display:none!important}}
@@ -410,7 +421,7 @@ function Nav({ page, setPage, theme, toggleTheme }) {
           </div>
         </div>
         {mob && (
-          <div className="mob-menu" style={{ background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px" }}>
+          <div className="mob-menu" style={{ background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px", animation:"fadeIn .2s ease" }}>
             {NAV_LINKS.map(l => (
               <button key={l} onClick={() => { setPage(l); setMob(false); }} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:page===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
             ))}
@@ -438,7 +449,7 @@ function Home({ setPage, theme }) {
         <img src={ethnileGroupHero} alt="ETHNile outdoor group photo in Kampala" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} />
         <div style={{ position:"absolute", inset:0, background:"rgba(5,7,15,0.60)" }} />
         <div className="hero-shell" style={{ position:"relative", maxWidth:1280, width:"100%", margin:"0 auto", display:"grid", gridTemplateColumns:"minmax(0,760px)", justifyContent:"start" }}>
-          <div className="fade-up" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(5,7,15,.75)", border:`1px solid ${heroBorder}`, padding:"7px 18px", borderRadius:99, marginBottom:26 }}>
+          <div className="fade-up glass-pulse" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(5,7,15,.75)", border:`1px solid ${heroBorder}`, padding:"7px 18px", borderRadius:99, marginBottom:26 }}>
             <span style={{ width:7, height:7, borderRadius:"50%", background:C.green, display:"inline-block", animation:"pulse 2s infinite" }} />
             <span style={{ fontSize:12, color:heroSub, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, letterSpacing:"1.5px", textTransform:"uppercase" }}>Uganda's Student Blockchain Community</span>
           </div>
@@ -465,10 +476,10 @@ function Home({ setPage, theme }) {
       </section>
 
       {/* TRACKS PREVIEW */}
-      <section style={{ padding:"clamp(56px,8vw,96px) clamp(16px,4vw,40px)", maxWidth:1280, margin:"0 auto" }}>
+      <section className="section-appear" style={{ padding:"clamp(56px,8vw,96px) clamp(16px,4vw,40px)", maxWidth:1280, margin:"0 auto" }}>
         <div className="home-tracks-head" style={{ display:"grid", gridTemplateColumns:"minmax(0,1.2fr) minmax(0,.8fr)", marginBottom:26, gap:18, alignItems:"end" }}>
           <div><SectionLabel>Learning Tracks</SectionLabel><h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", maxWidth:520 }}>Your path into blockchain</h2></div>
-          <div className="home-tracks-image" style={{ border:`1px solid ${C.border}`, borderRadius:14, overflow:"hidden", minHeight:180 }}>
+          <div className="home-tracks-image image-zoom" style={{ border:`1px solid ${C.border}`, borderRadius:14, overflow:"hidden", minHeight:180 }}>
             <img src={chainlinkRooftopPhoto} alt="Chainlink rooftop study session in Kampala" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
           </div>
         </div>
@@ -491,7 +502,7 @@ function Home({ setPage, theme }) {
       </section>
 
       {/* EVENTS PREVIEW */}
-      <section style={{ padding:"0 clamp(16px,4vw,40px) clamp(56px,8vw,96px)", maxWidth:1280, margin:"0 auto" }}>
+      <section className="section-appear-2" style={{ padding:"0 clamp(16px,4vw,40px) clamp(56px,8vw,96px)", maxWidth:1280, margin:"0 auto" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:32, flexWrap:"wrap", gap:16 }}>
           <div><SectionLabel>2026 Calendar</SectionLabel><h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px" }}>Upcoming Events</h2></div>
           <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, padding:"10px 22px", borderRadius:9, fontSize:13, fontWeight:600, cursor:"pointer", fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>All events <BsArrowRight size={ICON.xs} /></button>
@@ -504,7 +515,7 @@ function Home({ setPage, theme }) {
             return (
             <div key={e.title || i} className={`hover-card ${i===0?"home-event-featured":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"55":C.border}`, borderRadius:14, padding:22, position:"relative", overflow:"hidden", display:"flex", flexDirection:"column", gap:12, gridColumn:i===0?"span 2":"span 1" }}>
               {featured && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.blueLt})` }} />}
-              {e.image && <img className={isFlyer?"event-flyer-image home-flyer-image":undefined} src={e.image} alt={e.title || "Event visual"} style={{ width:"100%", height:isFlyer?(i===0?240:190):(i===0?190:140), objectFit:"cover", objectPosition:isFlyer?"top center":"center", background:C.bg2, borderRadius:10 }} />}
+              {e.image && <div className="image-zoom" style={{ borderRadius:10 }}><img className={isFlyer?"event-flyer-image home-flyer-image":undefined} src={e.image} alt={e.title || "Event visual"} style={{ width:"100%", height:isFlyer?(i===0?240:190):(i===0?190:140), objectFit:"cover", objectPosition:isFlyer?"top center":"center", background:C.bg2, borderRadius:10 }} /></div>}
               <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:6 }}>
                 <Pill label={e.tag || "Event"} color={color} />
                 {featured && <Pill label="Featured" color={C.cyan} />}
@@ -519,7 +530,7 @@ function Home({ setPage, theme }) {
       </section>
 
       {/* GALLERY */}
-      <section style={{ background:"#f4efe4", color:"#1e293b", padding:"clamp(52px,7vw,90px) clamp(16px,4vw,40px)", borderTop:"1px solid #ddd0b7", borderBottom:"1px solid #ddd0b7" }}>
+      <section className="section-appear" style={{ background:"#f4efe4", color:"#1e293b", padding:"clamp(52px,7vw,90px) clamp(16px,4vw,40px)", borderTop:"1px solid #ddd0b7", borderBottom:"1px solid #ddd0b7" }}>
         <div style={{ maxWidth:1280, margin:"0 auto" }}>
           <div style={{ marginBottom:20 }}>
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:"#7c4a03", marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>In The Community</div>
@@ -528,7 +539,9 @@ function Home({ setPage, theme }) {
           <div className="photo-masonry">
             {GALLERY_ITEMS.map((item, i) => (
               <figure key={i} className="photo-item" style={{ margin:0 }}>
-                <img src={item.src} alt={item.caption} style={{ width:"100%", display:"block", borderRadius:12, objectFit:"cover" }} />
+                <div className="image-zoom" style={{ borderRadius:12 }}>
+                  <img src={item.src} alt={item.caption} style={{ width:"100%", display:"block", borderRadius:12, objectFit:"cover" }} />
+                </div>
                 <figcaption style={{ fontSize:12, marginTop:8, color:"#334155", fontFamily:"'Manrope',sans-serif" }}>{item.caption}</figcaption>
               </figure>
             ))}
@@ -538,8 +551,8 @@ function Home({ setPage, theme }) {
       </section>
 
       {/* CTA */}
-      <section style={{ padding:"0 clamp(16px,4vw,40px) 60px", maxWidth:1280, margin:"0 auto" }}>
-        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(36px,6vw,64px) clamp(24px,5vw,56px)", textAlign:"left" }}>
+      <section className="section-appear-2" style={{ padding:"0 clamp(16px,4vw,40px) 60px", maxWidth:1280, margin:"0 auto" }}>
+        <div className="cta-pop" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(36px,6vw,64px) clamp(24px,5vw,56px)", textAlign:"left" }}>
           <div>
             <h2 style={{ fontSize:"clamp(28px,4.5vw,52px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.1, marginBottom:16 }}>313 of us already.<br /><span style={{ color:C.blueLt }}>Come be 314.</span></h2>
             <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:"0 0 28px", maxWidth:420 }}>If you're in Kampala and curious about blockchain, this is your lane.</p>
@@ -576,10 +589,12 @@ function Learn() {
   const total = TRACKS.reduce((a, t) => a + t.resources.length, 0);
   const nDone = Object.values(done).filter(Boolean).length;
   return (
-    <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Free Learning Tracks" h1="Your Blockchain Education" sub="4 structured tracks. All free. No account needed. Progress saved locally on your device." />
       <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}`, marginBottom:24 }}>
-        <img src={chainlinkRooftopPhoto} alt="Chainlink rooftop learning session in Kampala" style={{ width:"100%", height:"clamp(200px,30vw,320px)", objectFit:"cover" }} />
+        <div className="image-zoom" style={{ borderRadius:16 }}>
+          <img src={chainlinkRooftopPhoto} alt="Chainlink rooftop learning session in Kampala" style={{ width:"100%", height:"clamp(200px,30vw,320px)", objectFit:"cover" }} />
+        </div>
       </div>
       {nDone > 0 && (
         <div style={{ background:C.card, border:`1px solid ${C.green}40`, borderRadius:12, padding:"14px 20px", marginBottom:32, display:"flex", alignItems:"center", gap:14 }}>
@@ -642,10 +657,12 @@ function Learn() {
 // ─── Events ───────────────────────────────────────────────────────
 function Events() {
   return (
-    <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="2026 Calendar" h1="Upcoming Events" sub="Blockchain events in Uganda and across Africa. Every event is a door — show up." />
       <div style={{ marginBottom:20, borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
-        <img src={ethnileVenuePhoto} alt="ETHNile venue with sponsor banners" style={{ width:"100%", height:"clamp(200px,30vw,340px)", objectFit:"cover" }} />
+        <div className="image-zoom" style={{ borderRadius:16 }}>
+          <img src={ethnileVenuePhoto} alt="ETHNile venue with sponsor banners" style={{ width:"100%", height:"clamp(200px,30vw,340px)", objectFit:"cover" }} />
+        </div>
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:18, marginBottom:32 }}>
         {EVENTS.filter(e => e && typeof e === "object").map((e, i) => {
@@ -653,9 +670,9 @@ function Events() {
           const featured = Boolean(e.featured);
           const isFlyer = e.imageFit === "contain";
           return (
-            <div key={e.title || i} className={`hover-card ${i===0?"events-featured-card":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"60":C.border}`, borderRadius:18, padding:"clamp(18px,2.6vw,24px)", display:"flex", flexDirection:"column", gap:12, position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}>
+            <div key={e.title || i} className={`hover-card fade-up ${i===0?"events-featured-card":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"60":C.border}`, borderRadius:18, padding:"clamp(18px,2.6vw,24px)", display:"flex", flexDirection:"column", gap:12, position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}>
             {featured && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.blueLt})` }} />}
-            {e.image && <img className={isFlyer?"event-flyer-image events-flyer-image":undefined} src={e.image} alt={e.title || "Event"} style={{ width:"100%", height:isFlyer?(i===0?300:240):(i===0?220:160), objectFit:"cover", objectPosition:isFlyer?"top center":"center", background:C.bg2, borderRadius:10 }} />}
+            {e.image && <div className="image-zoom" style={{ borderRadius:10 }}><img className={isFlyer?"event-flyer-image events-flyer-image":undefined} src={e.image} alt={e.title || "Event"} style={{ width:"100%", height:isFlyer?(i===0?300:240):(i===0?220:160), objectFit:"cover", objectPosition:isFlyer?"top center":"center", background:C.bg2, borderRadius:10 }} /></div>}
             <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:6 }}><Pill label={e.tag || "Event"} color={color} />{featured && <Pill label="Featured" color={C.cyan} />}</div>
             <h3 style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3 }}>{e.title || "Upcoming Event"}</h3>
             <div><div style={{ fontSize:13, color:color, fontFamily:"'Manrope',sans-serif", fontWeight:600, marginBottom:3, display:"flex", alignItems:"center", gap:6 }}><BsCalendarEvent size={ICON.xs} /> {e.date || "Date TBC"}</div><div style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xs} /> {e.location || "Location TBC"}</div></div>
@@ -672,8 +689,10 @@ function Events() {
         <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:"0 0 16px", maxWidth:640 }}>A quick look at sessions we have already hosted or attended. This archive helps newcomers see the momentum we are building.</p>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:14 }}>
           {PAST_EVENTS.map((event, i) => (
-            <div key={event.title + i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:16, display:"flex", flexDirection:"column", gap:10 }}>
-              <img src={event.image} alt={event.title} style={{ width:"100%", height:150, objectFit:"cover", borderRadius:10 }} />
+            <div key={event.title + i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:16, display:"flex", flexDirection:"column", gap:10 }}>
+              <div className="image-zoom" style={{ borderRadius:10 }}>
+                <img src={event.image} alt={event.title} style={{ width:"100%", height:150, objectFit:"cover", borderRadius:10 }} />
+              </div>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:8, flexWrap:"wrap" }}>
                 <Pill label={event.tag} color={event.color} small />
                 <span style={{ fontSize:11, color:C.textDim, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"1px", textTransform:"uppercase" }}>Past Event</span>
@@ -699,23 +718,25 @@ function Events() {
 // ─── Opportunities ────────────────────────────────────────────────
 function Opportunities() {
   return (
-    <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Opportunities" h1="Earn, Build & Grow" sub="Jobs, grants, hackathons, and earn opportunities available to Ugandans right now." />
 
-      <div style={{ display:"grid", gridTemplateColumns:"minmax(0,1.1fr) minmax(0,.9fr)", gap:16, marginBottom:30 }}>
-        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
+      <div className="section-appear-2" style={{ display:"grid", gridTemplateColumns:"minmax(0,1.1fr) minmax(0,.9fr)", gap:16, marginBottom:30 }}>
+        <div className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
             <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>Built For Uganda</div>
           <h2 style={{ fontSize:"clamp(22px,3vw,34px)", color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.1, margin:"0 0 10px" }}>Remote opportunities, local momentum</h2>
           <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>Grants, bounties, internships, and jobs that Ugandan students can actually access now. Start with one, keep stacking your wins.</p>
         </div>
         <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
-          <img src={outdoorLaptopPhoto} alt="Outdoor laptop session for builders in Kampala" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
+          <div className="image-zoom" style={{ borderRadius:16 }}>
+            <img src={outdoorLaptopPhoto} alt="Outdoor laptop session for builders in Kampala" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
+          </div>
         </div>
       </div>
 
       <div style={{ display:"flex", flexDirection:"column", gap:48 }}>
         {OPPS.map((cat, ci) => (
-          <div key={ci}>
+          <div key={ci} className="fade-up">
             <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:18 }}>
               <div style={{ width:42, height:42, borderRadius:11, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}><cat.icon size={ICON.lg} /></div>
               <h2 style={{ fontSize:20, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0 }}>{cat.cat}</h2>
@@ -740,14 +761,16 @@ function Opportunities() {
 // ─── Resources Page ───────────────────────────────────────────────
 function Resources() {
   return (
-    <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Tools & Resources" h1="Everything You Need" sub="Curated tools, platforms, and links for every stage of your blockchain journey — from first steps to building on mainnet." />
 
-      <div style={{ display:"grid", gridTemplateColumns:"minmax(0,.95fr) minmax(0,1.05fr)", gap:16, marginBottom:30 }}>
+      <div className="section-appear-2" style={{ display:"grid", gridTemplateColumns:"minmax(0,.95fr) minmax(0,1.05fr)", gap:16, marginBottom:30 }}>
         <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
-          <img src={kyambogoRoomPhoto} alt="Kyambogo blockchain session room" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
+          <div className="image-zoom" style={{ borderRadius:16 }}>
+            <img src={kyambogoRoomPhoto} alt="Kyambogo blockchain session room" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
+          </div>
         </div>
-        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
+        <div className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
           <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>No Gatekeeping</div>
           <h2 style={{ fontSize:"clamp(22px,3vw,34px)", color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.1, margin:"0 0 10px" }}>Real tools. Free access. Start now.</h2>
           <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>A practical stack Ugandan learners can use immediately, from browser-based editors to grants and local communities.</p>
@@ -756,7 +779,7 @@ function Resources() {
 
       <div style={{ display:"flex", flexDirection:"column", gap:52 }}>
         {RESOURCES_DATA.map((cat, ci) => (
-          <div key={ci}>
+          <div key={ci} className="fade-up">
             <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:20 }}>
               <div style={{ width:44, height:44, borderRadius:12, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20 }}><cat.icon size={ICON.xl} /></div>
               <h2 style={{ fontSize:21, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0 }}>{cat.cat}</h2>
@@ -800,12 +823,12 @@ function Resources() {
 // ─── Blog ─────────────────────────────────────────────────────────
 function Blog({ setPost }) {
   return (
-    <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Insights & Perspectives" h1="The Blog" sub="Written for Ugandans. Honest, practical, no hype." />
       <p style={{ margin:"-24px 0 24px", fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Upcoming topics: Bank of Uganda crypto stance, mobile money x Web3 integration, and local startup stories.</p>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:18 }}>
         {POSTS.map((p, i) => (
-          <div key={p.id} onClick={() => setPost(p)} className="hover-card" style={{ background:C.card, border:`1px solid ${i===0?C.blue+"45":C.border}`, borderRadius:18, padding:"clamp(20px,3vw,30px)", cursor:"pointer", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
+          <div key={p.id} onClick={() => setPost(p)} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${i===0?C.blue+"45":C.border}`, borderRadius:18, padding:"clamp(20px,3vw,30px)", cursor:"pointer", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
             {i===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.purple})` }} />}
             <Pill label={p.tag} color={p.tagColor} />
             <h2 style={{ fontSize:18, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3, margin:0 }}>{p.title}</h2>
@@ -824,7 +847,7 @@ function Blog({ setPost }) {
 
 function BlogPost({ post, back }) {
   return (
-    <div style={{ maxWidth:720, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:720, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <button onClick={back} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, marginBottom:40, padding:"9px 18px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}><BsArrowLeft size={ICON.sm} /> Back to Blog</button>
       <Pill label={post.tag} color={post.tagColor} />
       <h1 style={{ fontSize:"clamp(26px,4vw,42px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", margin:"18px 0 14px", lineHeight:1.15 }}>{post.title}</h1>
@@ -853,16 +876,18 @@ function Community() {
     { name:"Web3 Africa", desc:"Pan-African community connecting blockchain builders across the continent.", link:"https://www.web3afrika.com/", icon:BsLink45Deg, logo:web3AfricaLogoImage, tag:"Africa" },
   ];
   return (
-    <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Join The Movement" h1="Community" sub="Start with us. Connect with the world." />
 
       <div style={{ borderRadius:18, overflow:"hidden", border:`1px solid ${C.border}`, marginBottom:16 }}>
-        <img src={chainlinkStreetGroupPhoto} alt="Chainlink Kampala community group outside Ponnus" style={{ width:"100%", height:"clamp(220px,32vw,380px)", objectFit:"cover" }} />
+        <div className="image-zoom" style={{ borderRadius:18 }}>
+          <img src={chainlinkStreetGroupPhoto} alt="Chainlink Kampala community group outside Ponnus" style={{ width:"100%", height:"clamp(220px,32vw,380px)", objectFit:"cover" }} />
+        </div>
       </div>
       <p style={{ margin:"0 0 24px", fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>313 members across Telegram, WhatsApp and X combined</p>
 
       {/* PRIMARY — Telegram */}
-      <div style={{ background:C.card, border:`1px solid #2AABEE50`, borderRadius:20, padding:"clamp(28px,4vw,44px)", marginBottom:20, position:"relative", overflow:"hidden" }}>
+      <div className="section-appear-2" style={{ background:C.card, border:`1px solid #2AABEE50`, borderRadius:20, padding:"clamp(28px,4vw,44px)", marginBottom:20, position:"relative", overflow:"hidden" }}>
         <div style={{ position:"absolute", top:-60, right:-60, width:200, height:200, background:"radial-gradient(circle,#2AABEE10,transparent 70%)", pointerEvents:"none" }} />
         <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:20 }}>
           <div style={{ width:52, height:52, borderRadius:14, background:"#2AABEE18", border:"1px solid #2AABEE35", display:"flex", alignItems:"center", justifyContent:"center", fontSize:24 }}><BsTelegram size={ICON.xxl} /></div>
@@ -880,12 +905,12 @@ function Community() {
       </div>
 
       {/* SECONDARY — WhatsApp + X */}
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:14, marginBottom:56 }}>
+      <div className="section-appear-2" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:14, marginBottom:56 }}>
         {[
           { name:"WhatsApp Community", handle:"DigitalSphereUg", link:"https://whatsapp.com/channel/0029VbAqlOlHFxP25IPcQw0l", color:"#25D366", icon:BsWhatsapp, desc:"Main community announcements and group discussions.", members:"146" },
           { name:"X (Twitter)", handle:"@DigitalSphereUg", link:"https://x.com/digitalsphereug", color:C.text, icon:BsTwitterX, desc:"Blockchain news, opportunities and community highlights.", members:"129" },
         ].map((p, i) => (
-          <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:24, display:"flex", flexDirection:"column", gap:14 }}>
+          <div key={i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:24, display:"flex", flexDirection:"column", gap:14 }}>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
               <div style={{ width:44, height:44, borderRadius:12, background:`${p.color}18`, border:`1px solid ${p.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}><p.icon size={ICON.lg} /></div>
             </div>
@@ -897,13 +922,13 @@ function Community() {
       </div>
 
       {/* OTHER COMMUNITIES */}
-      <div style={{ marginBottom:52 }}>
+      <div className="section-appear" style={{ marginBottom:52 }}>
         <SectionLabel>Wider Ecosystem</SectionLabel>
         <h2 style={{ fontSize:"clamp(22px,3.5vw,34px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px", marginBottom:8 }}>More Communities to Join</h2>
         <p style={{ fontSize:14, color:C.textSub, fontFamily:"'Manrope',sans-serif", marginBottom:28 }}>DigitalSphereUg is your starting point. These are the communities that connect you to the wider world.</p>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:14 }}>
           {otherCommunities.map((c, i) => (
-            <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:22, display:"flex", flexDirection:"column", gap:12 }}>
+            <div key={i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:22, display:"flex", flexDirection:"column", gap:12 }}>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
                 <div style={{ width:44, height:44, borderRadius:12, overflow:"hidden", border:`1px solid ${C.border}`, background:C.surface, display:"inline-flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>
                   {c.logo ? (
@@ -923,7 +948,7 @@ function Community() {
       </div>
 
       {/* University Chapters */}
-      <div style={{ background:C.card, border:`1px dashed ${C.blue}45`, borderRadius:20, padding:"clamp(24px,4vw,40px)" }}>
+      <div className="section-appear-2" style={{ background:C.card, border:`1px dashed ${C.blue}45`, borderRadius:20, padding:"clamp(24px,4vw,40px)" }}>
         <div style={{ display:"flex", gap:10, alignItems:"center", marginBottom:8 }}><BsMortarboard size={ICON.xl} /><Pill label="Coming Soon" color={C.blue} /></div>
         <h3 style={{ fontSize:22, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:"14px 0 10px" }}>University Chapters Programme</h3>
         <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif", margin:"0 0 22px", maxWidth:560 }}>We're building a programme for students to start DigitalSphereUg chapters at their universities across Uganda — each with its own lead, events, and campus community.</p>
@@ -953,10 +978,10 @@ function About({ setPage }) {
     { icon:BsGlobe2, title:"Africa to the World", color:C.purple, desc:"We start in Uganda but our ambition is pan-African. We believe the next generation of global blockchain builders will come from Africa — and we are building the infrastructure to make that happen." },
   ];
   return (
-    <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
 
       {/* MISSION */}
-       <div style={{ marginBottom:72 }}>
+      <div className="section-appear" style={{ marginBottom:72 }}>
         <SectionLabel>Who We Are</SectionLabel>
         <div className="about-grid" style={{ display:"grid", gridTemplateColumns:"minmax(0,1.05fr) minmax(0,.95fr)", gap:20, alignItems:"stretch" }}>
           <div>
@@ -969,15 +994,19 @@ function About({ setPage }) {
             </p>
           </div>
           <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
-            <img src={filecoinGroupPhoto} alt="Filecoin boardroom group photo in Kampala" style={{ width:"100%", height:"100%", minHeight:320, objectFit:"cover" }} />
+            <div className="image-zoom" style={{ borderRadius:16 }}>
+              <img src={filecoinGroupPhoto} alt="Filecoin boardroom group photo in Kampala" style={{ width:"100%", height:"100%", minHeight:320, objectFit:"cover" }} />
+            </div>
           </div>
         </div>
         <div style={{ marginTop:14, borderRadius:14, overflow:"hidden", border:`1px solid ${C.border}` }}>
-          <img src={stellarGroupPhoto} alt="Stellar group photo in Kampala" style={{ width:"100%", height:"clamp(180px,32vw,300px)", objectFit:"cover" }} />
+          <div className="image-zoom" style={{ borderRadius:14 }}>
+            <img src={stellarGroupPhoto} alt="Stellar group photo in Kampala" style={{ width:"100%", height:"clamp(180px,32vw,300px)", objectFit:"cover" }} />
+          </div>
         </div>
       </div>
        {/* 2. OUR STORY */}
-      <div style={{ marginBottom:72 }}>
+      <div className="section-appear-2" style={{ marginBottom:72 }}>
         <SectionLabel>Our Story</SectionLabel>
         <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>How it started</h2>
         <div style={{ border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(28px,4vw,48px)", position:"relative", overflow:"hidden" }}>
@@ -993,7 +1022,7 @@ function About({ setPage }) {
       </div>
  
       {/* 3. WHY UGANDA */}
-      <div style={{ marginBottom:72 }}>
+      <div className="section-appear" style={{ marginBottom:72 }}>
         <SectionLabel>Why Uganda</SectionLabel>
         <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>The opportunity is right here</h2>
         <div style={{ background:`linear-gradient(135deg,${C.blue}15,${C.purple}0a)`, border:`1px solid ${C.blue}35`, borderRadius:20, padding:"clamp(28px,4vw,48px)" }}>
@@ -1004,12 +1033,12 @@ function About({ setPage }) {
       </div>
 
       {/* 4. OUR VALUES */}
-      <div style={{ marginBottom:72 }}>
+      <div className="section-appear-2" style={{ marginBottom:72 }}>
         <SectionLabel>Our Values</SectionLabel>
         <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>What we stand for</h2>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))", gap:14 }}>
           {VALUES.map((item, i) => (
-            <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"22px 20px", display:"flex", flexDirection:"column", gap:12 }}>
+            <div key={i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"22px 20px", display:"flex", flexDirection:"column", gap:12 }}>
               <div style={{ width:44, height:44, borderRadius:12, display:"inline-flex", alignItems:"center", justifyContent:"center", background:`${item.color}16`, border:`1px solid ${item.color}35`, color:item.color }}>
                 <item.icon size={ICON.lg} />
               </div>
@@ -1021,7 +1050,7 @@ function About({ setPage }) {
       </div>
  
       {/* 5. IMPACT NUMBERS */}
-      <div style={{ marginBottom:72 }}>
+      <div className="section-appear" style={{ marginBottom:72 }}>
         <SectionLabel>Our Impact</SectionLabel>
         <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>Growing every day</h2>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))", gap:14 }}>
@@ -1030,7 +1059,7 @@ function About({ setPage }) {
             <div style={{ fontSize:14, color:C.textSub, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"0.3px", lineHeight:1.4, marginTop:6 }}>{IMPACT[0].l}</div>
           </div>
           {IMPACT.slice(1).map((s, i) => (
-            <div key={i} style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(18px,3vw,22px)", textAlign:"left" }}>
+            <div key={i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(18px,3vw,22px)", textAlign:"left" }}>
               <div style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:900, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:6 }}>{s.n}</div>
               <div style={{ fontSize:12, color:C.textSub, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"0.3px", lineHeight:1.4 }}>{s.l}</div>
             </div>
@@ -1039,12 +1068,12 @@ function About({ setPage }) {
       </div>
 
       {/* TEAM */}
-      <div style={{ marginBottom:72 }}>
+      <div className="section-appear-2" style={{ marginBottom:72 }}>
         <SectionLabel>The Team</SectionLabel>
         <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>The people behind the platform</h2>
         <div className="team-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:20 }}>
           {TEAM.map((member, i) => (
-            <div key={i} className="hover-card" style={{ background:C.card, border:`1px solid ${member.active?C.border:C.border+"60"}`, borderRadius:20, padding:"clamp(24px,3.5vw,36px)", display:"flex", flexDirection:"column", gap:20, opacity:member.active?1:0.55, position:"relative", overflow:"hidden" }}>
+            <div key={i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${member.active?C.border:C.border+"60"}`, borderRadius:20, padding:"clamp(24px,3.5vw,36px)", display:"flex", flexDirection:"column", gap:20, opacity:member.active?1:0.55, position:"relative", overflow:"hidden" }}>
               <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:member.active?`linear-gradient(90deg,${member.color},${member.color}50)`:`${C.textDim}40` }} />
 
               {/* Avatar */}
@@ -1095,7 +1124,7 @@ function About({ setPage }) {
         </div>
       </div>
             {/* 6. CAMPUS AMBASSADOR */}
-      <div style={{ marginBottom:72 }}>
+      <div className="section-appear" style={{ marginBottom:72 }}>
         <SectionLabel>Campus Ambassadors</SectionLabel>
         <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>Lead at your university</h2>
         <div style={{ background:C.card, border:`1px dashed ${C.blue}45`, borderRadius:20, padding:"clamp(28px,4vw,44px)" }}>
@@ -1118,14 +1147,14 @@ function About({ setPage }) {
       </div>
 
       {/* FAQ */}
-      <div style={{ marginBottom:72 }}>
+      <div className="section-appear-2" style={{ marginBottom:72 }}>
         <SectionLabel>FAQ</SectionLabel>
         <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>Frequently asked questions</h2>
         <div style={{ display:"flex", flexDirection:"column", gap:8, maxWidth:760 }}>
           {FAQS.map((faq, i) => {
             const isOpen = openFaq === i;
             return (
-              <div key={i} className="faq-item" style={{ background:C.card, border:`1px solid ${isOpen?C.blue:C.border}`, borderRadius:14, overflow:"hidden" }}>
+              <div key={i} className="faq-item fade-up" style={{ background:C.card, border:`1px solid ${isOpen?C.blue:C.border}`, borderRadius:14, overflow:"hidden" }}>
                 <button onClick={() => setOpenFaq(isOpen?null:i)} style={{ width:"100%", background:"none", border:"none", cursor:"pointer", padding:"18px 22px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:16, textAlign:"left" }}>
                   <span style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.4 }}>{faq.q}</span>
                   <span style={{ fontSize:20, color:isOpen?C.blueLt:C.textDim, flexShrink:0, transition:"transform .2s", display:"inline-flex", transform:isOpen?"rotate(180deg)":"none" }}><BsChevronDown size={ICON.xl} /></span>
@@ -1142,7 +1171,7 @@ function About({ setPage }) {
       </div>
 
       {/* IMAGE UPDATE GUIDE */}
-      <div style={{ marginBottom:18 }}>
+      <div className="section-appear" style={{ marginBottom:18 }}>
         <SectionLabel>Quick Guide</SectionLabel>
         <h2 style={{ fontSize:"clamp(22px,3.3vw,34px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.8px", marginBottom:16 }}>How to update website images</h2>
         <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(18px,3vw,24px)", display:"grid", gap:10 }}>
@@ -1165,7 +1194,7 @@ function About({ setPage }) {
 // ─── Footer ───────────────────────────────────────────────────────
 function Footer({ setPage }) {
   return (
-    <footer style={{ borderTop:`1px solid ${C.border}`, background:C.surface }}>
+    <footer className="section-appear" style={{ borderTop:`1px solid ${C.border}`, background:C.surface }}>
       <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(36px,5vw,56px) clamp(16px,4vw,40px) clamp(20px,3vw,32px)" }}>
         <div className="footer-grid" style={{ display:"grid", gridTemplateColumns:"2fr 1fr 1fr", gap:"clamp(28px,5vw,52px)", marginBottom:40 }}>
 
@@ -1191,7 +1220,7 @@ function Footer({ setPage }) {
           <div>
             <div style={{ fontSize:12, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"1.5px", textTransform:"uppercase", marginBottom:14 }}>Platform</div>
             {FOOTER_LINKS.map(l => (
-              <button key={l} onClick={() => setPage(l)} style={{ display:"block", background:"none", border:"none", cursor:"pointer", padding:"5px 0", color:C.textSub, fontSize:13, fontFamily:"'Manrope',sans-serif", textAlign:"left" }}>{l}</button>
+              <button key={l} onClick={() => setPage(l)} className="hover-lift" style={{ display:"block", background:"none", border:"none", cursor:"pointer", padding:"5px 0", color:C.textSub, fontSize:13, fontFamily:"'Manrope',sans-serif", textAlign:"left" }}>{l}</button>
             ))}
           </div>
 
@@ -1205,7 +1234,7 @@ function Footer({ setPage }) {
               { l:"Cyfrin Updraft", h:"https://updraft.cyfrin.io" },
               { l:"CryptoZombies", h:"https://cryptozombies.io" },
             ].map(lk => (
-              <a key={lk.l} href={lk.h} target="_blank" rel="noopener noreferrer" style={{ display:"block", padding:"5px 0", color:C.textSub, fontSize:13, fontFamily:"'Manrope',sans-serif", textDecoration:"none" }}>{lk.l}</a>
+              <a key={lk.l} href={lk.h} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"block", padding:"5px 0", color:C.textSub, fontSize:13, fontFamily:"'Manrope',sans-serif", textDecoration:"none" }}>{lk.l}</a>
             ))}
           </div>
         </div>
