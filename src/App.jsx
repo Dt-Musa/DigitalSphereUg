@@ -127,11 +127,11 @@ const TRACKS = [
 
 const EVENTS = [
   { title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
-  { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBONGO", tag:"University Session", color:C.cyan, featured:true, image:chainlinkFlyerPhoto, imageFit:"contain", desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
+  { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBOGO", tag:"University Session", color:C.cyan, featured:true, image:chainlinkFlyerPhoto, imageFit:"contain", desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
 ];
 
 const PAST_EVENTS = [
-  { title:"Kampala Blockchain Summit 2025", date:"Ended —Nov, 25g 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
+  { title:"Kampala Blockchain Summit 2025", date:"Ended — Nov 25, 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
   { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
   { title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
   { title:"BUIDL Africa Community Session", date:"2025", location:"Kampala, Uganda", tag:"Community", color:C.green, image:buildlSessionPhoto, recap:"Student-focused build session connecting learners to mentorship and project ideas.", link:"https://t.me/digitalsphereug" },
@@ -204,14 +204,14 @@ const TEAM = [
     avatar: brightImage,
     initials: "CL",
     color: C.green,
-    linkedin: "https://linkedin.com/in/your-linkedin-here",
-    x: "https://x.com/your-x-handle-here",
+    linkedin: "https://www.linkedin.com/in/irinatwebright1010?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    x: "https://x.com/IrinatweBright",
     active: true,
   },
   {
     name: "Rwego Edward",
     role: "Technical Lead",
-    bio: "Edward Rwego is the person who makes things actually work. As Technical Lead at DigitalSphereUg, he builds and mantains the platform, leads technical sessions, and makes sure Ugandans have right tools they need to enter the blockchain ecosystem.",
+    bio: "Edward Rwego is the person who makes things actually work. As Technical Lead at DigitalSphereUg, he builds and maintains the platform, leads technical sessions, and makes sure Ugandans have the right tools they need to enter the blockchain ecosystem.",
     avatar: rwegoImage,
     initials: "TL",
     color: C.textDim,
