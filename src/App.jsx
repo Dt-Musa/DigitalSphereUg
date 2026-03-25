@@ -797,6 +797,8 @@ function Gallery({ setPage }) {
               style={{ width:"100%", maxHeight:"70vh", objectFit:"cover", borderRadius:12 }}
             />
 
+            <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Swipe left or right on mobile to browse photos.</div>
+
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:14, flexWrap:"wrap" }}>
               <div style={{ flex:1, minWidth:220 }}>
                 <h3 style={{ margin:"0 0 6px", fontSize:20, color:C.text, fontFamily:"'Space Grotesk',sans-serif" }}>{activeItem.title}</h3>
