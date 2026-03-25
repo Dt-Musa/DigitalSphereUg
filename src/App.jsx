@@ -128,8 +128,6 @@ const TRACKS = [
 const EVENTS = [
   { title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
   { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBONGO", tag:"University Session", color:C.cyan, featured:true, image:chainlinkFlyerPhoto, imageFit:"contain", desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
-  { title:"GDG Kampala Web3 Meetup", date:"Recurring 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, featured:false, image:chainlinkStreetGroupPhoto, desc:"Regular community meetups by Google Developer Group Kampala. Beginner-friendly talks, networking, and hands-on sessions.", link:"https://gdg.community.dev/gdg-kampala/" },
-  { title:"BAU Youth Blockchain Innovation", date:"Ongoing 2026", location:"Uganda", tag:"Programme", color:C.purple, featured:false, image:buildlSessionPhoto, desc:"Blockchain Association of Uganda programme focused on empowering youth through blockchain technology across Uganda.", link:"https://bau.ug" },
 ];
 
 const PAST_EVENTS = [
@@ -137,6 +135,8 @@ const PAST_EVENTS = [
   { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
   { title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
   { title:"BUIDL Africa Community Session", date:"2025", location:"Kampala, Uganda", tag:"Community", color:C.green, image:buildlSessionPhoto, recap:"Student-focused build session connecting learners to mentorship and project ideas.", link:"https://t.me/digitalsphereug" },
+  { title:"GDG Kampala Web3 Meetup", date:"Ended — 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, image:chainlinkStreetGroupPhoto, recap:"Regular Web3 meetups wrapped after a strong season of beginner-friendly talks, networking, and practical demos.", link:"https://gdg.community.dev/gdg-kampala/" },
+  { title:"BAU Youth Blockchain Innovation", date:"Ended — 2026", location:"Uganda", tag:"Programme", color:C.purple, image:buildlSessionPhoto, recap:"BAU's youth innovation programme concluded after equipping local learners with blockchain foundations and growth pathways.", link:"https://bau.ug" },
 ];
 
 const OPPS = [
@@ -168,22 +168,21 @@ const POSTS = [
 ];
 
 const GALLERY_ITEMS = [
-  { src:ethnileGroupHero, caption:"ETHNile Outdoor Group — Kampala" },
-  { src:ethnileEventPhoto, caption:"ETHNile Event Session — Kampala" },
-  { src:filecoinGroupPhoto, caption:"Filecoin Session — Kampala" },
-  { src:buildAfricaHubPhoto, caption:"BuildAfrica National ICT Hub — Kampala" },
-  { src:chainlinkRooftopPhoto, caption:"Chainlink Rooftop Session — Kampala" },
-  { src:chainlinkGroupGalleryPhoto, caption:"Chainlink Group Session — Kampala" },
-  { src:chainlinkStreetGroupPhoto, caption:"Chainlink Kampala Group — Kampala" },
-  { src:buildlSessionPhoto, caption:"BUIDL Africa Session — Kampala" },
-  { src:avalancheScenesPhoto, caption:"Scenes from Avalanche Event — Kampala" },
-  { src:outdoorLaptopPhoto, caption:"Outdoor Laptop Session — Kampala" },
-  { src:kyambogoLecturePhoto, caption:"Kyambogo Lecture Hall — Kampala" },
-  { src:stellarGroupPhoto, caption:"Stellar Group — Kampala" },
-  { src:devfestCrowdPhoto, caption:"DevFest Hackathon Crowd — Kampala" },
-  { src:ethnileVenuePhoto, caption:"ETHNile Venue — Kampala" },
-  { src:kyambogoRoomPhoto, caption:"Kyambogo Session Room — Kampala" },
+  { image:devfestCrowdPhoto, title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", summary:"Uganda's biggest Web3 developer conference. DigitalSphereUg was in the room." },
+  { image:ethnileGroupHero, title:"ETHNile Kampala Community Day", date:"October 2025", location:"Kampala, Uganda", summary:"Builders, students, and founders connected around Ethereum education and real collaboration." },
+  { image:ethnileEventPhoto, title:"ETHNile Event Session", date:"October 2025", location:"Kampala, Uganda", summary:"We joined focused talks on blockchain adoption and practical next steps for local talent." },
+  { image:chainlinkRooftopPhoto, title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", summary:"We attended to deepen our understanding of oracle-powered applications for African use cases." },
+  { image:chainlinkGroupGalleryPhoto, title:"Chainlink Builder Meetup", date:"2026", location:"Kampala, Uganda", summary:"Developers met for a practical session on smart contract tooling and community building." },
+  { image:buildAfricaHubPhoto, title:"BuildAfrica National ICT Hub Meetup", date:"2026", location:"Kampala, Uganda", summary:"DigitalSphereUg showed up to support youth-driven innovation and hands-on technical learning." },
+  { image:filecoinGroupPhoto, title:"Filecoin Community Session", date:"2025", location:"Kampala, Uganda", summary:"We attended to explore decentralized storage opportunities and ecosystem onboarding paths." },
+  { image:avalancheScenesPhoto, title:"Avalanche Community Event", date:"2026", location:"Kampala, Uganda", summary:"The event brought together regional builders to discuss scalability, tooling, and product execution." },
+  { image:kyambogoLecturePhoto, title:"Kyambogo University Lecture", date:"2026", location:"Kampala, Uganda", summary:"Students engaged directly with Web3 career pathways and beginner-friendly learning routes." },
+  { image:stellarGroupPhoto, title:"Stellar Group Session", date:"2026", location:"Kampala, Uganda", summary:"We joined the session to connect with East African builders and expand practical developer exposure." },
+  { image:ethnileVenuePhoto, title:"ETHNile Venue Day", date:"2025", location:"Kampala, Uganda", summary:"The gathering highlighted ecosystem partnerships and community-led momentum in Uganda." },
+  { image:kyambogoRoomPhoto, title:"Kyambogo Session Room Meetup", date:"2026", location:"Kampala, Uganda", summary:"DigitalSphereUg joined learners for technical discussions and local builder networking." },
 ];
+
+const FEATURED_GALLERY_ITEMS = GALLERY_ITEMS.slice(0, 4);
 
 // ─── Team Data ────────────────────────────────────────────────────
 const TEAM = [
@@ -263,7 +262,7 @@ const RESOURCES_DATA = [
 ];
 
 const DEFAULT_PAGE = "Home";
-const NAV_LINKS = ["Home","Learn","Events","Opportunities","Resources","Blog","Community","About"];
+const NAV_LINKS = ["Home","Learn","Events","Gallery","Opportunities","Resources","Blog","Community","About"];
 const FOOTER_LINKS = NAV_LINKS.filter(link => link !== "Home");
 const STORAGE_KEYS = {
   completedResources: "dsug_done",
@@ -661,17 +660,23 @@ function Home({ setPage }) {
             <div style={{ fontSize:11, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:"#7c4a03", marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>In The Community</div>
             <h2 className="gallery-title" style={{ fontSize:"clamp(26px,4vw,42px)", lineHeight:1.08, margin:0, fontFamily:"'Space Grotesk',sans-serif" }}>We show up</h2>
           </div>
-          <div className="photo-masonry">
-            {GALLERY_ITEMS.map((item, i) => (
-              <figure key={i} className="photo-item" style={{ margin:0 }}>
-                <div className="image-zoom" style={{ borderRadius:12 }}>
-                  <img src={item.src} alt={item.caption} style={{ width:"100%", display:"block", borderRadius:12, objectFit:"cover" }} />
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))", gap:12 }}>
+            {FEATURED_GALLERY_ITEMS.map((item, i) => (
+              <article key={item.title + i} className="photo-item" style={{ margin:0, background:"#fff8ea", border:"1px solid #e7d4ae", borderRadius:12, padding:10 }}>
+                <div className="image-zoom" style={{ borderRadius:10 }}>
+                  <img src={item.image} alt={item.title} style={{ width:"100%", height:170, display:"block", borderRadius:10, objectFit:"cover" }} />
                 </div>
-                <figcaption style={{ fontSize:12, marginTop:8, color:"#334155", fontFamily:"'Manrope',sans-serif" }}>{item.caption}</figcaption>
-              </figure>
+                <div style={{ fontSize:13, marginTop:8, color:"#334155", fontFamily:"'Manrope',sans-serif", lineHeight:1.45 }}>
+                  <strong style={{ display:"block", color:"#0f172a", fontFamily:"'Space Grotesk',sans-serif" }}>{item.title}</strong>
+                  <span style={{ display:"block" }}>{item.date} — {item.location}</span>
+                </div>
+              </article>
             ))}
           </div>
-          <p style={{ margin:"10px 0 0", fontSize:13, color:"#475569", fontFamily:"'Manrope',sans-serif" }}>More events coming. Gallery updates as we grow.</p>
+          <div style={{ marginTop:14, display:"flex", justifyContent:"space-between", alignItems:"center", gap:12, flexWrap:"wrap" }}>
+            <p style={{ margin:0, fontSize:13, color:"#475569", fontFamily:"'Manrope',sans-serif" }}>Featured moments from the community. See the full gallery for every event story.</p>
+            <button onClick={() => setPage("Gallery")} className="hover-lift" style={{ background:"#0f172a", border:"none", color:"#fff", padding:"10px 18px", borderRadius:9, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", display:"inline-flex", alignItems:"center", gap:6 }}>View Full Gallery <BsArrowRight size={ICON.xs} /></button>
+          </div>
         </div>
       </section>
 
@@ -688,6 +693,38 @@ function Home({ setPage }) {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+function Gallery({ setPage }) {
+  return (
+    <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
+      <PageHero label="Community Archive" h1="Uganda Shows Up for Web3" sub="From campus sessions to major conferences, this is how DigitalSphereUg shows up." />
+
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:16, marginBottom:40 }}>
+        {GALLERY_ITEMS.map((item, i) => (
+          <article key={item.title + i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:12, display:"flex", flexDirection:"column", gap:10 }}>
+            <div className="image-zoom" style={{ borderRadius:10 }}>
+              <img src={item.image} alt={item.title} style={{ width:"100%", height:190, objectFit:"cover", borderRadius:10 }} />
+            </div>
+            <h3 style={{ fontSize:16, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.35 }}>{item.title}</h3>
+            <div style={{ fontSize:12, color:C.blueLt, fontFamily:"'Manrope',sans-serif", fontWeight:700 }}>{item.date} — {item.location}</div>
+            <p style={{ margin:0, fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif" }}>{item.summary}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="section-appear-2" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(24px,4vw,34px)", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:14 }}>
+        <div>
+          <h3 style={{ margin:"0 0 6px", fontSize:20, color:C.text, fontFamily:"'Space Grotesk',sans-serif" }}>Want to meet us at the next event?</h3>
+          <p style={{ margin:0, fontSize:14, color:C.textSub, fontFamily:"'Manrope',sans-serif", lineHeight:1.7 }}>Check our upcoming events and join the community before the next one.</p>
+        </div>
+        <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
+          <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"11px 18px", borderRadius:9, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", display:"inline-flex", alignItems:"center", gap:6 }}>View Upcoming Events <BsArrowRight size={ICON.xs} /></button>
+          <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"11px 18px", borderRadius:9, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", display:"inline-flex", alignItems:"center", gap:6 }}>Join The Community <BsArrowRight size={ICON.xs} /></button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1354,10 +1391,8 @@ function Footer({ setPage }) {
         </div>
 
         <div style={{ borderTop:`1px solid ${C.border}`, paddingTop:20, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:10 }}>
-          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>© 2026 DigitalSphereUg — Built in Uganda 🇺🇬 Free. Always free.</span>
-        </div>
-        <div style={{ marginTop:14, paddingTop:14, borderTop:`1px solid ${C.border}` }}>
-          <p style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", margin:0, lineHeight:1.6 }}>DigitalSphereUg curates links to free external resources. We do not own or host any third-party content. All linked resources belong to their respective owners.</p>
+          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>© 2026 DigitalSphereUg — Built in Uganda 🇺🇬</span>
+          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Disclaimer: DigitalSphereUg curates links to free external resources. All linked resources belong to their respective owners.</span>
         </div>
       </div>
     </footer>
@@ -1425,6 +1460,7 @@ export default function App() {
         {page === "Home"          && <Home setPage={go} />}
         {page === "Learn"         && <Learn />}
         {page === "Events"        && <Events />}
+        {page === "Gallery"       && <Gallery setPage={go} />}
         {page === "Opportunities" && <Opportunities />}
         {page === "Resources"     && <Resources />}
         {page === "Blog" && !post  && <Blog setPost={setPost} />}
