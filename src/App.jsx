@@ -168,16 +168,16 @@ const POSTS = [
 ];
 
 const GALLERY_ITEMS = [
-  { image:devfestCrowdPhoto, title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", summary:"Uganda's biggest Web3 developer conference. DigitalSphereUg was in the room." },
+  { image:devfestCrowdPhoto, title:"Blockchain DevFest Kampala", date:"June 28, 2025", location:"Kampala, Uganda", summary:"Uganda's biggest Web3 developer conference. DigitalSphereUg was in the room." },
   { image:ethnileGroupHero, title:"ETHNile Kampala Community Day", date:"October 2025", location:"Kampala, Uganda", summary:"Builders, students, and founders connected around Ethereum education and real collaboration." },
   { image:ethnileEventPhoto, title:"ETHNile Event Session", date:"October 2025", location:"Kampala, Uganda", summary:"We joined focused talks on blockchain adoption and practical next steps for local talent." },
-  { image:chainlinkRooftopPhoto, title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", summary:"We attended to deepen our understanding of oracle-powered applications for African use cases." },
-  { image:chainlinkGroupGalleryPhoto, title:"Chainlink Builder Meetup", date:"2026", location:"Kampala, Uganda", summary:"Developers met for a practical session on smart contract tooling and community building." },
-  { image:buildAfricaHubPhoto, title:"BuildAfrica National ICT Hub Meetup", date:"2026", location:"Kampala, Uganda", summary:"DigitalSphereUg showed up to support youth-driven innovation and hands-on technical learning." },
-  { image:filecoinGroupPhoto, title:"Filecoin Community Session", date:"2025", location:"Kampala, Uganda", summary:"We attended to explore decentralized storage opportunities and ecosystem onboarding paths." },
-  { image:avalancheScenesPhoto, title:"Avalanche Community Event", date:"2026", location:"Kampala, Uganda", summary:"The event brought together regional builders to discuss scalability, tooling, and product execution." },
+  { image:chainlinkRooftopPhoto, title:"Chainlink Rooftop Session", date:"December 12, 2025", location:"Kampala, Uganda", summary:"We attended to deepen our understanding of oracle-powered applications for African use cases." },
+  { image:chainlinkGroupGalleryPhoto, title:"Chainlink End-Of-Year Community Meetup", date:"December 12, 2025", location:"Kampala, Uganda", summary:"Developers met for a practical session on smart contract tooling and community building." },
+  { image:buildAfricaHubPhoto, title:"BUIDL Africa Conference", date:"November 15, 2025", location:"Kampala, Uganda", summary:"DigitalSphereUg showed up to support youth-driven innovation and hands-on technical learning." },
+  { image:filecoinGroupPhoto, title:"Filecoin Community Session", date:"March 21, 2026", location:"Kampala, Uganda", summary:"We attended to explore decentralized storage opportunities and ecosystem onboarding paths." },
+  { image:avalancheScenesPhoto, title:"Avalanche Community Event", date:"February 2026", location:"Kampala, Uganda", summary:"The event brought together regional builders to discuss scalability, tooling, and product execution." },
   { image:kyambogoLecturePhoto, title:"Kyambogo University Lecture", date:"2026", location:"Kampala, Uganda", summary:"Students engaged directly with Web3 career pathways and beginner-friendly learning routes." },
-  { image:stellarGroupPhoto, title:"Stellar Group Session", date:"2026", location:"Kampala, Uganda", summary:"We joined the session to connect with East African builders and expand practical developer exposure." },
+  { image:stellarGroupPhoto, title:"Stellar Group Session", date:"June 6, 2025", location:"Sheron Hotel, Kikoni Kampala", summary:"We joined the session to connect with East African builders and expand practical developer exposure." },
   { image:ethnileVenuePhoto, title:"ETHNile Venue Day", date:"2025", location:"Kampala, Uganda", summary:"The gathering highlighted ecosystem partnerships and community-led momentum in Uganda." },
   { image:kyambogoRoomPhoto, title:"Kyambogo Session Room Meetup", date:"2026", location:"Kampala, Uganda", summary:"DigitalSphereUg joined learners for technical discussions and local builder networking." },
 ];
