@@ -19,6 +19,14 @@
   z-index: 0;
 }
 
+.hero-static-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
 .hero-video-overlay {
   position: absolute;
   inset: 0;
@@ -122,6 +130,17 @@
 .hero-sound-toggle:hover {
   transform: translateY(-2px);
   background: rgba(9, 16, 35, 0.72);
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 @media (max-width: 640px) {
