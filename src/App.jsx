@@ -325,6 +325,8 @@ img,svg{max-width:100%}
 .photo-masonry{columns:3 280px;column-gap:14px}
 .photo-item{break-inside:avoid;margin-bottom:14px;transition:transform .25s ease,filter .25s ease}
 .photo-item:hover{transform:translateY(-4px);filter:saturate(1.04)}
+.resources-head{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+.resources-hero-image .image-zoom img{display:block;width:100%;height:100%;min-height:180px;object-fit:cover}
 @media(max-width:1050px){.desktop-nav{display:none!important}}
 @media(min-width:1100px){.team-avatar{width:132px;height:132px;border-radius:24px}}
 @media(min-width:1051px){.mob-menu{display:none!important}.mob-btn{display:none!important}.mob-actions{display:none!important}}
@@ -333,7 +335,9 @@ img,svg{max-width:100%}
   .hero-btns button{width:min(100%,320px);max-width:100%;justify-content:center}
   .stats-row{gap:24px!important}
   .home-tracks-head{grid-template-columns:1fr!important}
+  .resources-head{grid-template-columns:1fr!important}
   .home-tracks-image{min-height:210px!important}
+  .resources-hero-image .image-zoom img{height:220px!important;min-height:220px!important}
   .home-flyer-image{height:220px!important}
   .events-flyer-image{height:280px!important}
   .event-flyer-image{object-fit:cover!important;object-position:center top!important}
@@ -775,8 +779,8 @@ function Resources() {
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Tools & Resources" h1="Everything You Need" sub="Curated tools, platforms, and links for every stage of your blockchain journey — from first steps to building on mainnet." />
 
-      <div className="section-appear-2" style={{ display:"grid", gridTemplateColumns:"minmax(0,.95fr) minmax(0,1.05fr)", gap:16, marginBottom:30 }}>
-        <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
+      <div className="section-appear-2 resources-head" style={{ display:"grid", gap:16, marginBottom:30 }}>
+        <div className="resources-hero-image" style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
           <div className="image-zoom" style={{ borderRadius:16 }}>
             <img src={kyambogoRoomPhoto} alt="Kyambogo blockchain session room" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
           </div>
