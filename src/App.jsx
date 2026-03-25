@@ -33,6 +33,7 @@ import {
 } from "react-icons/bs";
 import musaImage from "./assets/images/Musa.jpeg";
 import brightImage from "./assets/images/Bright.jpeg";
+import rwegoImage from "./assets/images/Rwego.jpeg";
 import ethnileGroupHero from "./assets/hero/ethnile-group.jpg.jpg";
 import filecoinGroupPhoto from "./assets/gallery/filecoin-group.jpg.jpg";
 import stellarGroupPhoto from "./assets/about/stellar-group.jpg.jpg";
@@ -50,6 +51,7 @@ import algorandAfricaLogoImage from "./assets/community/algorand.jpg";
 import web3AfricaLogoImage from "./assets/community/web3Africa.jpg";
 import ethnileVenuePhoto from "./assets/gallery/ethnile-sponserbanner.jpg.jpg";
 import devfestFlyerPhoto from "./assets/events/devfest-2026-flyer.jpeg";
+import chainlinkFlyerPhoto from "./assets/events/chainlink-flyer.jpg.jpg";
 import buildlSessionPhoto from "./assets/gallery/buildl-session group.jpg";
 import outdoorLaptopPhoto from "./assets/gallery/outdoor-laptop session.jpg";
 import devfestCrowdPhoto from "./assets/gallery/devfest-crowd.jpg.jpg";
@@ -108,11 +110,17 @@ const TRACKS = [
 ];
 
 const EVENTS = [
-  { title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
-  { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"chainlinkflyer", tag:"University Session", color:C.cyan, featured:true, image:chainlinkRooftopPhoto, desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
+  { title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
+  { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBONGO", tag:"University Session", color:C.cyan, featured:true, image:chainlinkFlyerPhoto, imageFit:"contain", desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
   { title:"Kampala Blockchain Summit 2026", date:"Late 2026 — TBC", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, featured:false, image:ethnileVenuePhoto, desc:"Annual flagship summit by the Blockchain Association of Uganda (BAU). The leading policy and innovation event for Uganda's blockchain ecosystem.", link:"https://bau.ug" },
   { title:"GDG Kampala Web3 Meetup", date:"Recurring 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, featured:false, image:chainlinkStreetGroupPhoto, desc:"Regular community meetups by Google Developer Group Kampala. Beginner-friendly talks, networking, and hands-on sessions.", link:"https://gdg.community.dev/gdg-kampala/" },
   { title:"BAU Youth Blockchain Innovation", date:"Ongoing 2026", location:"Uganda", tag:"Programme", color:C.purple, featured:false, image:buildlSessionPhoto, desc:"Blockchain Association of Uganda programme focused on empowering youth through blockchain technology across Uganda.", link:"https://bau.ug" },
+];
+
+const PAST_EVENTS = [
+  { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
+  { title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
+  { title:"BUIDL Africa Community Session", date:"2025", location:"Kampala, Uganda", tag:"Community", color:C.green, image:buildlSessionPhoto, recap:"Student-focused build session connecting learners to mentorship and project ideas.", link:"https://t.me/digitalsphereug" },
 ];
 
 const OPPS = [
@@ -182,15 +190,15 @@ const TEAM = [
     active: true,
   },
   {
-    name: "Technical Lead",
-    role: "Platform Development",
-    bio: "Joining soon — building the technical infrastructure that powers the DigitalSphereUg platform.",
-    avatar: null,
+    name: "Rwego Edward",
+    role: "Technical Lead",
+    bio: "Edward Rwego is the person who makes things actually work. As Technical Lead at DigitalSphereUg, he builds and mantains the platform, leads technical sessions, and makes sure Ugandans have right tools they need to enter the blockchain ecosystem.",
+    avatar: rwegoImage,
     initials: "TL",
     color: C.textDim,
-    linkedin: null,
-    x: null,
-    active: false,
+    linkedin: "https://linkedin.com/in/your-linkedin-here",
+    x: "https://x.com/your-x-handle-here",
+    active: true,
   },
 ];
 
@@ -302,6 +310,11 @@ img,svg{max-width:100%}
   .hero-btns{flex-direction:column;align-items:center!important;width:100%}
   .hero-btns button{width:min(100%,320px);max-width:100%;justify-content:center}
   .stats-row{gap:24px!important}
+  .home-tracks-head{grid-template-columns:1fr!important}
+  .home-tracks-image{min-height:210px!important}
+  .home-flyer-image{height:220px!important}
+  .events-flyer-image{height:280px!important}
+  .event-flyer-image{object-fit:cover!important;object-position:center top!important}
   .about-grid{grid-template-columns:1fr!important}
   .footer-grid{grid-template-columns:1fr!important}
   .team-grid{grid-template-columns:1fr!important}
@@ -453,9 +466,9 @@ function Home({ setPage, theme }) {
 
       {/* TRACKS PREVIEW */}
       <section style={{ padding:"clamp(56px,8vw,96px) clamp(16px,4vw,40px)", maxWidth:1280, margin:"0 auto" }}>
-        <div style={{ display:"grid", gridTemplateColumns:"minmax(0,1.2fr) minmax(0,.8fr)", marginBottom:26, gap:18, alignItems:"end" }}>
+        <div className="home-tracks-head" style={{ display:"grid", gridTemplateColumns:"minmax(0,1.2fr) minmax(0,.8fr)", marginBottom:26, gap:18, alignItems:"end" }}>
           <div><SectionLabel>Learning Tracks</SectionLabel><h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", maxWidth:520 }}>Your path into blockchain</h2></div>
-          <div style={{ border:`1px solid ${C.border}`, borderRadius:14, overflow:"hidden", minHeight:180 }}>
+          <div className="home-tracks-image" style={{ border:`1px solid ${C.border}`, borderRadius:14, overflow:"hidden", minHeight:180 }}>
             <img src={chainlinkRooftopPhoto} alt="Chainlink rooftop study session in Kampala" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
           </div>
         </div>
@@ -487,10 +500,11 @@ function Home({ setPage, theme }) {
           {EVENTS.filter(e => e && typeof e === "object").map((e, i) => {
             const color = e.color || C.blueLt;
             const featured = Boolean(e.featured);
+            const isFlyer = e.imageFit === "contain";
             return (
             <div key={e.title || i} className={`hover-card ${i===0?"home-event-featured":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"55":C.border}`, borderRadius:14, padding:22, position:"relative", overflow:"hidden", display:"flex", flexDirection:"column", gap:12, gridColumn:i===0?"span 2":"span 1" }}>
               {featured && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.blueLt})` }} />}
-              {e.image && <img src={e.image} alt={e.title || "Event visual"} style={{ width:"100%", height:i===0?190:140, objectFit:"cover", borderRadius:10 }} />}
+              {e.image && <img className={isFlyer?"event-flyer-image home-flyer-image":undefined} src={e.image} alt={e.title || "Event visual"} style={{ width:"100%", height:isFlyer?(i===0?240:190):(i===0?190:140), objectFit:"cover", objectPosition:isFlyer?"top center":"center", background:C.bg2, borderRadius:10 }} />}
               <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:6 }}>
                 <Pill label={e.tag || "Event"} color={color} />
                 {featured && <Pill label="Featured" color={C.cyan} />}
@@ -637,10 +651,11 @@ function Events() {
         {EVENTS.filter(e => e && typeof e === "object").map((e, i) => {
           const color = e.color || C.blueLt;
           const featured = Boolean(e.featured);
+          const isFlyer = e.imageFit === "contain";
           return (
             <div key={e.title || i} className={`hover-card ${i===0?"events-featured-card":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"60":C.border}`, borderRadius:18, padding:"clamp(18px,2.6vw,24px)", display:"flex", flexDirection:"column", gap:12, position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}>
             {featured && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.blueLt})` }} />}
-            {e.image && <img src={e.image} alt={e.title || "Event"} style={{ width:"100%", height:i===0?220:160, objectFit:"cover", borderRadius:10 }} />}
+            {e.image && <img className={isFlyer?"event-flyer-image events-flyer-image":undefined} src={e.image} alt={e.title || "Event"} style={{ width:"100%", height:isFlyer?(i===0?300:240):(i===0?220:160), objectFit:"cover", objectPosition:isFlyer?"top center":"center", background:C.bg2, borderRadius:10 }} />}
             <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:6 }}><Pill label={e.tag || "Event"} color={color} />{featured && <Pill label="Featured" color={C.cyan} />}</div>
             <h3 style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3 }}>{e.title || "Upcoming Event"}</h3>
             <div><div style={{ fontSize:13, color:color, fontFamily:"'Manrope',sans-serif", fontWeight:600, marginBottom:3, display:"flex", alignItems:"center", gap:6 }}><BsCalendarEvent size={ICON.xs} /> {e.date || "Date TBC"}</div><div style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xs} /> {e.location || "Location TBC"}</div></div>
@@ -649,6 +664,30 @@ function Events() {
           </div>
         )})}
       </div>
+
+      {/* Past events */}
+      <div style={{ marginBottom:32 }}>
+        <SectionLabel>Archive</SectionLabel>
+        <h2 style={{ fontSize:"clamp(24px,3.8vw,36px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.8px", marginBottom:10 }}>Past Events</h2>
+        <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:"0 0 16px", maxWidth:640 }}>A quick look at sessions we have already hosted or attended. This archive helps newcomers see the momentum we are building.</p>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:14 }}>
+          {PAST_EVENTS.map((event, i) => (
+            <div key={event.title + i} className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:16, display:"flex", flexDirection:"column", gap:10 }}>
+              <img src={event.image} alt={event.title} style={{ width:"100%", height:150, objectFit:"cover", borderRadius:10 }} />
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:8, flexWrap:"wrap" }}>
+                <Pill label={event.tag} color={event.color} small />
+                <span style={{ fontSize:11, color:C.textDim, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"1px", textTransform:"uppercase" }}>Past Event</span>
+              </div>
+              <h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3, margin:0 }}>{event.title}</h3>
+              <div style={{ fontSize:12, color:event.color, fontFamily:"'Manrope',sans-serif", fontWeight:600, display:"flex", alignItems:"center", gap:6 }}><BsCalendarEvent size={ICON.xxs} /> {event.date}</div>
+              <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xxs} /> {event.location}</div>
+              <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, margin:0, flex:1, fontFamily:"'Manrope',sans-serif" }}>{event.recap}</p>
+              <a href={event.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"9px 14px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>View Source <BsArrowRight size={ICON.xxs} /></a>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div style={{ background:C.card, border:`1px dashed ${C.border}`, borderRadius:14, padding:"clamp(18px,3vw,28px)", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
         <div><div style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:4 }}>Know an event we haven't listed?</div><p style={{ fontSize:13, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:0 }}>Share it in the community and we'll add it to the calendar.</p></div>
         <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Share in Telegram <BsArrowRight size={ICON.xs} /></a>
@@ -1099,6 +1138,22 @@ function About({ setPage }) {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* IMAGE UPDATE GUIDE */}
+      <div style={{ marginBottom:18 }}>
+        <SectionLabel>Quick Guide</SectionLabel>
+        <h2 style={{ fontSize:"clamp(22px,3.3vw,34px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.8px", marginBottom:16 }}>How to update website images</h2>
+        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(18px,3vw,24px)", display:"grid", gap:10 }}>
+          {[
+            "1) Put your new image in the correct folder under src/assets (for example: events, images, gallery, or community).",
+            "2) Add or update the import at the top of App.jsx.",
+            "3) Assign the imported image in the right data object (EVENTS, PAST_EVENTS, TEAM, or GALLERY_ITEMS).",
+            "4) Save the file and refresh the page to confirm the image and crop look correct on mobile and desktop.",
+          ].map(step => (
+            <p key={step} style={{ margin:0, fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif" }}>{step}</p>
+          ))}
         </div>
       </div>
 
