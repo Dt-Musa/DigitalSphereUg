@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BsArrowRight, BsVolumeMuteFill, BsVolumeUpFill } from "react-icons/bs";
 import "./Hero.css";
+import heroVideoWebm from "./assets/video/event-hero.webm";
 import heroVideo from "./assets/video/event-hero.mp4";
 import heroPoster from "./assets/hero/ethnile-group.jpg.jpg";
 
@@ -45,7 +46,6 @@ export default function Hero({ setPage }) {
       ) : (
         <video
           ref={videoRef}
-          src={heroVideo}
           poster={heroPoster}
           autoPlay
           muted
@@ -53,7 +53,10 @@ export default function Hero({ setPage }) {
           playsInline
           preload="metadata"
           className="hero-video-bg"
-        />
+        >
+          <source src={heroVideoWebm} type="video/webm" />
+          <source src={heroVideo} type="video/mp4" />
+        </video>
       )}
 
       <div className="hero-video-overlay" />
