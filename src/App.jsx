@@ -699,6 +699,7 @@ function Home({ setPage }) {
 
 function Gallery({ setPage }) {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [touchStart, setTouchStart] = useState(null);
 
   useEffect(() => {
     if (activeIndex === null) return;
@@ -725,6 +726,29 @@ function Gallery({ setPage }) {
       if (prev === null) return prev;
       return prev === GALLERY_ITEMS.length - 1 ? 0 : prev + 1;
     });
+  };
+
+  const onTouchStart = e => {
+    const touch = e.touches?.[0];
+    if (!touch) return;
+    setTouchStart({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const onTouchEnd = e => {
+    if (!touchStart) return;
+    const touch = e.changedTouches?.[0];
+    if (!touch) return;
+
+    const dx = touch.clientX - touchStart.x;
+    const dy = touch.clientY - touchStart.y;
+    setTouchStart(null);
+
+    if (Math.abs(dx) < 50 || Math.abs(dy) > 80) return;
+    if (dx > 0) {
+      prevItem();
+    } else {
+      nextItem();
+    }
   };
 
   const activeItem = activeIndex === null ? null : GALLERY_ITEMS[activeIndex];
@@ -765,7 +789,13 @@ function Gallery({ setPage }) {
               <button type="button" onClick={() => setActiveIndex(null)} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.text, width:32, height:32, borderRadius:8, cursor:"pointer", fontSize:16, lineHeight:1 }}>×</button>
             </div>
 
-            <img src={activeItem.image} alt={activeItem.title} style={{ width:"100%", maxHeight:"70vh", objectFit:"cover", borderRadius:12 }} />
+            <img
+              src={activeItem.image}
+              alt={activeItem.title}
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
+              style={{ width:"100%", maxHeight:"70vh", objectFit:"cover", borderRadius:12 }}
+            />
 
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:14, flexWrap:"wrap" }}>
               <div style={{ flex:1, minWidth:220 }}>
