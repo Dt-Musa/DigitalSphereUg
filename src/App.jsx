@@ -1327,23 +1327,7 @@ function About({ setPage }) {
         </div>
       </div>
 
-      {/* IMAGE UPDATE GUIDE */}
-      <div className="section-appear" style={{ marginBottom:18 }}>
-        <SectionLabel>Quick Guide</SectionLabel>
-        <h2 style={{ fontSize:"clamp(22px,3.3vw,34px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.8px", marginBottom:16 }}>How to update website images</h2>
-        <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(18px,3vw,24px)", display:"grid", gap:10 }}>
-          {[
-            "1) Put your new image in the correct folder under src/assets (for example: events, images, gallery, or community).",
-            "2) Add or update the import at the top of App.jsx.",
-            "3) Assign the imported image in the right data object (EVENTS, PAST_EVENTS, TEAM, or GALLERY_ITEMS).",
-            "4) Save the file and refresh the page to confirm the image and crop look correct on mobile and desktop.",
-          ].map(step => (
-            <p key={step} style={{ margin:0, fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif" }}>{step}</p>
-          ))}
-        </div>
-      </div>
 
-      
     </div>
   );
 }
