@@ -56,6 +56,17 @@ import buildlSessionPhoto from "./assets/gallery/buildl-session group.jpg";
 import outdoorLaptopPhoto from "./assets/gallery/outdoor-laptop session.jpg";
 import devfestCrowdPhoto from "./assets/gallery/devfest-crowd.jpg.jpg";
 import kyambogoRoomPhoto from "./assets/gallery/kyambongo-lecture -room.jpg.jpg";
+import thirdwebResourceLogo from "./assets/resources/thirdweb.jpg";
+import metaMaskResourceLogo from "./assets/resources/meta-mask.jpg";
+import hardhatResourceLogo from "./assets/resources/hardhat.jpg";
+import foundryResourceLogo from "./assets/resources/foundry.png";
+import etherscanResourceLogo from "./assets/resources/ethscan.jpg";
+import ethereumOrgResourceLogo from "./assets/resources/etherium.org.jpg";
+import cyfrinResourceLogo from "./assets/resources/cyfrin.jpg";
+import cryptoZombiesResourceLogo from "./assets/resources/crypto zombies.jpg";
+import chainlistResourceLogo from "./assets/resources/chainlist.jpg";
+import bauResourceLogo from "./assets/resources/blockchain-association-of-uganda.jpg";
+import alchemyResourceLogo from "./assets/resources/alchemy.png";
 
 // ─── Colors ───────────────────────────────────────────────────────
 const THEMES = {
@@ -117,7 +128,7 @@ const EVENTS = [
 ];
 
 const PAST_EVENTS = [
-  { title:"Kampala Blockchain Summit 2025", date:"Ended —Nov, 25 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
+  { title:"Kampala Blockchain Summit 2025", date:"Ended —Nov, 25g 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
   { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
   { title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
   { title:"BUIDL Africa Community Session", date:"2025", location:"Kampala, Uganda", tag:"Community", color:C.green, image:buildlSessionPhoto, recap:"Student-focused build session connecting learners to mentorship and project ideas.", link:"https://t.me/digitalsphereug" },
@@ -216,29 +227,29 @@ const FAQS = [
 const RESOURCES_DATA = [
   { cat:"Developer Tools", icon:BsTools, color:C.blueLt, items:[
     { title:"Remix IDE", desc:"Browser-based Solidity editor — write and deploy smart contracts instantly, no setup needed.", link:"https://remix.ethereum.org/", tag:"Essential" },
-    { title:"MetaMask", desc:"The most widely used Ethereum wallet and browser extension. You need this to interact with dApps.", link:"https://metamask.io/", tag:"Essential" },
-    { title:"Hardhat", desc:"Professional development environment for building, testing, and deploying smart contracts.", link:"https://hardhat.org/", tag:"Intermediate" },
-    { title:"Foundry", desc:"Fast, portable toolkit for Ethereum development written in Rust.", link:"https://getfoundry.sh/", tag:"Advanced" },
-    { title:"Thirdweb", desc:"Build Web3 apps without needing to write complex smart contract code from scratch.", link:"https://thirdweb.com/", tag:"Beginner" },
+    { title:"MetaMask", desc:"The most widely used Ethereum wallet and browser extension. You need this to interact with dApps.", link:"https://metamask.io/", tag:"Essential", logo:metaMaskResourceLogo },
+    { title:"Hardhat", desc:"Professional development environment for building, testing, and deploying smart contracts.", link:"https://hardhat.org/", tag:"Intermediate", logo:hardhatResourceLogo },
+    { title:"Foundry", desc:"Fast, portable toolkit for Ethereum development written in Rust.", link:"https://getfoundry.sh/", tag:"Advanced", logo:foundryResourceLogo },
+    { title:"Thirdweb", desc:"Build Web3 apps without needing to write complex smart contract code from scratch.", link:"https://thirdweb.com/", tag:"Beginner", logo:thirdwebResourceLogo },
   ]},
   { cat:"Learning Platforms", icon:BsBook, color:C.green, items:[
-    { title:"Cyfrin Updraft", desc:"The best structured Solidity course available — completely free and built for beginners.", link:"https://updraft.cyfrin.io/", tag:"Free" },
-    { title:"Alchemy University", desc:"Road to Web3 — structured learning path from zero to deployed dApp.", link:"https://university.alchemy.com/", tag:"Free" },
+    { title:"Cyfrin Updraft", desc:"The best structured Solidity course available — completely free and built for beginners.", link:"https://updraft.cyfrin.io/", tag:"Free", logo:cyfrinResourceLogo },
+    { title:"Alchemy University", desc:"Road to Web3 — structured learning path from zero to deployed dApp.", link:"https://university.alchemy.com/", tag:"Free", logo:alchemyResourceLogo },
     { title:"LearnWeb3 DAO", desc:"Community-driven platform with beginner to advanced Web3 development tracks.", link:"https://learnweb3.io/", tag:"Free", logo:learnWeb3LogoImage },
-    { title:"CryptoZombies", desc:"Learn Solidity by building a zombie game — the most fun way to start coding on Ethereum.", link:"https://cryptozombies.io/", tag:"Free" },
-    { title:"Ethereum.org Learn", desc:"Official Ethereum Foundation learning resources — concepts, tutorials, and documentation.", link:"https://ethereum.org/en/learn/", tag:"Free" },
+    { title:"CryptoZombies", desc:"Learn Solidity by building a zombie game — the most fun way to start coding on Ethereum.", link:"https://cryptozombies.io/", tag:"Free", logo:cryptoZombiesResourceLogo },
+    { title:"Ethereum.org Learn", desc:"Official Ethereum Foundation learning resources — concepts, tutorials, and documentation.", link:"https://ethereum.org/en/learn/", tag:"Free", logo:ethereumOrgResourceLogo },
   ]},
   { cat:"Uganda & Africa Blockchain", icon:BsGlobeEuropeAfrica, color:C.cyan, items:[
-    { title:"Blockchain Association Uganda (BAU)", desc:"The official industry body for blockchain in Uganda. Events, programmes, and policy.", link:"https://bau.ug/", tag:"Uganda" },
+    { title:"Blockchain Association Uganda (BAU)", desc:"The official industry body for blockchain in Uganda. Events, programmes, and policy.", link:"https://bau.ug/", tag:"Uganda", logo:bauResourceLogo },
     { title:"Blockchain DevFest Kampala", desc:"Uganda's premier annual Web3 developer conference. Hackathon, workshops, speakers.", link:"https://devfestkampala.com/", tag:"Uganda" },
     { title:"Web3 Africa", desc:"Pan-African Web3 community connecting builders, developers and founders across the continent.", link:"https://www.web3afrika.com/", tag:"Africa", logo:web3AfricaLogoImage },
     { title:"Algorand Africa", desc:"Algorand Foundation's initiative to grow blockchain development across Africa.", link:"https://algorand.foundation/", tag:"Africa", logo:algorandAfricaLogoImage },
   ]},
   { cat:"Wallets & Testnet Tools", icon:BsKey, color:C.purple, items:[
-    { title:"MetaMask", desc:"Install this first — it is your gateway to every blockchain application.", link:"https://metamask.io/", tag:"Essential" },
+    { title:"MetaMask", desc:"Install this first — it is your gateway to every blockchain application.", link:"https://metamask.io/", tag:"Essential", logo:metaMaskResourceLogo },
     { title:"Sepolia Testnet Faucet", desc:"Get free test ETH to practise deploying smart contracts without spending real money.", link:"https://sepoliafaucet.com/", tag:"Free" },
-    { title:"Etherscan", desc:"Blockchain explorer — view transactions, contracts, and wallet activity on Ethereum.", link:"https://etherscan.io/", tag:"Tool" },
-    { title:"Chainlist", desc:"Add any blockchain network to MetaMask with one click.", link:"https://chainlist.org/", tag:"Tool" },
+    { title:"Etherscan", desc:"Blockchain explorer — view transactions, contracts, and wallet activity on Ethereum.", link:"https://etherscan.io/", tag:"Tool", logo:etherscanResourceLogo },
+    { title:"Chainlist", desc:"Add any blockchain network to MetaMask with one click.", link:"https://chainlist.org/", tag:"Tool", logo:chainlistResourceLogo },
   ]},
 ];
 
