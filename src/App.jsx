@@ -404,6 +404,147 @@ function SocialBtn({ href, label, Icon }) {
   );
 }
 
+function MailchimpSignup({ compact = false }) {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState("");
+
+  const actionUrl = "https://tech.us18.list-manage.com/subscribe/post?u=d1bef5bd2742eab35653e151d&id=92e93a0f72&f_id=00f8abe6f0";
+
+  useEffect(() => {
+    const successEl = document.getElementById("mce-success-response");
+    if (!successEl) return;
+
+    const observer = new MutationObserver(() => {
+      const msg = (successEl.textContent || "").trim();
+      const isVisible = successEl.style.display !== "none" && msg.length > 0;
+      if (isVisible) {
+        setToast("Thank you for joining DigitalSphereUg!");
+        const timer = setTimeout(() => setToast(""), 4500);
+        return () => clearTimeout(timer);
+      }
+      return undefined;
+    });
+
+    observer.observe(successEl, { childList:true, subtree:true, characterData:true, attributes:true });
+    return () => observer.disconnect();
+  }, []);
+
+  const submitForm = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    setIsSubmitting(true);
+    const successEl = document.getElementById("mce-success-response");
+    const errorEl = document.getElementById("mce-error-response");
+    if (successEl) {
+      successEl.style.display = "none";
+      successEl.textContent = "";
+    }
+    if (errorEl) {
+      errorEl.style.display = "none";
+      errorEl.textContent = "";
+    }
+
+    const callbackName = `mailchimp_cb_${Date.now()}`;
+    const params = new URLSearchParams();
+    params.set("EMAIL", email);
+    params.set("b_d1bef5bd2742eab35653e151d_92e93a0f72", "");
+    params.set("c", callbackName);
+    const jsonpUrl = `${actionUrl.replace("/post?", "/post-json?")}&${params.toString()}`;
+
+    window[callbackName] = data => {
+      const message = (data && data.msg) ? data.msg.replace(/<[^>]*>/g, "") : "Subscription complete.";
+      const isSuccess = data && data.result === "success";
+
+      if (isSuccess) {
+        if (successEl) {
+          successEl.style.display = "block";
+          successEl.textContent = message;
+        }
+        setEmail("");
+      } else {
+        if (errorEl) {
+          errorEl.style.display = "block";
+          errorEl.textContent = message;
+        }
+      }
+
+      setIsSubmitting(false);
+      delete window[callbackName];
+    };
+
+    const script = document.createElement("script");
+    script.src = jsonpUrl;
+    script.async = true;
+    script.onerror = () => {
+      if (errorEl) {
+        errorEl.style.display = "block";
+        errorEl.textContent = "Unable to submit right now. Please try again.";
+      }
+      setIsSubmitting(false);
+      delete window[callbackName];
+    };
+    document.body.appendChild(script);
+  };
+
+  return (
+    <div className={compact ? "" : "section-appear"} style={{ marginBottom:compact ? 0 : 56, position:"relative" }}>
+      {!compact && <SectionLabel>Newsletter</SectionLabel>}
+      <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:compact ? 14 : 18, padding:compact ? "14px 16px" : "clamp(20px,3vw,30px)", maxWidth:compact ? 560 : 680 }}>
+        <h3 style={{ fontSize:compact ? "18px" : "clamp(22px,3.3vw,32px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.2, margin:"0 0 8px" }}>Join DigitalSphereUg Newsletter</h3>
+        <p style={{ fontSize:compact ? 13 : 14, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:"0 0 12px" }}>Get Web3 opportunities, event drops, and practical learning resources in your inbox.</p>
+
+        <form action={actionUrl} method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate onSubmit={submitForm}>
+          <div id="mc_embed_signup_scroll">
+            <div className="mc-field-group" style={{ marginBottom:12 }}>
+              <label htmlFor="mce-EMAIL" style={{ display:"block", fontSize:13, color:C.textSub, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>Email Address <span style={{ color:C.blue }}>*</span></label>
+              <input
+                type="email"
+                name="EMAIL"
+                className="required email"
+                id="mce-EMAIL"
+                required
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                style={{ width:"100%", height:46, borderRadius:10, border:`1px solid ${C.border}`, background:C.surface, color:C.text, padding:"0 14px", fontSize:14, fontFamily:"'Manrope',sans-serif" }}
+              />
+            </div>
+
+            <div id="mce-responses" className="clear foot" style={{ marginBottom:12 }}>
+              <div className="response" id="mce-error-response" style={{ display:"none", color:"#ef4444", fontSize:13, fontFamily:"'Manrope',sans-serif" }}></div>
+              <div className="response" id="mce-success-response" style={{ display:"none", color:C.green, fontSize:13, fontFamily:"'Manrope',sans-serif" }}></div>
+            </div>
+
+            <div aria-hidden="true" style={{ position:"absolute", left:"-5000px" }}>
+              <input type="text" name="b_d1bef5bd2742eab35653e151d_92e93a0f72" tabIndex={-1} value="" readOnly />
+            </div>
+
+            <div className="optionalParent">
+              <div className="clear foot" style={{ display:"flex", gap:10, alignItems:"center", flexWrap:"wrap" }}>
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" className="button hover-lift" disabled={isSubmitting} style={{ background:C.blue, border:"none", color:C.white, padding:compact ? "9px 16px" : "11px 22px", borderRadius:10, fontSize:compact ? 12 : 13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", opacity:isSubmitting?0.7:1 }}>
+                  {isSubmitting ? "Subscribing..." : "Subscribe"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      {toast && (
+        <div role="status" aria-live="polite" style={{ position:"fixed", right:18, bottom:18, zIndex:500, background:C.green, color:"#052e16", padding:"12px 16px", borderRadius:12, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", boxShadow:"0 12px 28px rgba(0,0,0,.25)" }}>
+          {toast}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Nav ──────────────────────────────────────────────────────────
 function Nav({ page, setPage, theme, toggleTheme }) {
   const [mob, setMob] = useState(false);
@@ -831,6 +972,7 @@ function Resources() {
         </div>
         <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"11px 22px", borderRadius:9, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap", display:"inline-flex", alignItems:"center", gap:6 }}>Suggest on Telegram <BsArrowRight size={ICON.xs} /></a>
       </div>
+
     </div>
   );
 }
@@ -1254,10 +1396,14 @@ function Footer({ setPage }) {
           </div>
         </div>
 
+        <div style={{ marginTop:18, marginBottom:14, paddingTop:14, borderTop:`1px solid ${C.border}` }}>
+          <MailchimpSignup compact />
+        </div>
+
         <div style={{ borderTop:`1px solid ${C.border}`, paddingTop:20, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:10 }}>
           <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>© 2026 DigitalSphereUg — Built in Uganda 🇺🇬 Free. Always free.</span>
         </div>
-          <div style={{ marginTop:14, paddingTop:14, borderTop:`1px solid ${C.border}` }}>
+        <div style={{ marginTop:14, paddingTop:14, borderTop:`1px solid ${C.border}` }}>
           <p style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", margin:0, lineHeight:1.6 }}>DigitalSphereUg curates links to free external resources. We do not own or host any third-party content. All linked resources belong to their respective owners.</p>
         </div>
       </div>
