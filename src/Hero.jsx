@@ -32,7 +32,16 @@ export default function Hero({ setPage }) {
   }, [muted, prefersReducedMotion]);
 
   const toggleSound = () => {
-    setMuted(prev => !prev);
+    const nextMuted = !muted;
+    setMuted(nextMuted);
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = nextMuted;
+    if (!nextMuted) {
+      video.play().catch(() => {});
+    }
   };
 
   return (
@@ -48,7 +57,7 @@ export default function Hero({ setPage }) {
           ref={videoRef}
           poster={heroPoster}
           autoPlay
-          muted
+          muted={muted}
           loop
           playsInline
           preload="metadata"
