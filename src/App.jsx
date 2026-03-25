@@ -56,6 +56,10 @@ import buildlSessionPhoto from "./assets/gallery/buildl-session group.jpg";
 import outdoorLaptopPhoto from "./assets/gallery/outdoor-laptop session.jpg";
 import devfestCrowdPhoto from "./assets/gallery/devfest-crowd.jpg.jpg";
 import kyambogoRoomPhoto from "./assets/gallery/kyambongo-lecture -room.jpg.jpg";
+import chainlinkGroupGalleryPhoto from "./assets/gallery/chainlink-group.jpg.jpg";
+import buildAfricaHubPhoto from "./assets/gallery/BuildAfrica-National ICT HUB, kampala.jpg";
+import avalancheScenesPhoto from "./assets/gallery/scenes from Avaranche.jpg";
+import ethnileEventPhoto from "./assets/gallery/EthNileEvent.jpg";
 import thirdwebResourceLogo from "./assets/resources/thirdweb.jpg";
 import metaMaskResourceLogo from "./assets/resources/meta-mask.jpg";
 import hardhatResourceLogo from "./assets/resources/hardhat.jpg";
@@ -67,6 +71,7 @@ import cryptoZombiesResourceLogo from "./assets/resources/crypto zombies.jpg";
 import chainlistResourceLogo from "./assets/resources/chainlist.jpg";
 import bauResourceLogo from "./assets/resources/blockchain-association-of-uganda.jpg";
 import alchemyResourceLogo from "./assets/resources/alchemy.png";
+import Hero from "./Hero";
 
 // ─── Colors ───────────────────────────────────────────────────────
 const THEMES = {
@@ -164,10 +169,14 @@ const POSTS = [
 
 const GALLERY_ITEMS = [
   { src:ethnileGroupHero, caption:"ETHNile Outdoor Group — Kampala" },
+  { src:ethnileEventPhoto, caption:"ETHNile Event Session — Kampala" },
   { src:filecoinGroupPhoto, caption:"Filecoin Session — Kampala" },
+  { src:buildAfricaHubPhoto, caption:"BuildAfrica National ICT Hub — Kampala" },
   { src:chainlinkRooftopPhoto, caption:"Chainlink Rooftop Session — Kampala" },
+  { src:chainlinkGroupGalleryPhoto, caption:"Chainlink Group Session — Kampala" },
   { src:chainlinkStreetGroupPhoto, caption:"Chainlink Kampala Group — Kampala" },
   { src:buildlSessionPhoto, caption:"BUIDL Africa Session — Kampala" },
+  { src:avalancheScenesPhoto, caption:"Scenes from Avalanche Event — Kampala" },
   { src:outdoorLaptopPhoto, caption:"Outdoor Laptop Session — Kampala" },
   { src:kyambogoLecturePhoto, caption:"Kyambogo Lecture Hall — Kampala" },
   { src:stellarGroupPhoto, caption:"Stellar Group — Kampala" },
@@ -273,12 +282,6 @@ const ICON = {
   hero: 26,
   stat: 28,
 };
-
-function getAccentTextStyle(theme) {
-  return {
-    color: C.accent,
-  };
-}
 
 // ─── Global Styles ────────────────────────────────────────────────
 const GStyles = `
@@ -592,44 +595,10 @@ function Nav({ page, setPage, theme, toggleTheme }) {
 }
 
 // ─── Home ─────────────────────────────────────────────────────────
-function Home({ setPage, theme }) {
-  const heroAccentStyle = getAccentTextStyle(theme);
-  const heroText = "#eef2ff";
-  const heroSub = "#dbe5f4";
-  const heroBorder = "rgba(238,242,255,.35)";
-
+function Home({ setPage }) {
   return (
     <div>
-      {/* HERO */}
-      <section style={{ minHeight:"100vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", padding:"clamp(100px,14vh,140px) clamp(16px,4vw,40px) 80px" }}>
-        <img src={ethnileGroupHero} alt="ETHNile outdoor group photo in Kampala" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} />
-        <div style={{ position:"absolute", inset:0, background:"rgba(5,7,15,0.60)" }} />
-        <div className="hero-shell" style={{ position:"relative", maxWidth:1280, width:"100%", margin:"0 auto", display:"grid", gridTemplateColumns:"minmax(0,760px)", justifyContent:"start" }}>
-          <div className="fade-up glass-pulse" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(5,7,15,.75)", border:`1px solid ${heroBorder}`, padding:"7px 18px", borderRadius:99, marginBottom:26 }}>
-            <span style={{ width:7, height:7, borderRadius:"50%", background:C.green, display:"inline-block", animation:"pulse 2s infinite" }} />
-            <span style={{ fontSize:12, color:heroSub, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, letterSpacing:"1.5px", textTransform:"uppercase" }}>Uganda's Student Blockchain Community</span>
-          </div>
-          <h1 className="fade-up-2" style={{ fontSize:"clamp(38px,7vw,80px)", fontWeight:900, color:heroText, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-2.5px", lineHeight:1.03, margin:"0 0 24px" }}>
-            Uganda's Home<br />for <span style={heroAccentStyle}>Blockchain & Web3</span>
-          </h1>
-          <p className="fade-up-3" style={{ fontSize:"clamp(15px,2.3vw,18px)", color:heroSub, lineHeight:1.8, margin:"0 0 34px", maxWidth:560, fontFamily:"'Manrope',sans-serif" }}>
-            Free education, local events, real opportunities and supportive network of peers — built by Ugandan students, for every Ugandan ready to enter the Web3 ecosystem.
-          </p>
-          <div className="fade-up-3 hero-btns" style={{ display:"flex", gap:12, justifyContent:"flex-start", flexWrap:"wrap", marginBottom:42 }}>
-            <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:C.blue, border:"none", cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.white, fontSize:15, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:7 }}>Explore Free Tracks <BsArrowRight size={ICON.sm} /></button>
-            <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${heroBorder}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:heroText, fontSize:15, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>See Upcoming Events</button>
-            <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${heroBorder}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:heroText, fontSize:15, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>Join Community</button>
-          </div>
-          <div className="stats-row" style={{ display:"flex", gap:"clamp(18px,3vw,26px)", justifyContent:"flex-start", flexWrap:"wrap", background:"rgba(5,7,15,.76)", border:`1px solid ${heroBorder}`, borderRadius:14, padding:"14px 18px", maxWidth:640 }}>
-            {[{n:"313+",l:"Members"},{n:"4",l:"Learning Tracks"},{n:"Free",l:"Always Free"},{n:<BsGeoAlt size={ICON.stat} />,l:"Uganda-Built"}].map(s => (
-              <div key={s.l} style={{ textAlign:"center" }}>
-                <div style={{ fontSize:"clamp(26px,4vw,38px)", fontWeight:900, color:heroText, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px" }}>{s.n}</div>
-                <div style={{ fontSize:12, color:heroSub, fontFamily:"'Space Grotesk',sans-serif", marginTop:5, letterSpacing:"0.5px", textTransform:"uppercase" }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Hero setPage={setPage} />
 
       {/* TRACKS PREVIEW */}
       <section className="section-appear" style={{ padding:"clamp(56px,8vw,96px) clamp(16px,4vw,40px)", maxWidth:1280, margin:"0 auto" }}>
@@ -1453,7 +1422,7 @@ export default function App() {
     <div style={{ background:C.bg, minHeight:"100vh", color:C.text }}>
       <Nav page={page} setPage={go} theme={theme} toggleTheme={toggleTheme} />
       <main>
-        {page === "Home"          && <Home setPage={go} theme={theme} />}
+        {page === "Home"          && <Home setPage={go} />}
         {page === "Learn"         && <Learn />}
         {page === "Events"        && <Events />}
         {page === "Opportunities" && <Opportunities />}
