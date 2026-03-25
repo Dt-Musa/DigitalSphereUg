@@ -654,28 +654,25 @@ function Home({ setPage }) {
       </section>
 
       {/* GALLERY */}
-      <section className="section-appear" style={{ background:"#f4efe4", color:"#1e293b", padding:"clamp(52px,7vw,90px) clamp(16px,4vw,40px)", borderTop:"1px solid #ddd0b7", borderBottom:"1px solid #ddd0b7" }}>
+      <section className="section-appear" style={{ background:C.surface, color:C.text, padding:"clamp(52px,7vw,90px) clamp(16px,4vw,40px)", borderTop:`1px solid ${C.border}`, borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:1280, margin:"0 auto" }}>
           <div style={{ marginBottom:20 }}>
-            <div style={{ fontSize:11, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:"#7c4a03", marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>In The Community</div>
-            <h2 className="gallery-title" style={{ fontSize:"clamp(26px,4vw,42px)", lineHeight:1.08, margin:0, fontFamily:"'Space Grotesk',sans-serif" }}>We show up</h2>
+            <div style={{ fontSize:11, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>In The Community</div>
+            <h2 className="gallery-title" style={{ fontSize:"clamp(26px,4vw,42px)", lineHeight:1.08, margin:0, fontFamily:"'Space Grotesk',sans-serif", color:C.text }}>We show up</h2>
           </div>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))", gap:12 }}>
+          <div className="photo-masonry">
             {FEATURED_GALLERY_ITEMS.map((item, i) => (
-              <article key={item.title + i} className="photo-item" style={{ margin:0, background:"#fff8ea", border:"1px solid #e7d4ae", borderRadius:12, padding:10 }}>
-                <div className="image-zoom" style={{ borderRadius:10 }}>
-                  <img src={item.image} alt={item.title} style={{ width:"100%", height:170, display:"block", borderRadius:10, objectFit:"cover" }} />
+              <figure key={item.title + i} className="photo-item" style={{ margin:0 }}>
+                <div className="image-zoom" style={{ borderRadius:12 }}>
+                  <img src={item.image} alt={item.title} style={{ width:"100%", display:"block", borderRadius:12, objectFit:"cover" }} />
                 </div>
-                <div style={{ fontSize:13, marginTop:8, color:"#334155", fontFamily:"'Manrope',sans-serif", lineHeight:1.45 }}>
-                  <strong style={{ display:"block", color:"#0f172a", fontFamily:"'Space Grotesk',sans-serif" }}>{item.title}</strong>
-                  <span style={{ display:"block" }}>{item.date} — {item.location}</span>
-                </div>
-              </article>
+                <figcaption style={{ fontSize:12, marginTop:8, color:C.textSub, fontFamily:"'Manrope',sans-serif" }}><strong style={{ display:"block", color:C.text, fontFamily:"'Space Grotesk',sans-serif", fontSize:13, fontWeight:700 }}>{item.title}</strong><span style={{ display:"block", color:C.textSub, fontSize:11, fontWeight:600 }}>{item.date} — {item.location}</span></figcaption>
+              </figure>
             ))}
           </div>
+          <p style={{ margin:"10px 0 0", fontSize:13, color:C.textSub, fontFamily:"'Manrope',sans-serif", fontWeight:500 }}>Featured moments from the community. See the full gallery for every event story.</p>
           <div style={{ marginTop:14, display:"flex", justifyContent:"space-between", alignItems:"center", gap:12, flexWrap:"wrap" }}>
-            <p style={{ margin:0, fontSize:13, color:"#475569", fontFamily:"'Manrope',sans-serif" }}>Featured moments from the community. See the full gallery for every event story.</p>
-            <button onClick={() => setPage("Gallery")} className="hover-lift" style={{ background:"#0f172a", border:"none", color:"#fff", padding:"10px 18px", borderRadius:9, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", display:"inline-flex", alignItems:"center", gap:6 }}>View Full Gallery <BsArrowRight size={ICON.xs} /></button>
+            <button onClick={() => setPage("Gallery")} className="hover-lift" style={{ background:C.blue, border:"none", color:C.white, padding:"10px 18px", borderRadius:9, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", display:"inline-flex", alignItems:"center", gap:6 }}>View Full Gallery <BsArrowRight size={ICON.xs} /></button>
           </div>
         </div>
       </section>
@@ -757,16 +754,14 @@ function Gallery({ setPage }) {
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Community Archive" h1="Uganda Shows Up for Web3" sub="From campus sessions to major conferences, this is how DigitalSphereUg shows up." />
 
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:16, marginBottom:40 }}>
+      <div className="photo-masonry" style={{ marginBottom:40 }}>
         {GALLERY_ITEMS.map((item, i) => (
-          <article key={item.title + i} onClick={() => setActiveIndex(i)} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:12, display:"flex", flexDirection:"column", gap:10, cursor:"pointer" }}>
-            <div className="image-zoom" style={{ borderRadius:10 }}>
-              <img src={item.image} alt={item.title} style={{ width:"100%", height:190, objectFit:"cover", borderRadius:10 }} />
+          <figure key={item.title + i} onClick={() => setActiveIndex(i)} className="photo-item" style={{ margin:0, cursor:"pointer" }}>
+            <div className="image-zoom" style={{ borderRadius:12 }}>
+              <img src={item.image} alt={item.title} style={{ width:"100%", display:"block", borderRadius:12, objectFit:"cover" }} />
             </div>
-            <h3 style={{ fontSize:16, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.35 }}>{item.title}</h3>
-            <div style={{ fontSize:12, color:C.blueLt, fontFamily:"'Manrope',sans-serif", fontWeight:700 }}>{item.date} — {item.location}</div>
-            <p style={{ margin:0, fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif" }}>{item.summary}</p>
-          </article>
+            <figcaption style={{ fontSize:12, marginTop:8, color:C.textSub, fontFamily:"'Manrope',sans-serif" }}><strong style={{ display:"block", color:C.text, fontFamily:"'Space Grotesk',sans-serif", fontSize:13, fontWeight:700, marginBottom:2 }}>{item.title}</strong><span style={{ display:"block", color:C.textSub, fontSize:11, fontWeight:600, marginBottom:4 }}>{item.date} — {item.location}</span><p style={{ margin:0, fontSize:11, color:C.textDim, lineHeight:1.6, fontWeight:500 }}>{item.summary}</p></figcaption>
+          </figure>
         ))}
       </div>
 
