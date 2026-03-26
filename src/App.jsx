@@ -86,7 +86,7 @@ import chainlinkEastAfricaResourceLogo from "./assets/resources/Chainlink-EastAf
 import stellarEastAfricaResourceLogo from "./assets/resources/stellar-eastafrica.jpg";
 import binanceAfricaResourceLogo from "./assets/resources/Binance Africa.png";
 import buidlAfricaResourceLogo from "./assets/resources/BuildlAfrica.jpg";
-import filecoinResourceLogo from "./assets/resources/Filecoin.jpg";
+import filecoinResourceLogo from "./assets/resources/filecoin.jpg";
 import Hero from "./Hero";
 
 // ─── Colors ───────────────────────────────────────────────────────
