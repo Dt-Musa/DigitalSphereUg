@@ -87,6 +87,15 @@ import stellarEastAfricaResourceLogo from "./assets/resources/stellar-eastafrica
 import binanceAfricaResourceLogo from "./assets/resources/Binance Africa.png";
 import buidlAfricaResourceLogo from "./assets/resources/BuildlAfrica.jpg";
 import filecoinResourceLogo from "./assets/resources/filecoin.jpg";
+import alchemyOppLogo from "./assets/opportunities/alchemy.png";
+import binanceOppLogo from "./assets/opportunities/binance academy.jpg";
+import coinbaseOppLogo from "./assets/opportunities/coinbase.png";
+import ethereumFoundationOppLogo from "./assets/opportunities/ethereum-foundation.jpg";
+import gitcoinOppLogo from "./assets/opportunities/gitcoin.jpg";
+import chainlinkOppLogo from "./assets/opportunities/chainlink.jpg";
+import web3CareerOppLogo from "./assets/opportunities/web3 careers.jpg";
+import cryptoJobListOppLogo from "./assets/opportunities/crypto-job-list.jpg";
+import ethnileGlobalOppLogo from "./assets/opportunities/ethnile-global.jpg";
 import Hero from "./Hero";
 
 // ─── Colors ───────────────────────────────────────────────────────
@@ -157,23 +166,23 @@ const PAST_EVENTS = [
 
 const OPPS = [
   { cat:"Learn & Earn", color:C.cyan, icon:BsMortarboard, items:[
-    { title:"Binance Learn & Earn", desc:"Complete short courses and earn crypto rewards.", link:"https://academy.binance.com/", level:"Beginner" },
-    { title:"Coinbase Learn", desc:"Learn about crypto assets and earn small amounts.", link:"https://www.coinbase.com/learn", level:"Beginner" },
-    { title:"Alchemy University", desc:"Free blockchain bootcamp with official certification.", link:"https://university.alchemy.com/", level:"All Levels" },
+    { title:"Binance Learn & Earn", desc:"Complete short courses and earn crypto rewards.", link:"https://academy.binance.com/", level:"Beginner", logo:binanceOppLogo },
+    { title:"Coinbase Learn", desc:"Learn about crypto assets and earn small amounts.", link:"https://www.coinbase.com/learn", level:"Beginner", logo:coinbaseOppLogo },
+    { title:"Alchemy University", desc:"Free blockchain bootcamp with official certification.", link:"https://university.alchemy.com/", level:"All Levels", logo:alchemyOppLogo },
   ]},
   { cat:"Grants & Funding", color:C.green, icon:BsCashStack, items:[
-    { title:"Ethereum Foundation — ESP", desc:"Small grants for builders contributing to the Ethereum ecosystem.", link:"https://esp.ethereum.foundation/", level:"Intermediate" },
-    { title:"Gitcoin Grants", desc:"Community-funded grants for open source Web3 projects.", link:"https://gitcoin.co/grants", level:"All Levels" },
+    { title:"Ethereum Foundation — ESP", desc:"Small grants for builders contributing to the Ethereum ecosystem.", link:"https://esp.ethereum.foundation/", level:"Intermediate", logo:ethereumFoundationOppLogo },
+    { title:"Gitcoin Grants", desc:"Community-funded grants for open source Web3 projects.", link:"https://gitcoin.co/grants", level:"All Levels", logo:gitcoinOppLogo },
   ]},
   { cat:"Hackathons", color:C.blueLt, icon:BsLightningCharge, items:[
     { title:"DevFest Kampala Hackathon", desc:"Annual hackathon at Blockchain DevFest Kampala — June 2026.", link:"https://devfestkampala.com", level:"All Levels" },
-    { title:"ETHGlobal Hackathons", desc:"Global online and in-person Ethereum hackathons with real prizes.", link:"https://ethglobal.com/", level:"Intermediate" },
-    { title:"Chainlink Hackathon", desc:"Regular hackathons with prize pools for Web3 builders.", link:"https://chain.link/hackathon", level:"Intermediate" },
+    { title:"ETHGlobal Hackathons", desc:"Global online and in-person Ethereum hackathons with real prizes.", link:"https://ethglobal.com/", level:"Intermediate", logo:ethnileGlobalOppLogo },
+    { title:"Chainlink Hackathon", desc:"Regular hackathons with prize pools for Web3 builders.", link:"https://chain.link/hackathon", level:"Intermediate", logo:chainlinkOppLogo },
   ]},
   { cat:"Jobs & Internships", color:C.purple, icon:BsBriefcase, items:[
-    { title:"Web3.career", desc:"Dedicated job board for remote and global Web3 roles.", link:"https://web3.career/", level:"All Levels" },
-    { title:"Crypto Jobs List", desc:"Curated blockchain and crypto job listings worldwide.", link:"https://cryptojobslist.com/", level:"All Levels" },
-    { title:"Gitcoin Bounties", desc:"Get paid to contribute to open source blockchain projects.", link:"https://gitcoin.co/explorer", level:"Beginner–Intermediate" },
+    { title:"Web3.career", desc:"Dedicated job board for remote and global Web3 roles.", link:"https://web3.career/", level:"All Levels", logo:web3CareerOppLogo },
+    { title:"Crypto Jobs List", desc:"Curated blockchain and crypto job listings worldwide.", link:"https://cryptojobslist.com/", level:"All Levels", logo:cryptoJobListOppLogo },
+    { title:"Gitcoin Bounties", desc:"Get paid to contribute to open source blockchain projects.", link:"https://gitcoin.co/explorer", level:"Beginner–Intermediate", logo:gitcoinOppLogo },
   ]},
 ];
 
@@ -392,6 +401,7 @@ img,svg{max-width:100%}
   .hero-btns button{width:min(100%,320px);max-width:100%;justify-content:center}
   .stats-row{gap:24px!important}
   .home-tracks-head{grid-template-columns:1fr!important}
+  .op-hero-grid{grid-template-columns:1fr!important}
   .resources-head{grid-template-columns:1fr!important}
   .home-tracks-image{min-height:210px!important}
   .resources-hero-image .image-zoom img{height:220px!important;min-height:220px!important}
@@ -1057,15 +1067,15 @@ function Opportunities() {
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Opportunities" h1="Earn, Build & Grow" sub="Jobs, grants, hackathons, and earn opportunities available to Ugandans right now." />
 
-      <div className="section-appear-2" style={{ display:"grid", gridTemplateColumns:"minmax(0,1.1fr) minmax(0,.9fr)", gap:16, marginBottom:30 }}>
+      <div className="section-appear-2 op-hero-grid" style={{ display:"grid", gridTemplateColumns:"minmax(0,1fr) minmax(0,1fr)", gap:16, marginBottom:30 }}>
         <div className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
             <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>Built For Uganda</div>
           <h2 style={{ fontSize:"clamp(22px,3vw,34px)", color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.1, margin:"0 0 10px" }}>Remote opportunities, local momentum</h2>
           <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>Grants, bounties, internships, and jobs that Ugandan students can actually access now. Start with one, keep stacking your wins.</p>
         </div>
-        <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
-          <div className="image-zoom" style={{ borderRadius:16 }}>
-            <img src={outdoorLaptopPhoto} alt="Outdoor laptop session for builders in Kampala" style={{ width:"100%", height:"100%", minHeight:180, objectFit:"cover" }} />
+        <div className="resources-hero-image" style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}`, aspectRatio:"16/10" }}>
+          <div className="image-zoom" style={{ borderRadius:16, width:"100%", height:"100%" }}>
+            <img src={outdoorLaptopPhoto} alt="Outdoor laptop session for builders in Kampala" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
           </div>
         </div>
       </div>
@@ -1081,6 +1091,7 @@ function Opportunities() {
               {cat.items.map((item, ii) => (
                 <div key={ii} className={`hover-card ${ii===0?"op-featured-card":""}`} style={{ background:ii===0?C.surface:C.card, border:`1px solid ${ii===0?cat.color+"55":C.border}`, borderRadius:14, padding:ii===0?"26px 24px":"22px", display:"flex", flexDirection:"column", gap:12, gridColumn:ii===0?"span 2":"span 1", position:"relative", overflow:"hidden" }}>
                   {ii===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:cat.color }} />}
+                  {item.logo && <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-start", height:40, marginBottom:4 }}><img src={item.logo} alt={item.title} style={{ maxHeight:40, maxWidth:100, objectFit:"contain" }} /></div>}
                   <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}><h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3><Pill label={item.level} color={cat.color} small /></div>
                   <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{item.desc}</p>
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>Explore <BsArrowRight size={ICON.xxs} /></a>
