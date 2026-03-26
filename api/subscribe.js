@@ -2,6 +2,11 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function isDuplicateContactError(error) {
+  const message = (error?.message || '').toLowerCase();
+  return message.includes('already') && message.includes('exist');
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -13,11 +18,30 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Email is required' });
   }
 
+  const normalizedEmail = String(email).trim().toLowerCase();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(normalizedEmail)) {
+    return res.status(400).json({ error: 'Invalid email address' });
+  }
+
   try {
+    // Add to Resend Audience list
+    try {
+      await resend.contacts.create({
+        email: normalizedEmail,
+        audienceId: process.env.RESEND_AUDIENCE_ID,
+      });
+    } catch (error) {
+      if (!isDuplicateContactError(error)) {
+        throw error;
+      }
+    }
+
+    // Send welcome email
     await resend.emails.send({
       from: 'hello@mail.digitalsphereug.tech',
-      to: email,
-      subject: 'Welcome to DigitalSphereUg | Uganda-built Web3 community 🇺🇬',
+      to: normalizedEmail,
+      subject: 'Welcome to DigitalSphereUg 🇺🇬',
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
           <h2 style="color: #1a1a2e;">Welcome to DigitalSphereUg 🇺🇬</h2>
@@ -31,7 +55,7 @@ export default async function handler(req, res) {
       `
     });
 
-    return res.status(200).json({ success: true, message: 'Subscribed successfully' });
+    return res.status(200).json({ success: true });
 
   } catch (error) {
     return res.status(500).json({ error: error.message });
