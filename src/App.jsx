@@ -185,8 +185,8 @@ const POSTS = [
 
 const GALLERY_ITEMS = [
   { image:devfestCrowdPhoto, title:"Blockchain DevFest Kampala", date:"June 28, 2025", location:"Kampala, Uganda", summary:"Uganda's biggest Web3 developer conference. DigitalSphereUg was in the room." },
-  { image:ethnileGroupHero, title:"ETHNile Kampala Community Day", date:"October 2025", location:"Kampala, Uganda", summary:"Builders, students, and founders connected around Ethereum education and real collaboration." },
-  { image:ethnileEventPhoto, title:"ETHNile Event Session", date:"October 2025", location:"Kampala, Uganda", summary:"We joined focused talks on blockchain adoption and practical next steps for local talent." },
+  { image:ethnileGroupHero, title:"ETHNile Kampala Community Day", date:"October 2025", location:"Ndere Culture Center, Kampala, Uganda", summary:"Builders, students, and founders connected around Ethereum education and real collaboration during the first Ethereum-focused event in Kampala." },
+  { image:ethnileEventPhoto, title:"ETHNile Event Session", date:"October 2025", location:"Ndere Culture Center, Kampala, Uganda", summary:"We joined focused talks on blockchain adoption and practical next steps for local talent." },
   { image:communityWhatsAppMomentPhoto, title:"Community Workshop Moment", date:"March 2026", location:"Kampala, Uganda", summary:"A candid moment from one of our hands-on learning sessions with local builders." },
   { image:chainlinkRooftopPhoto, title:"Chainlink Rooftop Session", date:"December 12, 2025", location:"Kampala, Uganda", summary:"We attended to deepen our understanding of oracle-powered applications for African use cases." },
   { image:chainlinkGroupGalleryPhoto, title:"Chainlink End-Of-Year Community Meetup", date:"December 12, 2025", location:"Kampala, Uganda", summary:"Developers met for a practical session on smart contract tooling and community building." },
@@ -195,9 +195,9 @@ const GALLERY_ITEMS = [
   { image:filecoinGroupPhoto, title:"Filecoin Community Session", date:"March 21, 2026", location:"Kampala, Uganda", summary:"We attended to explore decentralized storage opportunities and ecosystem onboarding paths." },
   { image:avalancheScenesPhoto, title:"Avalanche Community Event", date:"February 2026", location:"Kampala, Uganda", summary:"The event brought together regional builders to discuss scalability, tooling, and product execution." },
   { image:stellarSorobanSessionPhoto, title:"Stellar EAC Soroban Interactive Session", date:"2026", location:"Kampala, Uganda", summary:"Interactive discussions around Soroban development and the Stellar East Africa ecosystem." },
-  { image:kyambogoLecturePhoto, title:"Kyambogo University Lecture", date:"2026", location:"Kampala, Uganda", summary:"Students engaged directly with Web3 career pathways and beginner-friendly learning routes." },
+  { image:kyambogoLecturePhoto, title:"BUIDLAfrica Discussion on Web3 & Blockchain Opportunities and Career Paths", date:"2026", location:"National ICT INNOVATION HUB, Nakawa", summary:"Students engaged directly with Web3 career pathways and beginner-friendly learning routes." },
   { image:stellarGroupPhoto, title:"Stellar Group Session", date:"June 6, 2025", location:"Sheron Hotel, Kikoni Kampala", summary:"We joined the session to connect with East African builders and expand practical developer exposure." },
-  { image:ethnileVenuePhoto, title:"ETHNile Venue Day", date:"2025", location:"Kampala, Uganda", summary:"The gathering highlighted ecosystem partnerships and community-led momentum in Uganda." },
+  { image:ethnileVenuePhoto, title:"ETHNile Venue Day", date:"2025", location:"Ndere Culture Center, Kampala, Uganda", summary:"The gathering highlighted ecosystem partnerships and community-led momentum in Uganda." },
   { image:kyambogoRoomPhoto, title:"Kyambogo Session Room Meetup", date:"2026", location:"Kampala, Uganda", summary:"DigitalSphereUg joined learners for technical discussions and local builder networking." },
 ];
 
