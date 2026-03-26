@@ -32,7 +32,7 @@ import {
   BsSun,
 } from "react-icons/bs";
 import musaImage from "./assets/images/Musa.jpeg";
-import brightImage from "./assets/images/Bright.jpeg";
+import brightImage from "./assets/images/Bright-Profile.jpg";
 import rwegoImage from "./assets/images/Rwego.jpeg";
 import ethnileGroupHero from "./assets/hero/ethnile-group.jpg.jpg";
 import filecoinGroupPhoto from "./assets/gallery/filecoin-group.jpg.jpg";
@@ -60,6 +60,9 @@ import chainlinkGroupGalleryPhoto from "./assets/gallery/chainlink-group.jpg.jpg
 import buildAfricaHubPhoto from "./assets/gallery/BuildAfrica-National ICT HUB, kampala.jpg";
 import avalancheScenesPhoto from "./assets/gallery/scenes from Avaranche.jpg";
 import ethnileEventPhoto from "./assets/gallery/EthNileEvent.jpg";
+import buidlAfricaScenesPhoto from "./assets/gallery/Scenes From BuidlAfrica-2025.jpg";
+import stellarSorobanSessionPhoto from "./assets/gallery/Stellar EAC-Intractive-sessions about Soroban.jpg";
+import communityWhatsAppMomentPhoto from "./assets/gallery/IMG-20260325-WA0035.jpg";
 import thirdwebResourceLogo from "./assets/resources/thirdweb.jpg";
 import metaMaskResourceLogo from "./assets/resources/meta-mask.jpg";
 import hardhatResourceLogo from "./assets/resources/hardhat.jpg";
@@ -71,6 +74,19 @@ import cryptoZombiesResourceLogo from "./assets/resources/crypto zombies.jpg";
 import chainlistResourceLogo from "./assets/resources/chainlist.jpg";
 import bauResourceLogo from "./assets/resources/blockchain-association-of-uganda.jpg";
 import alchemyResourceLogo from "./assets/resources/alchemy.png";
+import ethereumResourceLogo from "./assets/resources/ETHERIUM.jpg";
+import solidityResourceLogo from "./assets/resources/solidity.jpg";
+import chainlinkResourceLogo from "./assets/resources/Chainlink.jpg";
+import celoResourceLogo from "./assets/resources/celo.jpg";
+import web3JsResourceLogo from "./assets/resources/web3-js.jpg";
+import stellarResourceLogo from "./assets/resources/Stellar.jpg";
+import baseResourceLogo from "./assets/resources/BASE.jpg";
+import celoAfricaDaoResourceLogo from "./assets/resources/Celo-African-Dao.jpg";
+import chainlinkEastAfricaResourceLogo from "./assets/resources/Chainlink-EastAfrica.jpg";
+import stellarEastAfricaResourceLogo from "./assets/resources/stellar-eastafrica.jpg";
+import binanceAfricaResourceLogo from "./assets/resources/Binance Africa.png";
+import buidlAfricaResourceLogo from "./assets/resources/BuildlAfrica.jpg";
+import filecoinResourceLogo from "./assets/resources/Filecoin.jpg";
 import Hero from "./Hero";
 
 // ─── Colors ───────────────────────────────────────────────────────
@@ -171,11 +187,14 @@ const GALLERY_ITEMS = [
   { image:devfestCrowdPhoto, title:"Blockchain DevFest Kampala", date:"June 28, 2025", location:"Kampala, Uganda", summary:"Uganda's biggest Web3 developer conference. DigitalSphereUg was in the room." },
   { image:ethnileGroupHero, title:"ETHNile Kampala Community Day", date:"October 2025", location:"Kampala, Uganda", summary:"Builders, students, and founders connected around Ethereum education and real collaboration." },
   { image:ethnileEventPhoto, title:"ETHNile Event Session", date:"October 2025", location:"Kampala, Uganda", summary:"We joined focused talks on blockchain adoption and practical next steps for local talent." },
+  { image:communityWhatsAppMomentPhoto, title:"Community Workshop Moment", date:"March 2026", location:"Kampala, Uganda", summary:"A candid moment from one of our hands-on learning sessions with local builders." },
   { image:chainlinkRooftopPhoto, title:"Chainlink Rooftop Session", date:"December 12, 2025", location:"Kampala, Uganda", summary:"We attended to deepen our understanding of oracle-powered applications for African use cases." },
   { image:chainlinkGroupGalleryPhoto, title:"Chainlink End-Of-Year Community Meetup", date:"December 12, 2025", location:"Kampala, Uganda", summary:"Developers met for a practical session on smart contract tooling and community building." },
   { image:buildAfricaHubPhoto, title:"BUIDL Africa Conference", date:"November 15, 2025", location:"Kampala, Uganda", summary:"DigitalSphereUg showed up to support youth-driven innovation and hands-on technical learning." },
+  { image:buidlAfricaScenesPhoto, title:"Scenes From BuidlAfrica 2025", date:"2025", location:"Kampala, Uganda", summary:"Highlights from BuidlAfrica sessions focused on collaboration and practical blockchain building." },
   { image:filecoinGroupPhoto, title:"Filecoin Community Session", date:"March 21, 2026", location:"Kampala, Uganda", summary:"We attended to explore decentralized storage opportunities and ecosystem onboarding paths." },
   { image:avalancheScenesPhoto, title:"Avalanche Community Event", date:"February 2026", location:"Kampala, Uganda", summary:"The event brought together regional builders to discuss scalability, tooling, and product execution." },
+  { image:stellarSorobanSessionPhoto, title:"Stellar EAC Soroban Interactive Session", date:"2026", location:"Kampala, Uganda", summary:"Interactive discussions around Soroban development and the Stellar East Africa ecosystem." },
   { image:kyambogoLecturePhoto, title:"Kyambogo University Lecture", date:"2026", location:"Kampala, Uganda", summary:"Students engaged directly with Web3 career pathways and beginner-friendly learning routes." },
   { image:stellarGroupPhoto, title:"Stellar Group Session", date:"June 6, 2025", location:"Sheron Hotel, Kikoni Kampala", summary:"We joined the session to connect with East African builders and expand practical developer exposure." },
   { image:ethnileVenuePhoto, title:"ETHNile Venue Day", date:"2025", location:"Kampala, Uganda", summary:"The gathering highlighted ecosystem partnerships and community-led momentum in Uganda." },
@@ -261,6 +280,30 @@ const RESOURCES_DATA = [
   ]},
 ];
 
+const MARQUEE_TECH = [
+  { name:"Ethereum", logo:ethereumResourceLogo, tint:"#4d6ff0" },
+  { name:"Solidity", logo:solidityResourceLogo, tint:"#38bdf8" },
+  { name:"Chainlink", logo:chainlinkResourceLogo, tint:"#2847D4" },
+  { name:"Celo", logo:celoResourceLogo, tint:"#34d399" },
+  { name:"Hardhat", logo:hardhatResourceLogo, tint:"#f0b429" },
+  { name:"MetaMask", logo:metaMaskResourceLogo, tint:"#f59e0b" },
+  { name:"Web3.js", logo:web3JsResourceLogo, tint:"#38bdf8" },
+  { name:"Stellar", logo:stellarResourceLogo, tint:"#8b5cf6" },
+  { name:"Base", logo:baseResourceLogo, tint:"#3b82f6" },
+  { name:"Filecoin", logo:filecoinResourceLogo, tint:"#3b82f6" },
+];
+
+const MARQUEE_ECOSYSTEM = [
+  { name:"ETHNile", logo:ethnileLogoImage, tint:"#4d6ff0" },
+  { name:"Celo Africa DAO", logo:celoAfricaDaoResourceLogo, tint:"#34d399" },
+  { name:"Chainlink East Africa", logo:chainlinkEastAfricaResourceLogo, tint:"#2847D4" },
+  { name:"Stellar East Africa", logo:stellarEastAfricaResourceLogo, tint:"#8b5cf6" },
+  { name:"BAU Uganda", logo:bauResourceLogo, tint:"#38bdf8" },
+  { name:"Algorand Africa", logo:algorandAfricaLogoImage, tint:"#22d3ee" },
+  { name:"Binance Africa", logo:binanceAfricaResourceLogo, tint:"#f0b429" },
+  { name:"BuidlAfrica", logo:buidlAfricaResourceLogo, tint:"#4d6ff0" },
+];
+
 const DEFAULT_PAGE = "Home";
 const NAV_LINKS = ["Home","Learn","Events","Gallery","Opportunities","Resources","Blog","Community","About"];
 const FOOTER_LINKS = NAV_LINKS.filter(link => link !== "Home");
@@ -283,8 +326,9 @@ const ICON = {
 };
 
 // ─── Global Styles ────────────────────────────────────────────────
-const GStyles = `
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
+const getGStyles = () => `
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
+:root{--ds-bg:${C.bg};--ds-bg2:${C.bg2};--ds-surface:${C.surface};--ds-card:${C.card};--ds-card-hov:${C.cardHov};--ds-border:${C.border};--ds-blue:${C.blue};--ds-blue-15:${C.blue}15;--ds-blue-33:${C.blue}33;--ds-blue-40:${C.blue}40;--ds-blue-66:${C.blue}66;--ds-blue-80:${C.blue}80;--ds-text:${C.text}}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
 body{background:${C.bg};font-family:'Manrope',sans-serif;color:${C.text};max-width:100%;overflow-x:hidden}
@@ -297,14 +341,16 @@ img,svg{max-width:100%}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes glowPulse{0%,100%{box-shadow:0 0 0 #2847D400}50%{box-shadow:0 0 28px #2847D433}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 transparent}50%{box-shadow:0 0 28px var(--ds-blue-33)}}
+@keyframes marqueeLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes marqueeRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .fade-up{animation:fadeUp .7s ease both}
 .fade-up-2{animation:fadeUp .7s .1s ease both}
 .fade-up-3{animation:fadeUp .7s .2s ease both}
 .section-appear{animation:fadeUp .72s ease both}
 .section-appear-2{animation:fadeUp .72s .08s ease both}
 .hover-card{transition:transform .2s,border-color .2s,box-shadow .2s}
-.hover-card:hover{transform:translateY(-3px);border-color:#2847D480!important;box-shadow:0 8px 32px #2847D415}
+.hover-card:hover{transform:translateY(-3px);border-color:var(--ds-blue-80)!important;box-shadow:0 8px 32px var(--ds-blue-15)}
 .hover-lift{transition:all .15s}
 .hover-lift:hover{opacity:.85;transform:translateY(-1px)}
 .image-zoom{overflow:hidden;border-radius:10px}
@@ -312,9 +358,9 @@ img,svg{max-width:100%}
 .image-zoom:hover img{transform:scale(1.05);filter:saturate(1.08)}
 .glass-pulse{animation:glowPulse 3s ease-in-out infinite, floatY 6s ease-in-out infinite}
 .cta-pop{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
-.cta-pop:hover{transform:translateY(-4px);box-shadow:0 14px 30px #2847D433;border-color:#2847D466}
+.cta-pop:hover{transform:translateY(-4px);box-shadow:0 14px 30px var(--ds-blue-33);border-color:var(--ds-blue-66)}
 .res-item{transition:all .15s}
-.res-item:hover{background:${C.cardHov}!important;border-color:${C.blue}60!important}
+.res-item:hover{background:var(--ds-card-hov)!important;border-color:var(--ds-blue-66)!important}
 .nav-btn{transition:all .15s;border-bottom:2px solid transparent}
 .nav-btn:hover{color:${C.text}!important}
 .faq-item{transition:all .2s}
@@ -329,6 +375,15 @@ img,svg{max-width:100%}
 .photo-item:hover{transform:translateY(-4px);filter:saturate(1.04)}
 .resources-head{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
 .resources-hero-image .image-zoom img{display:block;width:100%;height:100%;min-height:180px;object-fit:cover}
+.tech-marquee-section{width:100%;background:var(--ds-bg2);border-top:1px solid var(--ds-border);border-bottom:1px solid var(--ds-border);padding:30px 0 32px;overflow:hidden}
+.tech-marquee-label{display:block;text-align:center;font:700 12px 'Outfit',sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--ds-blue);margin:0 0 16px}
+.tech-marquee-row{position:relative;overflow:hidden;padding:4px 0}
+.tech-marquee-track{display:flex;align-items:center;gap:12px;min-width:max-content;width:max-content;animation:marqueeLeft 28s linear infinite;will-change:transform}
+.tech-marquee-track.reverse{animation-name:marqueeRight;animation-duration:34s}
+.tech-marquee-row:hover .tech-marquee-track{animation-play-state:paused}
+.tech-chip{display:inline-flex;align-items:center;gap:10px;background:var(--ds-card);border:1px solid var(--ds-border);color:var(--ds-text);padding:9px 14px;border-radius:999px;white-space:nowrap;font:600 13px 'Manrope',sans-serif}
+.tech-chip-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:999px;overflow:hidden;background:var(--ds-surface);border:1px solid var(--ds-border)}
+.tech-chip-icon img{width:100%;height:100%;object-fit:cover}
 @media(max-width:1050px){.desktop-nav{display:none!important}}
 @media(min-width:1100px){.team-avatar{width:132px;height:132px;border-radius:24px}}
 @media(min-width:1051px){.mob-menu{display:none!important}.mob-btn{display:none!important}.mob-actions{display:none!important}}
@@ -353,6 +408,12 @@ img,svg{max-width:100%}
   .photo-masonry{columns:1 240px}
   .home-track-featured,.home-event-featured,.events-featured-card,.op-featured-card,.res-featured-card{grid-column:span 1!important}
   .op-grid,.res-grid{grid-template-columns:1fr!important}
+  .tech-marquee-section{padding:24px 0 26px}
+  .tech-marquee-label{font-size:11px;letter-spacing:2.2px;margin-bottom:12px}
+  .tech-marquee-track{gap:9px;animation-duration:24s}
+  .tech-marquee-track.reverse{animation-duration:30s}
+  .tech-chip{padding:8px 12px;font-size:12px;gap:8px}
+  .tech-chip-icon{width:18px;height:18px}
 }
 @media(max-width:420px){
   .brand-text{font-size:14px!important;letter-spacing:-0.2px!important}
@@ -552,7 +613,7 @@ function Nav({ page, setPage, theme, toggleTheme }) {
   const [mob, setMob] = useState(false);
   return (
     <>
-      <style>{GStyles}</style>
+      <style>{getGStyles()}</style>
       <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:300, background:C.surface, backdropFilter:"blur(24px)", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,4vw,40px)", display:"flex", alignItems:"center", justifyContent:"space-between", height:64 }}>
           <button onClick={() => setPage("Home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
@@ -598,6 +659,36 @@ function Home({ setPage }) {
   return (
     <div>
       <Hero setPage={setPage} />
+
+      <section className="tech-marquee-section section-appear" aria-label="Technologies and ecosystems we explore">
+        <span className="tech-marquee-label">Technologies & Ecosystems We Explore</span>
+
+        <div className="tech-marquee-row">
+          <div className="tech-marquee-track">
+            {[...MARQUEE_TECH, ...MARQUEE_TECH].map((item, idx) => (
+              <div className="tech-chip" key={`${item.name}-tech-${idx}`}>
+                <span className="tech-chip-icon" style={{ boxShadow:`inset 0 0 0 1px ${item.tint}40` }}>
+                  <img src={item.logo} alt="" aria-hidden="true" />
+                </span>
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="tech-marquee-row" style={{ marginTop:10 }}>
+          <div className="tech-marquee-track reverse">
+            {[...MARQUEE_ECOSYSTEM, ...MARQUEE_ECOSYSTEM].map((item, idx) => (
+              <div className="tech-chip" key={`${item.name}-eco-${idx}`}>
+                <span className="tech-chip-icon" style={{ boxShadow:`inset 0 0 0 1px ${item.tint}40` }}>
+                  <img src={item.logo} alt="" aria-hidden="true" />
+                </span>
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* TRACKS PREVIEW */}
       <section className="section-appear" style={{ padding:"clamp(56px,8vw,96px) clamp(16px,4vw,40px)", maxWidth:1280, margin:"0 auto" }}>
@@ -681,8 +772,8 @@ function Home({ setPage }) {
       <section className="section-appear-2" style={{ padding:"0 clamp(16px,4vw,40px) 60px", maxWidth:1280, margin:"0 auto" }}>
         <div className="cta-pop" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(36px,6vw,64px) clamp(24px,5vw,56px)", textAlign:"left" }}>
           <div>
-            <h2 style={{ fontSize:"clamp(28px,4.5vw,52px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.1, marginBottom:16 }}>313 of us already.<br /><span style={{ color:C.blueLt }}>Come be 314.</span></h2>
-            <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:"0 0 28px", maxWidth:420 }}>If you're in Kampala and curious about blockchain, this is your lane.</p>
+            <h2 style={{ fontSize:"clamp(28px,4.5vw,52px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.1, marginBottom:16 }}>300+ Students already building in Web3.<br /><span style={{ color:C.blueLt }}>Join the next wave.</span></h2>
+            <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:"0 0 28px", maxWidth:420 }}>If you're in Uganda and curious about blockchain, this is your lane.</p>
             <div style={{ display:"flex", gap:12, justifyContent:"flex-start", flexWrap:"wrap" }}>
               <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:C.blue, border:"none", cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.white, fontSize:15, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Start Learning Free</button>
               <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.blueLt}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.text, fontSize:15, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>Join Community</button>
@@ -1212,10 +1303,10 @@ function Community() {
 function About({ setPage }) {
   const [openFaq, setOpenFaq] = useState(null);
   const IMPACT = [
-    { n:"313+", l:"Community Members" },
+    { n:"300+", l:"Community Members" },
     { n:"4", l:"Free Learning Tracks" },
     { n:"3", l:"Blog Posts Published" },
-    { n:"2", l:"Major Events in 2026" },
+    { n:"3", l:"Major Events in 2026" },
   ];
   const VALUES = [
     { icon:BsPatchCheck, title:"Always Free", color:C.green, desc:"Every course, resource, event listing, and opportunity on this platform is free. No subscription, no paywall, no catch. We believe the barrier to blockchain in Uganda should be zero." },
@@ -1316,7 +1407,7 @@ function About({ setPage }) {
       {/* TEAM */}
       <div className="section-appear-2" style={{ marginBottom:72 }}>
         <SectionLabel>The Team</SectionLabel>
-        <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>The people behind the platform</h2>
+        <h2 style={{ fontSize:"clamp(26px,4vw,40px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:32 }}>Meet The Builders</h2>
         <div className="team-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:20 }}>
           {TEAM.map((member, i) => (
             <div key={i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${member.active?C.border:C.border+"60"}`, borderRadius:20, padding:"clamp(24px,3.5vw,36px)", display:"flex", flexDirection:"column", gap:20, opacity:member.active?1:0.55, position:"relative", overflow:"hidden" }}>
