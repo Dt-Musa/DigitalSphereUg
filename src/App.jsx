@@ -393,6 +393,13 @@ img,svg{max-width:100%}
 .tech-chip{display:inline-flex;align-items:center;gap:10px;background:var(--ds-card);border:1px solid var(--ds-border);color:var(--ds-text);padding:9px 14px;border-radius:999px;white-space:nowrap;font:600 13px 'Manrope',sans-serif}
 .tech-chip-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:999px;overflow:hidden;background:var(--ds-surface);border:1px solid var(--ds-border)}
 .tech-chip-icon img{width:100%;height:100%;object-fit:cover}
+.subscribe-section{margin-top:40px;padding:22px;border-radius:14px;background:var(--ds-card);border:1px solid var(--ds-border)}
+.subscribe-section h3{font:800 22px 'Space Grotesk',sans-serif;color:${C.text};margin:0 0 8px}
+.subscribe-section p{font:500 14px 'Manrope',sans-serif;color:${C.textSub};margin:0}
+.subscribe-form{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.subscribe-form input{display:block;box-sizing:border-box;flex:1 1 260px;height:44px;min-height:44px;max-height:44px;line-height:44px;border-radius:10px;border:1px solid var(--ds-border);background:var(--ds-surface);color:${C.text};padding:0 14px;font:500 14px 'Manrope',sans-serif;-webkit-appearance:none;appearance:none}
+.subscribe-form button{border:none;background:${C.blue};color:white;height:44px;padding:0 18px;border-radius:10px;font:700 13px 'Space Grotesk',sans-serif;cursor:pointer}
+.subscribe-message{margin-top:10px!important;color:${C.blueLt}!important;font-weight:700!important}
 @media(max-width:1050px){.desktop-nav{display:none!important}}
 @media(min-width:1100px){.team-avatar{width:132px;height:132px;border-radius:24px}}
 @media(min-width:1051px){.mob-menu{display:none!important}.mob-btn{display:none!important}.mob-actions{display:none!important}}
@@ -424,6 +431,13 @@ img,svg{max-width:100%}
   .tech-marquee-track.reverse{animation-duration:30s}
   .tech-chip{padding:8px 12px;font-size:12px;gap:8px}
   .tech-chip-icon{width:18px;height:18px}
+  .subscribe-section{margin-top:26px;padding:14px;border-radius:12px}
+  .subscribe-section h3{font-size:18px;line-height:1.25}
+  .subscribe-section p{font-size:13px;line-height:1.6}
+  .subscribe-form{flex-direction:column;align-items:stretch}
+  .subscribe-form input,.subscribe-form button{width:100%;height:40px;min-height:40px;max-height:40px}
+  .subscribe-form input{line-height:40px;padding-block:0;padding-inline:12px;font-size:16px}
+  .subscribe-form button{font-size:12px;padding:0 14px}
 }
 @media(max-width:420px){
   .brand-text{font-size:14px!important;letter-spacing:-0.2px!important}
@@ -477,143 +491,64 @@ function SocialBtn({ href, label, Icon }) {
   );
 }
 
-function MailchimpSignup({ compact = false }) {
+function SubscribeSection({ context = "footer" }) {
   const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [toast, setToast] = useState("");
+  const [message, setMessage] = useState("");
 
-  const actionUrl = "https://tech.us18.list-manage.com/subscribe/post?u=d1bef5bd2742eab35653e151d&id=92e93a0f72&f_id=00f8abe6f0";
+  const copyByContext = {
+    blog: {
+      heading: "Read today. Stay ahead tomorrow.",
+      description: "Get Uganda-first Web3 insights, event drops, opportunities, and beginner-friendly updates before everyone else.",
+      placeholder: "Your best email",
+      cta: "Get Community Updates →",
+      success: "You are in. Watch your inbox for Uganda Web3 updates 🇺🇬",
+    },
+    footer: {
+      heading: "Join Uganda's Web3 community",
+      description: "Stay plugged into practical resources, local events, and opportunities whether you are learning, exploring, or already in tech.",
+      placeholder: "Enter your email",
+      cta: "Join Free →",
+      success: "Welcome to DigitalSphereUg. You are officially in 🇺🇬",
+    },
+  };
 
-  useEffect(() => {
-    const successEl = document.getElementById("mce-success-response");
-    if (!successEl) return;
+  const copy = copyByContext[context] || copyByContext.footer;
 
-    const observer = new MutationObserver(() => {
-      const msg = (successEl.textContent || "").trim();
-      const isVisible = successEl.style.display !== "none" && msg.length > 0;
-      if (isVisible) {
-        setToast("Thank you for joining DigitalSphereUg!");
-        const timer = setTimeout(() => setToast(""), 4500);
-        return () => clearTimeout(timer);
-      }
-      return undefined;
-    });
+  const handleSubscribe = async email => {
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-    observer.observe(successEl, { childList:true, subtree:true, characterData:true, attributes:true });
-    return () => observer.disconnect();
-  }, []);
+      const data = await response.json();
 
-  const submitForm = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    setIsSubmitting(true);
-    const successEl = document.getElementById("mce-success-response");
-    const errorEl = document.getElementById("mce-error-response");
-    if (successEl) {
-      successEl.style.display = "none";
-      successEl.textContent = "";
-    }
-    if (errorEl) {
-      errorEl.style.display = "none";
-      errorEl.textContent = "";
-    }
-
-    const callbackName = `mailchimp_cb_${Date.now()}`;
-    const params = new URLSearchParams();
-    params.set("EMAIL", email);
-    params.set("b_d1bef5bd2742eab35653e151d_92e93a0f72", "");
-    params.set("c", callbackName);
-    const jsonpUrl = `${actionUrl.replace("/post?", "/post-json?")}&${params.toString()}`;
-
-    window[callbackName] = data => {
-      const message = (data && data.msg) ? data.msg.replace(/<[^>]*>/g, "") : "Subscription complete.";
-      const isSuccess = data && data.result === "success";
-
-      if (isSuccess) {
-        if (successEl) {
-          successEl.style.display = "block";
-          successEl.textContent = message;
-        }
+      if (response.ok) {
+        setMessage(copy.success);
         setEmail("");
       } else {
-        if (errorEl) {
-          errorEl.style.display = "block";
-          errorEl.textContent = message;
-        }
+        setMessage("Subscription failed. Please try again in a moment.");
       }
-
-      setIsSubmitting(false);
-      delete window[callbackName];
-    };
-
-    const script = document.createElement("script");
-    script.src = jsonpUrl;
-    script.async = true;
-    script.onerror = () => {
-      if (errorEl) {
-        errorEl.style.display = "block";
-        errorEl.textContent = "Unable to submit right now. Please try again.";
-      }
-      setIsSubmitting(false);
-      delete window[callbackName];
-    };
-    document.body.appendChild(script);
+    } catch (error) {
+      setMessage("Subscription failed. Please try again in a moment.");
+    }
   };
 
   return (
-    <div className={compact ? "" : "section-appear"} style={{ marginBottom:compact ? 0 : 56, position:"relative" }}>
-      {!compact && <SectionLabel>Newsletter</SectionLabel>}
-      <div style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:compact ? 14 : 18, padding:compact ? "14px 16px" : "clamp(20px,3vw,30px)", maxWidth:compact ? 560 : 680 }}>
-        <h3 style={{ fontSize:compact ? "18px" : "clamp(22px,3.3vw,32px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.2, margin:"0 0 8px" }}>Join DigitalSphereUg Newsletter</h3>
-        <p style={{ fontSize:compact ? 13 : 14, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:"0 0 12px" }}>Get Web3 opportunities, event drops, and practical learning resources in your inbox.</p>
-
-        <form action={actionUrl} method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate onSubmit={submitForm}>
-          <div id="mc_embed_signup_scroll">
-            <div className="mc-field-group" style={{ marginBottom:12 }}>
-              <label htmlFor="mce-EMAIL" style={{ display:"block", fontSize:13, color:C.textSub, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>Email Address <span style={{ color:C.blue }}>*</span></label>
-              <input
-                type="email"
-                name="EMAIL"
-                className="required email"
-                id="mce-EMAIL"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                style={{ width:"100%", height:46, borderRadius:10, border:`1px solid ${C.border}`, background:C.surface, color:C.text, padding:"0 14px", fontSize:14, fontFamily:"'Manrope',sans-serif" }}
-              />
-            </div>
-
-            <div id="mce-responses" className="clear foot" style={{ marginBottom:12 }}>
-              <div className="response" id="mce-error-response" style={{ display:"none", color:"#ef4444", fontSize:13, fontFamily:"'Manrope',sans-serif" }}></div>
-              <div className="response" id="mce-success-response" style={{ display:"none", color:C.green, fontSize:13, fontFamily:"'Manrope',sans-serif" }}></div>
-            </div>
-
-            <div aria-hidden="true" style={{ position:"absolute", left:"-5000px" }}>
-              <input type="text" name="b_d1bef5bd2742eab35653e151d_92e93a0f72" tabIndex={-1} value="" readOnly />
-            </div>
-
-            <div className="optionalParent">
-              <div className="clear foot" style={{ display:"flex", gap:10, alignItems:"center", flexWrap:"wrap" }}>
-                <button type="submit" name="subscribe" id="mc-embedded-subscribe" className="button hover-lift" disabled={isSubmitting} style={{ background:C.blue, border:"none", color:C.white, padding:compact ? "9px 16px" : "11px 22px", borderRadius:10, fontSize:compact ? 12 : 13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", cursor:"pointer", opacity:isSubmitting?0.7:1 }}>
-                  {isSubmitting ? "Subscribing..." : "Subscribe"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
+    <div className="subscribe-section">
+      <h3>{copy.heading}</h3>
+      <p>{copy.description}</p>
+      <div className="subscribe-form">
+        <input
+          type="email"
+          placeholder={copy.placeholder}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <button onClick={() => handleSubscribe(email)}>{copy.cta}</button>
       </div>
-
-      {toast && (
-        <div role="status" aria-live="polite" style={{ position:"fixed", right:18, bottom:18, zIndex:500, background:C.green, color:"#052e16", padding:"12px 16px", borderRadius:12, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", boxShadow:"0 12px 28px rgba(0,0,0,.25)" }}>
-          {toast}
-        </div>
-      )}
+      {message && <p className="subscribe-message">{message}</p>}
     </div>
   );
 }
@@ -1205,6 +1140,7 @@ function BlogPost({ post, back }) {
         <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span>
       </div>
       {post.body.split("\n\n").map((para, i) => <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{para}</p>)}
+      <SubscribeSection context="blog" />
     </div>
   );
 }
@@ -1572,7 +1508,7 @@ function Footer({ setPage }) {
         </div>
 
         <div style={{ marginTop:18, marginBottom:14, paddingTop:14, borderTop:`1px solid ${C.border}` }}>
-          <MailchimpSignup compact />
+          <SubscribeSection context="footer" />
         </div>
 
         <div style={{ borderTop:`1px solid ${C.border}`, paddingTop:20, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:10 }}>
