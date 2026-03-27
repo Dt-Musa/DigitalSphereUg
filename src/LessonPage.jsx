@@ -301,6 +301,8 @@ export default function LessonPage({
   const maxUnlockedLesson = Math.min(totalLessons, trackCompletedCount + 1);
   const hasLockedLessons = maxUnlockedLesson < totalLessons;
   const nextLockedLessonNumber = Math.min(totalLessons, maxUnlockedLesson + 1);
+  const isYouTubeVideoResource = resource.type === "video"
+    && /(?:youtu\.be|youtube(?:-nocookie)?\.com)/i.test(String(resource.openUrl || resource.url || ""));
 
   useEffect(() => {
     return () => {
@@ -700,27 +702,29 @@ export default function LessonPage({
                 <div style={{ fontSize: 13, color: TOKENS.cyan, marginTop: 10 }}>
                   Source: {resource.sourceWebsite}
                 </div>
-                <a
-                  href={resource.openUrl || resource.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-block",
-                    marginTop: 10,
-                    border: `1px solid ${TOKENS.blueLt}`,
-                    background: TOKENS.blue,
-                    color: "#ffffff",
-                    borderRadius: 10,
-                    textDecoration: "none",
-                    padding: "10px 14px",
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 800,
-                  }}
-                >
-                  {resource.embed === false || videoEmbedFailed
-                    ? "Open Lesson Video in New Tab ->"
-                    : "Open Resource ->"}
-                </a>
+                {!isYouTubeVideoResource ? (
+                  <a
+                    href={resource.openUrl || resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-block",
+                      marginTop: 10,
+                      border: `1px solid ${TOKENS.blueLt}`,
+                      background: TOKENS.blue,
+                      color: "#ffffff",
+                      borderRadius: 10,
+                      textDecoration: "none",
+                      padding: "10px 14px",
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 800,
+                    }}
+                  >
+                    {resource.embed === false || videoEmbedFailed
+                      ? "Open Lesson Video in New Tab ->"
+                      : "Open Resource ->"}
+                  </a>
+                ) : null}
                 <button
                   type="button"
                   onClick={onContinueLearning}
