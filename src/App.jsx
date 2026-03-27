@@ -188,6 +188,125 @@ const OPPS = [
 ];
 
 const POSTS = [
+  { id:4, author:"Irankunda Musa", tag:"Community", tagColor:C.purple, title:"The Room Laughed. I Stayed. Now We're Building.", excerpt:"A story about showing up uninvited to the future - and deciding to open the door for everyone else.", date:"March 2026", read:"", body:`The Room Laughed. I Stayed. Now We're Building.
+
+A story about showing up uninvited to the future and deciding to open the door for everyone else.
+
+The whole room laughed at me.
+
+Not cruelly. Not maliciously. But fully, genuinely, and audibly, because I had just told a room full of blockchain developers that the programming language I knew was HTML.
+
+I did not walk out.
+
+That decision to stay in that room, sit with the embarrassment, and keep listening even when every word sounded foreign is the reason DigitalSphereUg exists today.
+
+Africa Is Not Waiting For Permission
+
+Let us be honest about what is happening right now.
+
+Across this continent, millions of young people are watching a financial revolution unfold in real time, yet the door still feels locked from the inside. The language is technical. The events are developer-heavy. The entry points are often invisible. And the message, spoken or not, can feel the same: this space is not for you.
+
+We reject that entirely.
+
+Africa is not a footnote in the blockchain story. Africa is the story: remittances, currency instability, unbanked populations, mobile-first infrastructure, and the hunger to build solutions that solve real problems. The pieces are here. The people are here.
+
+What has been missing is a movement that starts where people are.
+
+That is what we are building. And it started with a laugh.
+
+January 2025. A Room I Was Not Ready For.
+
+Second semester had just begun when my friend Bright invited me to a Stellar meetup. I skipped a lecture to attend, not recklessly, but because I had been hearing Bitcoin everywhere and genuinely needed to understand what the noise was about.
+
+Someone accidentally pointed at me mid-session and asked, "What programming language do you know?"
+
+I answered honestly. Proudly, even.
+
+"HTML."
+
+Laughter.
+
+I sat with it. I did not leave. But I listened to JavaScript, Python, C, Rust, and Solidity, names flying around like a language I had no dictionary for. When the lead started explaining smart contracts in Rust, I stopped trying to keep up and started wondering if I had walked into the wrong life entirely.
+
+I left that afternoon and quietly made a decision: blockchain is not for me.
+
+Curiosity Is Louder Than Shame
+
+I went back to my books and focused on business. But I kept searching: Blockchain, Ethereum, Web3, Bitcoin. Every article opened three more questions. The confusion did not leave. It waited.
+
+Then June arrived with Blockchain DevFest Kampala.
+
+I went back.
+
+And this time, the door opened. Wallets, seed phrases, public keys, private keys. The full arc of a transaction, simplified, human, and real. For the first time, digital money stopped being philosophy and became mechanics. Something I could see, touch, and follow.
+
+Young innovators from across Africa stood in that room and talked about DeFi, stablecoins, and NFTs not as buzzwords, but as infrastructure being laid right now by people who looked like us, from cities like ours.
+
+I stopped feeling like an outsider. I started feeling like I was early.
+
+The Year I Refused To Stop Showing Up
+
+EthNile, November: the first Ethereum-focused event in Kampala. Builders, investors, founders, traders, and students in one room. Real World Assets. Zero-Knowledge Proofs. CBDCs. Topics that sounded impossible three months earlier now had names I could write down, research, and return to.
+
+Stellar BuidlAfrica, November: opportunities in DeFi, smart contracts, supply chain, healthcare, and ecosystem grants. A table fully set. Seats still open.
+
+Chainlink End-of-Year Meetup, December: oracles, data feeds, proof of reserve, and cross-chain interoperability. The architecture of a new financial internet, explained one layer at a time.
+
+I crossed into 2026 with something I did not have twelve months earlier: a foundation built from refusing to quit.
+
+Not a degree. Not a certification. A foundation built entirely from showing up, staying curious, and choosing not to let confusion be the final answer.
+
+This Is Bigger Than One Student. Bigger Than One Country.
+
+Here is the uncomfortable truth about the African blockchain ecosystem.
+
+The talent is here. The hunger is here. The use cases, financial inclusion, cross-border payments, land registries, and supply chains, are more relevant here than almost anywhere else on earth.
+
+But the pipeline from curious student to active contributor is broken. The entry points are too technical, too exclusive, and too far from where most students actually are.
+
+We are not waiting for someone else to fix that.
+
+DigitalSphereUg, built alongside fellow enthusiasts Irinatwe Bright and Rwego Edward, is a student-powered blockchain and Web3 platform built for Uganda, scaled for East Africa, and designed with the entire continent in mind.
+
+We start where students are. We walk with them forward. We build the pipeline that should have existed when we were looking for a door.
+
+To The Founders Reading This
+
+If you are building in the African Web3 space, or looking to, and you are not actively investing in the next generation of local talent, you are making a strategic mistake.
+
+The students showing up to meetups across Kampala, Nairobi, Lagos, and Kigali right now are not the future of this ecosystem. They are the ecosystem. They are the community managers, the developers, the early adopters, and the advocates who will carry your protocol into places no marketing budget can reach.
+
+DigitalSphereUg is on the ground. We are organized. We are growing. And we are open to partnerships with organizations and founders who believe adoption in Africa is not a charity project. It is the smartest bet in the room.
+
+Let us talk.
+
+Your Move
+
+If you are a student who has heard about blockchain and felt like the door was locked, it is not locked. It was never locked. You just needed someone to show you the handle. We are that someone.
+
+If you are a founder or organization ready to partner with a movement that is rooted, real, and scaling, reach out. The conversation starts here.
+
+Three things. Right now.
+
+1. Join DigitalSphereUg and be part of this from day one, not day one thousand.
+
+2. Subscribe to this blog. Every article is a step further into the ecosystem.
+
+3. Share this. Your share could be someone else's DevFest moment, the one that changes everything.
+
+The room laughed.
+
+I stayed.
+
+Now we are building a room where no one has to choose between their curiosity and their dignity.
+
+Come build it with us.
+
+DigitalSphereUg - A Student-Powered Blockchain & Web3 Platform.
+
+Uganda. East Africa. The Continent.
+
+Written by Irankunda Musa | Founder & Community, DigitalSphereUg.` },
   { id:1, author:"Irankunda Musa", tag:"Education", tagColor:C.green, title:"What is Blockchain — Explained for Ugandans", excerpt:"Forget the jargon. Here's what blockchain actually is, why it matters for Africa, and why Uganda is positioned to benefit more than most.", date:"March 2026", read:"5 min read", body:"Blockchain is simply a digital record book that nobody owns but everyone can see. Instead of a bank keeping your transaction history on their private servers, blockchain stores it across thousands of computers worldwide. No single person, company or government can change it.\n\nFor Uganda and Africa broadly, this is significant. Think about land ownership disputes, remittances from the diaspora eating 10% in fees, or the difficulty of building a credit history when you're unbanked. Blockchain has practical, near-term answers to all of these.\n\nThe opportunity is real. East Africa already leads the world in mobile money adoption. Adding blockchain on top of that existing infrastructure is a natural next step — and young Ugandans who understand both worlds will be the ones who build it.\n\nYou don't need to be a programmer to be part of this. Understanding the technology, the ecosystem, and the problems it solves is itself a skill the industry desperately needs." },
   { id:2, author:"Irinatwe Bright", tag:"Resources", tagColor:C.blueLt, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
   { id:3, author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
@@ -1119,7 +1238,10 @@ function Blog({ setPost }) {
             <div style={{ fontSize:13, color:C.blueLt, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700 }}>{p.author}</div>
             <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{p.excerpt}</p>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:12, borderTop:`1px solid ${C.border}` }}>
-              <div style={{ display:"flex", gap:12 }}><span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.date}</span><span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.read}</span></div>
+              <div style={{ display:"flex", gap:12 }}>
+                <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.date}</span>
+                {p.read ? <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.read}</span> : null}
+              </div>
               <span style={{ fontSize:13, color:C.blueLt, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>Read <BsArrowRight size={ICON.xs} /></span>
             </div>
           </div>
@@ -1138,7 +1260,7 @@ function BlogPost({ post, back }) {
       <div style={{ display:"flex", gap:20, marginBottom:36, paddingBottom:28, borderBottom:`1px solid ${C.border}`, flexWrap:"wrap" }}>
         <span style={{ fontSize:14, color:C.blueLt, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700 }}>{post.author || "DigitalSphereUg"}</span>
         <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.date}</span>
-        <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span>
+        {post.read ? <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span> : null}
       </div>
       {post.body.split("\n\n").map((para, i) => <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{para}</p>)}
       <SubscribeSection context="blog" />
@@ -1253,7 +1375,7 @@ function About({ setPage }) {
   const IMPACT = [
     { n:"300+", l:"Community Members" },
     { n:"4", l:"Free Learning Tracks" },
-    { n:"3", l:"Blog Posts Published" },
+    { n:String(POSTS.length), l:"Blog Posts Published" },
     { n:"3", l:"Major Events in 2026" },
   ];
   const VALUES = [
