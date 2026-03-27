@@ -160,6 +160,8 @@ export default function LessonPage({
   allLessons,
   theme = "dark",
   onNextLesson,
+  onPreviousLesson,
+  onJumpToLesson,
   onBackToTrack,
 }) {
   const TOKENS = theme === "light" ? LIGHT_TOKENS : DARK_TOKENS;
@@ -178,12 +180,15 @@ export default function LessonPage({
   const quizSectionRef = useRef(null);
   const practicalSectionRef = useRef(null);
   const completionSectionRef = useRef(null);
+  const unlockFlashTimeoutRef = useRef(null);
 
   const [isMobile, setIsMobile] = useState(() =>
     typeof window !== "undefined" ? window.innerWidth <= 768 : false,
   );
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [loadVideo, setLoadVideo] = useState(false);
+  const [videoEmbedFailed, setVideoEmbedFailed] = useState(false);
+  const [recentlyUnlockedLesson, setRecentlyUnlockedLesson] = useState(null);
 
   const [quizSelections, setQuizSelections] = useState(initialProgress.quizSelections);
   const [quizCorrect, setQuizCorrect] = useState(initialProgress.quizCorrect);
@@ -202,6 +207,7 @@ export default function LessonPage({
     setTaskCompleted(progress.taskCompleted);
     setLessonCompleted(progress.lessonCompleted);
     setLoadVideo(false);
+    setVideoEmbedFailed(false);
   }, [lessonPrefix, questions, quizFingerprint]);
 
   useEffect(() => {
@@ -275,6 +281,7 @@ export default function LessonPage({
   const allQuizCorrect = quizCorrect.every(Boolean);
   const readyForCompletion = allQuizCorrect && taskCompleted;
   const isFinalLesson = lessonNumber === totalLessons;
+  const canGoPrevious = lessonNumber > 1 && typeof onPreviousLesson === "function";
 
   useEffect(() => {
     if (allQuizCorrect && taskCompleted && completionSectionRef.current) {
@@ -291,6 +298,32 @@ export default function LessonPage({
 
   const trackProgressPercent = Math.round((trackCompletedCount / totalLessons) * 100);
   const completionProgress = trackProgressPercent;
+  const maxUnlockedLesson = Math.min(totalLessons, trackCompletedCount + 1);
+  const hasLockedLessons = maxUnlockedLesson < totalLessons;
+  const nextLockedLessonNumber = Math.min(totalLessons, maxUnlockedLesson + 1);
+
+  useEffect(() => {
+    return () => {
+      if (unlockFlashTimeoutRef.current) {
+        clearTimeout(unlockFlashTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (lessonNumber >= maxUnlockedLesson || maxUnlockedLesson > totalLessons) {
+      return;
+    }
+
+    setRecentlyUnlockedLesson(maxUnlockedLesson);
+    if (unlockFlashTimeoutRef.current) {
+      clearTimeout(unlockFlashTimeoutRef.current);
+    }
+    unlockFlashTimeoutRef.current = setTimeout(() => {
+      setRecentlyUnlockedLesson(null);
+      unlockFlashTimeoutRef.current = null;
+    }, 2000);
+  }, [lessonNumber, maxUnlockedLesson, totalLessons]);
 
   const mergedLessons = allLessons.map((item, index) => {
     if (index === lessonNumber - 1) {
@@ -389,6 +422,12 @@ export default function LessonPage({
             70% { transform: scale(1.08); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
           }
+
+          @keyframes ds-unlock-glow {
+            0% { box-shadow: 0 0 0 0 rgba(77, 111, 240, 0); }
+            40% { box-shadow: 0 0 0 2px rgba(77, 111, 240, 0.55); }
+            100% { box-shadow: 0 0 0 0 rgba(77, 111, 240, 0); }
+          }
         `}
       </style>
 
@@ -464,6 +503,26 @@ export default function LessonPage({
                 >
                   Change Track
                 </button>
+
+                {canGoPrevious ? (
+                  <button
+                    type="button"
+                    onClick={onPreviousLesson}
+                    style={{
+                      border: `1px solid ${TOKENS.border}`,
+                      background: TOKENS.card,
+                      color: TOKENS.textSub,
+                      borderRadius: 10,
+                      padding: "8px 12px",
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 700,
+                      fontSize: 12,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Previous Lesson
+                  </button>
+                ) : null}
               </div>
             </div>
 
@@ -568,50 +627,100 @@ export default function LessonPage({
 
             {resource.type === "video" ? (
               <>
-                <div
-                  style={{
-                    borderRadius: 14,
-                    border: `1px solid ${TOKENS.border}`,
-                    overflow: "hidden",
-                    background: TOKENS.surface,
-                    position: "relative",
-                    width: "100%",
-                    paddingTop: "56.25%",
-                  }}
-                >
-                  {loadVideo ? (
-                    <iframe
-                      title={resource.title}
-                      src={resource.url}
-                      loading="lazy"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        border: "none",
-                      }}
-                    />
-                  ) : (
+                {resource.embed === false || videoEmbedFailed ? (
+                  <div
+                    style={{
+                      borderRadius: 14,
+                      border: `1px solid ${TOKENS.border}`,
+                      background: TOKENS.surface,
+                      padding: 16,
+                      color: TOKENS.textSub,
+                      lineHeight: 1.7,
+                    }}
+                  >
                     <div
                       style={{
-                        position: "absolute",
-                        inset: 0,
-                        display: "grid",
-                        placeItems: "center",
-                        color: TOKENS.textSub,
-                        fontSize: 14,
-                        textAlign: "center",
-                        padding: 18,
+                        color: TOKENS.text,
+                        fontFamily: "'Outfit', sans-serif",
+                        fontWeight: 700,
+                        marginBottom: 6,
                       }}
                     >
-                      Loading video player only when this section is visible to save mobile data.
+                      Embedded player unavailable
                     </div>
-                  )}
+                    This lesson video cannot be played inside this page right now. Open it in a new tab using the button below, then return here to continue.
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      borderRadius: 14,
+                      border: `1px solid ${TOKENS.border}`,
+                      overflow: "hidden",
+                      background: TOKENS.surface,
+                      position: "relative",
+                      width: "100%",
+                      paddingTop: "56.25%",
+                    }}
+                  >
+                    {loadVideo ? (
+                      <iframe
+                        title={resource.title}
+                        src={resource.url}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        onError={() => setVideoEmbedFailed(true)}
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          width: "100%",
+                          height: "100%",
+                          border: "none",
+                        }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          display: "grid",
+                          placeItems: "center",
+                          color: TOKENS.textSub,
+                          fontSize: 14,
+                          textAlign: "center",
+                          padding: 18,
+                        }}
+                      >
+                        Loading video player only when this section is visible to save mobile data.
+                      </div>
+                    )}
+                  </div>
+                )}
+                <div style={{ fontSize: 13, color: TOKENS.cyan, marginTop: 10 }}>
+                  Source: {resource.sourceWebsite}
                 </div>
+                <a
+                  href={resource.openUrl || resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-block",
+                    marginTop: 10,
+                    border: `1px solid ${TOKENS.blueLt}`,
+                    background: TOKENS.blue,
+                    color: "#ffffff",
+                    borderRadius: 10,
+                    textDecoration: "none",
+                    padding: "10px 14px",
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 800,
+                  }}
+                >
+                  {resource.embed === false || videoEmbedFailed
+                    ? "Open Lesson Video in New Tab ->"
+                    : "Open Resource ->"}
+                </a>
                 <button
                   type="button"
                   onClick={onContinueLearning}
@@ -657,7 +766,7 @@ export default function LessonPage({
                   {resource.description}
                 </p>
                 <a
-                  href={resource.url}
+                  href={resource.openUrl || resource.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -976,6 +1085,26 @@ export default function LessonPage({
                 >
                   {isFinalLesson ? `Complete Track ${"\u2192"}` : `Next Lesson ${"\u2192"}`}
                 </button>
+                {canGoPrevious ? (
+                  <button
+                    type="button"
+                    onClick={onPreviousLesson}
+                    style={{
+                      border: `1px solid ${TOKENS.border}`,
+                      background: TOKENS.card,
+                      color: TOKENS.textSub,
+                      borderRadius: 10,
+                      padding: "11px 14px",
+                      fontFamily: "'Outfit', sans-serif",
+                      fontWeight: 700,
+                      cursor: "pointer",
+                      flex: 1,
+                      minWidth: 150,
+                    }}
+                  >
+                    Previous Lesson
+                  </button>
+                ) : null}
                 <button
                   type="button"
                   onClick={onBackToTrack}
@@ -1043,16 +1172,54 @@ export default function LessonPage({
               {trackProgressPercent}% complete
             </div>
 
+            {hasLockedLessons ? (
+              <div
+                style={{
+                  marginBottom: 10,
+                  border: `1px solid ${TOKENS.border}`,
+                  background: TOKENS.surface,
+                  borderRadius: 10,
+                  padding: "8px 10px",
+                  color: TOKENS.textSub,
+                  fontSize: 12,
+                  lineHeight: 1.5,
+                }}
+              >
+                Complete the current lesson to unlock Lesson {nextLockedLessonNumber}.
+              </div>
+            ) : null}
+
             <div style={{ display: "grid", gap: 8 }}>
               {mergedLessons.map((item, index) => {
                 const isCurrent = index === lessonNumber - 1;
                 const isFuture = index > lessonNumber - 1 && !item.completed;
                 const isDone = item.completed;
+                const lessonTarget = index + 1;
+                const isUnlocked = lessonTarget <= maxUnlockedLesson;
+                const isDisabled = !isUnlocked || isCurrent || typeof onJumpToLesson !== "function";
+                const isFreshlyUnlocked = lessonTarget === recentlyUnlockedLesson && isUnlocked && !isCurrent;
+                const lessonActionLabel = !isUnlocked
+                  ? `Lesson ${lessonTarget} is locked. Complete Lesson ${lessonTarget - 1} to unlock it.`
+                  : isCurrent
+                    ? `Lesson ${lessonTarget} is your current lesson.`
+                    : `Jump to Lesson ${lessonTarget}`;
 
                 return (
-                  <div
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (isDisabled) {
+                        return;
+                      }
+                      onJumpToLesson(lessonTarget);
+                    }}
+                    disabled={isDisabled}
+                    title={lessonActionLabel}
+                    aria-label={lessonActionLabel}
                     key={`${item.title}-${index}`}
                     style={{
+                      width: "100%",
+                      textAlign: "left",
                       border: `1px solid ${
                         isCurrent ? TOKENS.blue : isDone ? `${TOKENS.green}80` : TOKENS.border
                       }`,
@@ -1064,6 +1231,9 @@ export default function LessonPage({
                       borderRadius: 10,
                       padding: "10px 11px",
                       color: isFuture ? TOKENS.textDim : TOKENS.textSub,
+                      cursor: isUnlocked && !isCurrent ? "pointer" : "default",
+                      opacity: isUnlocked ? 1 : 0.84,
+                      animation: isFreshlyUnlocked ? "ds-unlock-glow 1.2s ease-out" : "none",
                     }}
                   >
                     <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -1079,11 +1249,15 @@ export default function LessonPage({
                           fontWeight: 800,
                         }}
                       >
-                        {isDone ? "✓" : isFuture ? "🔒" : index + 1}
+                        {isDone ? "✓" : isUnlocked ? index + 1 : "🔒"}
                       </span>
-                      <span style={{ fontSize: 13 }}>{item.title}</span>
+                      <span style={{ fontSize: 13 }}>
+                        {item.title}
+                        {!isUnlocked ? " (Locked)" : ""}
+                        {isFreshlyUnlocked ? " (New)" : ""}
+                      </span>
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -1159,16 +1333,55 @@ export default function LessonPage({
                 />
               </div>
 
+                {hasLockedLessons ? (
+                  <div
+                    style={{
+                      marginBottom: 10,
+                      border: `1px solid ${TOKENS.border}`,
+                      background: TOKENS.surface,
+                      borderRadius: 10,
+                      padding: "8px 10px",
+                      color: TOKENS.textSub,
+                      fontSize: 12,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    Complete the current lesson to unlock Lesson {nextLockedLessonNumber}.
+                  </div>
+                ) : null}
+
               <div style={{ display: "grid", gap: 8 }}>
                 {mergedLessons.map((item, index) => {
                   const isCurrent = index === lessonNumber - 1;
                   const isFuture = index > lessonNumber - 1 && !item.completed;
                   const isDone = item.completed;
+                  const lessonTarget = index + 1;
+                  const isUnlocked = lessonTarget <= maxUnlockedLesson;
+                  const isDisabled = !isUnlocked || isCurrent || typeof onJumpToLesson !== "function";
+                  const isFreshlyUnlocked = lessonTarget === recentlyUnlockedLesson && isUnlocked && !isCurrent;
+                  const lessonActionLabel = !isUnlocked
+                    ? `Lesson ${lessonTarget} is locked. Complete Lesson ${lessonTarget - 1} to unlock it.`
+                    : isCurrent
+                      ? `Lesson ${lessonTarget} is your current lesson.`
+                      : `Jump to Lesson ${lessonTarget}`;
 
                   return (
-                    <div
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (isDisabled) {
+                          return;
+                        }
+                        onJumpToLesson(lessonTarget);
+                        setIsBottomSheetOpen(false);
+                      }}
+                      disabled={isDisabled}
+                      title={lessonActionLabel}
+                      aria-label={lessonActionLabel}
                       key={`${item.title}-${index}`}
                       style={{
+                        width: "100%",
+                        textAlign: "left",
                         border: `1px solid ${
                           isCurrent ? TOKENS.blue : isDone ? `${TOKENS.green}80` : TOKENS.border
                         }`,
@@ -1180,6 +1393,9 @@ export default function LessonPage({
                         borderRadius: 10,
                         padding: "10px 11px",
                         color: isFuture ? TOKENS.textDim : TOKENS.textSub,
+                        cursor: isUnlocked && !isCurrent ? "pointer" : "default",
+                        opacity: isUnlocked ? 1 : 0.84,
+                        animation: isFreshlyUnlocked ? "ds-unlock-glow 1.2s ease-out" : "none",
                       }}
                     >
                       <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -1195,11 +1411,15 @@ export default function LessonPage({
                             fontWeight: 800,
                           }}
                         >
-                          {isDone ? "✓" : isFuture ? "🔒" : index + 1}
+                          {isDone ? "✓" : isUnlocked ? index + 1 : "🔒"}
                         </span>
-                        <span style={{ fontSize: 13 }}>{item.title}</span>
+                        <span style={{ fontSize: 13 }}>
+                          {item.title}
+                          {!isUnlocked ? " (Locked)" : ""}
+                          {isFreshlyUnlocked ? " (New)" : ""}
+                        </span>
                       </div>
-                    </div>
+                    </button>
                   );
                 })}
               </div>

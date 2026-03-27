@@ -4,6 +4,7 @@ import LessonPage from "./LessonPage";
 const STORAGE_KEYS = {
   activeTrackId: "digitalsphereug.learn.activeTrackId",
   activeLessonNumber: "digitalsphereug.learn.activeLessonNumber",
+  activeLessonByTrack: "digitalsphereug.learn.activeLessonByTrack",
   completedByTrack: "digitalsphereug.learn.completedByTrack",
   completedTrackId: "digitalsphereug.learn.completedTrackId",
 };
@@ -74,7 +75,7 @@ const TRACK_MASTERY = {
 
 const LESSON_RESOURCES = {
   basics: [
-    { type: "video", url: "https://youtu.be/i501_M4je_A", title: "But How Does Bitcoin Actually Work?", sourceWebsite: "YouTube" },
+    { type: "video", url: "https://www.youtube.com/watch?v=bBC-nXj3Ng4", title: "Blockchain explained for beginners", sourceWebsite: "YouTube" },
     { type: "article", url: "https://andersbrownworth.com/blockchain/", title: "Interactive blockchain demo", sourceWebsite: "Anders Brownworth" },
     { type: "article", url: "https://www.ibm.com/think/topics/blockchain", title: "What is blockchain", sourceWebsite: "IBM Think" },
     { type: "article", url: "https://www.coindesk.com/learn", title: "CoinDesk Learn fundamentals", sourceWebsite: "CoinDesk" },
@@ -117,7 +118,7 @@ const LESSON_RESOURCES = {
 
 const TRACK_RESOURCE_CATALOG = {
   basics: [
-    { type: "video", url: "https://youtu.be/i501_M4je_A", title: "But How Does Bitcoin Actually Work?", sourceWebsite: "YouTube" },
+    { type: "video", url: "https://www.youtube.com/watch?v=bBC-nXj3Ng4", title: "Blockchain explained for beginners", sourceWebsite: "YouTube" },
     { type: "article", url: "https://andersbrownworth.com/blockchain/", title: "Blockchain 101", sourceWebsite: "Anders Brownworth" },
     { type: "article", url: "https://www.ibm.com/think/topics/blockchain", title: "What is Blockchain?", sourceWebsite: "IBM Think" },
     { type: "article", url: "https://www.coindesk.com/learn", title: "Crypto Basics", sourceWebsite: "CoinDesk Learn" },
@@ -143,6 +144,10 @@ const TRACK_RESOURCE_CATALOG = {
   ],
 };
 
+const NON_EMBEDDABLE_YOUTUBE_IDS = new Set([
+  "i501_M4je_A",
+]);
+
 function toEmbeddableVideoUrl(url) {
   const youtubeId = extractYouTubeId(url);
   if (!youtubeId) {
@@ -151,21 +156,48 @@ function toEmbeddableVideoUrl(url) {
   return `https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1&iv_load_policy=3`;
 }
 
-function getResourceForLesson(trackId, lessonIndex) {
-  const catalog = TRACK_RESOURCE_CATALOG[trackId];
-  if (!Array.isArray(catalog) || catalog.length === 0) {
-    return LESSON_RESOURCES[trackId]?.[lessonIndex] || null;
+function toCanonicalYouTubeWatchUrl(url) {
+  const youtubeId = extractYouTubeId(url);
+  if (!youtubeId) {
+    return url;
+  }
+  return `https://www.youtube.com/watch?v=${youtubeId}`;
+}
+
+function normalizeVideoResource(resource) {
+  if (!resource || resource.type !== "video") {
+    return resource;
   }
 
-  const baseResource = catalog[lessonIndex % catalog.length];
+  const canonicalOpenUrl = toCanonicalYouTubeWatchUrl(resource.url);
+  const youtubeId = extractYouTubeId(canonicalOpenUrl);
+  const embedBlocked = youtubeId ? NON_EMBEDDABLE_YOUTUBE_IDS.has(youtubeId) : false;
+
+  return {
+    ...resource,
+    embed: !embedBlocked,
+    openUrl: canonicalOpenUrl,
+    url: toEmbeddableVideoUrl(canonicalOpenUrl),
+  };
+}
+
+function getResourceForLesson(trackId, lessonIndex) {
+  const catalog = TRACK_RESOURCE_CATALOG[trackId];
+  const baseResource = (
+    (Array.isArray(catalog) ? catalog[lessonIndex] : null)
+    || LESSON_RESOURCES[trackId]?.[lessonIndex]
+    || (Array.isArray(catalog) && catalog.length > 0 ? catalog[catalog.length - 1] : null)
+  );
+
+  if (!baseResource) {
+    return null;
+  }
+
   if (baseResource.type !== "video") {
     return baseResource;
   }
 
-  return {
-    ...baseResource,
-    url: toEmbeddableVideoUrl(baseResource.url),
-  };
+  return normalizeVideoResource(baseResource);
 }
 
 const normalizeLessonTitle = (title) => title.trim().toLowerCase();
@@ -1752,6 +1784,9 @@ export default function LessonDemoPage({ theme = "dark" }) {
   const [activeTrackId, setActiveTrackId] = useState(() =>
     safeRead(STORAGE_KEYS.activeTrackId, null),
   );
+  const [activeLessonByTrack, setActiveLessonByTrack] = useState(() =>
+    safeRead(STORAGE_KEYS.activeLessonByTrack, {}),
+  );
   const [activeLessonNumber, setActiveLessonNumber] = useState(() =>
     safeRead(STORAGE_KEYS.activeLessonNumber, 1),
   );
@@ -1765,8 +1800,40 @@ export default function LessonDemoPage({ theme = "dark" }) {
   const isMobile = typeof window !== "undefined" ? window.innerWidth <= 768 : false;
   const colors = TOKENS[theme] || TOKENS.dark;
 
+  const openTrackAtLesson = (trackId, lessonNumber) => {
+    const track = TRACKS.find((item) => item.id === trackId);
+    if (!track) {
+      return;
+    }
+
+    const clampedLessonNumber = Math.max(1, Math.min(lessonNumber, track.lesson.totalLessons));
+    setCompletedTrackId(null);
+    setActiveTrackId(trackId);
+    setActiveLessonNumber(clampedLessonNumber);
+    setActiveLessonByTrack((prev) => ({
+      ...prev,
+      [trackId]: clampedLessonNumber,
+    }));
+  };
+
+  const jumpToUnlockedLesson = (lessonNumber) => {
+    if (!activeTrack) {
+      return;
+    }
+
+    const completedCount = completedByTrack[activeTrack.id] || 0;
+    const maxUnlockedLesson = Math.min(activeTrack.lesson.totalLessons, completedCount + 1);
+    const safeLessonNumber = Math.max(1, Math.min(lessonNumber, maxUnlockedLesson));
+    openTrackAtLesson(activeTrack.id, safeLessonNumber);
+
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   safeWrite(STORAGE_KEYS.activeTrackId, activeTrackId);
   safeWrite(STORAGE_KEYS.activeLessonNumber, activeLessonNumber);
+  safeWrite(STORAGE_KEYS.activeLessonByTrack, activeLessonByTrack);
   safeWrite(STORAGE_KEYS.completedByTrack, completedByTrack);
   safeWrite(STORAGE_KEYS.completedTrackId, completedTrackId);
 
@@ -1800,6 +1867,7 @@ export default function LessonDemoPage({ theme = "dark" }) {
 
   if (!activeTrack && completedTrack) {
     const totalXp = completedTrack.lesson.totalLessons * completedTrack.lesson.xpReward;
+    const completionScore = 100;
     const level = Math.floor(totalXp / 200) + 1;
     const levelBase = (level - 1) * 200;
     const levelTarget = level * 200;
@@ -1817,6 +1885,81 @@ export default function LessonDemoPage({ theme = "dark" }) {
       ? TRACKS[completedIndex + 1]
       : null;
     const shareText = `I completed ${completedTrack.trackName} on DigitalSphereUg and earned ${totalXp} XP. Next step: keep building.`;
+
+    const downloadScoreCard = () => {
+      if (typeof document === "undefined") {
+        return;
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1350;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        return;
+      }
+
+      const nowLabel = new Date().toLocaleDateString();
+      const primary = completedTrack.color;
+
+      const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      bgGradient.addColorStop(0, "#0b1220");
+      bgGradient.addColorStop(1, "#1f2a44");
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
+      ctx.fillRect(70, 70, canvas.width - 140, canvas.height - 140);
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(70, 70, canvas.width - 140, canvas.height - 140);
+
+      ctx.fillStyle = "#dbe6ff";
+      ctx.font = "700 32px Arial";
+      ctx.fillText("DigitalSphereUg", 120, 150);
+
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "600 24px Arial";
+      ctx.fillText("Official Completion Score", 120, 200);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "800 56px Arial";
+      ctx.fillText(completedTrack.trackName, 120, 280);
+
+      ctx.fillStyle = primary;
+      ctx.font = "900 128px Arial";
+      ctx.fillText(`${completionScore}%`, 120, 430);
+
+      const gaugeX = 120;
+      const gaugeY = 530;
+      const gaugeW = 840;
+      const gaugeH = 36;
+
+      ctx.fillStyle = "rgba(148, 163, 184, 0.24)";
+      ctx.fillRect(gaugeX, gaugeY, gaugeW, gaugeH);
+      ctx.fillStyle = primary;
+      ctx.fillRect(gaugeX, gaugeY, Math.round((completionScore / 100) * gaugeW), gaugeH);
+
+      ctx.fillStyle = "#dbe6ff";
+      ctx.font = "600 30px Arial";
+      ctx.fillText(`XP Earned: ${totalXp}`, 120, 650);
+      ctx.fillText(`Level: ${level} Builder`, 120, 700);
+      ctx.fillText(`Date: ${nowLabel}`, 120, 750);
+
+      ctx.fillStyle = "#9fb3d9";
+      ctx.font = "500 24px Arial";
+      ctx.fillText("Keep building. Keep shipping. Keep learning in public.", 120, 840);
+
+      ctx.fillStyle = "#e2e8f0";
+      ctx.font = "700 26px Arial";
+      ctx.fillText("digitalsphereug.org", 120, 1220);
+
+      const link = document.createElement("a");
+      link.download = `${completedTrack.trackName.toLowerCase().replace(/\s+/g, "-")}-score-card.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    };
 
     return (
       <div
@@ -1944,6 +2087,76 @@ export default function LessonDemoPage({ theme = "dark" }) {
               </div>
             </div>
 
+            <div
+              style={{
+                marginBottom: 16,
+                border: `1px solid ${colors.border}`,
+                borderRadius: 12,
+                padding: 14,
+                background: colors.card,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Outfit', sans-serif",
+                  fontWeight: 800,
+                  marginBottom: 8,
+                  fontSize: 18,
+                }}
+              >
+                Official Score Card
+              </div>
+              <div style={{ color: colors.textSub, fontSize: 14, marginBottom: 10 }}>
+                Your completion score for this track
+              </div>
+              <div
+                style={{
+                  color: completedTrack.color,
+                  fontFamily: "'Outfit', sans-serif",
+                  fontWeight: 900,
+                  fontSize: 48,
+                  lineHeight: 1,
+                  marginBottom: 10,
+                }}
+              >
+                {completionScore}%
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  height: 10,
+                  borderRadius: 999,
+                  overflow: "hidden",
+                  border: `1px solid ${colors.border}`,
+                  marginBottom: 12,
+                }}
+              >
+                <div
+                  style={{
+                    width: `${completionScore}%`,
+                    height: "100%",
+                    background: `linear-gradient(90deg, ${completedTrack.color}, ${colors.blueLt})`,
+                  }}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={downloadScoreCard}
+                style={{
+                  border: `1px solid ${colors.blueLt}`,
+                  background: colors.blueLt,
+                  color: "#ffffff",
+                  borderRadius: 10,
+                  padding: "10px 12px",
+                  cursor: "pointer",
+                  fontFamily: "'Outfit', sans-serif",
+                  fontWeight: 700,
+                }}
+              >
+                Download Score Card
+              </button>
+            </div>
+
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 14 }}>
               <button
                 type="button"
@@ -1993,9 +2206,7 @@ export default function LessonDemoPage({ theme = "dark" }) {
                 <button
                   type="button"
                   onClick={() => {
-                    setCompletedTrackId(null);
-                    setActiveTrackId(nextTrack.id);
-                    setActiveLessonNumber(1);
+                    openTrackAtLesson(nextTrack.id, 1);
                     if (typeof window !== "undefined") {
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }
@@ -2038,9 +2249,7 @@ export default function LessonDemoPage({ theme = "dark" }) {
                 type="button"
                 onClick={() => {
                   setCompletedByTrack((prev) => ({ ...prev, [completedTrack.id]: 0 }));
-                  setCompletedTrackId(null);
-                  setActiveTrackId(completedTrack.id);
-                  setActiveLessonNumber(1);
+                  openTrackAtLesson(completedTrack.id, 1);
                   setCopied(false);
                 }}
                 style={{
@@ -2115,8 +2324,13 @@ export default function LessonDemoPage({ theme = "dark" }) {
                 const totalLessons = track.lesson.totalLessons;
                 const percent = Math.round((completedCount / totalLessons) * 100);
                 const isDone = completedCount >= totalLessons;
-                const canResume = completedCount > 0 && !isDone;
-                const resumeLessonNumber = Math.min(totalLessons, completedCount + 1);
+                const maxUnlockedLesson = Math.min(totalLessons, completedCount + 1);
+                const savedLessonForTrack = activeLessonByTrack[track.id];
+                const normalizedSavedLesson = typeof savedLessonForTrack === "number"
+                  ? Math.max(1, Math.min(totalLessons, savedLessonForTrack))
+                  : 1;
+                const resumeLessonNumber = Math.min(maxUnlockedLesson, normalizedSavedLesson);
+                const canResume = resumeLessonNumber > 1 && !isDone;
                 const lastStoppedLessonNumber = Math.max(1, Math.min(totalLessons, completedCount));
 
                 return (
@@ -2124,9 +2338,7 @@ export default function LessonDemoPage({ theme = "dark" }) {
                     <button
                       type="button"
                       onClick={() => {
-                        setCompletedTrackId(null);
-                        setActiveTrackId(track.id);
-                        setActiveLessonNumber(1);
+                        openTrackAtLesson(track.id, 1);
                       }}
                       style={{
                         textAlign: "left",
@@ -2224,9 +2436,7 @@ export default function LessonDemoPage({ theme = "dark" }) {
                       <button
                         type="button"
                         onClick={() => {
-                          setCompletedTrackId(null);
-                          setActiveTrackId(track.id);
-                          setActiveLessonNumber(resumeLessonNumber);
+                          openTrackAtLesson(track.id, resumeLessonNumber);
                         }}
                         style={{
                           textAlign: "left",
@@ -2270,7 +2480,7 @@ export default function LessonDemoPage({ theme = "dark" }) {
         }));
 
         if (activeLessonNumber < total) {
-          setActiveLessonNumber((prev) => prev + 1);
+          openTrackAtLesson(activeTrack.id, activeLessonNumber + 1);
           if (typeof window !== "undefined") {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }
@@ -2288,6 +2498,17 @@ export default function LessonDemoPage({ theme = "dark" }) {
         setActiveTrackId(null);
         setActiveLessonNumber(1);
       }}
+      onPreviousLesson={() => {
+        if (!activeTrack || activeLessonNumber <= 1) {
+          return;
+        }
+
+        openTrackAtLesson(activeTrack.id, activeLessonNumber - 1);
+        if (typeof window !== "undefined") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }}
+      onJumpToLesson={jumpToUnlockedLesson}
     />
   );
 }
