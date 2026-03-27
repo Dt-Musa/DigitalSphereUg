@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BsArrowLeft,
   BsArrowRight,
@@ -306,7 +306,7 @@ DigitalSphereUg - A Student-Powered Blockchain & Web3 Platform.
 
 Uganda. East Africa. The Continent.
 
-Written by Irankunda Musa | Founder & Community, DigitalSphereUg.` },
+Written by Irankunda Musa | Founder & Community Lead, DigitalSphereUg.` },
   { id:1, author:"Irankunda Musa", tag:"Education", tagColor:C.green, title:"What is Blockchain — Explained for Ugandans", excerpt:"Forget the jargon. Here's what blockchain actually is, why it matters for Africa, and why Uganda is positioned to benefit more than most.", date:"March 2026", read:"5 min read", body:"Blockchain is simply a digital record book that nobody owns but everyone can see. Instead of a bank keeping your transaction history on their private servers, blockchain stores it across thousands of computers worldwide. No single person, company or government can change it.\n\nFor Uganda and Africa broadly, this is significant. Think about land ownership disputes, remittances from the diaspora eating 10% in fees, or the difficulty of building a credit history when you're unbanked. Blockchain has practical, near-term answers to all of these.\n\nThe opportunity is real. East Africa already leads the world in mobile money adoption. Adding blockchain on top of that existing infrastructure is a natural next step — and young Ugandans who understand both worlds will be the ones who build it.\n\nYou don't need to be a programmer to be part of this. Understanding the technology, the ecosystem, and the problems it solves is itself a skill the industry desperately needs." },
   { id:2, author:"Irinatwe Bright", tag:"Resources", tagColor:C.blueLt, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
   { id:3, author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
@@ -1251,7 +1251,99 @@ function Blog({ setPost }) {
   );
 }
 
-function BlogPost({ post, back }) {
+function BlogPost({ post, back, onSelectPost }) {
+  const endOfPostRef = useRef(null);
+  const [showAfterReadPrompt, setShowAfterReadPrompt] = useState(false);
+  const [hasReachedEnd, setHasReachedEnd] = useState(false);
+  const [completedAt, setCompletedAt] = useState(null);
+  const [timelineLabel, setTimelineLabel] = useState("Just now");
+
+  const suggestedPosts = POSTS.filter((item) => item.id !== post.id).slice(0, 2);
+  const estimatedRead = post.read || "1 min read";
+
+  useEffect(() => {
+    setShowAfterReadPrompt(false);
+    setHasReachedEnd(false);
+    setCompletedAt(null);
+    setTimelineLabel("Just now");
+  }, [post.id]);
+
+  const getRelativeTimelineLabel = (completedAtTime) => {
+    if (!completedAtTime) {
+      return "Just now";
+    }
+
+    const elapsedMs = Date.now() - completedAtTime;
+    const elapsedMinutes = Math.floor(elapsedMs / 60000);
+
+    if (elapsedMinutes <= 0) {
+      return "Just now";
+    }
+    if (elapsedMinutes === 1) {
+      return "1 min ago";
+    }
+    if (elapsedMinutes < 60) {
+      return `${elapsedMinutes} mins ago`;
+    }
+
+    const elapsedHours = Math.floor(elapsedMinutes / 60);
+    if (elapsedHours === 1) {
+      return "1 hr ago";
+    }
+
+    return `${elapsedHours} hrs ago`;
+  };
+
+  useEffect(() => {
+    if (!endOfPostRef.current) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasReachedEnd(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.65,
+      },
+    );
+
+    observer.observe(endOfPostRef.current);
+
+    return () => observer.disconnect();
+  }, [post.id]);
+
+  useEffect(() => {
+    if (showAfterReadPrompt) {
+      return;
+    }
+
+    if (hasReachedEnd) {
+      setShowAfterReadPrompt(true);
+    }
+  }, [hasReachedEnd, showAfterReadPrompt]);
+
+  useEffect(() => {
+    if (!showAfterReadPrompt) {
+      return;
+    }
+
+    if (!completedAt) {
+      setCompletedAt(Date.now());
+      return;
+    }
+
+    setTimelineLabel(getRelativeTimelineLabel(completedAt));
+    const intervalId = setInterval(() => {
+      setTimelineLabel(getRelativeTimelineLabel(completedAt));
+    }, 30000);
+
+    return () => clearInterval(intervalId);
+  }, [showAfterReadPrompt, completedAt]);
+
   return (
     <div className="section-appear" style={{ maxWidth:720, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <button onClick={back} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, marginBottom:40, padding:"9px 18px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}><BsArrowLeft size={ICON.sm} /> Back to Blog</button>
@@ -1263,6 +1355,41 @@ function BlogPost({ post, back }) {
         {post.read ? <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span> : null}
       </div>
       {post.body.split("\n\n").map((para, i) => <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{para}</p>)}
+      <div ref={endOfPostRef} style={{ width:"100%", height:1 }} />
+
+      {showAfterReadPrompt && (
+        <div className="section-appear-2" style={{ marginTop:24, marginBottom:20, background:C.card, border:`1px solid ${C.blue}40`, borderRadius:16, padding:"20px 18px", display:"flex", flexDirection:"column", gap:12, boxShadow:`0 10px 30px ${C.blue}20`, animation:"fadeIn .3s ease" }}>
+          <div style={{ fontSize:12, fontWeight:700, letterSpacing:"1.5px", textTransform:"uppercase", color:C.blueLt, fontFamily:"'Space Grotesk',sans-serif" }}>After Reading</div>
+          <h3 style={{ margin:0, fontSize:20, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.2 }}>Nice work, you reached the end.</h3>
+          <p style={{ margin:0, fontSize:14, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif" }}>Want to keep momentum? Jump into another article or head back to all blog posts.</p>
+          <div style={{ display:"flex", gap:12, alignItems:"center", flexWrap:"wrap", paddingTop:4 }}>
+            <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Timeline</span>
+            <span style={{ fontSize:12, color:C.textSub, fontFamily:"'Manrope',sans-serif", background:C.surface, border:`1px solid ${C.border}`, padding:"4px 10px", borderRadius:999 }}>{`${timelineLabel} • ${estimatedRead}`}</span>
+          </div>
+
+          <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
+            {suggestedPosts[0] && typeof onSelectPost === "function" ? (
+              <button
+                type="button"
+                onClick={() => onSelectPost(suggestedPosts[0])}
+                className="hover-lift"
+                style={{ background:C.blue, border:`1px solid ${C.blue}`, color:C.white, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700, padding:"10px 14px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}
+              >
+                Read Next <BsArrowRight size={ICON.xs} />
+              </button>
+            ) : null}
+            <button
+              type="button"
+              onClick={back}
+              className="hover-lift"
+              style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.text, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700, padding:"10px 14px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}
+            >
+              All Articles <BsArrowLeft size={ICON.xs} />
+            </button>
+          </div>
+        </div>
+      )}
+
       <SubscribeSection context="blog" />
     </div>
   );
@@ -1708,7 +1835,7 @@ export default function App() {
         {page === "Opportunities" && <Opportunities />}
         {page === "Resources"     && <Resources />}
         {page === "Blog" && !post  && <Blog setPost={setPost} />}
-        {page === "Blog" && post   && <BlogPost post={post} back={() => setPost(null)} />}
+        {page === "Blog" && post   && <BlogPost post={post} back={() => setPost(null)} onSelectPost={setPost} />}
         {page === "Community"     && <Community />}
         {page === "About"         && <About setPage={go} theme={theme} />}
       </main>
