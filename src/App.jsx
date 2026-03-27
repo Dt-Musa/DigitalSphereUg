@@ -97,6 +97,7 @@ import web3CareerOppLogo from "./assets/opportunities/web3 careers.jpg";
 import cryptoJobListOppLogo from "./assets/opportunities/crypto-job-list.jpg";
 import ethnileGlobalOppLogo from "./assets/opportunities/ethnile-global.jpg";
 import Hero from "./Hero";
+import LessonDemoPage from "./LessonDemoPage";
 
 // ─── Colors ───────────────────────────────────────────────────────
 const THEMES = {
@@ -1579,7 +1580,7 @@ export default function App() {
       <Nav page={page} setPage={go} theme={theme} toggleTheme={toggleTheme} />
       <main>
         {page === "Home"          && <Home setPage={go} />}
-        {page === "Learn"         && <Learn />}
+        {page === "Learn"         && <LessonDemoPage theme={theme} />}
         {page === "Events"        && <Events />}
         {page === "Gallery"       && <Gallery setPage={go} />}
         {page === "Opportunities" && <Opportunities />}
