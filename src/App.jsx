@@ -1,4 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import {
   BsArrowLeft,
   BsArrowRight,
@@ -121,28 +130,28 @@ let C = THEMES.dark;
 
 // ─── Data ─────────────────────────────────────────────────────────
 const TRACKS = [
-  { id:1, icon:BsLink45Deg, color:C.green, label:"TRACK 01", title:"Blockchain Basics", sub:"No code required", level:"Beginner", time:"2–3 weeks", desc:"Understand how blockchain works from the ground up — concepts, use cases, and why it matters for Africa. Used by students at Makerere, Kyambogo & beyond.", resources:[
+  { id:1, slug:"track-1-blockchain-basics", icon:BsLink45Deg, color:C.green, label:"TRACK 01", title:"Blockchain Basics", sub:"No code required", level:"Beginner", time:"2–3 weeks", desc:"Understand how blockchain works from the ground up — concepts, use cases, and why it matters for Africa. Used by students at Makerere, Kyambogo & beyond.", resources:[
     { title:"But How Does Bitcoin Actually Work?", url:"https://www.youtube.com/watch?v=bBC-nXj3Ng4", time:"26 min", type:"Video" },
     { title:"Blockchain 101 — Anders Brownworth", url:"https://andersbrownworth.com/blockchain/", time:"30 min", type:"Interactive" },
     { title:"IBM — What is Blockchain?", url:"https://www.ibm.com/topics/blockchain", time:"1 hr", type:"Article" },
     { title:"CoinDesk Learn — Crypto Basics", url:"https://www.coindesk.com/learn/", time:"3 hrs", type:"Course" },
     { title:"MIT — Blockchain & Money", url:"https://ocw.mit.edu/courses/15-s12-blockchain-and-money-fall-2018/", time:"10 hrs", type:"Course" },
   ]},
-  { id:2, icon:BsCurrencyBitcoin, color:C.blueLt, label:"TRACK 02", title:"Ethereum & Solidity", sub:"Smart contracts", level:"Beginner–Intermediate", time:"4–6 weeks", desc:"Write your first smart contracts in Solidity and deploy them to the Ethereum blockchain.", resources:[
+  { id:2, slug:"track-2-ethereum-solidity", icon:BsCurrencyBitcoin, color:C.blueLt, label:"TRACK 02", title:"Ethereum & Solidity", sub:"Smart contracts", level:"Beginner–Intermediate", time:"4–6 weeks", desc:"Write your first smart contracts in Solidity and deploy them to the Ethereum blockchain.", resources:[
     { title:"CryptoZombies — Learn Solidity", url:"https://cryptozombies.io/", time:"10 hrs", type:"Interactive" },
     { title:"Cyfrin Updraft — Full Solidity Course", url:"https://updraft.cyfrin.io/", time:"40 hrs", type:"Course" },
     { title:"Patrick Collins — Solidity 2024", url:"https://www.youtube.com/watch?v=umepbfKp5rI", time:"27 hrs", type:"Video" },
     { title:"freeCodeCamp Solidity Tutorial", url:"https://www.youtube.com/watch?v=M576WGiDBdQ", time:"16 hrs", type:"Video" },
     { title:"Official Solidity Docs", url:"https://docs.soliditylang.org/", time:"Reference", type:"Docs" },
   ]},
-  { id:3, icon:BsBoxes, color:C.cyan, label:"TRACK 03", title:"Build Your First dApp", sub:"From idea to deployed", level:"Intermediate", time:"4–8 weeks", desc:"Build and deploy a real decentralised application using modern Web3 tools and frameworks.", resources:[
+  { id:3, slug:"track-3-build-your-first-dapp", icon:BsBoxes, color:C.cyan, label:"TRACK 03", title:"Build Your First dApp", sub:"From idea to deployed", level:"Intermediate", time:"4–8 weeks", desc:"Build and deploy a real decentralised application using modern Web3 tools and frameworks.", resources:[
     { title:"Alchemy University — Road to Web3", url:"https://university.alchemy.com/", time:"Free", type:"Course" },
     { title:"LearnWeb3 DAO — All Tracks", url:"https://learnweb3.io/", time:"Free", type:"Course" },
     { title:"Buildspace Projects", url:"https://buildspace.so/", time:"Free", type:"Project" },
     { title:"Hardhat Documentation", url:"https://hardhat.org/docs", time:"Reference", type:"Docs" },
     { title:"Thirdweb — Web3 App Builder", url:"https://thirdweb.com/", time:"Free", type:"Tool" },
   ]},
-  { id:4, icon:BsBriefcase, color:C.purple, label:"TRACK 04", title:"Web3 Career in Africa", sub:"Uganda to the world", level:"All levels", time:"Ongoing", desc:"Navigate the Web3 job market, find grants and opportunities, and build your on-chain reputation from Uganda.", resources:[
+  { id:4, slug:"track-4-web3-career-africa", icon:BsBriefcase, color:C.purple, label:"TRACK 04", title:"Web3 Career in Africa", sub:"Uganda to the world", level:"All levels", time:"Ongoing", desc:"Navigate the Web3 job market, find grants and opportunities, and build your on-chain reputation from Uganda.", resources:[
     { title:"Web3.career — Job Board", url:"https://web3.career/", time:"Job Board", type:"Jobs" },
     { title:"Gitcoin — Bounties & Grants", url:"https://gitcoin.co/", time:"Ongoing", type:"Earn" },
     { title:"Binance Learn & Earn", url:"https://academy.binance.com/", time:"Free", type:"Course" },
@@ -152,43 +161,44 @@ const TRACKS = [
 ];
 
 const EVENTS = [
-  { title:"Blockchain DevFest Kampala 2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
-  { title:"DeFi with Chainlink Oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBOGO", tag:"University Session", color:C.cyan, featured:true, image:chainlinkFlyerPhoto, imageFit:"contain", desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
+  { title:"Blockchain DevFest Kampala 2026", slug:"blockchain-devfest-kampala-2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
+  { title:"DeFi with Chainlink Oracles", slug:"defi-with-chainlink-oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBOGO", tag:"University Session", color:C.cyan, featured:true, image:chainlinkFlyerPhoto, imageFit:"contain", desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
 ];
 
 const PAST_EVENTS = [
-  { title:"Kampala Blockchain Summit 2025", date:"Ended — Nov 25, 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
+  { title:"Kampala Blockchain Summit 2025", slug:"kampala-blockchain-summit-2026", date:"Ended — Nov 25, 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
   { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
   { title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
   { title:"BUIDL Africa Community Session", date:"2025", location:"Kampala, Uganda", tag:"Community", color:C.green, image:buildlSessionPhoto, recap:"Student-focused build session connecting learners to mentorship and project ideas.", link:"https://t.me/digitalsphereug" },
-  { title:"GDG Kampala Web3 Meetup", date:"Ended — 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, image:chainlinkStreetGroupPhoto, recap:"Regular Web3 meetups wrapped after a strong season of beginner-friendly talks, networking, and practical demos.", link:"https://gdg.community.dev/gdg-kampala/" },
-  { title:"BAU Youth Blockchain Innovation", date:"Ended — 2026", location:"Uganda", tag:"Programme", color:C.purple, image:buildlSessionPhoto, recap:"BAU's youth innovation programme concluded after equipping local learners with blockchain foundations and growth pathways.", link:"https://bau.ug" },
+  { title:"GDG Kampala Web3 Meetup", slug:"gdg-kampala-web3-meetup", date:"Ended — 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, image:chainlinkStreetGroupPhoto, recap:"Regular Web3 meetups wrapped after a strong season of beginner-friendly talks, networking, and practical demos.", link:"https://gdg.community.dev/gdg-kampala/" },
+  { title:"BAU Youth Blockchain Innovation", slug:"bau-youth-blockchain-innovation", date:"Ended — 2026", location:"Uganda", tag:"Programme", color:C.purple, image:buildlSessionPhoto, recap:"BAU's youth innovation programme concluded after equipping local learners with blockchain foundations and growth pathways.", link:"https://bau.ug" },
 ];
 
 const OPPS = [
   { cat:"Learn & Earn", color:C.cyan, icon:BsMortarboard, items:[
-    { title:"Binance Learn & Earn", desc:"Complete short courses and earn crypto rewards.", link:"https://academy.binance.com/", level:"Beginner", logo:binanceOppLogo },
-    { title:"Coinbase Learn", desc:"Learn about crypto assets and earn small amounts.", link:"https://www.coinbase.com/learn", level:"Beginner", logo:coinbaseOppLogo },
-    { title:"Alchemy University", desc:"Free blockchain bootcamp with official certification.", link:"https://university.alchemy.com/", level:"All Levels", logo:alchemyOppLogo },
+    { title:"Binance Learn & Earn", slug:"binance-learn-and-earn", desc:"Complete short courses and earn crypto rewards.", link:"https://academy.binance.com/", level:"Beginner", logo:binanceOppLogo },
+    { title:"Coinbase Learn", slug:"coinbase-learn", desc:"Learn about crypto assets and earn small amounts.", link:"https://www.coinbase.com/learn", level:"Beginner", logo:coinbaseOppLogo },
+    { title:"Alchemy University", slug:"alchemy-university", desc:"Free blockchain bootcamp with official certification.", link:"https://university.alchemy.com/", level:"All Levels", logo:alchemyOppLogo },
   ]},
   { cat:"Grants & Funding", color:C.green, icon:BsCashStack, items:[
-    { title:"Ethereum Foundation — ESP", desc:"Small grants for builders contributing to the Ethereum ecosystem.", link:"https://esp.ethereum.foundation/", level:"Intermediate", logo:ethereumFoundationOppLogo },
-    { title:"Gitcoin Grants", desc:"Community-funded grants for open source Web3 projects.", link:"https://gitcoin.co/grants", level:"All Levels", logo:gitcoinOppLogo },
+    { title:"Ethereum Foundation — ESP", slug:"ethereum-foundation-esp", desc:"Small grants for builders contributing to the Ethereum ecosystem.", link:"https://esp.ethereum.foundation/", level:"Intermediate", logo:ethereumFoundationOppLogo },
+    { title:"Gitcoin Grants", slug:"gitcoin-grants", desc:"Community-funded grants for open source Web3 projects.", link:"https://gitcoin.co/grants", level:"All Levels", logo:gitcoinOppLogo },
   ]},
   { cat:"Hackathons", color:C.blueLt, icon:BsLightningCharge, items:[
-    { title:"DevFest Kampala Hackathon", desc:"Annual hackathon at Blockchain DevFest Kampala — June 2026.", link:"https://devfestkampala.com", level:"All Levels" },
-    { title:"ETHGlobal Hackathons", desc:"Global online and in-person Ethereum hackathons with real prizes.", link:"https://ethglobal.com/", level:"Intermediate", logo:ethnileGlobalOppLogo },
-    { title:"Chainlink Hackathon", desc:"Regular hackathons with prize pools for Web3 builders.", link:"https://chain.link/hackathon", level:"Intermediate", logo:chainlinkOppLogo },
+    { title:"DevFest Kampala Hackathon", slug:"devfest-kampala-hackathon", desc:"Annual hackathon at Blockchain DevFest Kampala — June 2026.", link:"https://devfestkampala.com", level:"All Levels" },
+    { title:"ETHGlobal Hackathons", slug:"ethglobal-hackathons", desc:"Global online and in-person Ethereum hackathons with real prizes.", link:"https://ethglobal.com/", level:"Intermediate", logo:ethnileGlobalOppLogo },
+    { title:"Chainlink Hackathon", slug:"chainlink-hackathon", desc:"Regular hackathons with prize pools for Web3 builders.", link:"https://chain.link/hackathon", level:"Intermediate", logo:chainlinkOppLogo },
   ]},
   { cat:"Jobs & Internships", color:C.purple, icon:BsBriefcase, items:[
-    { title:"Web3.career", desc:"Dedicated job board for remote and global Web3 roles.", link:"https://web3.career/", level:"All Levels", logo:web3CareerOppLogo },
-    { title:"Crypto Jobs List", desc:"Curated blockchain and crypto job listings worldwide.", link:"https://cryptojobslist.com/", level:"All Levels", logo:cryptoJobListOppLogo },
-    { title:"Gitcoin Bounties", desc:"Get paid to contribute to open source blockchain projects.", link:"https://gitcoin.co/explorer", level:"Beginner–Intermediate", logo:gitcoinOppLogo },
+    { title:"Web3.career", slug:"web3-career-jobs", desc:"Dedicated job board for remote and global Web3 roles.", link:"https://web3.career/", level:"All Levels", logo:web3CareerOppLogo },
+    { title:"Crypto Jobs List", slug:"crypto-jobs-list", desc:"Curated blockchain and crypto job listings worldwide.", link:"https://cryptojobslist.com/", level:"All Levels", logo:cryptoJobListOppLogo },
+    { title:"Gitcoin Bounties", slug:"gitcoin-bounties", desc:"Get paid to contribute to open source blockchain projects.", link:"https://gitcoin.co/explorer", level:"Beginner–Intermediate", logo:gitcoinOppLogo },
   ]},
 ];
 
 const POSTS = [
-  { id:4, author:"Irankunda Musa", tag:"Community", tagColor:C.purple, title:"The Room Laughed. I Stayed. Now We're Building.", excerpt:"A story about showing up uninvited to the future - and deciding to open the door for everyone else.", date:"March 2026", read:"", body:`The Room Laughed. I Stayed. Now We're Building.
+  { id:5, slug:"chainlink-digital-sphere-kyambogo", author:"Irankunda Musa", tag:"Events", tagColor:C.cyan, title:"DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next", excerpt:"What happens when blockchain experts walk into Kyambogo — and students who came confused walk out with clarity. A full recap of the Chainlink x DigitalSphereUg session.", date:"March 28, 2026", read:"10 min read", body:`DigitalSphereUg Showed Up at Kyambogo and nobody Wants to Miss What Comes Next\nWhat happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.\nSomething shifted at Kyambogo University today.\nA room full of students, some hearing the word \"blockchain\" for the very first time, others carrying months of curiosity with nowhere to put it sat down with on-chain Chainlink experts and walked out with clarity they did not have when they walked in.\nThe session was organized by ChainlinkEastAfrica — a team that understands exactly what this ecosystem needs at the grassroots level and keeps showing up to deliver it.\nDigitalSphereUg showed up because this is exactly what we exist for. We show up wherever knowledge about Blockchain and Web3 is being shared, absorb everything, and bring it back to every student who could not be in that room.\nToday, we brought it back.\nFirst — The basics nobody Usually Explains\nThe session opened exactly where it needed to, at the beginning.\nWhat is Blockchain?\nNot the buzzword. Not the price charts. The actual technology.\nBlockchain is a distributed digital ledger — a system that records transactions in blocks, chains them together in chronological order, and distributes identical copies across thousands of computers simultaneously. Once a transaction is verified and added to the chain, it cannot be altered, deleted, or reversed. No single person, company, or government controls it.\nThat is the foundation everything else is built on.\nWhy does it matter?\nThe use cases stretch further than most people realise — cross-border payments and remittances, supply chain tracking from farm to shelf, healthcare data ownership, digital identity verification, land registry systems, and decentralized financial services for the 1.4 billion people globally who have no access to a bank account. In Africa alone, blockchain is not a futuristic concept. It is a present solution to problems we live with daily.\nWhy is it considered top-tier emerging technology?\nThree reasons:\nOne — transparency. Every transaction is visible and verifiable by anyone on the network. No hidden fees. No manipulated records.\nTwo — immutability. What is recorded cannot be changed. In a continent where land disputes, election fraud, and financial manipulation are real challenges, that matters enormously.\nThree — decentralization. No single point of failure. No single authority with the power to shut it down, freeze your funds, or change the rules mid-game.\nThe Internet Grew Up,did you notice?\nBefore diving into DeFi, the session took a step back and traced the evolution of the internet itself. This context alone was worth the entire session.\nStay with us, this is where it gets interesting.\nWeb1 — The Read-Only Internet (1991–2004)\nThe early internet was a library. Static pages. Information you could read but not interact with. You were a consumer, never a participant. Think basic websites, early search engines, no social interaction.\nWeb2 — The Read-Write Internet (2004–Present)\nThis is the internet most of us grew up in. Social media. Platforms. User-generated content. You could now create, share, and interact. But there was a catch — the platforms owned everything. Your data, your content, your identity. Facebook, Google, YouTube built trillion-dollar businesses on content created by users who received nothing in return.\nWeb3 — The Read-Write-Own Internet (2020–Present)\nThis is where we are heading. Web3 gives users ownership of their data, their digital assets, their identity, and their financial activity. No platform in the middle taking a cut. No corporation storing your information and selling it to advertisers. The power shifts from companies back to individuals.\nWeb3 is not just a technology upgrade. It is a fundamental restructuring of who controls the internet — and who benefits from it.\nThe Web2 builders in the room had plenty of questions. Good. That curiosity is exactly where the transition begins.\nWeb3 and Careers, the opportunity most students are missing\nThis was the section that made people sit up straighter.\nThe Web3 industry is not just a technology shift — it is one of the fastest growing job markets in the world. And unlike most industries, it does not care where you studied, what your grades were, or which city you live in. It cares about what you can build, what you understand, and how you contribute.\nThe careers available in Web3 stretch far beyond development:\nFor the builders — Smart Contract Developers, dApp Developers, Protocol Engineers, and Blockchain Architects are among the highest paid technical roles globally. A skilled Solidity developer in Uganda can earn the same as one in San Francisco paid in cryptocurrency, working remotely.\nFor the communicators — Community Managers, Developer Relations, Content Creators, and Ecosystem Educators are in constant demand. Every protocol needs people who can explain complex technology to real humans. That skill is rare and valuable.\nFor the thinkers — Blockchain Researchers, Tokenomics Designers, DAO Governance Contributors, and Web3 Product Managers are building the infrastructure of a new financial internet. These roles require deep thinking, not just deep coding.\nFor the connectors — Business Development, Partnership Leads, and Ecosystem Growth roles exist at every major protocol. People who understand both the technology and the human relationships that drive adoption.\nThe entry point for all of these is the same curiosity, consistency, and showing up. The 15 minutes a day that Semwogere Collins committed to at the end of this session is not a small thing. It is the beginning of a career.\nThe Question Everyone Was Asking — What Is DeFi?\nDecentralized Finance. The theme of the day. And for good reason.\nHere is the question that comes up every time:\n\"How can my funds be secure if there is no bank protecting them?\"\nThe answer lies in understanding the difference between trust and trustless systems.\nIn CeFi (Centralized Finance) — your bank, your mobile money account, your investment platform — you are placing trust in an institution. You hand over your personal details, your funds, your financial life, and you hope the institution manages it responsibly.\nConsider this: when you open a bank account at Centenary Bank, you share your full identity, you agree to their terms, and you place your savings in their custody. If that bank faces financial trouble, freezes accounts, or abruptly closes, your money is at risk. You trusted them. They hold the power.\nIn DeFi (Decentralized Finance) — no trust is required. The system operates on trustless protocols — smart contracts that execute automatically when conditions are met, without any human intervention or institutional control.\nCreate a wallet. Secure your seed phrase. Share your public address. Receive funds from someone in the United States, Japan, or anywhere on earth — without sharing a single piece of personal information, without a bank approving the transaction, without waiting three to five business days.\nThat is trustless finance. And it works because of blockchain.\nHow Transactions Actually Work On-Chain\nStay with us — this is where it gets interesting.\nWhen a transaction happens on a blockchain network:\nThe transaction is broadcast to the network\nEvery node, every computer participating in the network receives a copy\nThe transaction is verified by the network through a consensus mechanism\nOnce verified it is recorded permanently as a block on the chain\nThat block is distributed across every node simultaneously\nIt cannot be reversed, altered, or deleted\nConsensus Mechanisms — the verification process come in different forms:\nProof of Work (PoW) — used by Bitcoin. Miners compete to solve complex mathematical puzzles. The winner validates the block and earns a reward. Energy intensive but battle-tested.\nProof of Stake (PoS) — used by Ethereum and many modern blockchains. Validators are chosen based on the amount of cryptocurrency they stake as collateral. More energy efficient and increasingly common.\nBoth mechanisms exist to answer one question: how do thousands of strangers agree on what is true without trusting each other? Blockchain solved that problem. That is why it matters.\nSmart Contracts — Self-Executing Agreements\nStay with us — this is where it gets interesting.\nA smart contract is a self-executing protocol stored on the blockchain. It runs automatically when predetermined conditions are met-no lawyers, no intermediaries, no delays.\nSimple example: a farmer in Eastern Uganda and a buyer in Kampala agree that payment will be released automatically once the goods are confirmed delivered. The smart contract holds the funds, monitors the condition, and executes the payment without either party needing to trust the other.\nNo middleman. No dispute. No waiting.\nThis is the foundation DeFi is built on.\nChainlink — The Bridge Between Blockchain and the Real World\nNow the main event.\nBlockchain is powerful. But it has one fundamental limitation — it cannot natively access real-world data. A smart contract on Ethereum has no way of knowing the current price of maize in Kampala, the weather in Mbarara, or whether a shipment has arrived at the port.\nThis is where Chainlink enters.\nChainlink is a decentralized oracle network — a middleware layer that connects blockchain smart contracts to real-world data, systems, and off-chain computation. It acts as the bridge between the closed world of the blockchain and the open world of real data.\nHow it works:\nChainlink sources data from multiple independent nodes simultaneously. Each node fetches the data independently, the results are aggregated, and the verified, tamper-proof data is fed into the smart contract. No single node can manipulate the outcome. The data is secure, reliable, and real-time.\nWhat kind of data?\nAsset prices — the real-time price of ETH, BTC, stablecoins\nCommodity prices — maize, coffee, oil\nWeather conditions — critical for agricultural insurance\nSports results — for prediction markets\nExchange rates — essential for cross-border DeFi applications in Africa\nA local example:\nImagine a DeFi lending protocol in Uganda that offers loans to smallholder farmers using their expected harvest as collateral. The loan amount, repayment terms, and liquidation conditions are all written into a smart contract. But the contract needs real-time commodity prices to function. Chainlink oracles feed verified maize prices directly into the contract automatically, securely, without any human operator. The farmer gets a fair loan. The lender gets reliable data. No bank required.\nThat is Chainlink powering DeFi in a real African context.\nBeyond Oracles — What Else Chainlink Brings\nThe session went deeper. Three additional Chainlink tools that are reshaping how blockchain connects to the world:\nChainlink Automation — smart contracts that trigger automatically based on real-world conditions. No manual intervention needed. If a price drops below a threshold, the contract executes. If a delivery is confirmed, payment releases.\nCross-Chain Interoperability Protocol (CCIP) — the protocol that allows different blockchain networks to communicate and transfer assets securely. Today there are hundreds of blockchains — Ethereum, Solana, Base, Stellar, Polygon, Celo. CCIP allows them to work together rather than in isolation.\nEnterprise Connectivity — closing the gap between traditional financial institutions and blockchain infrastructure. Banks, corporations, and governments can now interface with blockchain systems without rebuilding everything from scratch.\nThe session concluded with a definition that brought everything together:\nChainlink enables hybrid smart contracts — contracts that combine the security and immutability of on-chain code with the richness and flexibility of real-world off-chain data.\nChainlink Opportunities — What Is Available Right Now\nThis is where the session became personal for many students in the room. Because Chainlink is not just a technology to learn — it is an ecosystem with real, accessible opportunities for students in Uganda today.\nChainlink Bootcamps and Hackathons\nChainlink regularly runs developer bootcamps and global hackathons with significant prize pools. These are open to developers at all levels — including beginners who have just completed their first smart contract. Past Chainlink hackathons have paid out millions of dollars in prizes to participants from Africa.\nChainlink Grants\nThe Chainlink Community Grant Programme funds projects that build on or contribute to the Chainlink ecosystem. If you have an idea — a DeFi protocol, a data feed for African commodity markets, an agricultural insurance platform — this is real funding available to you right now.\nChainlink Developer Expert Programme\nFor those who go deep into the Chainlink ecosystem and develop strong technical knowledge — there is a formal recognition programme that opens doors to global visibility, speaking opportunities, and connections across the Web3 industry.\nChainlink Node Operator Opportunities\nAs the Chainlink network grows, the need for reliable node operators grows with it. Running a Chainlink node is a technical role with real earning potential — and it is something that can be set up and operated from Uganda.\nThe message from ChainlinkEastAfrica was clear: the opportunities are not reserved for developers in Europe or America. They are open. The barrier is not geography. It is knowledge — and that is exactly what this session was designed to remove.\nThe Chainlink Champion Ambassador Programme\nOne of the most exciting announcements of the session — and one that every student in that room should take seriously.\nChainlink Champions is Chainlink's official ambassador programme — a global network of passionate, knowledgeable community members who represent the Chainlink ecosystem in their local regions.\nAs a Chainlink Champion you:\nBecome an official representative of one of the most important protocols in Web3\nGet access to exclusive resources, early information, and direct support from the Chainlink team\nOrganise and host local events, workshops, and study groups in your community\nBuild a globally recognised reputation in the blockchain space\nConnect with a network of Champions across Africa and the world\nOpen doors to speaking opportunities, collaborations, and career advancement\nThis is not just a title. It is a launchpad.\nFor a student at Kyambogo University who wants to be taken seriously in the blockchain ecosystem — becoming a Chainlink Champion is one of the highest leverage moves available. You do not need years of experience. You need genuine passion, community presence, and the willingness to show up consistently.\nChainlinkEastAfrica is actively looking for Champions across Uganda and East Africa. If this speaks to you — do not wait. The programme rewards those who move early.\nThe Moment That Made Today Worth Everything\nAt the end of the session, something happened that reminded me exactly why DigitalSphereUg exists.\nA classmate — Semwogere Collins attending his very first blockchain event, turned to me and made a promise.\nHe would dedicate 15 minutes every day to learning about this technology.\nNot hours. Not a full course. Just 15 minutes of consistent curiosity every single day.\nThat is what onboarding looks like. Not mass registration. Not viral numbers. One person genuinely moved, genuinely committed deciding to begin.\nThat one moment is worth more than a thousand passive attendees. And it is exactly what DigitalSphereUg was built to create.\nThis Is Bigger Than One Session\nThe team at ChainlinkEastAfrica understands something that many global blockchain organisations miss context matters.\nThe examples they brought today were not lifted from Silicon Valley case studies. They were drawn from the financial realities that people in this room live every day. Mobile money limitations. Banking exclusion. Cross-border remittance friction. Agricultural financing gaps.\nThat is what great blockchain education looks like. Not abstract theory — but a direct line between the technology and the problems it was built to solve.\nYour Move\nIf you read this and felt something curiosity, recognition, or that quiet sense that you should have been in that room you were made for this space.\nThe next wave of Blockchain evolution is not coming. It is already here. The only question is whether you are building it or watching it pass.\nDigitalSphereUg is onboarding the next generation of Web3 builders across Uganda, East Africa, and the Continent.\nStudents. Beginners. The curious. The committed.\nIf that is you — or someone you know — this is your invitation.\n👉 Join the DigitalSphereUg community.\n📩 Subscribe to this blog — every session becomes a lesson you did not miss\n🔁 Share this article — one share could be someone else's 15-minutes-a-day moment\nDigitalSphereUg — A Student-Powered Blockchain & Web3 Platform.\nUganda. East Africa. The Continent.\nIrankunda Musa | Founder & Community Lead, DigitalSphereUg` },
+  { id:4, slug:"the-room-laughed-i-stayed-now-were-building", author:"Irankunda Musa", tag:"Community", tagColor:C.purple, title:"The Room Laughed. I Stayed. Now We're Building.", excerpt:"A story about showing up uninvited to the future - and deciding to open the door for everyone else.", date:"March 2026", read:"", body:`The Room Laughed. I Stayed. Now We're Building.
 
 A story about showing up uninvited to the future and deciding to open the door for everyone else.
 
@@ -307,9 +317,9 @@ DigitalSphereUg - A Student-Powered Blockchain & Web3 Platform.
 Uganda. East Africa. The Continent.
 
 Written by Irankunda Musa | Founder & Community Lead, DigitalSphereUg.` },
-  { id:1, author:"Irankunda Musa", tag:"Education", tagColor:C.green, title:"What is Blockchain — Explained for Ugandans", excerpt:"Forget the jargon. Here's what blockchain actually is, why it matters for Africa, and why Uganda is positioned to benefit more than most.", date:"March 2026", read:"5 min read", body:"Blockchain is simply a digital record book that nobody owns but everyone can see. Instead of a bank keeping your transaction history on their private servers, blockchain stores it across thousands of computers worldwide. No single person, company or government can change it.\n\nFor Uganda and Africa broadly, this is significant. Think about land ownership disputes, remittances from the diaspora eating 10% in fees, or the difficulty of building a credit history when you're unbanked. Blockchain has practical, near-term answers to all of these.\n\nThe opportunity is real. East Africa already leads the world in mobile money adoption. Adding blockchain on top of that existing infrastructure is a natural next step — and young Ugandans who understand both worlds will be the ones who build it.\n\nYou don't need to be a programmer to be part of this. Understanding the technology, the ecosystem, and the problems it solves is itself a skill the industry desperately needs." },
-  { id:2, author:"Irinatwe Bright", tag:"Resources", tagColor:C.blueLt, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
-  { id:3, author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
+  { id:1, slug:"what-is-blockchain-uganda", author:"Irankunda Musa", tag:"Education", tagColor:C.green, title:"What is Blockchain — Explained for Ugandans", excerpt:"Forget the jargon. Here's what blockchain actually is, why it matters for Africa, and why Uganda is positioned to benefit more than most.", date:"March 2026", read:"5 min read", body:"Blockchain is simply a digital record book that nobody owns but everyone can see. Instead of a bank keeping your transaction history on their private servers, blockchain stores it across thousands of computers worldwide. No single person, company or government can change it.\n\nFor Uganda and Africa broadly, this is significant. Think about land ownership disputes, remittances from the diaspora eating 10% in fees, or the difficulty of building a credit history when you're unbanked. Blockchain has practical, near-term answers to all of these.\n\nThe opportunity is real. East Africa already leads the world in mobile money adoption. Adding blockchain on top of that existing infrastructure is a natural next step — and young Ugandans who understand both worlds will be the ones who build it.\n\nYou don't need to be a programmer to be part of this. Understanding the technology, the ecosystem, and the problems it solves is itself a skill the industry desperately needs." },
+  { id:2, slug:"top-free-resources-web3-2026", author:"Irinatwe Bright", tag:"Resources", tagColor:C.blueLt, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
+  { id:3, slug:"blockchain-opportunities-uganda", author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
 ];
 
 const GALLERY_ITEMS = [
@@ -433,14 +443,69 @@ const MARQUEE_ECOSYSTEM = [
   { name:"BuidlAfrica", logo:buidlAfricaResourceLogo, tint:"#4d6ff0" },
 ];
 
-const DEFAULT_PAGE = "Home";
-const NAV_LINKS = ["Home","Learn","Events","Gallery","Opportunities","Resources","Blog","Community","About"];
-const FOOTER_LINKS = NAV_LINKS.filter(link => link !== "Home");
+const PAGE_ROUTES = {
+  Home: "/",
+  Learn: "/learn",
+  Events: "/events",
+  Gallery: "/gallery",
+  Opportunities: "/opportunities",
+  Resources: "/resources",
+  Blog: "/blog",
+  Community: "/community",
+  About: "/about",
+};
+const NAV_LINKS = ["Home", "Learn", "Events", "Gallery", "Opportunities", "Resources", "Blog", "Community", "About"];
+const FOOTER_LINKS = NAV_LINKS.filter((link) => link !== "Home");
+const SITE_URL = "https://digitalsphereug.tech";
+const DEFAULT_OG_IMAGE = ethnileGroupHero;
 const STORAGE_KEYS = {
   completedResources: "dsug_done",
-  activePage: "dsug_page",
   theme: "dsug_theme",
 };
+
+const toSlug = (value = "") => value
+  .toLowerCase()
+  .replace(/[^a-z0-9\s-]/g, "")
+  .trim()
+  .replace(/\s+/g, "-");
+
+const ALL_EVENTS = [...EVENTS, ...PAST_EVENTS].map((event) => ({
+  ...event,
+  slug: event.slug || toSlug(event.title),
+}));
+
+const OPPORTUNITY_ITEMS = OPPS.flatMap((category) =>
+  category.items.map((item) => ({
+    ...item,
+    cat: category.cat,
+    color: category.color,
+    slug: item.slug || toSlug(item.title),
+  })),
+);
+
+const TRACKS_BY_SLUG = Object.fromEntries(TRACKS.map((track) => [track.slug || toSlug(track.title), track]));
+
+function getShareUrl(pathname) {
+  const origin = typeof window !== "undefined" ? window.location.origin : SITE_URL;
+  return `${origin}${pathname}`;
+}
+
+function getPathFromPage(page) {
+  return PAGE_ROUTES[page] || PAGE_ROUTES.Home;
+}
+
+function getActiveNavLabel(pathname) {
+  if (pathname === "/") return "Home";
+  if (pathname.startsWith("/learn")) return "Learn";
+  if (pathname.startsWith("/events")) return "Events";
+  if (pathname.startsWith("/gallery")) return "Gallery";
+  if (pathname.startsWith("/opportunities")) return "Opportunities";
+  if (pathname.startsWith("/resources")) return "Resources";
+  if (pathname.startsWith("/blog")) return "Blog";
+  if (pathname.startsWith("/community")) return "Community";
+  if (pathname.startsWith("/about")) return "About";
+  return "Home";
+}
 
 const ICON = {
   xxs: 12,
@@ -673,15 +738,122 @@ function SubscribeSection({ context = "footer" }) {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+
+  return null;
+}
+
+function ShareLinkButton({ url, label = "Share" }) {
+  const [copied, setCopied] = useState(false);
+
+  const fallbackCopy = (text) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.setAttribute("readonly", "");
+    textArea.style.position = "absolute";
+    textArea.style.left = "-9999px";
+    document.body.appendChild(textArea);
+    textArea.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(textArea);
+    return ok;
+  };
+
+  const onShare = async (event) => {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    const shareUrl = url || window.location.href;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const ok = fallbackCopy(shareUrl);
+        if (!ok) {
+          throw new Error("Clipboard unavailable");
+        }
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={onShare}
+      className="hover-lift"
+      style={{
+        background: "transparent",
+        border: `1px solid ${C.border}`,
+        color: copied ? C.green : C.textSub,
+        padding: "7px 12px",
+        borderRadius: 8,
+        fontSize: 12,
+        fontWeight: 700,
+        cursor: "pointer",
+        fontFamily: "'Space Grotesk',sans-serif",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        whiteSpace: "nowrap",
+      }}
+      aria-live="polite"
+    >
+      <BsLink45Deg size={ICON.xs} />
+      {copied ? "Link copied!" : label}
+    </button>
+  );
+}
+
+function SiteMeta({ title, description, image, path }) {
+  const fullUrl = `${SITE_URL}${path || "/"}`;
+  const fullImage = image || DEFAULT_OG_IMAGE;
+
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="DigitalSphereUg" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={fullUrl} />
+      <meta property="og:image" content={fullImage} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={fullImage} />
+      <link rel="canonical" href={fullUrl} />
+    </Helmet>
+  );
+}
+
 // ─── Nav ──────────────────────────────────────────────────────────
-function Nav({ page, setPage, theme, toggleTheme }) {
+function Nav({ theme, toggleTheme }) {
   const [mob, setMob] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activePage = getActiveNavLabel(location.pathname);
+
+  const goToPage = (page) => {
+    navigate(getPathFromPage(page));
+  };
+
   return (
     <>
       <style>{getGStyles()}</style>
       <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:300, background:C.surface, backdropFilter:"blur(24px)", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,4vw,40px)", display:"flex", alignItems:"center", justifyContent:"space-between", height:64 }}>
-          <button onClick={() => setPage("Home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
+          <button onClick={() => goToPage("Home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
             {/* Logo image is temporarily disabled. Replace this placeholder with your SVG logo later. */}
             <div style={{ width:48, height:48, borderRadius:10, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:12, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif" }}>
               DS
@@ -690,12 +862,12 @@ function Nav({ page, setPage, theme, toggleTheme }) {
           </button>
           <div className="desktop-nav" style={{ display:"flex", gap:1, alignItems:"center" }}>
             {NAV_LINKS.map(l => (
-              <button key={l} onClick={() => setPage(l)} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${page===l?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:page===l?C.text:C.textSub, fontSize:13, fontWeight:page===l?700:500, fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
+              <button key={l} onClick={() => goToPage(l)} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${activePage===l?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:activePage===l?C.text:C.textSub, fontSize:13, fontWeight:activePage===l?700:500, fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
             ))}
             <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="hover-lift" style={{ marginLeft:8, background:C.surface, border:`1px solid ${C.border}`, cursor:"pointer", width:36, height:36, borderRadius:9, color:C.text, display:"inline-flex", alignItems:"center", justifyContent:"center" }}>
               {theme === "dark" ? <BsSun size={ICON.md} /> : <BsMoonStars size={ICON.md} />}
             </button>
-            <button onClick={() => setPage("Community")} className="hover-lift" style={{ marginLeft:10, background:C.blue, border:"none", cursor:"pointer", padding:"9px 20px", borderRadius:9, color:C.white, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Join Free →</button>
+            <button onClick={() => goToPage("Community")} className="hover-lift" style={{ marginLeft:10, background:C.blue, border:"none", cursor:"pointer", padding:"9px 20px", borderRadius:9, color:C.white, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Join Free →</button>
           </div>
           <div className="mob-actions" style={{ display:"flex", alignItems:"center", gap:8 }}>
             <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="hover-lift" style={{ background:C.surface, border:`1px solid ${C.border}`, cursor:"pointer", width:36, height:36, borderRadius:9, color:C.text, display:"inline-flex", alignItems:"center", justifyContent:"center" }}>
@@ -707,10 +879,10 @@ function Nav({ page, setPage, theme, toggleTheme }) {
         {mob && (
           <div className="mob-menu" style={{ background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px", animation:"fadeIn .2s ease" }}>
             {NAV_LINKS.map(l => (
-              <button key={l} onClick={() => { setPage(l); setMob(false); }} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:page===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
+              <button key={l} onClick={() => { goToPage(l); setMob(false); }} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:activePage===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
             ))}
             <div style={{ padding:`10px clamp(16px,4vw,40px) 0` }}>
-              <button onClick={() => { setPage("Community"); setMob(false); }} style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6 }}>Join Free →</button>
+              <button onClick={() => { goToPage("Community"); setMob(false); }} style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6 }}>Join Free →</button>
             </div>
           </div>
         )}
@@ -1056,7 +1228,16 @@ function Learn() {
 }
 
 // ─── Events ───────────────────────────────────────────────────────
-function Events() {
+function Events({ selectedSlug }) {
+  const eventRefs = useRef({});
+
+  useEffect(() => {
+    if (!selectedSlug) return;
+    const node = eventRefs.current[selectedSlug];
+    if (!node) return;
+    node.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [selectedSlug]);
+
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="2026 Calendar" h1="Upcoming Events" sub="Blockchain events in Uganda and across Africa. Every event is a door — show up." />
@@ -1070,15 +1251,27 @@ function Events() {
           const color = e.color || C.blueLt;
           const featured = Boolean(e.featured);
           const isFlyer = e.imageFit === "contain";
+          const eventSlug = e.slug || toSlug(e.title);
+          const isHighlighted = selectedSlug === eventSlug;
           return (
-            <div key={e.title || i} className={`hover-card fade-up ${i===0?"events-featured-card":""}`} style={{ background:C.card, border:`1px solid ${featured?C.blue+"60":C.border}`, borderRadius:18, padding:"clamp(18px,2.6vw,24px)", display:"flex", flexDirection:"column", gap:12, position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}>
+            <div
+              key={e.title || i}
+              ref={(node) => {
+                eventRefs.current[eventSlug] = node;
+              }}
+              className={`hover-card fade-up ${i===0?"events-featured-card":""}`}
+              style={{ background:C.card, border:`1px solid ${isHighlighted?C.blue:featured?C.blue+"60":C.border}`, boxShadow:isHighlighted?`0 0 0 2px ${C.blue}35`:"none", borderRadius:18, padding:"clamp(18px,2.6vw,24px)", display:"flex", flexDirection:"column", gap:12, position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}
+            >
             {featured && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.blueLt})` }} />}
             {e.image && <div className="image-zoom" style={{ borderRadius:10 }}><img className={isFlyer?"event-flyer-image events-flyer-image":undefined} src={e.image} alt={e.title || "Event"} style={{ width:"100%", height:isFlyer?(i===0?300:240):(i===0?220:160), objectFit:"cover", objectPosition:isFlyer?"top center":"center", background:C.bg2, borderRadius:10 }} /></div>}
             <div style={{ display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:6 }}><Pill label={e.tag || "Event"} color={color} />{featured && <Pill label="Featured" color={C.cyan} />}</div>
             <h3 style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3 }}>{e.title || "Upcoming Event"}</h3>
             <div><div style={{ fontSize:13, color:color, fontFamily:"'Manrope',sans-serif", fontWeight:600, marginBottom:3, display:"flex", alignItems:"center", gap:6 }}><BsCalendarEvent size={ICON.xs} /> {e.date || "Date TBC"}</div><div style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xs} /> {e.location || "Location TBC"}</div></div>
             <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{e.desc || "Event details will be shared soon."}</p>
-            <a href={e.link || "#"} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:featured?C.blue:"transparent", border:featured?"none":`1px solid ${C.border}`, color:featured?C.white:C.text, padding:"11px 18px", borderRadius:10, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{featured?"Register Now":"Learn More"}<BsArrowRight size={ICON.xs} /></a>
+            <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:10, flexWrap:"wrap", marginTop:"auto" }}>
+              <a href={e.link || "#"} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:featured?C.blue:"transparent", border:featured?"none":`1px solid ${C.border}`, color:featured?C.white:C.text, padding:"11px 18px", borderRadius:10, fontSize:13, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{featured?"Register Now":"Learn More"}<BsArrowRight size={ICON.xs} /></a>
+              <ShareLinkButton url={getShareUrl(`/events/${eventSlug}`)} />
+            </div>
           </div>
         )})}
       </div>
@@ -1089,8 +1282,18 @@ function Events() {
         <h2 style={{ fontSize:"clamp(24px,3.8vw,36px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.8px", marginBottom:10 }}>Past Events</h2>
         <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:"0 0 16px", maxWidth:640 }}>A quick look at sessions we have already hosted or attended. This archive helps newcomers see the momentum we are building.</p>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:14 }}>
-          {PAST_EVENTS.map((event, i) => (
-            <div key={event.title + i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:16, display:"flex", flexDirection:"column", gap:10 }}>
+          {PAST_EVENTS.map((event, i) => {
+            const eventSlug = event.slug || toSlug(event.title);
+            const isHighlighted = selectedSlug === eventSlug;
+            return (
+            <div
+              key={event.title + i}
+              ref={(node) => {
+                eventRefs.current[eventSlug] = node;
+              }}
+              className="hover-card fade-up"
+              style={{ background:C.card, border:`1px solid ${isHighlighted?C.blue:C.border}`, boxShadow:isHighlighted?`0 0 0 2px ${C.blue}35`:"none", borderRadius:14, padding:16, display:"flex", flexDirection:"column", gap:10 }}
+            >
               <div className="image-zoom" style={{ borderRadius:10 }}>
                 <img src={event.image} alt={event.title} style={{ width:"100%", height:150, objectFit:"cover", borderRadius:10 }} />
               </div>
@@ -1102,9 +1305,12 @@ function Events() {
               <div style={{ fontSize:12, color:event.color, fontFamily:"'Manrope',sans-serif", fontWeight:600, display:"flex", alignItems:"center", gap:6 }}><BsCalendarEvent size={ICON.xxs} /> {event.date}</div>
               <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xxs} /> {event.location}</div>
               <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, margin:0, flex:1, fontFamily:"'Manrope',sans-serif" }}>{event.recap}</p>
-              <a href={event.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"9px 14px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{event.link.includes("youtube.com") || event.link.includes("youtu.be") ? "Watch Replay" : "View Source"} <BsArrowRight size={ICON.xxs} /></a>
+              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:10, flexWrap:"wrap" }}>
+                <a href={event.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"9px 14px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{event.link.includes("youtube.com") || event.link.includes("youtu.be") ? "Watch Replay" : "View Source"} <BsArrowRight size={ICON.xxs} /></a>
+                <ShareLinkButton url={getShareUrl(`/events/${eventSlug}`)} />
+              </div>
             </div>
-          ))}
+          )})}
         </div>
       </div>
 
@@ -1117,7 +1323,16 @@ function Events() {
 }
 
 // ─── Opportunities ────────────────────────────────────────────────
-function Opportunities() {
+function Opportunities({ selectedSlug }) {
+  const oppRefs = useRef({});
+
+  useEffect(() => {
+    if (!selectedSlug) return;
+    const node = oppRefs.current[selectedSlug];
+    if (!node) return;
+    node.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [selectedSlug]);
+
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Opportunities" h1="Earn, Build & Grow" sub="Jobs, grants, hackathons, and earn opportunities available to Ugandans right now." />
@@ -1143,15 +1358,29 @@ function Opportunities() {
               <h2 style={{ fontSize:20, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0 }}>{cat.cat}</h2>
             </div>
             <div className="op-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:12 }}>
-              {cat.items.map((item, ii) => (
-                <div key={ii} className={`hover-card ${ii===0?"op-featured-card":""}`} style={{ background:ii===0?C.surface:C.card, border:`1px solid ${ii===0?cat.color+"55":C.border}`, borderRadius:14, padding:ii===0?"26px 24px":"22px", display:"flex", flexDirection:"column", gap:12, gridColumn:ii===0?"span 2":"span 1", position:"relative", overflow:"hidden" }}>
-                  {ii===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:cat.color }} />}
-                  {item.logo && <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-start", height:40, marginBottom:4 }}><img src={item.logo} alt={item.title} style={{ maxHeight:40, maxWidth:100, objectFit:"contain" }} /></div>}
-                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}><h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3><Pill label={item.level} color={cat.color} small /></div>
-                  <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{item.desc}</p>
-                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>Explore <BsArrowRight size={ICON.xxs} /></a>
-                </div>
-              ))}
+              {cat.items.map((item, ii) => {
+                const oppSlug = item.slug || toSlug(item.title);
+                const isHighlighted = selectedSlug === oppSlug;
+                return (
+                  <div
+                    key={ii}
+                    ref={(node) => {
+                      oppRefs.current[oppSlug] = node;
+                    }}
+                    className={`hover-card ${ii===0?"op-featured-card":""}`}
+                    style={{ background:ii===0?C.surface:C.card, border:`1px solid ${isHighlighted?C.blue:ii===0?cat.color+"55":C.border}`, boxShadow:isHighlighted?`0 0 0 2px ${C.blue}35`:"none", borderRadius:14, padding:ii===0?"26px 24px":"22px", display:"flex", flexDirection:"column", gap:12, gridColumn:ii===0?"span 2":"span 1", position:"relative", overflow:"hidden" }}
+                  >
+                    {ii===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:cat.color }} />}
+                    {item.logo && <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-start", height:40, marginBottom:4 }}><img src={item.logo} alt={item.title} style={{ maxHeight:40, maxWidth:100, objectFit:"contain" }} /></div>}
+                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}><h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3><Pill label={item.level} color={cat.color} small /></div>
+                    <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{item.desc}</p>
+                    <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:10, flexWrap:"wrap" }}>
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>Explore <BsArrowRight size={ICON.xxs} /></a>
+                      <ShareLinkButton url={getShareUrl(`/opportunities/${oppSlug}`)} />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         ))}
@@ -1224,14 +1453,14 @@ function Resources() {
 }
 
 // ─── Blog ─────────────────────────────────────────────────────────
-function Blog({ setPost }) {
+function Blog({ onOpenPost }) {
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
       <PageHero label="Insights & Perspectives" h1="The Blog" sub="Written for Ugandans. Honest, practical, no hype." />
       <p style={{ margin:"-24px 0 24px", fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Upcoming topics: Bank of Uganda crypto stance, mobile money x Web3 integration, and local startup stories.</p>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:18 }}>
         {POSTS.map((p, i) => (
-          <div key={p.id} onClick={() => setPost(p)} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${i===0?C.blue+"45":C.border}`, borderRadius:18, padding:"clamp(20px,3vw,30px)", cursor:"pointer", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
+          <div key={p.id} onClick={() => onOpenPost(p)} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${i===0?C.blue+"45":C.border}`, borderRadius:18, padding:"clamp(20px,3vw,30px)", cursor:"pointer", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
             {i===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.purple})` }} />}
             <Pill label={p.tag} color={p.tagColor} />
             <h2 style={{ fontSize:18, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3, margin:0 }}>{p.title}</h2>
@@ -1242,7 +1471,10 @@ function Blog({ setPost }) {
                 <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.date}</span>
                 {p.read ? <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{p.read}</span> : null}
               </div>
-              <span style={{ fontSize:13, color:C.blueLt, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>Read <BsArrowRight size={ICON.xs} /></span>
+              <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+                <ShareLinkButton url={getShareUrl(`/blog/${p.slug || toSlug(p.title)}`)} />
+                <span style={{ fontSize:13, color:C.blueLt, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>Read <BsArrowRight size={ICON.xs} /></span>
+              </div>
             </div>
           </div>
         ))}
@@ -1251,7 +1483,7 @@ function Blog({ setPost }) {
   );
 }
 
-function BlogPost({ post, back, onSelectPost }) {
+function BlogPost({ post, onBack, onOpenPost }) {
   const endOfPostRef = useRef(null);
   const [showAfterReadPrompt, setShowAfterReadPrompt] = useState(false);
   const [hasReachedEnd, setHasReachedEnd] = useState(false);
@@ -1346,7 +1578,7 @@ function BlogPost({ post, back, onSelectPost }) {
 
   return (
     <div className="section-appear" style={{ maxWidth:720, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
-      <button onClick={back} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, marginBottom:40, padding:"9px 18px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}><BsArrowLeft size={ICON.sm} /> Back to Blog</button>
+      <button onClick={onBack} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:600, marginBottom:40, padding:"9px 18px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}><BsArrowLeft size={ICON.sm} /> Back to Blog</button>
       <Pill label={post.tag} color={post.tagColor} />
       <h1 style={{ fontSize:"clamp(26px,4vw,42px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", margin:"18px 0 14px", lineHeight:1.15 }}>{post.title}</h1>
       <div style={{ display:"flex", gap:20, marginBottom:36, paddingBottom:28, borderBottom:`1px solid ${C.border}`, flexWrap:"wrap" }}>
@@ -1355,6 +1587,9 @@ function BlogPost({ post, back, onSelectPost }) {
         {post.read ? <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span> : null}
       </div>
       {post.body.split("\n\n").map((para, i) => <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{para}</p>)}
+      <div style={{ marginTop:4, marginBottom:26 }}>
+        <ShareLinkButton label="Copy Link" />
+      </div>
       <div ref={endOfPostRef} style={{ width:"100%", height:1 }} />
 
       {showAfterReadPrompt && (
@@ -1368,10 +1603,10 @@ function BlogPost({ post, back, onSelectPost }) {
           </div>
 
           <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
-            {suggestedPosts[0] && typeof onSelectPost === "function" ? (
+            {suggestedPosts[0] && typeof onOpenPost === "function" ? (
               <button
                 type="button"
-                onClick={() => onSelectPost(suggestedPosts[0])}
+                onClick={() => onOpenPost(suggestedPosts[0])}
                 className="hover-lift"
                 style={{ background:C.blue, border:`1px solid ${C.blue}`, color:C.white, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700, padding:"10px 14px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}
               >
@@ -1380,7 +1615,7 @@ function BlogPost({ post, back, onSelectPost }) {
             ) : null}
             <button
               type="button"
-              onClick={back}
+              onClick={onBack}
               className="hover-lift"
               style={{ background:"transparent", border:`1px solid ${C.border}`, color:C.text, cursor:"pointer", fontSize:13, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700, padding:"10px 14px", borderRadius:9, display:"inline-flex", alignItems:"center", gap:6 }}
             >
@@ -1772,6 +2007,9 @@ function Footer({ setPage }) {
 
 // ─── App ──────────────────────────────────────────────────────────
 export default function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [theme, setTheme] = useState(() => {
     try {
       const storedTheme = localStorage.getItem(STORAGE_KEYS.theme);
@@ -1782,24 +2020,6 @@ export default function App() {
   });
 
   C = theme === "light" ? THEMES.light : THEMES.dark;
-
-  const [page, setPage] = useState(() => {
-    try {
-      const savedPage = localStorage.getItem(STORAGE_KEYS.activePage);
-      return NAV_LINKS.includes(savedPage) ? savedPage : DEFAULT_PAGE;
-    } catch {
-      return DEFAULT_PAGE;
-    }
-  });
-  const [post, setPost] = useState(null);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEYS.activePage, page);
-    } catch {
-      // Ignore localStorage write failures in private/incognito modes.
-    }
-  }, [page]);
 
   useEffect(() => {
     try {
@@ -1817,29 +2037,187 @@ export default function App() {
     setTheme(prev => (prev === "dark" ? "light" : "dark"));
   };
 
-  const go = p => {
-    setPost(null);
-    setPage(p);
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top:0, behavior:"smooth" });
-    }
+  const openPage = (page) => {
+    navigate(getPathFromPage(page));
   };
+
+  const openBlogPost = (post) => {
+    navigate(`/blog/${post.slug || toSlug(post.title)}`);
+  };
+
+  const routeMeta = useMemo(() => {
+    const pathname = location.pathname;
+    const base = {
+      title: "DigitalSphereUg | Uganda's Home for Blockchain & Web3",
+      description: "Free blockchain education, events, opportunities, and community for Uganda.",
+      image: DEFAULT_OG_IMAGE,
+      path: pathname,
+    };
+
+    if (pathname.startsWith("/blog/")) {
+      const slug = pathname.replace("/blog/", "");
+      const post = POSTS.find((item) => (item.slug || toSlug(item.title)) === slug);
+      if (post) {
+        return {
+          title: `${post.title} | DigitalSphereUg Blog`,
+          description: post.excerpt,
+          image: ethnileGroupHero,
+          path: pathname,
+        };
+      }
+    }
+
+    if (pathname.startsWith("/events/")) {
+      const slug = pathname.replace("/events/", "");
+      const event = ALL_EVENTS.find((item) => item.slug === slug);
+      if (event) {
+        return {
+          title: `${event.title} | DigitalSphereUg Events`,
+          description: event.desc || event.recap || "Event update from DigitalSphereUg.",
+          image: event.image || ethnileGroupHero,
+          path: pathname,
+        };
+      }
+    }
+
+    if (pathname.startsWith("/learn/")) {
+      const slug = pathname.replace("/learn/", "");
+      const track = TRACKS_BY_SLUG[slug];
+      if (track) {
+        return {
+          title: `${track.title} | DigitalSphereUg Learn`,
+          description: track.desc,
+          image: chainlinkRooftopPhoto,
+          path: pathname,
+        };
+      }
+    }
+
+    if (pathname.startsWith("/opportunities/")) {
+      const slug = pathname.replace("/opportunities/", "");
+      const opportunity = OPPORTUNITY_ITEMS.find((item) => item.slug === slug);
+      if (opportunity) {
+        return {
+          title: `${opportunity.title} | DigitalSphereUg Opportunities`,
+          description: opportunity.desc,
+          image: opportunity.logo || outdoorLaptopPhoto,
+          path: pathname,
+        };
+      }
+    }
+
+    if (pathname === "/learn") {
+      return {
+        title: "Learn Blockchain | DigitalSphereUg",
+        description: "Follow structured learning tracks designed for Ugandan Web3 learners.",
+        image: chainlinkRooftopPhoto,
+        path: pathname,
+      };
+    }
+    if (pathname === "/events") {
+      return {
+        title: "Events | DigitalSphereUg",
+        description: "Upcoming blockchain events and community sessions in Uganda.",
+        image: ethnileVenuePhoto,
+        path: pathname,
+      };
+    }
+    if (pathname === "/opportunities") {
+      return {
+        title: "Opportunities | DigitalSphereUg",
+        description: "Web3 jobs, grants, hackathons, and growth opportunities for Uganda.",
+        image: outdoorLaptopPhoto,
+        path: pathname,
+      };
+    }
+    if (pathname === "/resources") {
+      return {
+        title: "Resources | DigitalSphereUg",
+        description: "Curated free blockchain tools and learning resources.",
+        image: kyambogoRoomPhoto,
+        path: pathname,
+      };
+    }
+    if (pathname === "/blog") {
+      return {
+        title: "Blog | DigitalSphereUg",
+        description: "Uganda-first blockchain insights, guides, and stories.",
+        image: ethnileGroupHero,
+        path: pathname,
+      };
+    }
+    if (pathname === "/community") {
+      return {
+        title: "Community | DigitalSphereUg",
+        description: "Join Uganda's most active student blockchain and Web3 community.",
+        image: chainlinkStreetGroupPhoto,
+        path: pathname,
+      };
+    }
+    if (pathname === "/about") {
+      return {
+        title: "About | DigitalSphereUg",
+        description: "Built by students, built for Uganda's blockchain future.",
+        image: stellarGroupPhoto,
+        path: pathname,
+      };
+    }
+
+    return base;
+  }, [location.pathname]);
+
+  const BlogPostRoute = () => {
+    const { slug } = useParams();
+    const post = POSTS.find((item) => (item.slug || toSlug(item.title)) === slug);
+    if (!post) {
+      return <Navigate to="/blog" replace />;
+    }
+    return <BlogPost post={post} onBack={() => navigate("/blog")} onOpenPost={openBlogPost} />;
+  };
+
+  const LearnRoute = () => {
+    return <LessonDemoPage theme={theme} showTrackList />;
+  };
+
+  const LearnTrackRoute = () => {
+    const { slug } = useParams();
+    return <LessonDemoPage theme={theme} initialTrackSlug={slug || null} />;
+  };
+
+  const EventsRoute = () => {
+    const { slug } = useParams();
+    return <Events selectedSlug={slug || null} />;
+  };
+
+  const OpportunitiesRoute = () => {
+    const { slug } = useParams();
+    return <Opportunities selectedSlug={slug || null} />;
+  };
+
   return (
     <div style={{ background:C.bg, minHeight:"100vh", color:C.text }}>
-      <Nav page={page} setPage={go} theme={theme} toggleTheme={toggleTheme} />
+      <SiteMeta {...routeMeta} />
+      <ScrollToTop />
+      <Nav theme={theme} toggleTheme={toggleTheme} />
       <main>
-        {page === "Home"          && <Home setPage={go} />}
-        {page === "Learn"         && <LessonDemoPage theme={theme} />}
-        {page === "Events"        && <Events />}
-        {page === "Gallery"       && <Gallery setPage={go} />}
-        {page === "Opportunities" && <Opportunities />}
-        {page === "Resources"     && <Resources />}
-        {page === "Blog" && !post  && <Blog setPost={setPost} />}
-        {page === "Blog" && post   && <BlogPost post={post} back={() => setPost(null)} onSelectPost={setPost} />}
-        {page === "Community"     && <Community />}
-        {page === "About"         && <About setPage={go} theme={theme} />}
+        <Routes>
+          <Route path="/" element={<Home setPage={openPage} />} />
+          <Route path="/learn" element={<LearnRoute />} />
+          <Route path="/learn/:slug" element={<LearnTrackRoute />} />
+          <Route path="/events" element={<EventsRoute />} />
+          <Route path="/events/:slug" element={<EventsRoute />} />
+          <Route path="/gallery" element={<Gallery setPage={openPage} />} />
+          <Route path="/opportunities" element={<OpportunitiesRoute />} />
+          <Route path="/opportunities/:slug" element={<OpportunitiesRoute />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/blog" element={<Blog onOpenPost={openBlogPost} />} />
+          <Route path="/blog/:slug" element={<BlogPostRoute />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/about" element={<About setPage={openPage} theme={theme} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
-      <Footer setPage={go} />
+      <Footer setPage={openPage} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { BsLink45Deg } from "react-icons/bs";
 import LessonPage from "./LessonPage";
 
 const STORAGE_KEYS = {
@@ -1436,6 +1437,7 @@ function buildLessonData(track, lessonNumber) {
 const TRACKS = [
   {
     id: "basics",
+    slug: "track-1-blockchain-basics",
     trackName: "Blockchain Basics",
     color: "#34d399",
     summary: "Start from zero and understand blockchain in plain language with local examples.",
@@ -1522,6 +1524,7 @@ const TRACKS = [
   },
   {
     id: "solidity",
+    slug: "track-2-ethereum-solidity",
     trackName: "Ethereum and Solidity",
     color: "#38bdf8",
     summary: "Move from concepts to writing simple smart contract logic.",
@@ -1608,6 +1611,7 @@ const TRACKS = [
   },
   {
     id: "dapp",
+    slug: "track-3-build-your-first-dapp",
     trackName: "Build Your First dApp",
     color: "#4d6ff0",
     summary: "Connect frontend interfaces to blockchain actions with confidence.",
@@ -1694,6 +1698,7 @@ const TRACKS = [
   },
   {
     id: "career",
+    slug: "track-4-web3-career-africa",
     trackName: "Web3 Career in Africa",
     color: "#818cf8",
     summary: "Turn learning into practical opportunities, portfolio proof, and community visibility.",
@@ -1780,7 +1785,7 @@ const TRACKS = [
   },
 ];
 
-export default function LessonDemoPage({ theme = "dark" }) {
+export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null, showTrackList = false }) {
   const [activeTrackId, setActiveTrackId] = useState(() =>
     safeRead(STORAGE_KEYS.activeTrackId, null),
   );
@@ -1815,6 +1820,51 @@ export default function LessonDemoPage({ theme = "dark" }) {
       [trackId]: clampedLessonNumber,
     }));
   };
+
+  const copyToClipboard = async (text) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.setAttribute("readonly", "");
+    textArea.style.position = "absolute";
+    textArea.style.left = "-9999px";
+    document.body.appendChild(textArea);
+    textArea.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(textArea);
+    if (!ok) {
+      throw new Error("Clipboard unavailable");
+    }
+  };
+
+  useEffect(() => {
+    if (!showTrackList) {
+      return;
+    }
+
+    setActiveTrackId(null);
+    setCompletedTrackId(null);
+    setActiveLessonNumber(1);
+  }, [showTrackList]);
+
+  useEffect(() => {
+    if (!initialTrackSlug) {
+      return;
+    }
+
+    const matchedTrack = TRACKS.find((track) => track.slug === initialTrackSlug);
+    if (!matchedTrack) {
+      return;
+    }
+
+    if (activeTrackId !== matchedTrack.id) {
+      openTrackAtLesson(matchedTrack.id, 1);
+    }
+  }, [initialTrackSlug, activeTrackId]);
 
   const jumpToUnlockedLesson = (lessonNumber) => {
     if (!activeTrack) {
@@ -2453,6 +2503,39 @@ export default function LessonDemoPage({ theme = "dark" }) {
                         Resume from Lesson {resumeLessonNumber} {"->"}
                       </button>
                     ) : null}
+
+                    <button
+                      type="button"
+                      onClick={async (event) => {
+                        event.stopPropagation();
+                        const origin = typeof window !== "undefined" ? window.location.origin : "https://digitalsphereug.tech";
+                        const shareUrl = `${origin}/learn/${track.slug}`;
+                        try {
+                          await copyToClipboard(shareUrl);
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        } catch {
+                          setCopied(false);
+                        }
+                      }}
+                      style={{
+                        textAlign: "left",
+                        border: `1px solid ${colors.border}`,
+                        background: colors.card,
+                        color: copied ? colors.green : colors.textSub,
+                        borderRadius: 10,
+                        padding: "10px 12px",
+                        cursor: "pointer",
+                        fontFamily: "'Outfit', sans-serif",
+                        fontWeight: 700,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                      }}
+                    >
+                      <BsLink45Deg size={14} />
+                      {copied ? "Link copied!" : "Share Track"}
+                    </button>
                   </div>
                 );
               })()
