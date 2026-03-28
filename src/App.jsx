@@ -162,10 +162,10 @@ const TRACKS = [
 
 const EVENTS = [
   { title:"Blockchain DevFest Kampala 2026", slug:"blockchain-devfest-kampala-2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
-  { title:"DeFi with Chainlink Oracles", slug:"defi-with-chainlink-oracles", date:"March 28, 2026", location:"CLB BOARD ROOM, KYAMBOGO", tag:"University Session", color:C.cyan, featured:true, image:chainlinkFlyerPhoto, imageFit:"contain", desc:"Join us at Kyambogo University for a brief introduction to decentralized finance (DeFi) and how Chainlink oracles power real-world blockchain applications.", link:"https://luma.com/i0sdk4gq?tk=9qU4oK" },
 ];
 
 const PAST_EVENTS = [
+  { title:"DeFi with Chainlink Oracles", slug:"defi-with-chainlink-oracles", date:"Ended — March 28, 2026", location:"CLB Board Room, Kyambogo University", tag:"University Session", color:C.cyan, image:chainlinkFlyerPhoto, recap:"Chainlink East Africa joined students for DeFi, oracles, and Web3 careers at Kyambogo. Read the DigitalSphereUg session recap.", link:"https://digitalsphereug.tech/blog/chainlink-digital-sphere-kyambogo" },
   { title:"Kampala Blockchain Summit 2025", slug:"kampala-blockchain-summit-2026", date:"Ended — Nov 25, 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
   { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
   { title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
@@ -197,8 +197,105 @@ const OPPS = [
 ];
 
 const POSTS = [
-  { id:5, slug:"chainlink-digital-sphere-kyambogo", author:"Irankunda Musa", tag:"Events", tagColor:C.cyan, title:"DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next", excerpt:"What happens when blockchain experts walk into Kyambogo — and students who came confused walk out with clarity. A full recap of the Chainlink x DigitalSphereUg session.", date:"March 28, 2026", read:"10 min read", body:`DigitalSphereUg Showed Up at Kyambogo and nobody Wants to Miss What Comes Next\nWhat happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.\nSomething shifted at Kyambogo University today.\nA room full of students, some hearing the word \"blockchain\" for the very first time, others carrying months of curiosity with nowhere to put it sat down with on-chain Chainlink experts and walked out with clarity they did not have when they walked in.\nThe session was organized by ChainlinkEastAfrica — a team that understands exactly what this ecosystem needs at the grassroots level and keeps showing up to deliver it.\nDigitalSphereUg showed up because this is exactly what we exist for. We show up wherever knowledge about Blockchain and Web3 is being shared, absorb everything, and bring it back to every student who could not be in that room.\nToday, we brought it back.\nFirst — The basics nobody Usually Explains\nThe session opened exactly where it needed to, at the beginning.\nWhat is Blockchain?\nNot the buzzword. Not the price charts. The actual technology.\nBlockchain is a distributed digital ledger — a system that records transactions in blocks, chains them together in chronological order, and distributes identical copies across thousands of computers simultaneously. Once a transaction is verified and added to the chain, it cannot be altered, deleted, or reversed. No single person, company, or government controls it.\nThat is the foundation everything else is built on.\nWhy does it matter?\nThe use cases stretch further than most people realise — cross-border payments and remittances, supply chain tracking from farm to shelf, healthcare data ownership, digital identity verification, land registry systems, and decentralized financial services for the 1.4 billion people globally who have no access to a bank account. In Africa alone, blockchain is not a futuristic concept. It is a present solution to problems we live with daily.\nWhy is it considered top-tier emerging technology?\nThree reasons:\nOne — transparency. Every transaction is visible and verifiable by anyone on the network. No hidden fees. No manipulated records.\nTwo — immutability. What is recorded cannot be changed. In a continent where land disputes, election fraud, and financial manipulation are real challenges, that matters enormously.\nThree — decentralization. No single point of failure. No single authority with the power to shut it down, freeze your funds, or change the rules mid-game.\nThe Internet Grew Up,did you notice?\nBefore diving into DeFi, the session took a step back and traced the evolution of the internet itself. This context alone was worth the entire session.\nStay with us, this is where it gets interesting.\nWeb1 — The Read-Only Internet (1991–2004)\nThe early internet was a library. Static pages. Information you could read but not interact with. You were a consumer, never a participant. Think basic websites, early search engines, no social interaction.\nWeb2 — The Read-Write Internet (2004–Present)\nThis is the internet most of us grew up in. Social media. Platforms. User-generated content. You could now create, share, and interact. But there was a catch — the platforms owned everything. Your data, your content, your identity. Facebook, Google, YouTube built trillion-dollar businesses on content created by users who received nothing in return.\nWeb3 — The Read-Write-Own Internet (2020–Present)\nThis is where we are heading. Web3 gives users ownership of their data, their digital assets, their identity, and their financial activity. No platform in the middle taking a cut. No corporation storing your information and selling it to advertisers. The power shifts from companies back to individuals.\nWeb3 is not just a technology upgrade. It is a fundamental restructuring of who controls the internet — and who benefits from it.\nThe Web2 builders in the room had plenty of questions. Good. That curiosity is exactly where the transition begins.\nWeb3 and Careers, the opportunity most students are missing\nThis was the section that made people sit up straighter.\nThe Web3 industry is not just a technology shift — it is one of the fastest growing job markets in the world. And unlike most industries, it does not care where you studied, what your grades were, or which city you live in. It cares about what you can build, what you understand, and how you contribute.\nThe careers available in Web3 stretch far beyond development:\nFor the builders — Smart Contract Developers, dApp Developers, Protocol Engineers, and Blockchain Architects are among the highest paid technical roles globally. A skilled Solidity developer in Uganda can earn the same as one in San Francisco paid in cryptocurrency, working remotely.\nFor the communicators — Community Managers, Developer Relations, Content Creators, and Ecosystem Educators are in constant demand. Every protocol needs people who can explain complex technology to real humans. That skill is rare and valuable.\nFor the thinkers — Blockchain Researchers, Tokenomics Designers, DAO Governance Contributors, and Web3 Product Managers are building the infrastructure of a new financial internet. These roles require deep thinking, not just deep coding.\nFor the connectors — Business Development, Partnership Leads, and Ecosystem Growth roles exist at every major protocol. People who understand both the technology and the human relationships that drive adoption.\nThe entry point for all of these is the same curiosity, consistency, and showing up. The 15 minutes a day that Semwogere Collins committed to at the end of this session is not a small thing. It is the beginning of a career.\nThe Question Everyone Was Asking — What Is DeFi?\nDecentralized Finance. The theme of the day. And for good reason.\nHere is the question that comes up every time:\n\"How can my funds be secure if there is no bank protecting them?\"\nThe answer lies in understanding the difference between trust and trustless systems.\nIn CeFi (Centralized Finance) — your bank, your mobile money account, your investment platform — you are placing trust in an institution. You hand over your personal details, your funds, your financial life, and you hope the institution manages it responsibly.\nConsider this: when you open a bank account at Centenary Bank, you share your full identity, you agree to their terms, and you place your savings in their custody. If that bank faces financial trouble, freezes accounts, or abruptly closes, your money is at risk. You trusted them. They hold the power.\nIn DeFi (Decentralized Finance) — no trust is required. The system operates on trustless protocols — smart contracts that execute automatically when conditions are met, without any human intervention or institutional control.\nCreate a wallet. Secure your seed phrase. Share your public address. Receive funds from someone in the United States, Japan, or anywhere on earth — without sharing a single piece of personal information, without a bank approving the transaction, without waiting three to five business days.\nThat is trustless finance. And it works because of blockchain.\nHow Transactions Actually Work On-Chain\nStay with us — this is where it gets interesting.\nWhen a transaction happens on a blockchain network:\nThe transaction is broadcast to the network\nEvery node, every computer participating in the network receives a copy\nThe transaction is verified by the network through a consensus mechanism\nOnce verified it is recorded permanently as a block on the chain\nThat block is distributed across every node simultaneously\nIt cannot be reversed, altered, or deleted\nConsensus Mechanisms — the verification process come in different forms:\nProof of Work (PoW) — used by Bitcoin. Miners compete to solve complex mathematical puzzles. The winner validates the block and earns a reward. Energy intensive but battle-tested.\nProof of Stake (PoS) — used by Ethereum and many modern blockchains. Validators are chosen based on the amount of cryptocurrency they stake as collateral. More energy efficient and increasingly common.\nBoth mechanisms exist to answer one question: how do thousands of strangers agree on what is true without trusting each other? Blockchain solved that problem. That is why it matters.\nSmart Contracts — Self-Executing Agreements\nStay with us — this is where it gets interesting.\nA smart contract is a self-executing protocol stored on the blockchain. It runs automatically when predetermined conditions are met-no lawyers, no intermediaries, no delays.\nSimple example: a farmer in Eastern Uganda and a buyer in Kampala agree that payment will be released automatically once the goods are confirmed delivered. The smart contract holds the funds, monitors the condition, and executes the payment without either party needing to trust the other.\nNo middleman. No dispute. No waiting.\nThis is the foundation DeFi is built on.\nChainlink — The Bridge Between Blockchain and the Real World\nNow the main event.\nBlockchain is powerful. But it has one fundamental limitation — it cannot natively access real-world data. A smart contract on Ethereum has no way of knowing the current price of maize in Kampala, the weather in Mbarara, or whether a shipment has arrived at the port.\nThis is where Chainlink enters.\nChainlink is a decentralized oracle network — a middleware layer that connects blockchain smart contracts to real-world data, systems, and off-chain computation. It acts as the bridge between the closed world of the blockchain and the open world of real data.\nHow it works:\nChainlink sources data from multiple independent nodes simultaneously. Each node fetches the data independently, the results are aggregated, and the verified, tamper-proof data is fed into the smart contract. No single node can manipulate the outcome. The data is secure, reliable, and real-time.\nWhat kind of data?\nAsset prices — the real-time price of ETH, BTC, stablecoins\nCommodity prices — maize, coffee, oil\nWeather conditions — critical for agricultural insurance\nSports results — for prediction markets\nExchange rates — essential for cross-border DeFi applications in Africa\nA local example:\nImagine a DeFi lending protocol in Uganda that offers loans to smallholder farmers using their expected harvest as collateral. The loan amount, repayment terms, and liquidation conditions are all written into a smart contract. But the contract needs real-time commodity prices to function. Chainlink oracles feed verified maize prices directly into the contract automatically, securely, without any human operator. The farmer gets a fair loan. The lender gets reliable data. No bank required.\nThat is Chainlink powering DeFi in a real African context.\nBeyond Oracles — What Else Chainlink Brings\nThe session went deeper. Three additional Chainlink tools that are reshaping how blockchain connects to the world:\nChainlink Automation — smart contracts that trigger automatically based on real-world conditions. No manual intervention needed. If a price drops below a threshold, the contract executes. If a delivery is confirmed, payment releases.\nCross-Chain Interoperability Protocol (CCIP) — the protocol that allows different blockchain networks to communicate and transfer assets securely. Today there are hundreds of blockchains — Ethereum, Solana, Base, Stellar, Polygon, Celo. CCIP allows them to work together rather than in isolation.\nEnterprise Connectivity — closing the gap between traditional financial institutions and blockchain infrastructure. Banks, corporations, and governments can now interface with blockchain systems without rebuilding everything from scratch.\nThe session concluded with a definition that brought everything together:\nChainlink enables hybrid smart contracts — contracts that combine the security and immutability of on-chain code with the richness and flexibility of real-world off-chain data.\nChainlink Opportunities — What Is Available Right Now\nThis is where the session became personal for many students in the room. Because Chainlink is not just a technology to learn — it is an ecosystem with real, accessible opportunities for students in Uganda today.\nChainlink Bootcamps and Hackathons\nChainlink regularly runs developer bootcamps and global hackathons with significant prize pools. These are open to developers at all levels — including beginners who have just completed their first smart contract. Past Chainlink hackathons have paid out millions of dollars in prizes to participants from Africa.\nChainlink Grants\nThe Chainlink Community Grant Programme funds projects that build on or contribute to the Chainlink ecosystem. If you have an idea — a DeFi protocol, a data feed for African commodity markets, an agricultural insurance platform — this is real funding available to you right now.\nChainlink Developer Expert Programme\nFor those who go deep into the Chainlink ecosystem and develop strong technical knowledge — there is a formal recognition programme that opens doors to global visibility, speaking opportunities, and connections across the Web3 industry.\nChainlink Node Operator Opportunities\nAs the Chainlink network grows, the need for reliable node operators grows with it. Running a Chainlink node is a technical role with real earning potential — and it is something that can be set up and operated from Uganda.\nThe message from ChainlinkEastAfrica was clear: the opportunities are not reserved for developers in Europe or America. They are open. The barrier is not geography. It is knowledge — and that is exactly what this session was designed to remove.\nThe Chainlink Champion Ambassador Programme\nOne of the most exciting announcements of the session — and one that every student in that room should take seriously.\nChainlink Champions is Chainlink's official ambassador programme — a global network of passionate, knowledgeable community members who represent the Chainlink ecosystem in their local regions.\nAs a Chainlink Champion you:\nBecome an official representative of one of the most important protocols in Web3\nGet access to exclusive resources, early information, and direct support from the Chainlink team\nOrganise and host local events, workshops, and study groups in your community\nBuild a globally recognised reputation in the blockchain space\nConnect with a network of Champions across Africa and the world\nOpen doors to speaking opportunities, collaborations, and career advancement\nThis is not just a title. It is a launchpad.\nFor a student at Kyambogo University who wants to be taken seriously in the blockchain ecosystem — becoming a Chainlink Champion is one of the highest leverage moves available. You do not need years of experience. You need genuine passion, community presence, and the willingness to show up consistently.\nChainlinkEastAfrica is actively looking for Champions across Uganda and East Africa. If this speaks to you — do not wait. The programme rewards those who move early.\nThe Moment That Made Today Worth Everything\nAt the end of the session, something happened that reminded me exactly why DigitalSphereUg exists.\nA classmate — Semwogere Collins attending his very first blockchain event, turned to me and made a promise.\nHe would dedicate 15 minutes every day to learning about this technology.\nNot hours. Not a full course. Just 15 minutes of consistent curiosity every single day.\nThat is what onboarding looks like. Not mass registration. Not viral numbers. One person genuinely moved, genuinely committed deciding to begin.\nThat one moment is worth more than a thousand passive attendees. And it is exactly what DigitalSphereUg was built to create.\nThis Is Bigger Than One Session\nThe team at ChainlinkEastAfrica understands something that many global blockchain organisations miss context matters.\nThe examples they brought today were not lifted from Silicon Valley case studies. They were drawn from the financial realities that people in this room live every day. Mobile money limitations. Banking exclusion. Cross-border remittance friction. Agricultural financing gaps.\nThat is what great blockchain education looks like. Not abstract theory — but a direct line between the technology and the problems it was built to solve.\nYour Move\nIf you read this and felt something curiosity, recognition, or that quiet sense that you should have been in that room you were made for this space.\nThe next wave of Blockchain evolution is not coming. It is already here. The only question is whether you are building it or watching it pass.\nDigitalSphereUg is onboarding the next generation of Web3 builders across Uganda, East Africa, and the Continent.\nStudents. Beginners. The curious. The committed.\nIf that is you — or someone you know — this is your invitation.\n👉 Join the DigitalSphereUg community.\n📩 Subscribe to this blog — every session becomes a lesson you did not miss\n🔁 Share this article — one share could be someone else's 15-minutes-a-day moment\nDigitalSphereUg — A Student-Powered Blockchain & Web3 Platform.\nUganda, East Africa, Africa.
-  \nIrankunda Musa | Founder & Community Lead, DigitalSphereUg` },
+  { id:5, slug:"chainlink-digital-sphere-kyambogo", author:"Irankunda Musa", tag:"Events", tagColor:C.cyan, title:"DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next", excerpt:"What happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.", date:"March 28, 2026", read:"6 min read", body:`DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next
+
+What happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.
+
+Something shifted at Kyambogo University today.
+
+A room full of students, some hearing the word \"blockchain\" for the very first time, others carrying months of confusion with nowhere to put it, sat down with on-chain Chainlink experts and walked out with clarity they did not have when they walked in.
+
+The session was organized by ChainlinkEastAfrica, a team that understands exactly what this ecosystem needs at the grassroots level and keeps showing up to deliver it.
+
+DigitalSphereUg came as a community. Eager. Taking notes. Ready to bring everything back to every student who could not be in that room.
+
+Today, we brought it back.
+
+The Internet Grew Up. Did You Notice?
+
+Before DeFi, the session grounded everyone in context. Three phases. Three different internets.
+
+Web1 (1991–2004): Read only. A library you could visit but never write in. You consumed information. That was it.
+
+Web2 (2004–Present): Read and write. Social media. Platforms. You could create and share, but the platforms owned everything. Facebook, Google, and YouTube built trillion-dollar businesses on content created by users who received nothing in return.
+
+Web3 (2020–Present): Read, write, and own. Your data. Your assets. Your identity. No corporation in the middle taking a cut. The power shifts from platforms back to people.
+
+Web3 is not just a technology upgrade. It is a fundamental restructuring of who controls the internet and who benefits from it.
+
+What Is DeFi and Why Does It Matter Here?
+
+Decentralized Finance. The theme of the day.
+
+DeFi is the blockchain-powered alternative to the traditional financial system: banking, lending, borrowing, and earning without banks, brokers, or any middlemen.
+
+The question everyone always asks: \"How can my funds be secure without a bank?\"
+
+Here is the answer.
+
+When you open a bank account at Centenary Bank, you hand over your identity, your funds, and your financial life. If that bank faces trouble, freezes accounts, or abruptly closes, your money is at risk. You trusted them. They hold the power. That is CeFi, Centralized Finance built entirely on trust.
+
+DeFi is trustless. No institution holds your funds. No one can freeze your account. Create a wallet, secure your seed phrase, share your public address, and receive funds from anywhere on earth without sharing a single piece of personal information.
+
+Transactions move on-chain, recorded as blocks, distributed across thousands of computers simultaneously, verified by the network, and permanently locked. Once confirmed, nothing reverses it. No bank. No middleman. No permission required.
+
+Chainlink — Where Blockchain Meets the Real World
+
+Blockchain is powerful. But it has one limitation: it cannot natively access real-world data.
+
+A smart contract on Ethereum cannot know the current price of maize in Kampala, the weather in Mbarara, or whether a shipment arrived at the port.
+
+Chainlink solves that.
+
+Chainlink is a decentralized oracle network, a bridge connecting blockchain smart contracts to real-world data. It sources information from multiple independent nodes, aggregates the results, and feeds verified, tamper-proof, real-time data directly into smart contracts.
+
+A practical example close to home: imagine a DeFi lending protocol offering loans to smallholder farmers in Uganda using their expected harvest as collateral. Chainlink oracles feed real-time maize prices into the smart contract automatically, no human operator, no bank required. The farmer gets a fair loan. The lender gets reliable data.
+
+That is Chainlink powering DeFi in a real African context.
+
+The session also covered Chainlink Automation, Cross-Chain Interoperability Protocol (CCIP) which allows different blockchain networks to communicate securely, and Enterprise Connectivity, closing the gap between traditional institutions and blockchain infrastructure.
+
+The conclusion: Chainlink enables hybrid smart contracts, combining the security of on-chain code with the richness of real-world data.
+
+The Opportunity Nobody Told You About
+
+This is the part every student in that room needed to hear.
+
+Web3 is one of the fastest growing job markets in the world. It does not care where you studied, what your grades were, or which city you live in. It cares about what you can build, what you understand, and how you contribute.
+
+The roles stretch far beyond coding: community managers, ecosystem educators, DAO contributors, business development leads, blockchain researchers. Every protocol needs people who can explain complex technology to real humans. That skill is rare and valuable.
+
+And for those ready to go deeper, ChainlinkEastAfrica is actively looking for Chainlink Champions across Uganda and East Africa. An official ambassador programme with access to exclusive resources, global visibility, speaking opportunities, and direct support from the Chainlink team.
+
+The barrier is not geography. It is knowledge. And that is exactly what this session was designed to remove.
+
+The Moment That Made Today Worth Everything
+
+At the end of the session, a classmate, Semwogere Collins, attending his very first blockchain event, made a quiet promise.
+
+Fifteen minutes every day. To learn this technology.
+
+Not hours. Not a bootcamp. Just fifteen minutes of consistent curiosity, every single day.
+
+That is what onboarding looks like. One person, genuinely moved, genuinely committed, deciding to begin. That moment is worth more than a thousand passive attendees.
+
+It is exactly what DigitalSphereUg was built to create.
+
+Your Move
+
+The next wave of Blockchain is not coming. It is already here. The only question is whether you are building it or watching it pass.
+
+DigitalSphereUg is onboarding the next generation of Web3 builders across Uganda, East Africa, and the Continent.
+
+1. Join the community — https://t.me/digitalsphereug
+
+2. Subscribe to this blog — every session becomes a lesson you did not miss
+
+3. Share this — one share could be someone else's fifteen-minutes-a-day moment
+
+DigitalSphereUg — A Student-Powered Blockchain & Web3 Platform. Uganda, East Africa,The Continent.
+
+Irankunda Musa | Founder & Community Lead, digitalsphereug.tech` },
   { id:4, slug:"the-room-laughed-i-stayed-now-were-building", author:"Irankunda Musa", tag:"Community", tagColor:C.purple, title:"The Room Laughed. I Stayed. Now We're Building.", excerpt:"A story about showing up uninvited to the future - and deciding to open the door for everyone else.", date:"March 2026", read:"", body:`The Room Laughed. I Stayed. Now We're Building.
 
 A story about showing up uninvited to the future and deciding to open the door for everyone else.
@@ -1307,7 +1404,7 @@ function Events({ selectedSlug }) {
               <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", display:"flex", alignItems:"center", gap:6 }}><BsGeoAlt size={ICON.xxs} /> {event.location}</div>
               <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, margin:0, flex:1, fontFamily:"'Manrope',sans-serif" }}>{event.recap}</p>
               <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:10, flexWrap:"wrap" }}>
-                <a href={event.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"9px 14px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{event.link.includes("youtube.com") || event.link.includes("youtu.be") ? "Watch Replay" : "View Source"} <BsArrowRight size={ICON.xxs} /></a>
+                <a href={event.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, background:"transparent", border:`1px solid ${C.border}`, color:C.text, padding:"9px 14px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>{event.link.includes("youtube.com") || event.link.includes("youtu.be") ? "Watch Replay" : event.link.includes("/blog/") ? "Read Recap" : "View Source"} <BsArrowRight size={ICON.xxs} /></a>
                 <ShareLinkButton url={getShareUrl(`/events/${eventSlug}`)} />
               </div>
             </div>
@@ -1484,6 +1581,27 @@ function Blog({ onOpenPost }) {
   );
 }
 
+function linkifyBlogParagraph(text, paraIndex) {
+  const segments = text.split(/(https?:\/\/[^\s]+)/g);
+  return segments.map((seg, j) => {
+    if (/^https?:\/\//.test(seg)) {
+      const href = seg.replace(/[.,;:!?)}\]]+$/, "");
+      return (
+        <a
+          key={`p${paraIndex}-s${j}`}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color:C.blueLt, textDecoration:"underline", textUnderlineOffset:3 }}
+        >
+          {href}
+        </a>
+      );
+    }
+    return <span key={`p${paraIndex}-s${j}`}>{seg}</span>;
+  });
+}
+
 function BlogPost({ post, onBack, onOpenPost }) {
   const endOfPostRef = useRef(null);
   const [showAfterReadPrompt, setShowAfterReadPrompt] = useState(false);
@@ -1587,7 +1705,9 @@ function BlogPost({ post, onBack, onOpenPost }) {
         <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.date}</span>
         {post.read ? <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span> : null}
       </div>
-      {post.body.split("\n\n").map((para, i) => <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{para}</p>)}
+      {post.body.split("\n\n").map((para, i) => (
+        <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{linkifyBlogParagraph(para, i)}</p>
+      ))}
       <div style={{ marginTop:4, marginBottom:26 }}>
         <ShareLinkButton label="Copy Link" />
       </div>
