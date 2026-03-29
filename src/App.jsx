@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Link,
   Navigate,
   Route,
   Routes,
@@ -105,6 +106,7 @@ import chainlinkOppLogo from "./assets/opportunities/chainlink.jpg";
 import web3CareerOppLogo from "./assets/opportunities/web3 careers.jpg";
 import cryptoJobListOppLogo from "./assets/opportunities/crypto-job-list.jpg";
 import ethnileGlobalOppLogo from "./assets/opportunities/ethnile-global.jpg";
+import celoProofOfShipOppLogo from "./assets/opportunities/celo-proof-of-ship.jpg";
 import Hero from "./Hero";
 import LessonDemoPage from "./LessonDemoPage";
 
@@ -181,6 +183,7 @@ const OPPS = [
     { title:"Alchemy University", slug:"alchemy-university", desc:"Free blockchain bootcamp with official certification.", link:"https://university.alchemy.com/", level:"All Levels", logo:alchemyOppLogo },
   ]},
   { cat:"Grants & Funding", color:C.green, icon:BsCashStack, items:[
+    { title:"Celo Proof of Ship Season 2", slug:"celo-proof-of-ship-season-2", desc:"A monthly programme where builders ship real projects, document progress publicly, and earn funding inside the Celo ecosystem. $5,000 prize pool distributed across 50 projects every month by AI agents tracking real GitHub activity and on-chain contributions.", link:"https://celoplatform.notion.site/Proof-of-Ship-17cd5cb803de8060ba10d22a72b549f8", level:"Grants & Funding", badge:"Live", prize:"$5,000 monthly prize pool", projectsFunded:"50 projects per month", audience:"Student builders, developers, and Web3 enthusiasts across Uganda and East Africa", ctaLabel:"Apply Now", logo:celoProofOfShipOppLogo },
     { title:"Ethereum Foundation — ESP", slug:"ethereum-foundation-esp", desc:"Small grants for builders contributing to the Ethereum ecosystem.", link:"https://esp.ethereum.foundation/", level:"Intermediate", logo:ethereumFoundationOppLogo },
     { title:"Gitcoin Grants", slug:"gitcoin-grants", desc:"Community-funded grants for open source Web3 projects.", link:"https://gitcoin.co/grants", level:"All Levels", logo:gitcoinOppLogo },
   ]},
@@ -197,6 +200,51 @@ const OPPS = [
 ];
 
 const POSTS = [
+  { id:6, slug:"celo-proof-of-ship-season-2-is-live", author:"Irinatwe Bright", tag:"Opportunities", tagColor:C.green, title:"Celo Proof of Ship Season 2 Is Live — And You Cannot Afford to Sit This One Out", excerpt:"The opportunity putting student builders across Uganda on the global Web3 map.", date:"March 2026", read:"6 min read", body:`Celo Proof of Ship Season 2 Is Live — And You Cannot Afford to Sit This One Out
+
+The opportunity putting student builders across Uganda on the global Web3 map.
+
+Ever heard of Celo Proof of Ship?
+
+If not, this is exactly why DigitalSphereUg exists. Bringing the right opportunities to students in real time, so nobody misses what could change everything.
+
+What Is Celo Proof of Ship?
+
+Celo Proof of Ship is a monthly programme where builders ship real projects, document their progress publicly, and earn recognition and funding inside the Celo ecosystem.
+
+Every month, a $5,000 prize pool is distributed across 50 participating projects. Not by a panel of judges in a pitch room, but by AI agents tracking your actual GitHub activity and on-chain contributions. Your work speaks for itself.
+
+The most impactful projects earn a spot in a live Builder Showcase, presented directly to Celo ecosystem partners, investors, and funders from across the globe.
+
+Why It Is a Big Deal for Students in Uganda
+
+Celo is not a random choice for Africa. It is a blockchain built with Africa in mind: MiniPay, cUSD stablecoins, and mobile-first payment tools designed for the financial realities we live with every day.
+
+By participating, you build an on-chain reputation, a permanent, verifiable record of every project and contribution stored on the blockchain. This credential follows you across the entire Web3 ecosystem, opening doors to grants, retroactive funding, and global opportunities long after the programme ends.
+
+You also gain real connections with builders and mentors worldwide, global visibility through the monthly showcase, and direct entry into one of the most active blockchain ecosystems on the continent.
+
+The barrier is not geography. Not your university. Not your background. It is simply the decision to start.
+
+What Is Stopping You From Building?
+
+Fear to try. Fear to build in public. Fear to be seen before you feel ready.
+
+Nobody feels ready. The builders who win are the ones who ship anyway.
+
+Every detail on how to register, set up your project, and start building is on our opportunities page. Drop your thoughts in the comments. We want to hear what you are working on.
+
+1. Join the community — https://t.me/digitalsphereug
+
+2. Subscribe — every opportunity lands in your inbox before anywhere else
+
+3. Share this — the builder who needs this might be one share away
+
+DigitalSphereUg — A Student-Powered Blockchain & Web3 Platform.
+
+Uganda, East Africa, Uganda
+
+Irinatwe Bright | Co-Founder & Content Lead, DigitalSphereUg` },
   { id:5, slug:"chainlink-digital-sphere-kyambogo", author:"Irankunda Musa", tag:"Events", tagColor:C.cyan, title:"DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next", excerpt:"What happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.", date:"March 28, 2026", read:"6 min read", body:`DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next
 
 What happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.
@@ -938,34 +986,29 @@ function SiteMeta({ title, description, image, path }) {
 // ─── Nav ──────────────────────────────────────────────────────────
 function Nav({ theme, toggleTheme }) {
   const [mob, setMob] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
   const activePage = getActiveNavLabel(location.pathname);
-
-  const goToPage = (page) => {
-    navigate(getPathFromPage(page));
-  };
 
   return (
     <>
       <style>{getGStyles()}</style>
       <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:300, background:C.surface, backdropFilter:"blur(24px)", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,4vw,40px)", display:"flex", alignItems:"center", justifyContent:"space-between", height:64 }}>
-          <button onClick={() => goToPage("Home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
+          <Link to={getPathFromPage("Home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10, textDecoration:"none" }}>
             {/* Logo image is temporarily disabled. Replace this placeholder with your SVG logo later. */}
             <div style={{ width:48, height:48, borderRadius:10, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:12, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif" }}>
               DS
             </div>
             <span className="brand-text" style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
-          </button>
+          </Link>
           <div className="desktop-nav" style={{ display:"flex", gap:1, alignItems:"center" }}>
             {NAV_LINKS.map(l => (
-              <button key={l} onClick={() => goToPage(l)} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${activePage===l?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:activePage===l?C.text:C.textSub, fontSize:13, fontWeight:activePage===l?700:500, fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
+              <Link key={l} to={getPathFromPage(l)} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${activePage===l?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:activePage===l?C.text:C.textSub, fontSize:13, fontWeight:activePage===l?700:500, fontFamily:"'Space Grotesk',sans-serif", textDecoration:"none" }}>{l}</Link>
             ))}
             <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="hover-lift" style={{ marginLeft:8, background:C.surface, border:`1px solid ${C.border}`, cursor:"pointer", width:36, height:36, borderRadius:9, color:C.text, display:"inline-flex", alignItems:"center", justifyContent:"center" }}>
               {theme === "dark" ? <BsSun size={ICON.md} /> : <BsMoonStars size={ICON.md} />}
             </button>
-            <button onClick={() => goToPage("Community")} className="hover-lift" style={{ marginLeft:10, background:C.blue, border:"none", cursor:"pointer", padding:"9px 20px", borderRadius:9, color:C.white, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Join Free →</button>
+            <Link to={getPathFromPage("Community")} className="hover-lift" style={{ marginLeft:10, background:C.blue, border:"none", cursor:"pointer", padding:"9px 20px", borderRadius:9, color:C.white, fontSize:13, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", textDecoration:"none" }}>Join Free →</Link>
           </div>
           <div className="mob-actions" style={{ display:"flex", alignItems:"center", gap:8 }}>
             <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="hover-lift" style={{ background:C.surface, border:`1px solid ${C.border}`, cursor:"pointer", width:36, height:36, borderRadius:9, color:C.text, display:"inline-flex", alignItems:"center", justifyContent:"center" }}>
@@ -977,10 +1020,10 @@ function Nav({ theme, toggleTheme }) {
         {mob && (
           <div className="mob-menu" style={{ background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px", animation:"fadeIn .2s ease" }}>
             {NAV_LINKS.map(l => (
-              <button key={l} onClick={() => { goToPage(l); setMob(false); }} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:activePage===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif" }}>{l}</button>
+              <Link key={l} to={getPathFromPage(l)} onClick={() => setMob(false)} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:activePage===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif", textDecoration:"none" }}>{l}</Link>
             ))}
             <div style={{ padding:`10px clamp(16px,4vw,40px) 0` }}>
-              <button onClick={() => { goToPage("Community"); setMob(false); }} style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6 }}>Join Free →</button>
+              <Link to={getPathFromPage("Community")} onClick={() => setMob(false)} style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, textDecoration:"none" }}>Join Free →</Link>
             </div>
           </div>
         )}
@@ -1470,10 +1513,39 @@ function Opportunities({ selectedSlug }) {
                   >
                     {ii===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:cat.color }} />}
                     {item.logo && <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-start", height:40, marginBottom:4 }}><img src={item.logo} alt={item.title} style={{ maxHeight:40, maxWidth:100, objectFit:"contain" }} /></div>}
-                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}><h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3><Pill label={item.level} color={cat.color} small /></div>
+                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}>
+                      <h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3>
+                      <div style={{ display:"flex", alignItems:"center", gap:6, flexWrap:"wrap", justifyContent:"flex-end" }}>
+                        {item.badge && (
+                          <span style={{ fontSize:11, fontWeight:700, color:"#0f5132", background:"#22c55e22", border:"1px solid #22c55e66", padding:"3px 8px", borderRadius:999, fontFamily:"'Space Grotesk',sans-serif", textTransform:"uppercase", letterSpacing:"0.6px" }}>
+                            {item.badge}
+                          </span>
+                        )}
+                        <Pill label={item.level} color={cat.color} small />
+                      </div>
+                    </div>
                     <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{item.desc}</p>
+                    {(item.prize || item.projectsFunded || item.audience) && (
+                      <div style={{ display:"grid", gap:6, padding:"10px 12px", border:`1px solid ${cat.color}30`, borderRadius:10, background:`${cat.color}10` }}>
+                        {item.prize && (
+                          <div style={{ fontSize:13, color:cat.color, fontFamily:"'Manrope',sans-serif", fontWeight:800 }}>
+                            Prize: {item.prize}
+                          </div>
+                        )}
+                        {item.projectsFunded && (
+                          <div style={{ fontSize:12, color:C.textSub, fontFamily:"'Manrope',sans-serif", lineHeight:1.6 }}>
+                            Projects funded: {item.projectsFunded}
+                          </div>
+                        )}
+                        {item.audience && (
+                          <div style={{ fontSize:12, color:C.textSub, fontFamily:"'Manrope',sans-serif", lineHeight:1.6 }}>
+                            Who it is for: {item.audience}
+                          </div>
+                        )}
+                      </div>
+                    )}
                     <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:10, flexWrap:"wrap" }}>
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>Explore <BsArrowRight size={ICON.xxs} /></a>
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>{item.ctaLabel || "Explore"} <BsArrowRight size={ICON.xxs} /></a>
                       <ShareLinkButton url={getShareUrl(`/opportunities/${oppSlug}`)} />
                     </div>
                   </div>
