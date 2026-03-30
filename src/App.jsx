@@ -987,14 +987,47 @@ function SiteMeta({ title, description, image, path }) {
 function Nav({ theme, toggleTheme }) {
   const [mob, setMob] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const activePage = getActiveNavLabel(location.pathname);
+
+  const goMobile = (page) => {
+    navigate(getPathFromPage(page));
+    setMob(false);
+  };
+
+  useEffect(() => {
+    if (typeof document === "undefined" || !mob) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mob]);
 
   return (
     <>
       <style>{getGStyles()}</style>
-      <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:300, background:C.surface, backdropFilter:"blur(24px)", borderBottom:`1px solid ${C.border}` }}>
+      {mob && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setMob(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 4999,
+            border: "none",
+            padding: 0,
+            margin: 0,
+            cursor: "pointer",
+            background: "rgba(5, 7, 15, 0.55)",
+            WebkitTapHighlightColor: "transparent",
+          }}
+        />
+      )}
+      <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:mob ? 5000 : 300, background:C.surface, backdropFilter:"blur(24px)", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,4vw,40px)", display:"flex", alignItems:"center", justifyContent:"space-between", height:64 }}>
-          <Link to={getPathFromPage("Home")} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10, textDecoration:"none" }}>
+          <Link to={getPathFromPage("Home")} onClick={() => setMob(false)} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10, textDecoration:"none", WebkitTapHighlightColor:"transparent" }}>
             {/* Logo image is temporarily disabled. Replace this placeholder with your SVG logo later. */}
             <div style={{ width:48, height:48, borderRadius:10, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:12, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif" }}>
               DS
@@ -1018,12 +1051,25 @@ function Nav({ theme, toggleTheme }) {
           </div>
         </div>
         {mob && (
-          <div className="mob-menu" style={{ background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px", animation:"fadeIn .2s ease" }}>
+          <div className="mob-menu" style={{ position:"relative", zIndex:1, background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px", animation:"fadeIn .2s ease", WebkitTapHighlightColor:"transparent" }}>
             {NAV_LINKS.map(l => (
-              <Link key={l} to={getPathFromPage(l)} onClick={() => setMob(false)} style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:activePage===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif", textDecoration:"none" }}>{l}</Link>
+              <button
+                key={l}
+                type="button"
+                onClick={() => goMobile(l)}
+                style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:activePage===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif", WebkitTapHighlightColor:"transparent" }}
+              >
+                {l}
+              </button>
             ))}
             <div style={{ padding:`10px clamp(16px,4vw,40px) 0` }}>
-              <Link to={getPathFromPage("Community")} onClick={() => setMob(false)} style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, textDecoration:"none" }}>Join Free →</Link>
+              <button
+                type="button"
+                onClick={() => goMobile("Community")}
+                style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, WebkitTapHighlightColor:"transparent" }}
+              >
+                Join Free →
+              </button>
             </div>
           </div>
         )}
