@@ -4,7 +4,24 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 function isDuplicateContactError(error) {
   const message = (error?.message || '').toLowerCase();
-  return message.includes('already') && message.includes('exist');
+  const statusCode = Number(error?.statusCode || error?.status || error?.code || 0);
+  return (message.includes('already') && message.includes('exist')) || statusCode === 409;
+}
+
+function getErrorMessage(error) {
+  if (!error) {
+    return 'Unexpected subscription error';
+  }
+
+  if (typeof error.message === 'string' && error.message.trim()) {
+    return error.message;
+  }
+
+  if (typeof error.error?.message === 'string' && error.error.message.trim()) {
+    return error.error.message;
+  }
+
+  return 'Unexpected subscription error';
 }
 
 export default async function handler(req, res) {
@@ -24,8 +41,16 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
+  if (!process.env.RESEND_API_KEY || !process.env.RESEND_AUDIENCE_ID) {
+    return res.status(500).json({
+      error: 'Server email subscription is not configured. Please try again later.',
+    });
+  }
+
   try {
-    // Add to Resend Audience list
+    let isExistingContact = false;
+
+    // Add to Resend Audience list.
     try {
       await resend.contacts.create({
         email: normalizedEmail,
@@ -35,29 +60,36 @@ export default async function handler(req, res) {
       if (!isDuplicateContactError(error)) {
         throw error;
       }
+      isExistingContact = true;
     }
 
-    // Send welcome email
-    await resend.emails.send({
-      from: 'hello@mail.digitalsphereug.tech',
-      to: normalizedEmail,
-      subject: 'Welcome to DigitalSphereUg 🇺🇬',
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-          <h2 style="color: #1a1a2e;">Welcome to DigitalSphereUg 🇺🇬</h2>
-          <p style="color: #444; font-size: 16px;">You just joined a student-led, Uganda-built Web3 community.</p>
-          <p style="color: #444; font-size: 16px;">From now on, you will get practical learning resources, event announcements, and curated opportunities from Uganda's blockchain ecosystem.</p>
-          <p style="color: #444; font-size: 16px;">No gatekeeping. No paywalls. Free, always.</p>
-          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
-            <p style="color: #888; font-size: 14px;">— The DigitalSphereUg Team<br/>Student-led. Uganda-built. Web3-ready.</p>
-          </div>
-        </div>
-      `
-    });
+    // Send welcome email only on first successful add. If this fails, keep subscription successful.
+    if (!isExistingContact) {
+      try {
+        await resend.emails.send({
+          from: 'hello@mail.digitalsphereug.tech',
+          to: normalizedEmail,
+          subject: 'Welcome to DigitalSphereUg 🇺🇬',
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+              <h2 style="color: #1a1a2e;">Welcome to DigitalSphereUg 🇺🇬</h2>
+              <p style="color: #444; font-size: 16px;">You just joined a student-led, Uganda-built Web3 community.</p>
+              <p style="color: #444; font-size: 16px;">From now on, you will get practical learning resources, event announcements, and curated opportunities from Uganda's blockchain ecosystem.</p>
+              <p style="color: #444; font-size: 16px;">No gatekeeping. No paywalls. Free, always.</p>
+              <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
+                <p style="color: #888; font-size: 14px;">— The DigitalSphereUg Team<br/>Student-led. Uganda-built. Web3-ready.</p>
+              </div>
+            </div>
+          `,
+        });
+      } catch (emailError) {
+        console.error('Welcome email failed after successful subscription:', getErrorMessage(emailError));
+      }
+    }
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, existing: isExistingContact });
 
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: getErrorMessage(error) });
   }
 }

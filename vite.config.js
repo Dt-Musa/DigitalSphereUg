@@ -8,6 +8,12 @@ const base = isGithubActions && repoName ? `/${repoName}/` : '/'
 export default defineConfig({
   base,
   plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    setupFiles: './src/test/setupTests.js',
+    globals: true,
+    clearMocks: true,
+  },
   server: {
     headers: {
       'Cache-Control': 'no-store',

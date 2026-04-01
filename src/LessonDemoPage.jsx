@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BsLink45Deg } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import LessonPage from "./LessonPage";
 
 const STORAGE_KEYS = {
@@ -145,9 +146,7 @@ const TRACK_RESOURCE_CATALOG = {
   ],
 };
 
-const NON_EMBEDDABLE_YOUTUBE_IDS = new Set([
-  "i501_M4je_A",
-]);
+const NON_EMBEDDABLE_YOUTUBE_IDS = new Set();
 
 function toEmbeddableVideoUrl(url) {
   const youtubeId = extractYouTubeId(url);
@@ -845,7 +844,85 @@ const QUESTION_BANK_BY_RESOURCE_KEY = {
       successMessage: "Right. Uganda's youth profile is a meaningful ecosystem argument.",
     },
   ],
+  "cyfrin.io/updraft": [
+    {
+      question: "What is Cyfrin Updraft mainly focused on?",
+      options: [
+        "Smart contract security and developer education",
+        "NFT trading for beginners",
+        "A blockchain gaming studio",
+        "Wallet hardware manufacturing",
+      ],
+      correctIndex: 0,
+      hint: "Think safety, review, and developer training.",
+      successMessage: "Correct. Updraft is about security-focused learning.",
+    },
+    {
+      question: "Why is a security-first mindset important for smart contract developers?",
+      options: [
+        "Because bugs can permanently lose or lock real value",
+        "Because smart contracts never hold money",
+        "Because audits are optional decoration",
+        "Because security only matters after launch",
+      ],
+      correctIndex: 0,
+      hint: "Think about irreversible blockchain transactions.",
+      successMessage: "Exactly. Mistakes in contracts can be costly and permanent.",
+    },
+    {
+      question: "Which habit best matches a Cyfrin-style learning path?",
+      options: [
+        "Skip tests to move faster",
+        "Write tests, review assumptions, and learn from vulnerabilities",
+        "Copy code without understanding it",
+        "Deploy first and ask questions later",
+      ],
+      correctIndex: 1,
+      hint: "Look for careful verification and testing.",
+      successMessage: "Right. Rigorous testing and review are the point.",
+    },
+  ],
+  "buildspace.so": [
+    {
+      question: "What is buildspace best known for?",
+      options: [
+        "Helping builders ship projects quickly in public",
+        "Providing blockchain exchange services",
+        "Selling NFT collections",
+        "Running a wallet app",
+      ],
+      correctIndex: 0,
+      hint: "Think shipping, building, and public progress.",
+      successMessage: "Correct. buildspace is about building and shipping.",
+    },
+    {
+      question: "Why does building publicly help a learner's career?",
+      options: [
+        "It hides progress from employers",
+        "It creates visible proof of work and momentum",
+        "It guarantees immediate funding",
+        "It removes the need for practice",
+      ],
+      correctIndex: 1,
+      hint: "Think portfolio and credibility.",
+      successMessage: "Exactly. Visible work builds trust and opportunity.",
+    },
+    {
+      question: "Which action fits a buildspace-style weekly sprint?",
+      options: [
+        "Watch tutorials without shipping anything",
+        "Ship a small feature, share progress, and reflect",
+        "Wait until the project is perfect before starting",
+        "Hide the project until the end",
+      ],
+      correctIndex: 1,
+      hint: "Choose the option with execution and feedback loops.",
+      successMessage: "Right. Small shipped outputs are the core habit.",
+    },
+  ],
 };
+
+QUESTION_BANK_BY_RESOURCE_KEY["youtube:bBC-nXj3Ng4"] = QUESTION_BANK_BY_RESOURCE_KEY["youtube:i501_M4je_A"];
 
 function extractYouTubeId(url) {
   const match = String(url).match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?v=))([\w-]{11})/i);
@@ -853,9 +930,13 @@ function extractYouTubeId(url) {
 }
 
 function getResourceQuestionKey(url) {
-  const normalizedUrl = String(url || "").trim().toLowerCase();
-  const youtubeId = extractYouTubeId(normalizedUrl);
+  const rawUrl = String(url || "").trim();
+  const normalizedUrl = rawUrl.toLowerCase();
+  const youtubeId = extractYouTubeId(rawUrl);
   if (youtubeId) {
+    if (youtubeId === "bBC-nXj3Ng4") {
+      return "youtube:i501_M4je_A";
+    }
     return `youtube:${youtubeId}`;
   }
 
@@ -882,16 +963,47 @@ function sanitizeQuestionBankSet(questionSet) {
     return [];
   }
 
-  return questionSet.slice(0, 3).map((question) => {
-    const options = uniqueTextList(Array.isArray(question.options) ? question.options : []).slice(0, 4);
-    const hasValidCorrectIndex = Number.isInteger(question.correctIndex)
+  return questionSet.slice(0, 3).map((question, index) => {
+    const originalOptions = Array.isArray(question.options) ? question.options : [];
+
+    // Deduplicate options, but keep `correctIndex` aligned with the *actual correct option text*.
+    // This prevents incorrect "correct" marking when options get deduped/truncated.
+    const correctText = Number.isInteger(question.correctIndex)
       && question.correctIndex >= 0
-      && question.correctIndex < options.length;
+      && question.correctIndex < originalOptions.length
+      ? originalOptions[question.correctIndex]
+      : null;
+
+    const dedupedOptions = uniqueTextList(originalOptions);
+    const normalizedCorrect = typeof correctText === "string" ? correctText.trim().toLowerCase() : "";
+    let options = dedupedOptions.slice(0, 4);
+
+    if (normalizedCorrect && !options.some((opt) => opt.trim().toLowerCase() === normalizedCorrect)) {
+      if (options.length < 4) {
+        options = [...options, correctText];
+      } else {
+        options = [...options.slice(0, 3), correctText];
+      }
+    }
+
+    let correctIndex = normalizedCorrect
+      ? Math.max(0, options.findIndex((opt) => opt.trim().toLowerCase() === normalizedCorrect))
+      : 0;
+
+    // Balance answer positions deterministically to avoid a repeated "same option is always correct" pattern.
+    if (options.length >= 3 && correctIndex >= 0 && correctIndex < options.length) {
+      const desiredCorrectIndex = getStableCorrectIndex(String(question.question || ""), index + 1) % options.length;
+      const correctOption = options[correctIndex];
+      const wrongOptions = options.filter((_, optionIndex) => optionIndex !== correctIndex);
+      const reordered = positionOptions(correctOption, wrongOptions, desiredCorrectIndex);
+      options = reordered.options;
+      correctIndex = reordered.correctIndex;
+    }
 
     return {
       question: String(question.question || "").trim(),
       options,
-      correctIndex: hasValidCorrectIndex ? question.correctIndex : 0,
+      correctIndex: Number.isInteger(correctIndex) && correctIndex >= 0 ? correctIndex : 0,
       hint: String(question.hint || "Pick the option that best matches the lesson."),
       successMessage: String(question.successMessage || "Correct. Nice work."),
     };
@@ -1207,15 +1319,30 @@ function finalizeQuestionSet(questions, title, blueprint, resourceTitle) {
 
     seenQuestions.add(uniqueQuestion.toLowerCase());
 
-    const correctedIndex = Math.max(
-      0,
-      dedupedOptions.findIndex((option) => option === originalCorrect),
-    );
+    // Remap correctIndex safely even after deduping/truncation.
+    // Use normalized text matching instead of strict string equality.
+    const normalizedCorrect = typeof originalCorrect === "string"
+      ? originalCorrect.trim().toLowerCase()
+      : "";
+
+    let options = dedupedOptions.slice(0, 3);
+
+    if (normalizedCorrect && !options.some((opt) => opt.trim().toLowerCase() === normalizedCorrect)) {
+      if (options.length < 3) {
+        options = [...options, originalCorrect];
+      } else {
+        options = [...options.slice(0, 2), originalCorrect];
+      }
+    }
+
+    const correctedIndex = normalizedCorrect
+      ? Math.max(0, options.findIndex((opt) => opt.trim().toLowerCase() === normalizedCorrect))
+      : 0;
 
     return {
       ...question,
       question: uniqueQuestion,
-      options: dedupedOptions.slice(0, 3),
+      options,
       correctIndex: correctedIndex,
     };
   });
@@ -1417,6 +1544,18 @@ function buildLessonData(track, lessonNumber) {
     || track.lesson.resource;
   const guide = buildGuideForLesson(title, resource);
 
+  // For the first step in each track, use the explicitly authored questions.
+  // This keeps question intent aligned with the lesson rather than relying
+  // on generic blueprint/question-bank generation.
+  const manualQuestions =
+    index === 0 && Array.isArray(track.lesson.questions)
+      ? sanitizeQuestionBankSet(track.lesson.questions)
+      : null;
+  const questions =
+    manualQuestions && manualQuestions.length === 3
+      ? manualQuestions
+      : buildQuestionsForTitle(title, resource);
+
   return {
     ...track.lesson,
     lessonNumber,
@@ -1429,7 +1568,7 @@ function buildLessonData(track, lessonNumber) {
       ...resource,
       description: `This resource is mapped specifically to ${title} and drives the lesson flow, questions, and practical task for this step.`,
     },
-    questions: buildQuestionsForTitle(title, resource),
+    questions,
     practicalTask: guide.practicalTask,
   };
 }
@@ -1785,32 +1924,89 @@ const TRACKS = [
   },
 ];
 
-export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null, showTrackList = false }) {
+const TRACK_BY_ID = Object.fromEntries(TRACKS.map((track) => [track.id, track]));
+
+function toPositiveInt(value, fallback = 1) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 1 ? Math.floor(parsed) : fallback;
+}
+
+function sanitizeTrackId(trackId) {
+  return Object.prototype.hasOwnProperty.call(TRACK_BY_ID, trackId) ? trackId : null;
+}
+
+function sanitizeLessonByTrack(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return {};
+  }
+
+  return Object.entries(value).reduce((acc, [trackId, lessonNumber]) => {
+    const track = TRACK_BY_ID[trackId];
+    if (!track) {
+      return acc;
+    }
+
+    const clamped = Math.max(1, Math.min(toPositiveInt(lessonNumber, 1), track.lesson.totalLessons));
+    acc[trackId] = clamped;
+    return acc;
+  }, {});
+}
+
+function sanitizeCompletedByTrack(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return {};
+  }
+
+  return Object.entries(value).reduce((acc, [trackId, completedCount]) => {
+    const track = TRACK_BY_ID[trackId];
+    if (!track) {
+      return acc;
+    }
+
+    const clamped = Math.max(0, Math.min(Number(completedCount) || 0, track.lesson.totalLessons));
+    acc[trackId] = clamped;
+    return acc;
+  }, {});
+}
+
+export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null, initialLessonNumber = null, showTrackList = false }) {
+  const navigate = useNavigate();
   const [activeTrackId, setActiveTrackId] = useState(() =>
-    safeRead(STORAGE_KEYS.activeTrackId, null),
+    sanitizeTrackId(safeRead(STORAGE_KEYS.activeTrackId, null)),
   );
   const [activeLessonByTrack, setActiveLessonByTrack] = useState(() =>
-    safeRead(STORAGE_KEYS.activeLessonByTrack, {}),
+    sanitizeLessonByTrack(safeRead(STORAGE_KEYS.activeLessonByTrack, {})),
   );
   const [activeLessonNumber, setActiveLessonNumber] = useState(() =>
-    safeRead(STORAGE_KEYS.activeLessonNumber, 1),
+    toPositiveInt(safeRead(STORAGE_KEYS.activeLessonNumber, 1), 1),
   );
   const [completedByTrack, setCompletedByTrack] = useState(() =>
-    safeRead(STORAGE_KEYS.completedByTrack, {}),
+    sanitizeCompletedByTrack(safeRead(STORAGE_KEYS.completedByTrack, {})),
   );
   const [completedTrackId, setCompletedTrackId] = useState(() =>
-    safeRead(STORAGE_KEYS.completedTrackId, null),
+    sanitizeTrackId(safeRead(STORAGE_KEYS.completedTrackId, null)),
   );
-  const [copied, setCopied] = useState(false);
-  const isMobile = typeof window !== "undefined" ? window.innerWidth <= 768 : false;
+  const [copiedTrackId, setCopiedTrackId] = useState(null);
+  const [copiedProofCard, setCopiedProofCard] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false,
+  );
+  const copiedResetTimeoutRef = useRef(null);
   const colors = TOKENS[theme] || TOKENS.dark;
 
-  const openTrackAtLesson = (trackId, lessonNumber) => {
+  const scrollToTopInstant = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  };
+
+  const openTrackAtLesson = (trackId, lessonNumber, options = {}) => {
     const track = TRACKS.find((item) => item.id === trackId);
     if (!track) {
       return;
     }
 
+    const { updateUrl = true, replaceHistory = false } = options;
     const clampedLessonNumber = Math.max(1, Math.min(lessonNumber, track.lesson.totalLessons));
     setCompletedTrackId(null);
     setActiveTrackId(trackId);
@@ -1819,6 +2015,12 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
       ...prev,
       [trackId]: clampedLessonNumber,
     }));
+
+    if (updateUrl) {
+      scrollToTopInstant();
+      const lessonPath = `/learn/${track.slug}/lesson/${clampedLessonNumber}`;
+      navigate(lessonPath, { replace: replaceHistory });
+    }
   };
 
   const copyToClipboard = async (text) => {
@@ -1841,6 +2043,38 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
     }
   };
 
+  const scheduleCopiedReset = (onReset, delayMs = 1500) => {
+    if (copiedResetTimeoutRef.current) {
+      clearTimeout(copiedResetTimeoutRef.current);
+    }
+
+    copiedResetTimeoutRef.current = setTimeout(() => {
+      onReset();
+      copiedResetTimeoutRef.current = null;
+    }, delayMs);
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
+    const onResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  useEffect(() => () => {
+    if (copiedResetTimeoutRef.current) {
+      clearTimeout(copiedResetTimeoutRef.current);
+    }
+  }, []);
+
   useEffect(() => {
     if (!showTrackList) {
       return;
@@ -1849,7 +2083,12 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
     setActiveTrackId(null);
     setCompletedTrackId(null);
     setActiveLessonNumber(1);
-  }, [showTrackList]);
+
+    const currentPath = typeof window !== "undefined" ? window.location.pathname : "/learn";
+    if (currentPath !== "/learn") {
+      navigate("/learn", { replace: true });
+    }
+  }, [showTrackList, navigate]);
 
   useEffect(() => {
     if (!initialTrackSlug) {
@@ -1861,10 +2100,23 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
       return;
     }
 
-    if (activeTrackId !== matchedTrack.id) {
-      openTrackAtLesson(matchedTrack.id, 1);
+    const savedLessonForTrack = activeLessonByTrack[matchedTrack.id];
+    const desiredLesson = typeof initialLessonNumber === "number"
+      ? initialLessonNumber
+      : (typeof savedLessonForTrack === "number" ? savedLessonForTrack : 1);
+
+    const isSameTrack = activeTrackId === matchedTrack.id;
+    const isSameLesson = activeLessonNumber === desiredLesson;
+
+    if (!isSameTrack || !isSameLesson) {
+      openTrackAtLesson(matchedTrack.id, desiredLesson, { replaceHistory: true });
     }
-  }, [initialTrackSlug, activeTrackId]);
+  }, [
+    initialTrackSlug,
+    initialLessonNumber,
+    // Keep this effect tied to URL intent only; including local lesson state
+    // causes route sync to fight manual next/previous navigation.
+  ]);
 
   const jumpToUnlockedLesson = (lessonNumber) => {
     if (!activeTrack) {
@@ -1875,17 +2127,27 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
     const maxUnlockedLesson = Math.min(activeTrack.lesson.totalLessons, completedCount + 1);
     const safeLessonNumber = Math.max(1, Math.min(lessonNumber, maxUnlockedLesson));
     openTrackAtLesson(activeTrack.id, safeLessonNumber);
-
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
   };
 
-  safeWrite(STORAGE_KEYS.activeTrackId, activeTrackId);
-  safeWrite(STORAGE_KEYS.activeLessonNumber, activeLessonNumber);
-  safeWrite(STORAGE_KEYS.activeLessonByTrack, activeLessonByTrack);
-  safeWrite(STORAGE_KEYS.completedByTrack, completedByTrack);
-  safeWrite(STORAGE_KEYS.completedTrackId, completedTrackId);
+  useEffect(() => {
+    safeWrite(STORAGE_KEYS.activeTrackId, activeTrackId);
+  }, [activeTrackId]);
+
+  useEffect(() => {
+    safeWrite(STORAGE_KEYS.activeLessonNumber, activeLessonNumber);
+  }, [activeLessonNumber]);
+
+  useEffect(() => {
+    safeWrite(STORAGE_KEYS.activeLessonByTrack, activeLessonByTrack);
+  }, [activeLessonByTrack]);
+
+  useEffect(() => {
+    safeWrite(STORAGE_KEYS.completedByTrack, completedByTrack);
+  }, [completedByTrack]);
+
+  useEffect(() => {
+    safeWrite(STORAGE_KEYS.completedTrackId, completedTrackId);
+  }, [completedTrackId]);
 
   const activeTrack = useMemo(
     () => TRACKS.find((track) => track.id === activeTrackId) || null,
@@ -2003,7 +2265,7 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
 
       ctx.fillStyle = "#e2e8f0";
       ctx.font = "700 26px Arial";
-      ctx.fillText("digitalsphereug.org", 120, 1220);
+      ctx.fillText("digitalsphereug.tech", 120, 1220);
 
       const link = document.createElement("a");
       link.download = `${completedTrack.trackName.toLowerCase().replace(/\s+/g, "-")}-score-card.png`;
@@ -2212,11 +2474,11 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
                 type="button"
                 onClick={async () => {
                   try {
-                    await navigator.clipboard.writeText(shareText);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 1500);
+                    await copyToClipboard(shareText);
+                    setCopiedProofCard(true);
+                    scheduleCopiedReset(() => setCopiedProofCard(false), 1500);
                   } catch {
-                    setCopied(false);
+                    setCopiedProofCard(false);
                   }
                 }}
                 style={{
@@ -2230,7 +2492,7 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
                   fontWeight: 700,
                 }}
               >
-                {copied ? "Copied" : "Copy Proof Card Text"}
+                {copiedProofCard ? "Copied" : "Copy Proof Card Text"}
               </button>
               <a
                 href="https://t.me/digitalsphereug"
@@ -2257,9 +2519,7 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
                   type="button"
                   onClick={() => {
                     openTrackAtLesson(nextTrack.id, 1);
-                    if (typeof window !== "undefined") {
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }
+                    scrollToTopInstant();
                   }}
                   style={{
                     flex: 1,
@@ -2279,7 +2539,10 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
               ) : null}
               <button
                 type="button"
-                onClick={() => setCompletedTrackId(null)}
+                onClick={() => {
+                  setCompletedTrackId(null);
+                  navigate("/learn");
+                }}
                 style={{
                   flex: 1,
                   minWidth: 180,
@@ -2509,20 +2772,20 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
                       onClick={async (event) => {
                         event.stopPropagation();
                         const origin = typeof window !== "undefined" ? window.location.origin : "https://digitalsphereug.tech";
-                        const shareUrl = `${origin}/learn/${track.slug}`;
+                        const shareUrl = `${origin}/learn/${track.slug}/lesson/1`;
                         try {
                           await copyToClipboard(shareUrl);
-                          setCopied(true);
-                          setTimeout(() => setCopied(false), 2000);
+                          setCopiedTrackId(track.id);
+                          scheduleCopiedReset(() => setCopiedTrackId(null), 2000);
                         } catch {
-                          setCopied(false);
+                          setCopiedTrackId(null);
                         }
                       }}
                       style={{
                         textAlign: "left",
                         border: `1px solid ${colors.border}`,
                         background: colors.card,
-                        color: copied ? colors.green : colors.textSub,
+                        color: copiedTrackId === track.id ? colors.green : colors.textSub,
                         borderRadius: 10,
                         padding: "10px 12px",
                         cursor: "pointer",
@@ -2534,7 +2797,7 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
                       }}
                     >
                       <BsLink45Deg size={14} />
-                      {copied ? "Link copied!" : "Share Track"}
+                      {copiedTrackId === track.id ? "Link copied!" : "Share Track"}
                     </button>
                   </div>
                 );
@@ -2550,6 +2813,16 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
     <LessonPage
       {...activeLesson}
       theme={theme}
+      onLessonCompleted={() => {
+        if (!activeTrack) {
+          return;
+        }
+
+        setCompletedByTrack((prev) => ({
+          ...prev,
+          [activeTrack.id]: Math.max(prev[activeTrack.id] || 0, activeLessonNumber),
+        }));
+      }}
       onNextLesson={() => {
         if (!activeTrack) {
           return;
@@ -2564,22 +2837,18 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
 
         if (activeLessonNumber < total) {
           openTrackAtLesson(activeTrack.id, activeLessonNumber + 1);
-          if (typeof window !== "undefined") {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }
           return;
         }
 
         setCompletedTrackId(activeTrack.id);
         setActiveTrackId(null);
         setActiveLessonNumber(1);
-        if (typeof window !== "undefined") {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+        scrollToTopInstant();
       }}
       onBackToTrack={() => {
         setActiveTrackId(null);
         setActiveLessonNumber(1);
+        navigate("/learn");
       }}
       onPreviousLesson={() => {
         if (!activeTrack || activeLessonNumber <= 1) {
@@ -2587,9 +2856,6 @@ export default function LessonDemoPage({ theme = "dark", initialTrackSlug = null
         }
 
         openTrackAtLesson(activeTrack.id, activeLessonNumber - 1);
-        if (typeof window !== "undefined") {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
       }}
       onJumpToLesson={jumpToUnlockedLesson}
     />

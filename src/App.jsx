@@ -73,6 +73,13 @@ import ethnileEventPhoto from "./assets/gallery/EthNileEvent.jpg";
 import buidlAfricaScenesPhoto from "./assets/gallery/Scenes From BuidlAfrica-2025.jpg";
 import stellarSorobanSessionPhoto from "./assets/gallery/Stellar EAC-Intractive-sessions about Soroban.jpg";
 import communityWhatsAppMomentPhoto from "./assets/gallery/IMG-20260325-WA0035.jpg";
+import article1BlogImage from "./assets/Blog/article1.jpg";
+import article2BlogImage from "./assets/Blog/article2.jpg";
+import article3BlogImage from "./assets/Blog/article3.jpg";
+import article4BlogImage from "./assets/Blog/article4.jpeg";
+import article6BlogImage from "./assets/Blog/article6.jpeg";
+import article7BlogImage from "./assets/Blog/article7.jpg";
+import article3UpdatedBlogImage from "./assets/Blog/kyambongo-lecture -room.jpg.jpg";
 import thirdwebResourceLogo from "./assets/resources/thirdweb.jpg";
 import metaMaskResourceLogo from "./assets/resources/meta-mask.jpg";
 import hardhatResourceLogo from "./assets/resources/hardhat.jpg";
@@ -200,7 +207,126 @@ const OPPS = [
 ];
 
 const POSTS = [
-  { id:6, slug:"celo-proof-of-ship-season-2-is-live", author:"Irinatwe Bright", tag:"Opportunities", tagColor:C.green, title:"Celo Proof of Ship Season 2 Is Live — And You Cannot Afford to Sit This One Out", excerpt:"The opportunity putting student builders across Uganda on the global Web3 map.", date:"March 2026", read:"6 min read", body:`Celo Proof of Ship Season 2 Is Live — And You Cannot Afford to Sit This One Out
+  { id:7, slug:"rwa-tokenization-africas-on-chain-moment-uganda-2026", author:"Irankunda Musa", tag:"Insights", tagColor:C.blueLt, image:article7BlogImage, title:"From Confusion in Meetups to Africa's On-Chain Moment: Why RWA Tokenization Hits Different in 2026 - And What It Means for Uganda", excerpt:"A DigitalSphereUg breakdown of the biggest blockchain story happening in our own backyard.", date:"April 2026", read:"9 min read", body:`From Confusion in Meetups to Africa's On-Chain Moment: Why RWA Tokenization Hits Different in 2026 - And What It Means for Uganda
+
+A DigitalSphereUg breakdown of the biggest blockchain story happening in our own backyard.
+
+Today, somewhere between my third Web3 meetup of the week and a phone notification that stopped me mid-scroll, something clicked.
+
+One word kept echoing in every room: tokenization.
+
+People were talking passionately about RWA - Real-World Assets. At first I was confused, just like many of you might be right now. Is this crypto hype or something real?
+
+Then my phone lit up: tokenized real-world assets have crossed $26 billion in Total Value Locked globally.
+
+Not surprising. In 2025, RWA became one of the biggest drivers of blockchain adoption worldwide. In 2026 it is moving from pilots to real infrastructure. From conversation to construction.
+
+And at that moment, a second notification reminded me of something every Ugandan in the blockchain space should know: Uganda's $5.5 billion tokenized economy - the Diacente Group and Global Settlement Network (GSN) partnership - paired with the pilot of our digital shilling CBDC.
+
+That moment connected everything. This is worthy of our full attention.
+
+What Is RWA - In Plain English
+
+RWA stands for Real-World Asset tokenization.
+
+It is the process of taking real, tangible things - farms, factories, solar plants, mines, real estate, government bonds - and turning ownership rights into digital tokens on a blockchain.
+
+These tokens represent a claim on the actual asset. Not crypto hype. Real value, made accessible.
+
+Think of it this way: instead of a farmer struggling to get a loan against their harvest because paperwork is slow and trust is low - tokenization makes that harvest a digital asset that investors anywhere in the world can support transparently.
+
+That is the power of RWA. Not speculation. Infrastructure.
+
+Uganda Is Not Watching From the Sidelines
+
+Diacente Group and GSN have partnered to launch a $5.5 billion tokenized economy in Uganda - digitizing real infrastructure across agro-processing, mineral extraction, renewable energy, and trade logistics.
+
+The centrepiece is the Karamoja Green Industrial and Special Economic Zone (GISEZ) - already a national flagship under Uganda's development plan.
+
+Running alongside it is Uganda's first CBDC pilot - the digital shilling - deployed on a permissioned blockchain and accessible via smartphone and USSD. Over 40 million Ugandans can transact digitally including those with the most basic phones.
+
+The projected impact: over one million jobs and up to $10 billion in annual exports.
+
+This is Africa taking ownership of its infrastructure story - using blockchain not for speculation but for practical, generational development.
+
+What This Means For Your Career
+
+This is the section most people skip. Do not.
+
+Uganda's tokenized economy is not just a government project. It is a job market that does not fully exist yet - and the people who prepare now will be first in the door when it opens.
+
+What will be needed:
+
+Smart contract developers - building protocols that govern tokenized assets and automated settlements.
+
+Compliance specialists - every tokenized asset needs KYC, AML, and regulatory alignment. This is non-negotiable.
+
+RWA valuers and analysts - someone has to assess whether a solar plant in Karamoja is worth what its token claims. A new profession being born right now.
+
+Mobile-first product designers - the CBDC runs on USSD. Reaching 40 million Ugandans means building for the least powerful phone, not the latest iPhone.
+
+Community educators - explaining tokenization to a farmer in Mbale or a market trader in Owino requires someone who speaks both blockchain and Ugandan daily reality. Rare. Genuinely valuable.
+
+The entry point for all of these is the same - curiosity, consistency, and starting now.
+
+Why Local Voices Are the Most Powerful Force in the Room
+
+International capital and foreign technology can build the infrastructure. But the people who make it work on the ground - who make it inclusive, understood, and trusted by ordinary Ugandans - those have to come from here.
+
+The Diacente and GSN initiative will need Ugandan developers, designers, educators, compliance experts, and entrepreneurs who understand how to integrate blockchain with MTN Mobile Money and Airtel Money rails.
+
+That is where local knowledge becomes irreplaceable. And that is where you come in.
+
+DigitalSphereUg Is Here to Bridge the Gap
+
+We are not just watching Uganda's tokenized economy take shape. We are preparing Ugandans and East Africans to participate in it meaningfully.
+
+Here is where to start right now:
+
+Learn the basics - Track 1 walks you through blockchain from the ground up. No experience needed. No cost.
+
+https://digitalsphereug.tech/learn
+
+Find opportunities - grants, hackathons, bootcamps, and jobs connected to Uganda's blockchain ecosystem.
+
+https://digitalsphereug.tech/opportunities
+
+Stay informed - daily blockchain and Web3 updates without the noise.
+
+https://t.me/digitalsphereug
+
+Join the community - 300+ Ugandans already inside.
+
+https://digitalsphereug.tech/community
+
+The Moment That Brought This Home
+
+At a recent Chainlink session at Kyambogo, a classmate - Semwogere Collins - attending his very first blockchain event, made a quiet promise.
+
+He would dedicate 15 minutes every day to learning about this technology.
+
+Not hours. Not a full course. Just 15 minutes of consistent curiosity every single day.
+
+That is what this moment asks of every Ugandan student. Not mastery. Just 15 minutes a day of choosing to understand the technology being built in your own country - so that when the doors open, you are ready to walk through them.
+
+Your Move
+
+The next wave of blockchain in Uganda is not coming. It is already here. The only question is whether you are building it or watching it pass.
+
+Explore the platform - https://digitalsphereug.tech
+
+Subscribe to this blog - every article is a step further into the ecosystem
+
+Share this - one share could be the moment that changes someone's direction entirely
+
+DigitalSphereUg - A Student-Powered Blockchain and Web3 Platform.
+
+Uganda. East Africa. The Continent.
+
+Irankunda Musa | Lead, DigitalSphereUg
+
+https://digitalsphereug.tech` },
+  { id:6, slug:"celo-proof-of-ship-season-2-is-live", author:"Irinatwe Bright", tag:"Opportunities", tagColor:C.green, image:article6BlogImage, title:"Celo Proof of Ship Season 2 Is Live — And You Cannot Afford to Sit This One Out", excerpt:"The opportunity putting student builders across Uganda on the global Web3 map.", date:"March 2026", read:"6 min read", body:`Celo Proof of Ship Season 2 Is Live — And You Cannot Afford to Sit This One Out
 
 The opportunity putting student builders across Uganda on the global Web3 map.
 
@@ -245,7 +371,7 @@ DigitalSphereUg — A Student-Powered Blockchain & Web3 Platform.
 Uganda, East Africa, Uganda
 
 Irinatwe Bright | Co-Founder & Content Lead, DigitalSphereUg` },
-  { id:5, slug:"chainlink-digital-sphere-kyambogo", author:"Irankunda Musa", tag:"Events", tagColor:C.cyan, title:"DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next", excerpt:"What happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.", date:"March 28, 2026", read:"6 min read", body:`DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next
+  { id:5, slug:"chainlink-digital-sphere-kyambogo", author:"Irankunda Musa", tag:"Events", tagColor:C.cyan, image:article3UpdatedBlogImage, title:"DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next", excerpt:"What happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.", date:"March 28, 2026", read:"6 min read", body:`DigitalSphereUg Showed Up at Kyambogo — And Nobody Wants to Miss What Comes Next
 
 What happens when blockchain experts walk into Kyambogo and students who came confused walk out with clarity.
 
@@ -344,7 +470,7 @@ DigitalSphereUg is onboarding the next generation of Web3 builders across Uganda
 DigitalSphereUg — A Student-Powered Blockchain & Web3 Platform. Uganda, East Africa,The Continent.
 
 Irankunda Musa | Founder & Community Lead, digitalsphereug.tech` },
-  { id:4, slug:"the-room-laughed-i-stayed-now-were-building", author:"Irankunda Musa", tag:"Community", tagColor:C.purple, title:"The Room Laughed. I Stayed. Now We're Building.", excerpt:"A story about showing up uninvited to the future - and deciding to open the door for everyone else.", date:"March 2026", read:"", body:`The Room Laughed. I Stayed. Now We're Building.
+  { id:4, slug:"the-room-laughed-i-stayed-now-were-building", author:"Irankunda Musa", tag:"Community", tagColor:C.purple, image:article4BlogImage, title:"The Room Laughed. I Stayed. Now We're Building.", excerpt:"A story about showing up uninvited to the future - and deciding to open the door for everyone else.", date:"March 2026", read:"", body:`The Room Laughed. I Stayed. Now We're Building.
 
 A story about showing up uninvited to the future and deciding to open the door for everyone else.
 
@@ -463,9 +589,207 @@ DigitalSphereUg - A Student-Powered Blockchain & Web3 Platform.
 Uganda. East Africa. The Continent.
 
 Written by Irankunda Musa | Founder & Community Lead, DigitalSphereUg.` },
-  { id:1, slug:"what-is-blockchain-uganda", author:"Irankunda Musa", tag:"Education", tagColor:C.green, title:"What is Blockchain — Explained for Ugandans", excerpt:"Forget the jargon. Here's what blockchain actually is, why it matters for Africa, and why Uganda is positioned to benefit more than most.", date:"March 2026", read:"5 min read", body:"Blockchain is simply a digital record book that nobody owns but everyone can see. Instead of a bank keeping your transaction history on their private servers, blockchain stores it across thousands of computers worldwide. No single person, company or government can change it.\n\nFor Uganda and Africa broadly, this is significant. Think about land ownership disputes, remittances from the diaspora eating 10% in fees, or the difficulty of building a credit history when you're unbanked. Blockchain has practical, near-term answers to all of these.\n\nThe opportunity is real. East Africa already leads the world in mobile money adoption. Adding blockchain on top of that existing infrastructure is a natural next step — and young Ugandans who understand both worlds will be the ones who build it.\n\nYou don't need to be a programmer to be part of this. Understanding the technology, the ecosystem, and the problems it solves is itself a skill the industry desperately needs." },
-  { id:2, slug:"top-free-resources-web3-2026", author:"Irinatwe Bright", tag:"Resources", tagColor:C.blueLt, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
-  { id:3, slug:"blockchain-opportunities-uganda", author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
+  { id:1, slug:"what-is-blockchain-and-why-every-ugandan-should-care-right-now", oldSlugs:["what-is-blockchain-uganda"], author:"Irankunda Musa", tag:"Education", tagColor:C.green, image:article1BlogImage, title:"What Is Blockchain — And Why Every Ugandan Should Care Right Now", excerpt:"A DigitalSphereUg beginner's guide to the technology reshaping Africa's future.", date:"April 2026", read:"12 min read", body:`What Is Blockchain — And Why Every Ugandan Should Care Right Now
+
+A DigitalSphereUg beginner's guide to the technology reshaping Africa's future.
+
+There is a word you keep hearing everywhere.
+
+In meetups. On social media. In government announcements. In conversations between people who seem to know something you do not.
+
+Blockchain.
+
+And every time it comes up, it either sounds too technical to engage with or too hyped to take seriously.
+
+This article is for everyone who has heard the word and kept scrolling. For every student who sat in a room where blockchain was being discussed and nodded along without fully understanding what was being said.
+
+We are going to fix that today. No jargon. No assumptions. Just a clear, honest explanation of what blockchain actually is — and why it matters more in Uganda and East Africa than almost anywhere else on earth.
+
+Start Here — The Problem Blockchain Was Built to Solve
+
+Before explaining what blockchain is, it helps to understand the problem it was built to solve.
+
+Imagine you want to send money from Kampala to your cousin in Nairobi.
+
+Right now, that process looks something like this: you go to a bank or mobile money agent, hand over your money, pay a fee, and trust that a chain of institutions — your bank, possibly an intermediary, your cousin's bank — will move that value correctly and deliver it in full. The process takes time. The fees eat into the amount. And at every step, you are trusting institutions you have no real visibility into.
+
+Now ask yourself a harder question: how does your bank know your account balance is correct? Because they keep a record. Their record. On their servers. Under their control.
+
+If that record is wrong — through error, fraud, or institutional failure — your money is at risk. You have no independent way to verify it. You simply trust.
+
+Blockchain was built to remove that trust requirement entirely.
+
+What Is Blockchain — The Real Explanation
+
+A blockchain is a shared digital record book that nobody owns but everybody can see.
+
+Instead of one bank, one company, or one government keeping a single copy of a record on their private servers — a blockchain copies that same record across thousands of computers simultaneously, all around the world.
+
+Every time a new transaction happens it is grouped with other recent transactions into a block. That block is verified by the network, given a unique digital fingerprint called a hash, and added to the chain of all previous blocks in chronological order.
+
+Hence the name: block plus chain.
+
+Once a block is added it cannot be changed. If someone tries to alter a record in an old block the hash changes — and every subsequent block in the chain immediately becomes invalid. The entire network sees the tampering instantly. The dishonest version gets rejected.
+
+This is what people mean when they say blockchain is immutable — what is written cannot be unwritten.
+
+Three Properties That Make It Different
+
+Decentralization
+
+No single person, company, or government controls a public blockchain. There is no head office. No CEO. No central server that can be shut down, hacked, or coerced. Thousands of computers — called nodes — each hold an identical copy of the entire record. For a transaction to be valid, the majority of nodes must agree. One bad actor cannot corrupt the whole system.
+
+Transparency
+
+Every transaction ever recorded on a public blockchain is visible to anyone in the world. You can look up any wallet address and see its complete history. Nothing is hidden. No backroom deals. No manipulated books.
+
+Trustlessness
+
+This is the most important and most misunderstood property. Trustless does not mean you cannot trust anyone. It means you do not have to. The system enforces honesty through mathematics and code — not through goodwill or institutional reputation. Two strangers on opposite sides of the world can transact directly, with the blockchain as their neutral, incorruptible referee.
+
+A Ugandan Lens — Why This Matters Here Specifically
+
+The properties above are interesting everywhere. But they are transformative in Uganda and across Africa. Here is why.
+
+Land ownership disputes are one of the most common and costly legal battles in Uganda. Records are fragmented, paper-based, and vulnerable to manipulation. A land registry built on blockchain would be public, permanent, and impossible to falsify without the entire network detecting it.
+
+Cross-border remittances remain one of the most expensive financial services in East Africa. Formal average fees across Africa often exceed 8 to 9 percent — meaning if your relative in the diaspora sends you $200, up to $18 disappears before it reaches you. Blockchain is already changing this in our region. Celo's stablecoin cUSD — pegged to the US dollar and built for mobile — is being used across East Africa for exactly this problem. A pilot by Celo Foundation and Mercy Corps Ventures in Kenya demonstrated that using cUSD reduced average transaction costs from 28.8 percent down to 2.02 percent for a $5 transfer — a 93 percent reduction in fees. The same infrastructure is available to Ugandans today. Celo Uganda, an active community in Kampala, is already building local awareness and adoption around these tools.
+
+Financial inclusion remains a challenge in rural Uganda where formal banking infrastructure is thin. Mobile money has made enormous progress. Blockchain builds on top of that progress — enabling savings, lending, insurance, and investment products that require no bank account, no physical branch, and no traditional credit history.
+
+Supply chain integrity — from coffee farms in Mount Elgon to export markets in Europe — can be tracked transparently on-chain. Every step. Every hand the product passes through. Every price paid. Buyers get verified proof of origin and fair trade practices. Farmers get fairer prices.
+
+The problems blockchain solves are not abstract first-world problems. They are the daily realities of millions of Ugandans. That is why this technology matters here more than the noise around it suggests.
+
+How Does a Blockchain Transaction Actually Work
+
+Walk through what happens when you send cryptocurrency from one wallet to another:
+
+Step 1 — You initiate the transaction
+
+You open your wallet app and send a specified amount to another wallet address. Your wallet signs the transaction with your private key — a unique cryptographic proof that you authorise this specific transfer.
+
+Step 2 — The transaction is broadcast
+
+Your signed transaction is sent out to the network. Every node receives a copy and holds it in a waiting area called the mempool — a pool of pending transactions.
+
+Step 3 — Verification
+
+Nodes compete to verify batches of pending transactions and bundle them into a block. The verification process — called a consensus mechanism — ensures no fraudulent transactions make it through.
+
+Step 4 — The block is added
+
+The verified block is added to the chain. Every node updates its copy of the record simultaneously. The transaction is now permanent and irreversible.
+
+Step 5 — Confirmation
+
+Your recipient sees the funds. On modern blockchains like Ethereum, the process typically completes in under a minute under normal conditions. On Bitcoin, expect a few minutes.
+
+No bank approved it. No branch processed it. No business hours applied.
+
+Proof of Work vs Proof of Stake — The Two Main Consensus Mechanisms
+
+When thousands of strangers around the world all need to agree on what is true without trusting each other, the blockchain needs a system for reaching that agreement. These systems are called consensus mechanisms.
+
+Proof of Work — used by Bitcoin
+
+Miners — participants with powerful computers — compete to solve complex mathematical puzzles. The first to solve the puzzle earns the right to add the next block and receives a reward in cryptocurrency. The competition is intentionally difficult and energy-intensive — making it expensive to cheat.
+
+Think of it like a room full of students all racing to solve the same incredibly hard exam question. The winner gets to write the answer on the board — and everyone checks it before accepting it.
+
+Proof of Stake — used by Ethereum and most modern blockchains
+
+Instead of competing through computation, validators are selected based on how much cryptocurrency they lock up as collateral — called staking. If a validator attempts fraud, they lose their stake. Honest participation is financially incentivised. Dishonesty is financially punishing.
+
+More energy efficient. Faster. And increasingly the standard for new blockchains.
+
+What Can Be Built on Blockchain
+
+The ledger itself is the foundation. What gets built on top of it is where it gets genuinely exciting.
+
+Cryptocurrency
+
+The most well-known application. Digital money that moves without banks. Bitcoin, Ethereum, and thousands of others.
+
+Smart Contracts
+
+Self-executing agreements written in code. When condition A is met, action B happens automatically — no lawyer, no middleman, no delay. The foundation of DeFi, NFTs, DAOs, and most of what we call Web3.
+
+DeFi — Decentralised Finance
+
+Banking services — lending, borrowing, earning interest, trading — built on smart contracts and accessible to anyone with an internet connection. No credit score. No branch visit. No rejected application.
+
+NFTs — Non-Fungible Tokens
+
+Proof of unique ownership for digital and physical assets. Most relevant for Uganda right now: verifying land ownership on-chain, making records permanent and tamper-proof. Beyond land, NFTs are used by institutions verifying real-world ownership, artists, musicians, and game developers.
+
+DAOs — Decentralised Autonomous Organisations
+
+Organisations governed by smart contracts and community votes rather than boards of directors or shareholders. Every rule is written in code. Every decision is transparent. Imagine a Ugandan farmers cooperative governed entirely by smart contracts — every member votes, every decision is recorded, no single person controls the funds.
+
+RWA — Real World Asset Tokenization
+
+Physical assets — farms, factories, solar plants, bonds — converted into digital tokens on a blockchain, enabling fractional ownership, global investment, and transparent settlement. Globally, real world asset tokenization is one of the fastest growing sectors in blockchain. For Uganda — where land disputes are common, investment access is limited, and agricultural supply chains lack transparency — the applications are immediate and practical.
+
+What Blockchain Is Not
+
+Because the noise around this technology is loud, it is worth being clear about what it is not.
+
+Blockchain is not Bitcoin. Bitcoin is one application built on one blockchain. The technology is far broader than any single cryptocurrency.
+
+Blockchain is not anonymous. Public blockchains are pseudonymous — wallet addresses are visible to everyone, even if the identity behind them is not immediately obvious. With enough analysis, transactions can be traced.
+
+Blockchain is not a scam. Like any technology, it has been used fraudulently by bad actors. The technology itself is neutral. Electricity powers hospitals and weapons. The internet built Wikipedia and enabled fraud. Blockchain is a tool. The outcome depends on who uses it and how.
+
+Blockchain is not only for developers. The ecosystem needs educators, writers, designers, compliance specialists, community managers, and entrepreneurs. Understanding the technology — even without writing a single line of code — is a genuinely valuable skill.
+
+Where Do You Start
+
+Understanding blockchain is the first step. But understanding without direction leads nowhere.
+
+Here is a clear path forward:
+
+Start with Track 1 on DigitalSphereUg
+
+Our Blockchain Basics track was built for exactly this moment — for someone who has read an article like this and wants to go deeper without getting lost. Free. Structured. No experience needed.
+
+https://digitalsphereug.tech/learn
+
+Explore the tools
+
+MetaMask, Remix IDE, Etherscan, testnets — our Resources page has everything you need to go from reading about blockchain to actually interacting with it.
+
+https://digitalsphereug.tech/resources
+
+Find your opportunity
+
+Grants, hackathons, bootcamps, and jobs connected to Uganda's blockchain ecosystem.
+
+https://digitalsphereug.tech/opportunities
+
+Join the community
+
+300+ Ugandans already building their Web3 future together. Daily updates. Real conversations. No noise.
+
+https://t.me/digitalsphereug
+
+The Honest Bottom Line
+
+Blockchain is not magic. It is not a guaranteed path to wealth. It is not going to solve every problem Uganda faces overnight.
+
+But it is real infrastructure being built right now — from Kampala's startup scene to across East Africa and the world. And the gap between people who understand it and people who do not is going to matter in ways we are only beginning to see.
+
+The best time to start learning was five years ago.
+
+The second best time is right now.
+
+DigitalSphereUg — A Powered Blockchain & Web3 Platform.
+
+Uganda, East Africa, Africa.
+
+Irankunda Musa | Lead, DigitalSphereUg` },
+  { id:2, slug:"top-free-resources-web3-2026", author:"Irinatwe Bright", tag:"Resources", tagColor:C.blueLt, image:article2BlogImage, title:"Top Free Resources to Start Your Web3 Career in 2026", excerpt:"You don't need to spend a single shilling to start learning blockchain development. Here are the best free platforms available right now.", date:"March 2026", read:"7 min read", body:"The barrier to entering Web3 is not money. It is knowing where to start. Here is the honest answer.\n\nFor complete beginners, start with CryptoZombies. It teaches Solidity — the language used to write Ethereum smart contracts — through a game. It sounds simple. It is genuinely the best beginner Solidity course online.\n\nOnce you have the basics, move to Cyfrin Updraft. Patrick Collins built this platform specifically to train the next generation of blockchain developers. It is completely free and professionally produced.\n\nFor building actual applications, Alchemy University's Road to Web3 is unmatched. It walks you from zero to deployed dApp in a structured programme with real projects.\n\nNone of these cost anything. All of them are recognised by employers globally. Start today." },
+  { id:3, slug:"blockchain-opportunities-uganda", author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, image:article3BlogImage, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
 ];
 
 const GALLERY_ITEMS = [
@@ -589,19 +913,19 @@ const MARQUEE_ECOSYSTEM = [
   { name:"BuidlAfrica", logo:buidlAfricaResourceLogo, tint:"#4d6ff0" },
 ];
 
-const PAGE_ROUTES = {
-  Home: "/",
-  Learn: "/learn",
-  Events: "/events",
-  Gallery: "/gallery",
-  Opportunities: "/opportunities",
-  Resources: "/resources",
-  Blog: "/blog",
-  Community: "/community",
-  About: "/about",
-};
-const NAV_LINKS = ["Home", "Learn", "Events", "Gallery", "Opportunities", "Resources", "Blog", "Community", "About"];
-const FOOTER_LINKS = NAV_LINKS.filter((link) => link !== "Home");
+const NAV_LINKS = [
+  { label: "Home", path: "/" },
+  { label: "Learn", path: "/learn" },
+  { label: "Events", path: "/events" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "Opportunities", path: "/opportunities" },
+  { label: "Resources", path: "/resources" },
+  { label: "Blog", path: "/blog" },
+  { label: "Community", path: "/community" },
+  { label: "About", path: "/about" },
+];
+const PAGE_ROUTES = Object.fromEntries(NAV_LINKS.map((item) => [item.label, item.path]));
+const FOOTER_LINKS = NAV_LINKS.map((item) => item.label).filter((label) => label !== "Home");
 const SITE_URL = "https://digitalsphereug.tech";
 const DEFAULT_OG_IMAGE = ethnileGroupHero;
 const STORAGE_KEYS = {
@@ -636,8 +960,35 @@ function getShareUrl(pathname) {
   return `${origin}${pathname}`;
 }
 
+function matchesPostSlug(post, slug) {
+  if (!slug) {
+    return false;
+  }
+
+  const primarySlug = post.slug || toSlug(post.title);
+  if (primarySlug === slug) {
+    return true;
+  }
+
+  return Array.isArray(post.oldSlugs) ? post.oldSlugs.includes(slug) : false;
+}
+
+function findPostBySlug(slug) {
+  return POSTS.find((item) => matchesPostSlug(item, slug)) || null;
+}
+
 function getPathFromPage(page) {
-  return PAGE_ROUTES[page] || PAGE_ROUTES.Home;
+  if (typeof page !== "string") {
+    return PAGE_ROUTES.Home;
+  }
+
+  const direct = PAGE_ROUTES[page];
+  if (direct) {
+    return direct;
+  }
+
+  const matchedItem = NAV_LINKS.find((item) => item.label.toLowerCase() === page.toLowerCase());
+  return matchedItem ? matchedItem.path : PAGE_ROUTES.Home;
 }
 
 function getActiveNavLabel(pathname) {
@@ -825,6 +1176,7 @@ function SocialBtn({ href, label, Icon }) {
 function SubscribeSection({ context = "footer" }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const copyByContext = {
     blog: {
@@ -845,24 +1197,45 @@ function SubscribeSection({ context = "footer" }) {
 
   const copy = copyByContext[context] || copyByContext.footer;
 
-  const handleSubscribe = async email => {
+  const handleSubscribe = async (rawEmail) => {
+    const normalizedEmail = String(rawEmail || "").trim().toLowerCase();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(normalizedEmail)) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    if (isSubmitting) {
+      return;
+    }
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
+
     try {
+      setIsSubmitting(true);
+      setMessage("");
       const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: normalizedEmail }),
+        signal: controller.signal,
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (response.ok) {
         setMessage(copy.success);
         setEmail("");
       } else {
-        setMessage("Subscription failed. Please try again in a moment.");
+        setMessage(data?.error || "Subscription failed. Please try again in a moment.");
       }
     } catch (error) {
-      setMessage("Subscription failed. Please try again in a moment.");
+      setMessage("Subscription request timed out. Please try again.");
+    } finally {
+      clearTimeout(timeoutId);
+      setIsSubmitting(false);
     }
   };
 
@@ -877,7 +1250,9 @@ function SubscribeSection({ context = "footer" }) {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
-        <button onClick={() => handleSubscribe(email)}>{copy.cta}</button>
+        <button onClick={() => handleSubscribe(email)} disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : copy.cta}
+        </button>
       </div>
       {message && <p className="subscribe-message">{message}</p>}
     </div>
@@ -888,7 +1263,7 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [pathname]);
 
   return null;
@@ -997,12 +1372,27 @@ function Nav({ theme, toggleTheme }) {
 
   useEffect(() => {
     if (typeof document === "undefined" || !mob) return;
-    const prev = document.body.style.overflow;
+
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
     };
   }, [mob]);
+
+  useEffect(() => {
+    // Any route change should immediately close mobile navigation and release scroll lock.
+    setMob(false);
+
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+  }, [location.pathname]);
 
   return (
     <>
@@ -1035,8 +1425,8 @@ function Nav({ theme, toggleTheme }) {
             <span className="brand-text" style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
           </Link>
           <div className="desktop-nav" style={{ display:"flex", gap:1, alignItems:"center" }}>
-            {NAV_LINKS.map(l => (
-              <Link key={l} to={getPathFromPage(l)} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${activePage===l?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:activePage===l?C.text:C.textSub, fontSize:13, fontWeight:activePage===l?700:500, fontFamily:"'Space Grotesk',sans-serif", textDecoration:"none" }}>{l}</Link>
+            {NAV_LINKS.map((item) => (
+              <Link key={item.label} to={item.path} className="nav-btn" style={{ background:"none", border:"none", borderBottom:`2px solid ${activePage===item.label?C.blue:"transparent"}`, cursor:"pointer", padding:"8px 11px", borderRadius:"8px 8px 0 0", color:activePage===item.label?C.text:C.textSub, fontSize:13, fontWeight:activePage===item.label?700:500, fontFamily:"'Space Grotesk',sans-serif", textDecoration:"none" }}>{item.label}</Link>
             ))}
             <button onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="hover-lift" style={{ marginLeft:8, background:C.surface, border:`1px solid ${C.border}`, cursor:"pointer", width:36, height:36, borderRadius:9, color:C.text, display:"inline-flex", alignItems:"center", justifyContent:"center" }}>
               {theme === "dark" ? <BsSun size={ICON.md} /> : <BsMoonStars size={ICON.md} />}
@@ -1052,24 +1442,24 @@ function Nav({ theme, toggleTheme }) {
         </div>
         {mob && (
           <div className="mob-menu" style={{ position:"relative", zIndex:1, background:C.surface, borderTop:`1px solid ${C.border}`, padding:"10px 0 18px", animation:"fadeIn .2s ease", WebkitTapHighlightColor:"transparent" }}>
-            {NAV_LINKS.map(l => (
-              <button
-                key={l}
-                type="button"
-                onClick={() => goMobile(l)}
-                style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:activePage===l?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif", WebkitTapHighlightColor:"transparent" }}
+            {NAV_LINKS.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                onClick={() => setMob(false)}
+                style={{ display:"block", width:"100%", background:"none", border:"none", cursor:"pointer", padding:`12px clamp(16px,4vw,40px)`, color:activePage===item.label?C.blueLt:C.text, fontSize:15, fontWeight:600, textAlign:"left", fontFamily:"'Space Grotesk',sans-serif", textDecoration:"none", WebkitTapHighlightColor:"transparent" }}
               >
-                {l}
-              </button>
+                {item.label}
+              </Link>
             ))}
             <div style={{ padding:`10px clamp(16px,4vw,40px) 0` }}>
-              <button
-                type="button"
-                onClick={() => goMobile("Community")}
-                style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, WebkitTapHighlightColor:"transparent" }}
+              <Link
+                to={getPathFromPage("Community")}
+                onClick={() => setMob(false)}
+                style={{ background:C.blue, border:"none", cursor:"pointer", padding:"13px 24px", borderRadius:10, color:C.white, fontSize:14, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif", width:"100%", display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, textDecoration:"none", WebkitTapHighlightColor:"transparent" }}
               >
                 Join Free →
-              </button>
+              </Link>
             </div>
           </div>
         )}
@@ -1678,6 +2068,11 @@ function Blog({ onOpenPost }) {
         {POSTS.map((p, i) => (
           <div key={p.id} onClick={() => onOpenPost(p)} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${i===0?C.blue+"45":C.border}`, borderRadius:18, padding:"clamp(20px,3vw,30px)", cursor:"pointer", display:"flex", flexDirection:"column", gap:14, position:"relative", overflow:"hidden" }}>
             {i===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${C.blue},${C.purple})` }} />}
+            {p.image ? (
+              <div className="image-zoom" style={{ borderRadius:12 }}>
+                <img src={p.image} alt={p.title} style={{ width:"100%", height:180, objectFit:"cover", borderRadius:12 }} />
+              </div>
+            ) : null}
             <Pill label={p.tag} color={p.tagColor} />
             <h2 style={{ fontSize:18, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.3, margin:0 }}>{p.title}</h2>
             <div style={{ fontSize:13, color:C.blueLt, fontFamily:"'Space Grotesk',sans-serif", fontWeight:700 }}>{p.author}</div>
@@ -1823,6 +2218,13 @@ function BlogPost({ post, onBack, onOpenPost }) {
         <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.date}</span>
         {post.read ? <span style={{ fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>{post.read}</span> : null}
       </div>
+      {post.image ? (
+        <div style={{ marginBottom:28, borderRadius:14, overflow:"hidden", border:`1px solid ${C.border}` }}>
+          <div className="image-zoom" style={{ borderRadius:14 }}>
+            <img src={post.image} alt={post.title} style={{ width:"100%", height:"clamp(220px,34vw,360px)", objectFit:"cover" }} />
+          </div>
+        </div>
+      ) : null}
       {post.body.split("\n\n").map((para, i) => (
         <p key={i} style={{ fontSize:16, color:C.textSub, lineHeight:1.9, fontFamily:"'Manrope',sans-serif", marginBottom:22 }}>{linkifyBlogParagraph(para, i)}</p>
       ))}
@@ -2295,12 +2697,12 @@ export default function App() {
 
     if (pathname.startsWith("/blog/")) {
       const slug = pathname.replace("/blog/", "");
-      const post = POSTS.find((item) => (item.slug || toSlug(item.title)) === slug);
+      const post = findPostBySlug(slug);
       if (post) {
         return {
           title: `${post.title} | DigitalSphereUg Blog`,
           description: post.excerpt,
-          image: ethnileGroupHero,
+          image: post.image || ethnileGroupHero,
           path: pathname,
         };
       }
@@ -2320,7 +2722,8 @@ export default function App() {
     }
 
     if (pathname.startsWith("/learn/")) {
-      const slug = pathname.replace("/learn/", "");
+      const match = pathname.match(/^\/learn\/([^/]+)/);
+      const slug = match ? match[1] : "";
       const track = TRACKS_BY_SLUG[slug];
       if (track) {
         return {
@@ -2407,10 +2810,16 @@ export default function App() {
 
   const BlogPostRoute = () => {
     const { slug } = useParams();
-    const post = POSTS.find((item) => (item.slug || toSlug(item.title)) === slug);
+    const post = findPostBySlug(slug || "");
     if (!post) {
       return <Navigate to="/blog" replace />;
     }
+
+    const canonicalSlug = post.slug || toSlug(post.title);
+    if (slug !== canonicalSlug) {
+      return <Navigate to={`/blog/${canonicalSlug}`} replace />;
+    }
+
     return <BlogPost post={post} onBack={() => navigate("/blog")} onOpenPost={openBlogPost} />;
   };
 
@@ -2420,7 +2829,14 @@ export default function App() {
 
   const LearnTrackRoute = () => {
     const { slug } = useParams();
-    return <LessonDemoPage theme={theme} initialTrackSlug={slug || null} />;
+    return <LessonDemoPage theme={theme} initialTrackSlug={slug || null} initialLessonNumber={null} />;
+  };
+
+  const LearnLessonRoute = () => {
+    const { slug, lessonNumber } = useParams();
+    const parsedLessonNumber = Number.parseInt(lessonNumber || "", 10);
+    const initialLessonNumber = Number.isFinite(parsedLessonNumber) ? parsedLessonNumber : null;
+    return <LessonDemoPage theme={theme} initialTrackSlug={slug || null} initialLessonNumber={initialLessonNumber} />;
   };
 
   const EventsRoute = () => {
@@ -2443,6 +2859,7 @@ export default function App() {
           <Route path="/" element={<Home setPage={openPage} />} />
           <Route path="/learn" element={<LearnRoute />} />
           <Route path="/learn/:slug" element={<LearnTrackRoute />} />
+          <Route path="/learn/:slug/lesson/:lessonNumber" element={<LearnLessonRoute />} />
           <Route path="/events" element={<EventsRoute />} />
           <Route path="/events/:slug" element={<EventsRoute />} />
           <Route path="/gallery" element={<Gallery setPage={openPage} />} />

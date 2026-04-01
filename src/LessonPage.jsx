@@ -71,13 +71,19 @@ function withLength(value, length, fallbackValue) {
 }
 
 function getQuizFingerprint(questions) {
-  return JSON.stringify(
-    questions.map((question) => ({
+  // Increment this version whenever the question mapping / sanitizer changes.
+  // This forces a reset of stored quiz progress so the practical task
+  // doesn't unlock based on stale "correct" data.
+  const QUIZ_BANK_VERSION = 6;
+
+  return JSON.stringify({
+    v: QUIZ_BANK_VERSION,
+    questions: questions.map((question) => ({
       question: question.question,
       options: question.options,
       correctIndex: question.correctIndex,
     })),
-  );
+  });
 }
 
 function readLessonProgress(lessonPrefix, questions, quizFingerprint) {
@@ -119,27 +125,42 @@ function readLessonProgress(lessonPrefix, questions, quizFingerprint) {
     return null;
   });
 
-  const rawCorrect = withLength(
-    safeRead(`${lessonPrefix}.quizCorrect`, false),
-    questions.length,
-    false,
-  );
-  const quizCorrect = rawCorrect.map((value) => Boolean(value));
+  // Recompute correctness from current selections and current question keys.
+  // This prevents stale/tampered localStorage from unlocking lessons unexpectedly.
+  const quizCorrect = quizSelections.map((selectedOptionIndex, questionIndex) => {
+    if (typeof selectedOptionIndex !== "number") {
+      return false;
+    }
+    return selectedOptionIndex === questions[questionIndex]?.correctIndex;
+  });
 
-  const rawFeedback = withLength(
-    safeRead(`${lessonPrefix}.quizFeedback`, ""),
-    questions.length,
-    "",
-  );
-  const quizFeedback = rawFeedback.map((value) => (typeof value === "string" ? value : ""));
+  const quizFeedback = quizSelections.map((selectedOptionIndex, questionIndex) => {
+    if (typeof selectedOptionIndex !== "number") {
+      return "";
+    }
+
+    return quizCorrect[questionIndex]
+      ? String(questions[questionIndex]?.successMessage || "Correct. Nice work.")
+      : String(questions[questionIndex]?.hint || "Pick the option that best matches the lesson.");
+  });
+
+  const taskAnswer = safeRead(`${lessonPrefix}.taskAnswer`, "");
+  const normalizedTaskAnswer = typeof taskAnswer === "string" ? taskAnswer : "";
+  const allCorrect = quizCorrect.every(Boolean);
+  const taskCompleted = Boolean(safeRead(`${lessonPrefix}.taskCompleted`, false))
+    && normalizedTaskAnswer.trim().length > 0
+    && allCorrect;
+  const lessonCompleted = Boolean(safeRead(`${lessonPrefix}.lessonCompleted`, false))
+    && allCorrect
+    && taskCompleted;
 
   return {
     quizSelections,
     quizCorrect,
     quizFeedback,
-    taskAnswer: safeRead(`${lessonPrefix}.taskAnswer`, ""),
-    taskCompleted: safeRead(`${lessonPrefix}.taskCompleted`, false),
-    lessonCompleted: safeRead(`${lessonPrefix}.lessonCompleted`, false),
+    taskAnswer: normalizedTaskAnswer,
+    taskCompleted,
+    lessonCompleted,
   };
 }
 
@@ -163,6 +184,7 @@ export default function LessonPage({
   onPreviousLesson,
   onJumpToLesson,
   onBackToTrack,
+  onLessonCompleted,
 }) {
   const TOKENS = theme === "light" ? LIGHT_TOKENS : DARK_TOKENS;
 
@@ -197,6 +219,7 @@ export default function LessonPage({
   const [taskAnswer, setTaskAnswer] = useState(initialProgress.taskAnswer);
   const [taskCompleted, setTaskCompleted] = useState(initialProgress.taskCompleted);
   const [lessonCompleted, setLessonCompleted] = useState(initialProgress.lessonCompleted);
+  const hasNotifiedCompletionRef = useRef(false);
 
   useEffect(() => {
     const progress = readLessonProgress(lessonPrefix, questions, quizFingerprint);
@@ -206,8 +229,13 @@ export default function LessonPage({
     setTaskAnswer(progress.taskAnswer);
     setTaskCompleted(progress.taskCompleted);
     setLessonCompleted(progress.lessonCompleted);
+    hasNotifiedCompletionRef.current = false;
     setLoadVideo(false);
     setVideoEmbedFailed(false);
+
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
   }, [lessonPrefix, questions, quizFingerprint]);
 
   useEffect(() => {
@@ -284,8 +312,24 @@ export default function LessonPage({
   const canGoPrevious = lessonNumber > 1 && typeof onPreviousLesson === "function";
 
   useEffect(() => {
+    if (!readyForCompletion) {
+      hasNotifiedCompletionRef.current = false;
+      return;
+    }
+
+    if (hasNotifiedCompletionRef.current) {
+      return;
+    }
+
+    hasNotifiedCompletionRef.current = true;
+    if (typeof onLessonCompleted === "function") {
+      onLessonCompleted();
+    }
+  }, [readyForCompletion, onLessonCompleted]);
+
+  useEffect(() => {
     if (allQuizCorrect && taskCompleted && completionSectionRef.current) {
-      completionSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      completionSectionRef.current.scrollIntoView({ behavior: "auto", block: "start" });
     }
   }, [allQuizCorrect, taskCompleted]);
 
@@ -337,6 +381,19 @@ export default function LessonPage({
     return item;
   });
 
+  const scrollToSection = (sectionRef) => {
+    if (typeof window === "undefined" || !sectionRef?.current) {
+      return;
+    }
+
+    const stickyOffset = isMobile ? 84 : 96;
+    const top = Math.max(
+      0,
+      sectionRef.current.getBoundingClientRect().top + window.scrollY - stickyOffset,
+    );
+    window.scrollTo({ top, behavior: "auto" });
+  };
+
   const handleQuizAnswer = (qIndex, optionIndex) => {
     const isCorrect = optionIndex === questions[qIndex].correctIndex;
 
@@ -356,25 +413,29 @@ export default function LessonPage({
   };
 
   const onContinueLearning = () => {
-    if (quizSectionRef.current) {
-      quizSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    scrollToSection(quizSectionRef);
   };
 
   const onJumpToPractical = () => {
     if (!allQuizCorrect) {
       return;
     }
-    if (practicalSectionRef.current) {
-      practicalSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+
+    scrollToSection(practicalSectionRef);
   };
 
   const submitTask = () => {
     if (!allQuizCorrect || !taskAnswer.trim()) {
       return;
     }
-    setTaskCompleted(true);
+
+    if (!taskCompleted) {
+      setTaskCompleted(true);
+    }
+
+    if (typeof onNextLesson === "function") {
+      onNextLesson();
+    }
   };
 
   const difficultyBadgeColor = difficultyColor[difficulty] || TOKENS.blueLt;
@@ -672,6 +733,7 @@ export default function LessonPage({
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
+                        onLoad={() => setVideoEmbedFailed(false)}
                         onError={() => setVideoEmbedFailed(true)}
                         style={{
                           position: "absolute",
@@ -702,29 +764,25 @@ export default function LessonPage({
                 <div style={{ fontSize: 13, color: TOKENS.cyan, marginTop: 10 }}>
                   Source: {resource.sourceWebsite}
                 </div>
-                {!isYouTubeVideoResource ? (
-                  <a
-                    href={resource.openUrl || resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "inline-block",
-                      marginTop: 10,
-                      border: `1px solid ${TOKENS.blueLt}`,
-                      background: TOKENS.blue,
-                      color: "#ffffff",
-                      borderRadius: 10,
-                      textDecoration: "none",
-                      padding: "10px 14px",
-                      fontFamily: "'Outfit', sans-serif",
-                      fontWeight: 800,
-                    }}
-                  >
-                    {resource.embed === false || videoEmbedFailed
-                      ? "Open Lesson Video in New Tab ->"
-                      : "Open Resource ->"}
-                  </a>
-                ) : null}
+                <a
+                  href={resource.openUrl || resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-block",
+                    marginTop: 10,
+                    border: `1px solid ${TOKENS.blueLt}`,
+                    background: TOKENS.blue,
+                    color: "#ffffff",
+                    borderRadius: 10,
+                    textDecoration: "none",
+                    padding: "10px 14px",
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 800,
+                  }}
+                >
+                  Open Lesson Video in New Tab {"\u2192"}
+                </a>
                 <button
                   type="button"
                   onClick={onContinueLearning}
@@ -979,7 +1037,7 @@ export default function LessonPage({
                   allQuizCorrect && taskAnswer.trim() ? "pointer" : "not-allowed",
               }}
             >
-              Submit and Continue {"\u2192"}
+              Submit and Go to Next Lesson {"\u2192"}
             </button>
           </section>
 
