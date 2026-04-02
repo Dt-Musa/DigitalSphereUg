@@ -71,7 +71,7 @@ export default function Hero({ setPage }) {
       <div className="hero-video-overlay" />
 
       <div className="hero-video-content">
-        <div className="hero-chip">Uganda's Student Blockchain Community</div>
+        <div className="hero-chip">Uganda's Blockchain Community</div>
         <h1>
           Uganda's Home for <span>Blockchain & Web3</span>
         </h1>
