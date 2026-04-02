@@ -166,6 +166,8 @@ function readLessonProgress(lessonPrefix, questions, quizFingerprint) {
 
 export default function LessonPage({
   trackName,
+  lessonId,
+  resourceId,
   lessonNumber,
   totalLessons,
   lessonTitle,
@@ -192,10 +194,23 @@ export default function LessonPage({
     () => getLessonStoragePrefix(trackName, lessonNumber),
     [trackName, lessonNumber],
   );
-  const quizFingerprint = useMemo(() => getQuizFingerprint(questions), [questions]);
+  const scopedQuestions = useMemo(() => {
+    if (!Array.isArray(questions)) {
+      return [];
+    }
+
+    return questions.filter((question) => {
+      if (!question || typeof question !== "object") {
+        return false;
+      }
+
+      return question.lessonId === lessonId && question.resourceId === resourceId;
+    });
+  }, [questions, lessonId, resourceId]);
+  const quizFingerprint = useMemo(() => getQuizFingerprint(scopedQuestions), [scopedQuestions]);
   const initialProgress = useMemo(
-    () => readLessonProgress(lessonPrefix, questions, quizFingerprint),
-    [lessonPrefix, questions, quizFingerprint],
+    () => readLessonProgress(lessonPrefix, scopedQuestions, quizFingerprint),
+    [lessonPrefix, scopedQuestions, quizFingerprint],
   );
 
   const resourceSectionRef = useRef(null);
@@ -222,13 +237,25 @@ export default function LessonPage({
   const hasNotifiedCompletionRef = useRef(false);
 
   useEffect(() => {
-    const progress = readLessonProgress(lessonPrefix, questions, quizFingerprint);
-    setQuizSelections(progress.quizSelections);
-    setQuizCorrect(progress.quizCorrect);
-    setQuizFeedback(progress.quizFeedback);
-    setTaskAnswer(progress.taskAnswer);
-    setTaskCompleted(progress.taskCompleted);
-    setLessonCompleted(progress.lessonCompleted);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(`${lessonPrefix}.quizSelections`);
+      localStorage.removeItem(`${lessonPrefix}.quizCorrect`);
+      localStorage.removeItem(`${lessonPrefix}.quizFeedback`);
+      localStorage.removeItem(`${lessonPrefix}.taskAnswer`);
+      localStorage.removeItem(`${lessonPrefix}.taskCompleted`);
+      localStorage.removeItem(`${lessonPrefix}.lessonCompleted`);
+    }
+
+    const emptySelections = new Array(scopedQuestions.length).fill(null);
+    const emptyCorrect = new Array(scopedQuestions.length).fill(false);
+    const emptyFeedback = new Array(scopedQuestions.length).fill("");
+
+    setQuizSelections(emptySelections);
+    setQuizCorrect(emptyCorrect);
+    setQuizFeedback(emptyFeedback);
+    setTaskAnswer("");
+    setTaskCompleted(false);
+    setLessonCompleted(false);
     hasNotifiedCompletionRef.current = false;
     setLoadVideo(false);
     setVideoEmbedFailed(false);
@@ -236,7 +263,7 @@ export default function LessonPage({
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
-  }, [lessonPrefix, questions, quizFingerprint]);
+  }, [lessonPrefix, scopedQuestions, quizFingerprint]);
 
   useEffect(() => {
     safeWrite(`${lessonPrefix}.quizFingerprint`, quizFingerprint);
@@ -306,7 +333,8 @@ export default function LessonPage({
     return () => observer.disconnect();
   }, [resource.type, loadVideo]);
 
-  const allQuizCorrect = quizCorrect.every(Boolean);
+  const hasQuizQuestions = scopedQuestions.length > 0;
+  const allQuizCorrect = hasQuizQuestions ? quizCorrect.every(Boolean) : true;
   const readyForCompletion = allQuizCorrect && taskCompleted;
   const isFinalLesson = lessonNumber === totalLessons;
   const canGoPrevious = lessonNumber > 1 && typeof onPreviousLesson === "function";
@@ -395,7 +423,7 @@ export default function LessonPage({
   };
 
   const handleQuizAnswer = (qIndex, optionIndex) => {
-    const isCorrect = optionIndex === questions[qIndex].correctIndex;
+    const isCorrect = optionIndex === scopedQuestions[qIndex].correctIndex;
 
     const updatedSelections = [...quizSelections];
     updatedSelections[qIndex] = optionIndex;
@@ -407,8 +435,8 @@ export default function LessonPage({
 
     const updatedFeedback = [...quizFeedback];
     updatedFeedback[qIndex] = isCorrect
-      ? questions[qIndex].successMessage
-      : questions[qIndex].hint;
+      ? scopedQuestions[qIndex].successMessage
+      : scopedQuestions[qIndex].hint;
     setQuizFeedback(updatedFeedback);
   };
 
@@ -852,6 +880,7 @@ export default function LessonPage({
             )}
           </section>
 
+          {hasQuizQuestions ? (
           <section ref={quizSectionRef} style={{ ...cardStyle, marginBottom: 16 }}>
             <h2
               style={{
@@ -867,7 +896,7 @@ export default function LessonPage({
               Answer all questions correctly to unlock the practical task.
             </p>
 
-            {questions.slice(0, 3).map((q, qIndex) => (
+            {scopedQuestions.slice(0, 3).map((q, qIndex) => (
               <div
                 key={`${q.question}-${qIndex}`}
                 style={{
@@ -975,6 +1004,7 @@ export default function LessonPage({
                 : "Answer all 3 correctly to continue"}
             </button>
           </section>
+          ) : null}
 
           <section
             ref={practicalSectionRef}

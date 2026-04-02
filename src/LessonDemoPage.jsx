@@ -1480,15 +1480,6 @@ function buildQuestionsFromBlueprint(title, blueprint, resource) {
 }
 
 function buildQuestionsForTitle(title, resource) {
-  const resourceQuestionKey = getResourceQuestionKey(resource?.url);
-  const curatedQuestionSet = sanitizeQuestionBankSet(
-    QUESTION_BANK_BY_RESOURCE_KEY[resourceQuestionKey],
-  );
-
-  if (curatedQuestionSet.length === 3) {
-    return curatedQuestionSet;
-  }
-
   const key = normalizeLessonTitle(title);
   const blueprint = LESSON_QUIZ_BLUEPRINTS[key] || {
     focus: `the core of ${title}`,
@@ -1542,6 +1533,8 @@ function buildLessonData(track, lessonNumber) {
   const resource = getResourceForLesson(track.id, index)
     || LESSON_RESOURCES[track.id]?.[index]
     || track.lesson.resource;
+  const lessonId = `${track.id}-${lessonNumber}`;
+  const resourceId = getResourceQuestionKey(resource?.openUrl || resource?.url) || `${track.id}-${index}`;
   const guide = buildGuideForLesson(title, resource);
 
   // For the first step in each track, use the explicitly authored questions.
@@ -1555,9 +1548,16 @@ function buildLessonData(track, lessonNumber) {
     manualQuestions && manualQuestions.length === 3
       ? manualQuestions
       : buildQuestionsForTitle(title, resource);
+  const scopedQuestions = questions.map((question) => ({
+    ...question,
+    lessonId,
+    resourceId,
+  }));
 
   return {
     ...track.lesson,
+    lessonId,
+    resourceId,
     lessonNumber,
     lessonTitle: title,
     estimatedTime: `${10 + (index % 4) * 2} minutes`,
@@ -1568,7 +1568,7 @@ function buildLessonData(track, lessonNumber) {
       ...resource,
       description: `This resource is mapped specifically to ${title} and drives the lesson flow, questions, and practical task for this step.`,
     },
-    questions,
+    questions: scopedQuestions,
     practicalTask: guide.practicalTask,
   };
 }

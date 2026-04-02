@@ -927,7 +927,7 @@ const NAV_LINKS = [
 const PAGE_ROUTES = Object.fromEntries(NAV_LINKS.map((item) => [item.label, item.path]));
 const FOOTER_LINKS = NAV_LINKS.map((item) => item.label).filter((label) => label !== "Home");
 const SITE_URL = "https://digitalsphereug.tech";
-const DEFAULT_OG_IMAGE = ethnileGroupHero;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 const STORAGE_KEYS = {
   completedResources: "dsug_done",
   theme: "dsug_theme",
@@ -1337,7 +1337,9 @@ function ShareLinkButton({ url, label = "Share" }) {
 
 function SiteMeta({ title, description, image, path }) {
   const fullUrl = `${SITE_URL}${path || "/"}`;
-  const fullImage = image || DEFAULT_OG_IMAGE;
+  const fullImage = /^https?:\/\//i.test(String(image || ""))
+    ? image
+    : `${SITE_URL}${String(image || DEFAULT_OG_IMAGE).startsWith("/") ? "" : "/"}${String(image || DEFAULT_OG_IMAGE)}`;
 
   return (
     <Helmet>
