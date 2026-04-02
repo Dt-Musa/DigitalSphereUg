@@ -12,6 +12,33 @@ const POST_IMAGE_SOURCE_BY_SLUG = {
   "top-free-resources-web3-2026": "src/assets/Blog/article2.jpg",
   "blockchain-opportunities-uganda": "src/assets/Blog/article3.jpg",
 };
+const EVENT_META_BY_SLUG = {
+  "blockchain-devfest-kampala-2026": {
+    title: "Blockchain DevFest Kampala 2026",
+    description: "Africa's premier Web3 developer conference in Kampala. Theme: Responsible Decentralized AI.",
+    imageSource: "src/assets/events/devfest-2026-flyer.jpeg",
+  },
+  "defi-with-chainlink-oracles": {
+    title: "DeFi with Chainlink Oracles",
+    description: "Chainlink East Africa joined students for DeFi, oracles, and Web3 careers at Kyambogo.",
+    imageSource: "src/assets/events/chainlink-flyer.jpg.jpg",
+  },
+  "kampala-blockchain-summit-2026": {
+    title: "Kampala Blockchain Summit 2025",
+    description: "Summit session highlights and replay from Kampala.",
+    imageSource: "https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg",
+  },
+  "gdg-kampala-web3-meetup": {
+    title: "GDG Kampala Web3 Meetup",
+    description: "Beginner-friendly talks, networking, and practical Web3 demos.",
+    imageSource: "src/assets/community/chainlink.jpg.jpg",
+  },
+  "bau-youth-blockchain-innovation": {
+    title: "BAU Youth Blockchain Innovation",
+    description: "BAU youth innovation programme on blockchain foundations and growth pathways.",
+    imageSource: "src/assets/gallery/buildl-session group.jpg",
+  },
+};
 
 function escapeHtml(value) {
   return String(value)
@@ -134,6 +161,30 @@ function resolvePostImageUrl(post, imageImportMap, distDir) {
   return `${SITE_URL}/${outputRelativePath}`;
 }
 
+function resolveMappedImageUrl(slug, mappedSource, distDir, folder) {
+  if (!mappedSource) {
+    return DEFAULT_OG_IMAGE;
+  }
+
+  if (/^https?:\/\//i.test(mappedSource)) {
+    return mappedSource;
+  }
+
+  const mappedAbsoluteSource = path.join(process.cwd(), mappedSource);
+  if (!fs.existsSync(mappedAbsoluteSource)) {
+    return DEFAULT_OG_IMAGE;
+  }
+
+  const ext = path.extname(mappedAbsoluteSource) || ".jpg";
+  const outputRelativePath = path.posix.join("og", folder, `${slug}${ext.toLowerCase()}`);
+  const outputAbsolutePath = path.join(distDir, "og", folder, `${slug}${ext.toLowerCase()}`);
+
+  fs.mkdirSync(path.dirname(outputAbsolutePath), { recursive: true });
+  fs.copyFileSync(mappedAbsoluteSource, outputAbsolutePath);
+
+  return `${SITE_URL}/${outputRelativePath}`;
+}
+
 function main() {
   const projectRoot = process.cwd();
   const appPath = path.join(projectRoot, "src", "App.jsx");
@@ -173,6 +224,31 @@ function main() {
     html = upsertCanonical(html, postUrl);
 
     const outputPath = path.join(projectRoot, "dist", "blog", post.slug, "index.html");
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, html, "utf8");
+  }
+
+  const eventEntries = Object.entries(EVENT_META_BY_SLUG);
+  for (const [eventSlug, eventMeta] of eventEntries) {
+    const eventUrl = `${SITE_URL}/events/${eventSlug}`;
+    const eventImageUrl = resolveMappedImageUrl(eventSlug, eventMeta.imageSource, distDir, "events");
+    let html = baseHtml;
+
+    html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(eventMeta.title)} | DigitalSphereUg Events</title>`);
+    html = upsertMetaTag(html, "name", "description", eventMeta.description);
+    html = upsertMetaTag(html, "property", "og:type", "website");
+    html = upsertMetaTag(html, "property", "og:site_name", "DigitalSphereUg");
+    html = upsertMetaTag(html, "property", "og:title", `${eventMeta.title} | DigitalSphereUg Events`);
+    html = upsertMetaTag(html, "property", "og:description", eventMeta.description);
+    html = upsertMetaTag(html, "property", "og:url", eventUrl);
+    html = upsertMetaTag(html, "property", "og:image", eventImageUrl);
+    html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
+    html = upsertMetaTag(html, "name", "twitter:title", `${eventMeta.title} | DigitalSphereUg Events`);
+    html = upsertMetaTag(html, "name", "twitter:description", eventMeta.description);
+    html = upsertMetaTag(html, "name", "twitter:image", eventImageUrl);
+    html = upsertCanonical(html, eventUrl);
+
+    const outputPath = path.join(projectRoot, "dist", "events", eventSlug, "index.html");
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, html, "utf8");
   }
