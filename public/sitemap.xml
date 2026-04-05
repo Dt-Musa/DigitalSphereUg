@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://www.digitalsphereug.tech/</loc>
+    <loc>https://digitalsphereug.tech/</loc>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
 
 
   <url>
-    <loc>https://www.digitalsphereug.tech/learn</loc>
+    <loc>https://digitalsphereug.tech/learn</loc>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.digitalsphereug.tech/events</loc>
+    <loc>https://digitalsphereug.tech/events</loc>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   
    <url>
-    <loc>https://www.digitalsphereug.tech/Gallery</loc>
+    <loc>https://digitalsphereug.tech/gallery</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.digitalsphereug.tech/opportunities</loc>
+    <loc>https://digitalsphereug.tech/opportunities</loc>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.digitalsphereug.tech/resources</loc>
+    <loc>https://digitalsphereug.tech/resources</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.digitalsphereug.tech/blog</loc>
+    <loc>https://digitalsphereug.tech/blog</loc>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.digitalsphereug.tech/community</loc>
+    <loc>https://digitalsphereug.tech/community</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
-    <loc>https://www.digitalsphereug.tech/about</loc>
+    <loc>https://digitalsphereug.tech/about</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>

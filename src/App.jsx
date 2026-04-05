@@ -1346,7 +1346,7 @@ function SiteMeta({ title, description, image, path }) {
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="DigitalSphereUg" />
+      <meta property="og:site_name" content="DigitalSphere" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={fullUrl} />
@@ -2692,8 +2692,8 @@ export default function App() {
   const routeMeta = useMemo(() => {
     const pathname = location.pathname;
     const base = {
-      title: "DigitalSphereUg | Uganda's Home for Blockchain & Web3",
-      description: "Free blockchain education, events, opportunities, and community for Uganda.",
+      title: "DigitalSphere | Africa's Home for Blockchain & Web3",
+      description: "Master the fundamentals of Blockchain and Web3, discover local events, and access real opportunities for individuals and communities ready to grow in Web3 across Africa.",
       image: DEFAULT_OG_IMAGE,
       path: pathname,
     };
@@ -2703,7 +2703,7 @@ export default function App() {
       const post = findPostBySlug(slug);
       if (post) {
         return {
-          title: `${post.title} | DigitalSphereUg Blog`,
+          title: `${post.title} | DigitalSphere Blog`,
           description: post.excerpt,
           image: post.image || ethnileGroupHero,
           path: pathname,
@@ -2716,8 +2716,8 @@ export default function App() {
       const event = ALL_EVENTS.find((item) => item.slug === slug);
       if (event) {
         return {
-          title: `${event.title} | DigitalSphereUg Events`,
-          description: event.desc || event.recap || "Event update from DigitalSphereUg.",
+          title: `${event.title} | DigitalSphere Events`,
+          description: event.desc || event.recap || "Event update from DigitalSphere.",
           image: event.image || ethnileGroupHero,
           path: pathname,
         };
@@ -2730,7 +2730,7 @@ export default function App() {
       const track = TRACKS_BY_SLUG[slug];
       if (track) {
         return {
-          title: `${track.title} | DigitalSphereUg Learn`,
+          title: `${track.title} | DigitalSphere Learn`,
           description: track.desc,
           image: chainlinkRooftopPhoto,
           path: pathname,
@@ -2743,7 +2743,7 @@ export default function App() {
       const opportunity = OPPORTUNITY_ITEMS.find((item) => item.slug === slug);
       if (opportunity) {
         return {
-          title: `${opportunity.title} | DigitalSphereUg Opportunities`,
+          title: `${opportunity.title} | DigitalSphere Opportunities`,
           description: opportunity.desc,
           image: opportunity.logo || outdoorLaptopPhoto,
           path: pathname,
@@ -2753,31 +2753,31 @@ export default function App() {
 
     if (pathname === "/learn") {
       return {
-        title: "Learn Blockchain | DigitalSphereUg",
-        description: "Follow structured learning tracks designed for Ugandan Web3 learners.",
+        title: "Learn Blockchain | DigitalSphere",
+        description: "Master the fundamentals of Blockchain and Web3 with structured tracks for learners across Africa.",
         image: chainlinkRooftopPhoto,
         path: pathname,
       };
     }
     if (pathname === "/events") {
       return {
-        title: "Events | DigitalSphereUg",
-        description: "Upcoming blockchain events and community sessions in Uganda.",
+        title: "Events | DigitalSphere",
+        description: "Upcoming blockchain events and community sessions across Africa.",
         image: ethnileVenuePhoto,
         path: pathname,
       };
     }
     if (pathname === "/opportunities") {
       return {
-        title: "Opportunities | DigitalSphereUg",
-        description: "Web3 jobs, grants, hackathons, and growth opportunities for Uganda.",
+        title: "Opportunities | DigitalSphere",
+        description: "Web3 jobs, grants, hackathons, and growth opportunities across Africa.",
         image: outdoorLaptopPhoto,
         path: pathname,
       };
     }
     if (pathname === "/resources") {
       return {
-        title: "Resources | DigitalSphereUg",
+        title: "Resources | DigitalSphere",
         description: "Curated free blockchain tools and learning resources.",
         image: kyambogoRoomPhoto,
         path: pathname,
@@ -2785,24 +2785,24 @@ export default function App() {
     }
     if (pathname === "/blog") {
       return {
-        title: "Blog | DigitalSphereUg",
-        description: "Uganda-first blockchain insights, guides, and stories.",
+        title: "Blog | DigitalSphere",
+        description: "Africa-first blockchain insights, guides, and stories.",
         image: ethnileGroupHero,
         path: pathname,
       };
     }
     if (pathname === "/community") {
       return {
-        title: "Community | DigitalSphereUg",
-        description: "Join Uganda's most active student blockchain and Web3 community.",
+        title: "Community | DigitalSphere",
+        description: "Join DigitalSphere's growing blockchain and Web3 community across Africa.",
         image: chainlinkStreetGroupPhoto,
         path: pathname,
       };
     }
     if (pathname === "/about") {
       return {
-        title: "About | DigitalSphereUg",
-        description: "Built by students, built for Uganda's blockchain future.",
+        title: "About | DigitalSphere",
+        description: "Built by students and builders, for Africa's blockchain future.",
         image: stellarGroupPhoto,
         path: pathname,
       };
