@@ -71,13 +71,12 @@ export default function Hero({ setPage }) {
       <div className="hero-video-overlay" />
 
       <div className="hero-video-content">
-        <div className="hero-chip">Uganda's Blockchain Community</div>
+        <div className="hero-chip">DigitalSphere Community</div>
         <h1>
-          Uganda's Home for <span>Blockchain & Web3</span>
+         Africa's Home for <span>Blockchain & Web3</span>
         </h1>
         <p>
-          Free education, local events, and real opportunities built by Ugandan
-          students for every learner ready to grow in Web3.
+          Master the fundamentals of Blockchain and Web3, get to know about local events, as well as real opportunities for every individuals and communities ready to grow in Web3.
         </p>
 
         <div className="hero-actions">

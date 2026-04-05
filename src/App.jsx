@@ -851,9 +851,9 @@ const TEAM = [
 
 // ─── FAQ Data ─────────────────────────────────────────────────────
 const FAQS = [
-  { q:"Is everything on this platform really free?", a:"Yes — completely. Every course, resource, event listing, and opportunity on DigitalSphereUg is free. No subscription, no payment, no catch. That is the whole point." },
+  { q:"Is everything on this platform really free?", a:"Yes — completely. Every course, resource, event listing, and opportunity on DigitalSphere is free. No subscription, no payment, no catch. That is the whole point." },
   { q:"Do I need coding experience to start?", a:"Not at all. Track 1 (Blockchain Basics) is designed for complete beginners with zero technical background. You learn what blockchain is, why it matters, and how it works — no code required." },
-  { q:"I'm not a university student — can I still join?", a:"Absolutely. DigitalSphereUg is open to every Ugandan and anyone interested in blockchain — students, professionals, entrepreneurs, and curious individuals at any stage of life." },
+  { q:"I'm not a university student — can I still join?", a:"Absolutely. DigitalSphere is open to everyone interested in blockchain — students, professionals, entrepreneurs, and curious individuals at any stage of life." },
   { q:"Which track should I start with?", a:"If you have never studied blockchain before, start with Track 1: Blockchain Basics. If you already understand the concepts and want to write code, go straight to Track 2: Ethereum & Solidity." },
   { q:"How do I join the community?", a:"Click the Join Community button at the top of the page or visit the Community page. Our main community hub is on Telegram — join there for daily resources, updates, and conversations with other learners." },
   { q:"Can I contribute to the platform?", a:"Yes. We welcome blog posts, resource suggestions, event submissions, and campus chapter leads. Reach out through our Telegram channel and we will get back to you." },
@@ -1187,11 +1187,11 @@ function SubscribeSection({ context = "footer" }) {
       success: "You are in. Watch your inbox for Uganda Web3 updates 🇺🇬",
     },
     footer: {
-      heading: "Join Uganda's Web3 community",
+      heading: "Join Africa's Web3 Community",
       description: "Stay plugged into practical resources, local events, and opportunities whether you are learning, exploring, or already in tech.",
       placeholder: "Enter your email",
       cta: "Join Free →",
-      success: "Welcome to DigitalSphereUg. You are officially in 🇺🇬",
+      success: "Welcome to DigitalSphere. Gain the skills and knowledge about Blockchain and Web3 Technology",
     },
   };
 
@@ -1424,7 +1424,7 @@ function Nav({ theme, toggleTheme }) {
             <div style={{ width:48, height:48, borderRadius:10, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:12, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif" }}>
               DS
             </div>
-            <span className="brand-text" style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
+            <span className="brand-text" style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px" }}>DigitalSphere{/* <span style={{ color:C.blueLt }}>Ug</span> */}</span>
           </Link>
           <div className="desktop-nav" style={{ display:"flex", gap:1, alignItems:"center" }}>
             {NAV_LINKS.map((item) => (
@@ -1819,7 +1819,7 @@ function Events({ selectedSlug }) {
 
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
-      <PageHero label="2026 Calendar" h1="Upcoming Events" sub="Blockchain events in Uganda and across Africa. Every event is a door — show up." />
+      <PageHero label="2026 Calendar" h1="Upcoming Events" sub="Blockchain events across Africa. Every event is a door — show up." />
       <div style={{ marginBottom:20, borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
         <div className="image-zoom" style={{ borderRadius:16 }}>
           <img src={ethnileVenuePhoto} alt="ETHNile venue with sponsor banners" style={{ width:"100%", height:"clamp(200px,30vw,340px)", objectFit:"cover" }} />
@@ -1914,13 +1914,13 @@ function Opportunities({ selectedSlug }) {
 
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
-      <PageHero label="Opportunities" h1="Earn, Build & Grow" sub="Jobs, grants, hackathons, and earn opportunities available to Ugandans right now." />
+      <PageHero label="Opportunities" h1="Earn, Build & Grow" sub="Managing & moderating online communitities,Content & Research, Testing & Bug Bounties, Jobs, grants, hackathons, and other earning opportunities available in the blockchain space." />
 
       <div className="section-appear-2 op-hero-grid" style={{ display:"grid", gridTemplateColumns:"minmax(0,1fr) minmax(0,1fr)", gap:16, marginBottom:30 }}>
         <div className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
-            <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>Built For Uganda</div>
+            <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>Built For Africa</div>
           <h2 style={{ fontSize:"clamp(22px,3vw,34px)", color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.1, margin:"0 0 10px" }}>Remote opportunities, local momentum</h2>
-          <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>Grants, bounties, internships, and jobs that Ugandan students can actually access now. Start with one, keep stacking your wins.</p>
+          <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>Grants, bounties, internships, and jobs that everyone can actually access now. Start with one, keep stacking your wins.</p>
         </div>
         <div className="resources-hero-image" style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}`, aspectRatio:"16/10" }}>
           <div className="image-zoom" style={{ borderRadius:16, width:"100%", height:"100%" }}>
@@ -2012,7 +2012,7 @@ function Resources() {
         <div className="hover-card" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,3vw,30px)" }}>
           <div style={{ fontSize:12, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:C.blueLt, marginBottom:8, fontFamily:"'Space Grotesk',sans-serif" }}>No Gatekeeping</div>
           <h2 style={{ fontSize:"clamp(22px,3vw,34px)", color:C.text, fontFamily:"'Space Grotesk',sans-serif", lineHeight:1.1, margin:"0 0 10px" }}>Real tools. Free access. Start now.</h2>
-          <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>A practical stack Ugandan learners can use immediately, from browser-based editors to grants and local communities.</p>
+          <p style={{ fontSize:14, color:C.textSub, lineHeight:1.75, margin:0, fontFamily:"'Manrope',sans-serif", maxWidth:560 }}>A practical stack everyone can use immediately, from browser-based editors to grants and local communities.</p>
         </div>
       </div>
 
@@ -2064,7 +2064,7 @@ function Resources() {
 function Blog({ onOpenPost }) {
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
-      <PageHero label="Insights & Perspectives" h1="The Blog" sub="Written for Ugandans. Honest, practical, no hype." />
+      <PageHero label="Insights & Perspectives" h1="The Blog" sub="Written for everyone. Honest, practical, no hype." />
       <p style={{ margin:"-24px 0 24px", fontSize:13, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Upcoming topics: Bank of Uganda crypto stance, mobile money x Web3 integration, and local startup stories.</p>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:18 }}>
         {POSTS.map((p, i) => (
@@ -2309,7 +2309,7 @@ function Community() {
           </div>
         </div>
         <p style={{ fontSize:15, color:C.textSub, lineHeight:1.8, fontFamily:"'Manrope',sans-serif", margin:"0 0 24px", maxWidth:580 }}>
-          Our main learning hub. Daily blockchain resources, free course links, curated opportunities, and the most active conversations about Web3 in Uganda. This is where you start.
+          Our main learning hub. Daily blockchain resources, free course links, curated opportunities, and the most active conversations about Web3 in Africa. This is where you start.
         </p>
         <a href="https://t.me/digitalsphereug" target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#2AABEE", border:"none", color:"#051326", padding:"13px 28px", borderRadius:11, fontSize:14, fontWeight:800, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif" }}>
           Join on Telegram <BsArrowRight size={ICON.sm} />
@@ -2337,7 +2337,7 @@ function Community() {
       <div className="section-appear" style={{ marginBottom:52 }}>
         <SectionLabel>Wider Ecosystem</SectionLabel>
         <h2 style={{ fontSize:"clamp(22px,3.5vw,34px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px", marginBottom:8 }}>More Communities to Join</h2>
-        <p style={{ fontSize:14, color:C.textSub, fontFamily:"'Manrope',sans-serif", marginBottom:28 }}>DigitalSphereUg is your starting point. These are the communities that connect you to the wider world.</p>
+        <p style={{ fontSize:14, color:C.textSub, fontFamily:"'Manrope',sans-serif", marginBottom:28 }}>DigitalSphere is your starting point. These are the communities that connect you to the wider world.</p>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:14 }}>
           {otherCommunities.map((c, i) => (
             <div key={i} className="hover-card fade-up" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:14, padding:22, display:"flex", flexDirection:"column", gap:12 }}>
@@ -2384,10 +2384,10 @@ function About({ setPage }) {
     { n:"3", l:"Major Events in 2026" },
   ];
   const VALUES = [
-    { icon:BsPatchCheck, title:"Always Free", color:C.green, desc:"Every course, resource, event listing, and opportunity on this platform is free. No subscription, no paywall, no catch. We believe the barrier to blockchain in Uganda should be zero." },
-    { icon:BsGeoAlt, title:"Uganda First", color:C.blue, desc:"Everything we do is built with the Ugandan context in mind — local events, local opportunities, and an understanding of what it actually means to be a student in Uganda trying to enter a global industry." },
-    { icon:BsMortarboard, title:"Student-Led", color:C.cyan, desc:"Founded and run by students. We understand the learner's perspective because we are learners. That means no gatekeeping, no jargon, and no assumption that you already know things you haven't been taught." },
-    { icon:BsGlobe2, title:"Africa to the World", color:C.purple, desc:"We start in Uganda but our ambition is pan-African. We believe the next generation of global blockchain builders will come from Africa — and we are building the infrastructure to make that happen." },
+    { icon:BsPatchCheck, title:"Always Free", color:C.green, desc:"Every course, resource, event listing, and opportunity on this platform is free. No subscription, no paywall, no catch. We believe the barrier to blockchain in Africa should be zero." },
+    { icon:BsGeoAlt, title:"Africa's First", color:C.blue, desc:"Everything we do is built with the Africa's context in mind — local events, available opportunities, and an understanding on how we can integrate Blockchain and Web3 in real life businesses." },
+    { icon:BsMortarboard, title:"Built For Everyone", color:C.cyan, desc:"We understand the beginner's perspective because we were once beginner's. That means no gatekeeping, no jargon, and no assumption that you already know things you haven't been taught." },
+    { icon:BsGlobe2, title:"Africa to the World", color:C.purple, desc:"We started in Uganda, East Africa but our ambition is pan-African. We believe the next generation of global blockchain builders will come from Africa — and we are building the infrastructure to make that happen." },
   ];
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
@@ -2398,11 +2398,11 @@ function About({ setPage }) {
         <div className="about-grid" style={{ display:"grid", gridTemplateColumns:"minmax(0,1.05fr) minmax(0,.95fr)", gap:20, alignItems:"stretch" }}>
           <div>
             <h1 style={{ fontSize:"clamp(34px,5.5vw,64px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.05, marginBottom:24 }}>
-              Built by students.<br />
-              <span style={{ color:C.accent }}>Built for Uganda.</span>
+              Built by DigitalSphere.<br />
+              <span style={{ color:C.accent }}>Built for Africa.</span>
             </h1>
             <p style={{ fontSize:18, color:C.text, lineHeight:1.85, fontFamily:"'Manrope',sans-serif", maxWidth:680, marginBottom:16, fontWeight:500 }}>
-              DigitalSphereUg exists to accelerate blockchain education and opportunities for Ugandan students — and contribute Uganda's voice to the global Web3 conversation.
+              DigitalSphere exists to accelerate blockchain education and opportunities for the African Community and contribute Africa's voice to the global Web3 conversation.
             </p>
           </div>
           <div style={{ borderRadius:16, overflow:"hidden", border:`1px solid ${C.border}` }}>
@@ -2425,20 +2425,21 @@ function About({ setPage }) {
           <img src={kyambogoLecturePhoto} alt="Kyambogo lecture hall blockchain session" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover" }} />
           <div style={{ position:"absolute", inset:0, background:"rgba(5,7,15,0.64)" }} />
           <p style={{ fontSize:16, color:"#dbe5f4", lineHeight:1.9, fontFamily:"'Manrope',sans-serif", margin:"0 0 20px", maxWidth:680, position:"relative" }}>
-            DigitalSphereUg started as a simple idea — a Ugandan student who believed blockchain was the biggest opportunity of our generation and couldn't find a local community to learn with. So instead of waiting for one to exist, we built it.
+            DigitalSphere started as a simple idea — Musa, Bright and Rwego, who believed blockchain is the biggest opportunity for the new generation yet they couldn't find a local community to learn with. So instead of waiting for one to exist, they built the DigitalSphere Community.
           </p>
           <p style={{ fontSize:16, color:"#dbe5f4", lineHeight:1.9, fontFamily:"'Manrope',sans-serif", margin:0, maxWidth:680, position:"relative" }}>
-            What started as a WhatsApp group and an X page with a few followers is now a growing platform with structured learning tracks, local events coverage, and a community of over 300 Ugandans building their Web3 future together. We are just getting started.
+            What started as a WhatsApp group and an X page with a few followers is now a growing platform with structured learning tracks, local events coverage, and a community of over 300 Africans building their Web3 future together. We are just getting started.
           </p>
         </div>
       </div>
  
-      {/* 3. WHY UGANDA */}
+      {/* 3. WHY AFRICA */}
       <div className="section-appear" style={{ marginBottom:72 }}>
-        <SectionLabel>Why Uganda</SectionLabel>
+        <SectionLabel>Why AFRICA</SectionLabel>
         <h2 style={{ fontSize:"clamp(24px,3.5vw,38px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1px", marginBottom:24 }}>The opportunity is right here</h2>
         <div style={{ background:`linear-gradient(135deg,${C.blue}15,${C.purple}0a)`, border:`1px solid ${C.blue}35`, borderRadius:20, padding:"clamp(28px,4vw,48px)" }}>
           <p style={{ fontSize:"clamp(16px,2.5vw,20px)", color:C.text, lineHeight:1.85, fontFamily:"'Manrope',sans-serif", margin:0, maxWidth:680, fontWeight:500, fontStyle:"italic" }}>
+            Let's take Uganda as a case study;
             "Uganda is one of the youngest countries in the world by median age. Over 75% of the population is under 30. We are not late to blockchain — we are early. And DigitalSphereUg exists to make sure Ugandan students are builders in this space, not just observers."
           </p>
         </div>
@@ -2601,9 +2602,9 @@ function Footer({ setPage }) {
               <div style={{ width:40, height:40, borderRadius:8, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:11, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif", flexShrink:0 }}>
                 DS
               </div>
-              <span style={{ fontSize:16, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap" }}>DigitalSphere<span style={{ color:C.blueLt }}>Ug</span></span>
+              <span style={{ fontSize:16, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap" }}>DigitalSphere{/* <span style={{ color:C.blueLt }}>Ug</span> */}</span>
             </button>
-            <p style={{ fontSize:13, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif", margin:"0 0 20px", maxWidth:240 }}>Student-led. Uganda-built. Web3-ready.</p>
+            <p style={{ fontSize:13, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif", margin:"0 0 20px", maxWidth:240 }}>Always Free. Built For Everyone. Web3-ready.</p>
             {/* Social links in footer */}
             <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
               <a href="https://x.com/digitalsphereug" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)" className="social-btn" style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.card, border:`1px solid ${C.border}`, color:C.textSub, width:36, height:36, borderRadius:8, textDecoration:"none" }}><BsTwitterX size={ICON.md} /></a>
@@ -2640,8 +2641,8 @@ function Footer({ setPage }) {
         </div>
 
         <div style={{ borderTop:`1px solid ${C.border}`, paddingTop:20, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:10 }}>
-          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>© 2026 DigitalSphereUg — Built in Uganda 🇺🇬</span>
-          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Disclaimer: DigitalSphereUg curates links to free external resources. All linked resources belong to their respective owners.</span>
+          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>© 2026 DigitalSphere — Built for Everyone</span>
+          <span style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif" }}>Disclaimer: DigitalSphere curates links to free external resources. All linked resources belong to their respective owners.</span>
         </div>
       </div>
     </footer>
