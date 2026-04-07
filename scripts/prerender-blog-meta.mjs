@@ -39,6 +39,111 @@ const EVENT_META_BY_SLUG = {
     imageSource: "src/assets/gallery/buildl-session group.jpg",
   },
 };
+const OPPORTUNITY_META_BY_SLUG = {
+  "binance-learn-and-earn": {
+    title: "Binance Learn & Earn",
+    description: "Complete short blockchain courses and earn rewards as you learn.",
+    imageSource: "src/assets/opportunities/binance academy.jpg",
+  },
+  "coinbase-learn": {
+    title: "Coinbase Learn",
+    description: "Learn key crypto concepts and earn as you build confidence.",
+    imageSource: "src/assets/opportunities/coinbase.png",
+  },
+  "alchemy-university": {
+    title: "Alchemy University",
+    description: "Free blockchain bootcamp and learning pathways for all levels.",
+    imageSource: "src/assets/opportunities/alchemy.png",
+  },
+  "celo-proof-of-ship-season-2": {
+    title: "Celo Proof of Ship Season 2",
+    description: "Ship real projects publicly and compete for monthly ecosystem funding.",
+    imageSource: "src/assets/opportunities/celo-proof-of-ship.jpg",
+  },
+  "ethereum-foundation-esp": {
+    title: "Ethereum Foundation - ESP",
+    description: "Funding support for builders and public goods in the Ethereum ecosystem.",
+    imageSource: "src/assets/opportunities/ethereum-foundation.jpg",
+  },
+  "gitcoin-grants": {
+    title: "Gitcoin Grants",
+    description: "Community-funded support for open source and mission-driven Web3 projects.",
+    imageSource: "src/assets/opportunities/gitcoin.jpg",
+  },
+  "devfest-kampala-hackathon": {
+    title: "DevFest Kampala Hackathon",
+    description: "Build and showcase solutions at Kampala's flagship blockchain hackathon.",
+    imageSource: "src/assets/events/devfest-2026-flyer.jpeg",
+  },
+  "ethglobal-hackathons": {
+    title: "ETHGlobal Hackathons",
+    description: "Global Ethereum hackathons with prizes, mentorship, and collaboration.",
+    imageSource: "src/assets/opportunities/ethnile-global.jpg",
+  },
+  "chainlink-hackathon": {
+    title: "Chainlink Hackathon",
+    description: "Compete in Chainlink hackathons and build production-ready Web3 tools.",
+    imageSource: "src/assets/opportunities/chainlink.jpg",
+  },
+  "web3-career-jobs": {
+    title: "Web3.career",
+    description: "Explore remote and global Web3 roles curated for builders.",
+    imageSource: "src/assets/opportunities/web3 careers.jpg",
+  },
+  "crypto-jobs-list": {
+    title: "Crypto Jobs List",
+    description: "Find curated blockchain and crypto job opportunities worldwide.",
+    imageSource: "src/assets/opportunities/crypto-job-list.jpg",
+  },
+  "gitcoin-bounties": {
+    title: "Gitcoin Bounties",
+    description: "Earn by contributing to open source blockchain projects.",
+    imageSource: "src/assets/opportunities/gitcoin.jpg",
+  },
+};
+
+const STATIC_PAGE_META = {
+  "/": {
+    title: "DigitalSphere | Africa's Home for Blockchain & Web3",
+    description: "Master the fundamentals of Blockchain and Web3, discover local events, and access real opportunities for individuals and communities ready to grow in Web3 across Africa.",
+    imageSource: "public/og-default.jpg",
+  },
+  "/learn": {
+    title: "Learn Blockchain | DigitalSphere",
+    description: "Master the fundamentals of Blockchain and Web3 with structured tracks for learners across Africa.",
+    imageSource: "src/assets/community/chainlink-rooftop.jpg.jpg",
+  },
+  "/events": {
+    title: "Events | DigitalSphere",
+    description: "Upcoming blockchain events and community sessions across Africa.",
+    imageSource: "src/assets/gallery/ethnile-sponserbanner.jpg.jpg",
+  },
+  "/opportunities": {
+    title: "Opportunities | DigitalSphere",
+    description: "Web3 jobs, grants, hackathons, and growth opportunities across Africa.",
+    imageSource: "src/assets/gallery/outdoor-laptop session.jpg",
+  },
+  "/resources": {
+    title: "Resources | DigitalSphere",
+    description: "Curated free blockchain tools and learning resources.",
+    imageSource: "src/assets/gallery/kyambongo-lecture -room.jpg.jpg",
+  },
+  "/blog": {
+    title: "Blog | DigitalSphere",
+    description: "Africa-first blockchain insights, guides, and stories.",
+    imageSource: "src/assets/hero/ethnile-group.jpg.jpg",
+  },
+  "/community": {
+    title: "Community | DigitalSphere",
+    description: "Join DigitalSphere's growing blockchain and Web3 community across Africa.",
+    imageSource: "src/assets/community/chainlink.jpg.jpg",
+  },
+  "/about": {
+    title: "About | DigitalSphere",
+    description: "Built by students and builders, for Africa's blockchain future.",
+    imageSource: "src/assets/about/stellar-group.jpg.jpg",
+  },
+};
 
 function escapeHtml(value) {
   return String(value)
@@ -81,7 +186,8 @@ function extractImageImportMap(appSource, projectRoot) {
 }
 
 function extractPostsMeta(appSource) {
-  const startIndex = appSource.indexOf("const POSTS = [");
+  const postsDeclarationMatch = appSource.match(/\b(?:const|let)\s+POSTS\s*=\s*\[/);
+  const startIndex = postsDeclarationMatch ? postsDeclarationMatch.index : -1;
   if (startIndex < 0) {
     return [];
   }
@@ -198,9 +304,6 @@ function main() {
   const appSource = fs.readFileSync(appPath, "utf8");
   const posts = extractPostsMeta(appSource);
   const imageImportMap = extractImageImportMap(appSource, projectRoot);
-  if (posts.length === 0) {
-    return;
-  }
 
   const baseHtml = fs.readFileSync(distIndexPath, "utf8");
 
@@ -249,6 +352,63 @@ function main() {
     html = upsertCanonical(html, eventUrl);
 
     const outputPath = path.join(projectRoot, "dist", "events", eventSlug, "index.html");
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, html, "utf8");
+  }
+
+  const opportunityEntries = Object.entries(OPPORTUNITY_META_BY_SLUG);
+  for (const [opportunitySlug, opportunityMeta] of opportunityEntries) {
+    const opportunityUrl = `${SITE_URL}/opportunities/${opportunitySlug}`;
+    const opportunityImageUrl = resolveMappedImageUrl(opportunitySlug, opportunityMeta.imageSource, distDir, "opportunities");
+    let html = baseHtml;
+
+    html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(opportunityMeta.title)} | DigitalSphere Opportunities</title>`);
+    html = upsertMetaTag(html, "name", "description", opportunityMeta.description);
+    html = upsertMetaTag(html, "property", "og:type", "website");
+    html = upsertMetaTag(html, "property", "og:site_name", "DigitalSphereUg");
+    html = upsertMetaTag(html, "property", "og:title", `${opportunityMeta.title} | DigitalSphere Opportunities`);
+    html = upsertMetaTag(html, "property", "og:description", opportunityMeta.description);
+    html = upsertMetaTag(html, "property", "og:url", opportunityUrl);
+    html = upsertMetaTag(html, "property", "og:image", opportunityImageUrl);
+    html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
+    html = upsertMetaTag(html, "name", "twitter:title", `${opportunityMeta.title} | DigitalSphere Opportunities`);
+    html = upsertMetaTag(html, "name", "twitter:description", opportunityMeta.description);
+    html = upsertMetaTag(html, "name", "twitter:image", opportunityImageUrl);
+    html = upsertCanonical(html, opportunityUrl);
+
+    const outputPath = path.join(projectRoot, "dist", "opportunities", opportunitySlug, "index.html");
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, html, "utf8");
+  }
+
+  const staticEntries = Object.entries(STATIC_PAGE_META);
+  for (const [pagePath, pageMeta] of staticEntries) {
+    const pageUrl = pagePath === "/" ? SITE_URL : `${SITE_URL}${pagePath}`;
+    const pageImageUrl = resolveMappedImageUrl(
+      pagePath === "/" ? "home" : pagePath.replaceAll("/", "-").replace(/^-/, ""),
+      pageMeta.imageSource,
+      distDir,
+      "pages",
+    );
+    let html = baseHtml;
+
+    html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(pageMeta.title)}</title>`);
+    html = upsertMetaTag(html, "name", "description", pageMeta.description);
+    html = upsertMetaTag(html, "property", "og:type", "website");
+    html = upsertMetaTag(html, "property", "og:site_name", "DigitalSphereUg");
+    html = upsertMetaTag(html, "property", "og:title", pageMeta.title);
+    html = upsertMetaTag(html, "property", "og:description", pageMeta.description);
+    html = upsertMetaTag(html, "property", "og:url", pageUrl);
+    html = upsertMetaTag(html, "property", "og:image", pageImageUrl);
+    html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
+    html = upsertMetaTag(html, "name", "twitter:title", pageMeta.title);
+    html = upsertMetaTag(html, "name", "twitter:description", pageMeta.description);
+    html = upsertMetaTag(html, "name", "twitter:image", pageImageUrl);
+    html = upsertCanonical(html, pageUrl);
+
+    const outputPath = pagePath === "/"
+      ? path.join(projectRoot, "dist", "index.html")
+      : path.join(projectRoot, "dist", pagePath.replace(/^\//, ""), "index.html");
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, html, "utf8");
   }

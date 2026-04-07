@@ -843,8 +843,8 @@ let TEAM = [
     avatar: rwegoImage,
     initials: "TL",
     color: C.textDim,
-    linkedin: "https://linkedin.com/in/https://www.linkedin.com/in/rwego-edward-440052325?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-    x: "https://x.com/https://x.com/Edcode_9",
+    linkedin: "https://www.linkedin.com/in/rwego-edward-440052325?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    x: "https://x.com/Edcode_9",
     active: true,
   },
 ];
@@ -1802,7 +1802,7 @@ function Home({ setPage }) {
         <div className="cta-pop" style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:20, padding:"clamp(36px,6vw,64px) clamp(24px,5vw,56px)", textAlign:"left" }}>
           <div>
             <h2 style={{ fontSize:"clamp(28px,4.5vw,52px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-1.5px", lineHeight:1.1, marginBottom:16 }}>300+ Students already building in Web3.<br /><span style={{ color:C.blueLt }}>Join the next wave.</span></h2>
-            <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:"0 0 28px", maxWidth:420 }}>If you're in Uganda and curious about blockchain, this is your lane.</p>
+            <p style={{ fontSize:16, color:C.textSub, fontFamily:"'Manrope',sans-serif", margin:"0 0 28px", maxWidth:420 }}>If you're curious about blockchain, this is your lane.</p>
             <div style={{ display:"flex", gap:12, justifyContent:"flex-start", flexWrap:"wrap" }}>
               <button onClick={() => setPage("Learn")} className="hover-lift" style={{ background:C.blue, border:"none", cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.white, fontSize:15, fontWeight:700, fontFamily:"'Space Grotesk',sans-serif" }}>Start Learning Free</button>
               <button onClick={() => setPage("Community")} className="hover-lift" style={{ background:"transparent", border:`1px solid ${C.blueLt}`, cursor:"pointer", padding:"15px 36px", borderRadius:12, color:C.text, fontSize:15, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>Join Community</button>

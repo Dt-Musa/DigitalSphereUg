@@ -76,7 +76,7 @@ export default function Hero({ setPage }) {
          Africa's Home for <span>Blockchain & Web3</span>
         </h1>
         <p>
-          Master the fundamentals of Blockchain and Web3, get to know about local events, as well as real opportunities for every individuals and communities ready to grow in Web3.
+          Master the fundamentals of Blockchain and Web3, get to know about local events, as well as real opportunities for every individual and communities ready to grow in Web3.
         </p>
 
         <div className="hero-actions">
