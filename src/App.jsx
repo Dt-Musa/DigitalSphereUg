@@ -843,8 +843,8 @@ let TEAM = [
     avatar: rwegoImage,
     initials: "TL",
     color: C.textDim,
-    linkedin: "https://linkedin.com/in/your-linkedin-here",
-    x: "https://x.com/your-x-handle-here",
+    linkedin: "https://linkedin.com/in/https://www.linkedin.com/in/rwego-edward-440052325?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    x: "https://x.com/https://x.com/Edcode_9",
     active: true,
   },
 ];
