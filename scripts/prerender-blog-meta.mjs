@@ -1,8 +1,51 @@
 import fs from "node:fs";
 import path from "node:path";
+import { createClient } from "@sanity/client";
+import { createImageUrlBuilder } from "@sanity/image-url";
 
 const SITE_URL = "https://www.digitalsphereug.tech";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
+const DEPLOY_VERSION = (
+  process.env.VERCEL_GIT_COMMIT_SHA
+  || process.env.VERCEL_GIT_COMMIT_REF
+  || process.env.VERCEL_URL
+  || process.env.npm_package_version
+  || new Date().toISOString().slice(0, 10)
+).toString();
+const BUILD_TIMESTAMP = new Date().toISOString();
+const SANITY_PROJECT_ID = "vzjsmuxp";
+const SANITY_DATASET = "production";
+const SANITY_API_VERSION = "2026-04-06";
+
+const sanityClient = createClient({
+  projectId: SANITY_PROJECT_ID,
+  dataset: SANITY_DATASET,
+  apiVersion: SANITY_API_VERSION,
+  useCdn: true,
+  perspective: "published",
+});
+
+const sanityImageBuilder = createImageUrlBuilder(sanityClient);
+
+const CMS_META_QUERY = `{
+  "posts": *[_type == "blogPost" && defined(slug.current)] | order(publishedDate desc){
+    title,
+    "slug": slug.current,
+    "description": coalesce(excerpt, ""),
+    image,
+    coverImage
+  },
+  "events": *[_type == "event"] | order(_updatedAt desc){
+    title,
+    "description": coalesce(description, ""),
+    image
+  },
+  "opportunities": *[_type == "opportunity" && coalesce(active, true) == true] | order(_updatedAt desc){
+    title,
+    "description": coalesce(description, ""),
+    logo
+  }
+}`;
 const POST_IMAGE_SOURCE_BY_SLUG = {
   "rwa-tokenization-africas-on-chain-moment-uganda-2026": "src/assets/Blog/article7.jpg",
   "celo-proof-of-ship-season-2-is-live": "src/assets/Blog/article6.jpeg",
@@ -174,6 +217,82 @@ function upsertOgImageSupportTags(html, imageUrl) {
   return next;
 }
 
+function toSlug(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+function resolveSanityImageUrl(imageSource) {
+  if (!imageSource) {
+    return "";
+  }
+
+  try {
+    return sanityImageBuilder.image(imageSource).width(1200).height(630).fit("crop").auto("format").url();
+  } catch {
+    return "";
+  }
+}
+
+function withVersionQuery(rawUrl) {
+  const url = String(rawUrl || "").trim();
+  if (!url) {
+    return DEFAULT_OG_IMAGE;
+  }
+
+  try {
+    const parsed = new URL(url);
+    parsed.searchParams.set("v", DEPLOY_VERSION);
+    return parsed.toString();
+  } catch {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}v=${encodeURIComponent(DEPLOY_VERSION)}`;
+  }
+}
+
+async function fetchCmsMeta() {
+  try {
+    const data = await sanityClient.fetch(CMS_META_QUERY);
+
+    const posts = (data?.posts || [])
+      .filter((post) => post?.slug && post?.title)
+      .map((post) => ({
+        slug: String(post.slug).trim(),
+        title: String(post.title).trim(),
+        description: String(post.description || "").trim(),
+        imageUrl: resolveSanityImageUrl(post.image) || resolveSanityImageUrl(post.coverImage),
+      }));
+
+    const events = (data?.events || [])
+      .filter((event) => event?.title)
+      .map((event) => ({
+        slug: toSlug(event.title),
+        title: String(event.title).trim(),
+        description: String(event.description || "").trim(),
+        imageUrl: resolveSanityImageUrl(event.image),
+      }))
+      .filter((event) => Boolean(event.slug));
+
+    const opportunities = (data?.opportunities || [])
+      .filter((opportunity) => opportunity?.title)
+      .map((opportunity) => ({
+        slug: toSlug(opportunity.title),
+        title: String(opportunity.title).trim(),
+        description: String(opportunity.description || "").trim(),
+        imageUrl: resolveSanityImageUrl(opportunity.logo),
+      }))
+      .filter((opportunity) => Boolean(opportunity.slug));
+
+    return { posts, events, opportunities };
+  } catch (error) {
+    console.warn("SEO prerender: failed to fetch CMS metadata, using static metadata only.", error?.message || error);
+    return { posts: [], events: [], opportunities: [] };
+  }
+}
+
 function extractImageImportMap(appSource, projectRoot) {
   const map = new Map();
   const importPattern = /import\s+(\w+)\s+from\s+"(.+?)";/g;
@@ -300,7 +419,7 @@ function resolveMappedImageUrl(slug, mappedSource, distDir, folder) {
   return `${SITE_URL}/${outputRelativePath}`;
 }
 
-function main() {
+async function main() {
   const projectRoot = process.cwd();
   const appPath = path.join(projectRoot, "src", "App.jsx");
   const distDir = path.join(projectRoot, "dist");
@@ -311,94 +430,147 @@ function main() {
   }
 
   const appSource = fs.readFileSync(appPath, "utf8");
-  const posts = extractPostsMeta(appSource);
+  const staticPosts = extractPostsMeta(appSource);
   const imageImportMap = extractImageImportMap(appSource, projectRoot);
+  const cmsMeta = await fetchCmsMeta();
+
+  const postsBySlug = new Map(staticPosts.map((post) => [post.slug, post]));
+  for (const post of cmsMeta.posts) {
+    const previous = postsBySlug.get(post.slug) || {};
+    postsBySlug.set(post.slug, {
+      ...previous,
+      ...post,
+      imageUrl: post.imageUrl || previous.imageUrl || "",
+    });
+  }
 
   const baseHtml = fs.readFileSync(distIndexPath, "utf8");
+  const generatedRoutes = {
+    blog: [],
+    events: [],
+    opportunities: [],
+    pages: [],
+  };
 
-  for (const post of posts) {
+  for (const post of postsBySlug.values()) {
     const postUrl = `${SITE_URL}/blog/${post.slug}`;
-    const postImageUrl = resolvePostImageUrl(post, imageImportMap, distDir);
+    const postImageUrl = withVersionQuery(post.imageUrl || resolvePostImageUrl(post, imageImportMap, distDir));
+    const postDescription = post.description || "Latest update from DigitalSphereUg.";
     let html = baseHtml;
 
     html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(post.title)} | DigitalSphereUg Blog</title>`);
-    html = upsertMetaTag(html, "name", "description", post.description);
+    html = upsertMetaTag(html, "name", "description", postDescription);
     html = upsertMetaTag(html, "property", "og:type", "article");
     html = upsertMetaTag(html, "property", "og:site_name", "DigitalSphereUg");
     html = upsertMetaTag(html, "property", "og:title", `${post.title} | DigitalSphereUg Blog`);
-    html = upsertMetaTag(html, "property", "og:description", post.description);
+    html = upsertMetaTag(html, "property", "og:description", postDescription);
     html = upsertMetaTag(html, "property", "og:url", postUrl);
+    html = upsertMetaTag(html, "property", "og:updated_time", BUILD_TIMESTAMP);
+    html = upsertMetaTag(html, "property", "article:modified_time", BUILD_TIMESTAMP);
     html = upsertOgImageSupportTags(html, postImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", `${post.title} | DigitalSphereUg Blog`);
-    html = upsertMetaTag(html, "name", "twitter:description", post.description);
+    html = upsertMetaTag(html, "name", "twitter:description", postDescription);
     html = upsertMetaTag(html, "name", "twitter:image", postImageUrl);
     html = upsertCanonical(html, postUrl);
 
     const outputPath = path.join(projectRoot, "dist", "blog", post.slug, "index.html");
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, html, "utf8");
+    generatedRoutes.blog.push(`/blog/${post.slug}`);
   }
 
-  const eventEntries = Object.entries(EVENT_META_BY_SLUG);
-  for (const [eventSlug, eventMeta] of eventEntries) {
+  const eventMetaBySlug = new Map(
+    Object.entries(EVENT_META_BY_SLUG).map(([slug, meta]) => [slug, { slug, ...meta }]),
+  );
+  for (const event of cmsMeta.events) {
+    const previous = eventMetaBySlug.get(event.slug) || {};
+    eventMetaBySlug.set(event.slug, {
+      ...previous,
+      slug: event.slug,
+      title: event.title,
+      description: event.description || previous.description || "Event update from DigitalSphere.",
+      imageSource: event.imageUrl || previous.imageSource,
+    });
+  }
+
+  for (const [eventSlug, eventMeta] of eventMetaBySlug.entries()) {
     const eventUrl = `${SITE_URL}/events/${eventSlug}`;
-    const eventImageUrl = resolveMappedImageUrl(eventSlug, eventMeta.imageSource, distDir, "events");
+    const eventImageUrl = withVersionQuery(resolveMappedImageUrl(eventSlug, eventMeta.imageSource, distDir, "events"));
+    const eventDescription = eventMeta.description || "Event update from DigitalSphere.";
     let html = baseHtml;
 
     html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(eventMeta.title)} | DigitalSphereUg Events</title>`);
-    html = upsertMetaTag(html, "name", "description", eventMeta.description);
+    html = upsertMetaTag(html, "name", "description", eventDescription);
     html = upsertMetaTag(html, "property", "og:type", "website");
     html = upsertMetaTag(html, "property", "og:site_name", "DigitalSphereUg");
     html = upsertMetaTag(html, "property", "og:title", `${eventMeta.title} | DigitalSphereUg Events`);
-    html = upsertMetaTag(html, "property", "og:description", eventMeta.description);
+    html = upsertMetaTag(html, "property", "og:description", eventDescription);
     html = upsertMetaTag(html, "property", "og:url", eventUrl);
+    html = upsertMetaTag(html, "property", "og:updated_time", BUILD_TIMESTAMP);
     html = upsertOgImageSupportTags(html, eventImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", `${eventMeta.title} | DigitalSphereUg Events`);
-    html = upsertMetaTag(html, "name", "twitter:description", eventMeta.description);
+    html = upsertMetaTag(html, "name", "twitter:description", eventDescription);
     html = upsertMetaTag(html, "name", "twitter:image", eventImageUrl);
     html = upsertCanonical(html, eventUrl);
 
     const outputPath = path.join(projectRoot, "dist", "events", eventSlug, "index.html");
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, html, "utf8");
+    generatedRoutes.events.push(`/events/${eventSlug}`);
   }
 
-  const opportunityEntries = Object.entries(OPPORTUNITY_META_BY_SLUG);
-  for (const [opportunitySlug, opportunityMeta] of opportunityEntries) {
+  const opportunityMetaBySlug = new Map(
+    Object.entries(OPPORTUNITY_META_BY_SLUG).map(([slug, meta]) => [slug, { slug, ...meta }]),
+  );
+  for (const opportunity of cmsMeta.opportunities) {
+    const previous = opportunityMetaBySlug.get(opportunity.slug) || {};
+    opportunityMetaBySlug.set(opportunity.slug, {
+      ...previous,
+      slug: opportunity.slug,
+      title: opportunity.title,
+      description: opportunity.description || previous.description || "Opportunity update from DigitalSphere.",
+      imageSource: opportunity.imageUrl || previous.imageSource,
+    });
+  }
+
+  for (const [opportunitySlug, opportunityMeta] of opportunityMetaBySlug.entries()) {
     const opportunityUrl = `${SITE_URL}/opportunities/${opportunitySlug}`;
-    const opportunityImageUrl = resolveMappedImageUrl(opportunitySlug, opportunityMeta.imageSource, distDir, "opportunities");
+    const opportunityImageUrl = withVersionQuery(resolveMappedImageUrl(opportunitySlug, opportunityMeta.imageSource, distDir, "opportunities"));
+    const opportunityDescription = opportunityMeta.description || "Opportunity update from DigitalSphere.";
     let html = baseHtml;
 
     html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(opportunityMeta.title)} | DigitalSphere Opportunities</title>`);
-    html = upsertMetaTag(html, "name", "description", opportunityMeta.description);
+    html = upsertMetaTag(html, "name", "description", opportunityDescription);
     html = upsertMetaTag(html, "property", "og:type", "website");
     html = upsertMetaTag(html, "property", "og:site_name", "DigitalSphereUg");
     html = upsertMetaTag(html, "property", "og:title", `${opportunityMeta.title} | DigitalSphere Opportunities`);
-    html = upsertMetaTag(html, "property", "og:description", opportunityMeta.description);
+    html = upsertMetaTag(html, "property", "og:description", opportunityDescription);
     html = upsertMetaTag(html, "property", "og:url", opportunityUrl);
+    html = upsertMetaTag(html, "property", "og:updated_time", BUILD_TIMESTAMP);
     html = upsertOgImageSupportTags(html, opportunityImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", `${opportunityMeta.title} | DigitalSphere Opportunities`);
-    html = upsertMetaTag(html, "name", "twitter:description", opportunityMeta.description);
+    html = upsertMetaTag(html, "name", "twitter:description", opportunityDescription);
     html = upsertMetaTag(html, "name", "twitter:image", opportunityImageUrl);
     html = upsertCanonical(html, opportunityUrl);
 
     const outputPath = path.join(projectRoot, "dist", "opportunities", opportunitySlug, "index.html");
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, html, "utf8");
+    generatedRoutes.opportunities.push(`/opportunities/${opportunitySlug}`);
   }
 
   const staticEntries = Object.entries(STATIC_PAGE_META);
   for (const [pagePath, pageMeta] of staticEntries) {
     const pageUrl = pagePath === "/" ? SITE_URL : `${SITE_URL}${pagePath}`;
-    const pageImageUrl = resolveMappedImageUrl(
+    const pageImageUrl = withVersionQuery(resolveMappedImageUrl(
       pagePath === "/" ? "home" : pagePath.replaceAll("/", "-").replace(/^-/, ""),
       pageMeta.imageSource,
       distDir,
       "pages",
-    );
+    ));
     let html = baseHtml;
 
     html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(pageMeta.title)}</title>`);
@@ -408,6 +580,7 @@ function main() {
     html = upsertMetaTag(html, "property", "og:title", pageMeta.title);
     html = upsertMetaTag(html, "property", "og:description", pageMeta.description);
     html = upsertMetaTag(html, "property", "og:url", pageUrl);
+    html = upsertMetaTag(html, "property", "og:updated_time", BUILD_TIMESTAMP);
     html = upsertOgImageSupportTags(html, pageImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", pageMeta.title);
@@ -420,7 +593,36 @@ function main() {
       : path.join(projectRoot, "dist", pagePath.replace(/^\//, ""), "index.html");
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, html, "utf8");
+    generatedRoutes.pages.push(pagePath);
   }
+
+  generatedRoutes.blog.sort((a, b) => a.localeCompare(b));
+  generatedRoutes.events.sort((a, b) => a.localeCompare(b));
+  generatedRoutes.opportunities.sort((a, b) => a.localeCompare(b));
+  generatedRoutes.pages.sort((a, b) => a.localeCompare(b));
+
+  const report = {
+    generatedAt: BUILD_TIMESTAMP,
+    deployVersion: DEPLOY_VERSION,
+    counts: {
+      blog: generatedRoutes.blog.length,
+      events: generatedRoutes.events.length,
+      opportunities: generatedRoutes.opportunities.length,
+      pages: generatedRoutes.pages.length,
+    },
+    routes: generatedRoutes,
+  };
+
+  const reportPath = path.join(distDir, "seo-routes.json");
+  fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+
+  console.log(
+    `SEO prerender summary: blog=${report.counts.blog}, events=${report.counts.events}, opportunities=${report.counts.opportunities}, pages=${report.counts.pages}`,
+  );
+  console.log(`SEO prerender report: ${reportPath}`);
 }
 
-main();
+main().catch((error) => {
+  console.error("SEO prerender failed:", error);
+  process.exitCode = 1;
+});
