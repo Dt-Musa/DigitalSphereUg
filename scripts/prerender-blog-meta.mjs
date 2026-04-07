@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const SITE_URL = "https://digitalsphereug.tech";
+const SITE_URL = "https://www.digitalsphereug.tech";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 const POST_IMAGE_SOURCE_BY_SLUG = {
   "rwa-tokenization-africas-on-chain-moment-uganda-2026": "src/assets/Blog/article7.jpg",
@@ -165,6 +165,15 @@ function upsertCanonical(html, href) {
   return pattern.test(html) ? html.replace(pattern, tag) : html.replace("</head>", `  ${tag}\n  </head>`);
 }
 
+function upsertOgImageSupportTags(html, imageUrl) {
+  let next = html;
+  next = upsertMetaTag(next, "property", "og:image", imageUrl);
+  next = upsertMetaTag(next, "property", "og:image:secure_url", imageUrl);
+  next = upsertMetaTag(next, "property", "og:image:width", "1200");
+  next = upsertMetaTag(next, "property", "og:image:height", "630");
+  return next;
+}
+
 function extractImageImportMap(appSource, projectRoot) {
   const map = new Map();
   const importPattern = /import\s+(\w+)\s+from\s+"(.+?)";/g;
@@ -319,7 +328,7 @@ function main() {
     html = upsertMetaTag(html, "property", "og:title", `${post.title} | DigitalSphereUg Blog`);
     html = upsertMetaTag(html, "property", "og:description", post.description);
     html = upsertMetaTag(html, "property", "og:url", postUrl);
-    html = upsertMetaTag(html, "property", "og:image", postImageUrl);
+    html = upsertOgImageSupportTags(html, postImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", `${post.title} | DigitalSphereUg Blog`);
     html = upsertMetaTag(html, "name", "twitter:description", post.description);
@@ -344,7 +353,7 @@ function main() {
     html = upsertMetaTag(html, "property", "og:title", `${eventMeta.title} | DigitalSphereUg Events`);
     html = upsertMetaTag(html, "property", "og:description", eventMeta.description);
     html = upsertMetaTag(html, "property", "og:url", eventUrl);
-    html = upsertMetaTag(html, "property", "og:image", eventImageUrl);
+    html = upsertOgImageSupportTags(html, eventImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", `${eventMeta.title} | DigitalSphereUg Events`);
     html = upsertMetaTag(html, "name", "twitter:description", eventMeta.description);
@@ -369,7 +378,7 @@ function main() {
     html = upsertMetaTag(html, "property", "og:title", `${opportunityMeta.title} | DigitalSphere Opportunities`);
     html = upsertMetaTag(html, "property", "og:description", opportunityMeta.description);
     html = upsertMetaTag(html, "property", "og:url", opportunityUrl);
-    html = upsertMetaTag(html, "property", "og:image", opportunityImageUrl);
+    html = upsertOgImageSupportTags(html, opportunityImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", `${opportunityMeta.title} | DigitalSphere Opportunities`);
     html = upsertMetaTag(html, "name", "twitter:description", opportunityMeta.description);
@@ -399,7 +408,7 @@ function main() {
     html = upsertMetaTag(html, "property", "og:title", pageMeta.title);
     html = upsertMetaTag(html, "property", "og:description", pageMeta.description);
     html = upsertMetaTag(html, "property", "og:url", pageUrl);
-    html = upsertMetaTag(html, "property", "og:image", pageImageUrl);
+    html = upsertOgImageSupportTags(html, pageImageUrl);
     html = upsertMetaTag(html, "name", "twitter:card", "summary_large_image");
     html = upsertMetaTag(html, "name", "twitter:title", pageMeta.title);
     html = upsertMetaTag(html, "name", "twitter:description", pageMeta.description);

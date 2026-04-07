@@ -116,6 +116,7 @@ import ethnileGlobalOppLogo from "./assets/opportunities/ethnile-global.jpg";
 import celoProofOfShipOppLogo from "./assets/opportunities/celo-proof-of-ship.jpg";
 import Hero from "./Hero";
 import LessonDemoPage from "./LessonDemoPage";
+import { fetchCmsContent } from "./sanityContent";
 
 // ─── Colors ───────────────────────────────────────────────────────
 const THEMES = {
@@ -945,7 +946,7 @@ const NAV_LINKS = [
 ];
 const PAGE_ROUTES = Object.fromEntries(NAV_LINKS.map((item) => [item.label, item.path]));
 const FOOTER_LINKS = NAV_LINKS.map((item) => item.label).filter((label) => label !== "Home");
-const SITE_URL = "https://digitalsphereug.tech";
+const SITE_URL = "https://www.digitalsphereug.tech";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 const STORAGE_KEYS = {
   completedResources: "dsug_done",
@@ -953,7 +954,9 @@ const STORAGE_KEYS = {
 };
 
 const CMS_FLAG_RAW = String(import.meta.env.VITE_ENABLE_CMS ?? "").trim().toLowerCase();
-const CMS_ENABLED = ["", "1", "true", "yes", "on"].includes(CMS_FLAG_RAW);
+const CMS_ENABLED = ["1", "true", "yes", "on"].includes(CMS_FLAG_RAW);
+const CMS_BADGE_FLAG_RAW = String(import.meta.env.VITE_SHOW_CMS_BADGE ?? "").trim().toLowerCase();
+const CMS_BADGE_ENABLED = ["1", "true", "yes", "on"].includes(CMS_BADGE_FLAG_RAW);
 const CMS_POLL_MS = 30000;
 
 const normalizeMergeKey = (value) =>
@@ -1562,6 +1565,9 @@ function SiteMeta({ title, description, image, path }) {
       <meta property="og:description" content={description} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:image" content={fullImage} />
+      <meta property="og:image:secure_url" content={fullImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
@@ -2955,8 +2961,7 @@ export default function App() {
       }
 
       try {
-        const cmsModule = await import("./sanityContent");
-        const content = await cmsModule.fetchCmsContent();
+        const content = await fetchCmsContent();
         if (cancelled) {
           isSyncing = false;
           return;
@@ -3004,7 +3009,7 @@ export default function App() {
     };
   }, []);
 
-  const showCmsBadge = cmsStatus.loading || Boolean(cmsStatus.error);
+  const showCmsBadge = import.meta.env.DEV && CMS_BADGE_ENABLED && (cmsStatus.loading || Boolean(cmsStatus.error));
   const cmsBadgeText = cmsStatus.loading
     ? "CMS: loading"
     : `CMS fallback active (${cmsStatus.error || "fetch failed"})`;
