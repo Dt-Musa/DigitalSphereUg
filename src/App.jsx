@@ -138,7 +138,7 @@ const THEMES = {
 let C = THEMES.dark;
 
 // ─── Data ─────────────────────────────────────────────────────────
-const TRACKS = [
+let TRACKS = [
   { id:1, slug:"track-1-blockchain-basics", icon:BsLink45Deg, color:C.green, label:"TRACK 01", title:"Blockchain Basics", sub:"No code required", level:"Beginner", time:"2–3 weeks", desc:"Understand how blockchain works from the ground up — concepts, use cases, and why it matters for Africa. Used by students at Makerere, Kyambogo & beyond.", resources:[
     { title:"But How Does Bitcoin Actually Work?", url:"https://www.youtube.com/watch?v=bBC-nXj3Ng4", time:"26 min", type:"Video" },
     { title:"Blockchain 101 — Anders Brownworth", url:"https://andersbrownworth.com/blockchain/", time:"30 min", type:"Interactive" },
@@ -169,11 +169,11 @@ const TRACKS = [
   ]},
 ];
 
-const EVENTS = [
+let EVENTS = [
   { title:"Blockchain DevFest Kampala 2026", slug:"blockchain-devfest-kampala-2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
 ];
 
-const PAST_EVENTS = [
+let PAST_EVENTS = [
   { title:"DeFi with Chainlink Oracles", slug:"defi-with-chainlink-oracles", date:"Ended — March 28, 2026", location:"CLB Board Room, Kyambogo University", tag:"University Session", color:C.cyan, image:chainlinkFlyerPhoto, recap:"Chainlink East Africa joined students for DeFi, oracles, and Web3 careers at Kyambogo. Read the DigitalSphereUg session recap.", link:"https://digitalsphereug.tech/blog/chainlink-digital-sphere-kyambogo" },
   { title:"Kampala Blockchain Summit 2025", slug:"kampala-blockchain-summit-2026", date:"Ended — Nov 25, 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
   { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
@@ -183,7 +183,7 @@ const PAST_EVENTS = [
   { title:"BAU Youth Blockchain Innovation", slug:"bau-youth-blockchain-innovation", date:"Ended — 2026", location:"Uganda", tag:"Programme", color:C.purple, image:buildlSessionPhoto, recap:"BAU's youth innovation programme concluded after equipping local learners with blockchain foundations and growth pathways.", link:"https://bau.ug" },
 ];
 
-const OPPS = [
+let OPPS = [
   { cat:"Learn & Earn", color:C.cyan, icon:BsMortarboard, items:[
     { title:"Binance Learn & Earn", slug:"binance-learn-and-earn", desc:"Complete short courses and earn crypto rewards.", link:"https://academy.binance.com/", level:"Beginner", logo:binanceOppLogo },
     { title:"Coinbase Learn", slug:"coinbase-learn", desc:"Learn about crypto assets and earn small amounts.", link:"https://www.coinbase.com/learn", level:"Beginner", logo:coinbaseOppLogo },
@@ -206,7 +206,7 @@ const OPPS = [
   ]},
 ];
 
-const POSTS = [
+let POSTS = [
   { id:7, slug:"rwa-tokenization-africas-on-chain-moment-uganda-2026", author:"Irankunda Musa", tag:"Insights", tagColor:C.blueLt, image:article7BlogImage, title:"From Confusion in Meetups to Africa's On-Chain Moment: Why RWA Tokenization Hits Different in 2026 - And What It Means for Uganda", excerpt:"A DigitalSphereUg breakdown of the biggest blockchain story happening in our own backyard.", date:"April 2026", read:"9 min read", body:`From Confusion in Meetups to Africa's On-Chain Moment: Why RWA Tokenization Hits Different in 2026 - And What It Means for Uganda
 
 A DigitalSphereUg breakdown of the biggest blockchain story happening in our own backyard.
@@ -792,7 +792,7 @@ Irankunda Musa | Lead, DigitalSphereUg` },
   { id:3, slug:"blockchain-opportunities-uganda", author:"Irankunda Musa", tag:"Opportunities", tagColor:C.cyan, image:article3BlogImage, title:"Blockchain Opportunities in Uganda Right Now", excerpt:"From the Blockchain Association of Uganda to DevFest Kampala, here's what's happening locally — and how to position yourself to benefit.", date:"March 2026", read:"6 min read", body:"Uganda's blockchain ecosystem is small but growing fast. Here is what is happening now and how to get involved.\n\nThe Blockchain Association of Uganda (BAU) is the country's main industry body. They run programmes, connect companies with talent, and advocate for blockchain-friendly policy.\n\nBlockchain DevFest Kampala is the flagship technical event. Every year it brings together developers, entrepreneurs, and investors from across Africa. Attending — even as a first-timer — opens doors that LinkedIn cannot.\n\nGlobally, platforms like Gitcoin pay developers in cryptocurrency to fix bugs and contribute to open source projects. A Ugandan with solid Solidity skills can earn in USD or ETH from their laptop in Kampala.\n\nThe window is open. The question is whether you walk through it." },
 ];
 
-const GALLERY_ITEMS = [
+let GALLERY_ITEMS = [
   { image:devfestCrowdPhoto, title:"Blockchain DevFest Kampala", date:"June 28, 2025", location:"Kampala, Uganda", summary:"Uganda's biggest Web3 developer conference. DigitalSphereUg was in the room." },
   { image:ethnileGroupHero, title:"ETHNile Kampala Community Day", date:"October 2025", location:"Ndere Culture Center, Kampala, Uganda", summary:"Builders, students, and founders connected around Ethereum education and real collaboration during the first Ethereum-focused event in Kampala." },
   { image:ethnileEventPhoto, title:"ETHNile Event Session", date:"October 2025", location:"Ndere Culture Center, Kampala, Uganda", summary:"We joined focused talks on blockchain adoption and practical next steps for local talent." },
@@ -810,10 +810,10 @@ const GALLERY_ITEMS = [
   { image:kyambogoRoomPhoto, title:"Kyambogo Session Room Meetup", date:"2026", location:"Kampala, Uganda", summary:"DigitalSphereUg joined learners for technical discussions and local builder networking." },
 ];
 
-const FEATURED_GALLERY_ITEMS = GALLERY_ITEMS.slice(0, 4);
+const getFeaturedGalleryItems = () => GALLERY_ITEMS.slice(0, 4);
 
 // ─── Team Data ────────────────────────────────────────────────────
-const TEAM = [
+let TEAM = [
   {
     name: "Irankunda Musa",
     role: "Founder & Community Lead",
@@ -850,7 +850,7 @@ const TEAM = [
 ];
 
 // ─── FAQ Data ─────────────────────────────────────────────────────
-const FAQS = [
+let FAQS = [
   { q:"Is everything on this platform really free?", a:"Yes — completely. Every course, resource, event listing, and opportunity on DigitalSphere is free. No subscription, no payment, no catch. That is the whole point." },
   { q:"Do I need coding experience to start?", a:"Not at all. Track 1 (Blockchain Basics) is designed for complete beginners with zero technical background. You learn what blockchain is, why it matters, and how it works — no code required." },
   { q:"I'm not a university student — can I still join?", a:"Absolutely. DigitalSphere is open to everyone interested in blockchain — students, professionals, entrepreneurs, and curious individuals at any stage of life." },
@@ -860,7 +860,7 @@ const FAQS = [
 ];
 
 // ─── Resources Data ───────────────────────────────────────────────
-const RESOURCES_DATA = [
+let RESOURCES_DATA = [
   { cat:"Developer Tools", icon:BsTools, color:C.blueLt, items:[
     { title:"Remix IDE", desc:"Browser-based Solidity editor — write and deploy smart contracts instantly, no setup needed.", link:"https://remix.ethereum.org/", tag:"Essential" },
     { title:"MetaMask", desc:"The most widely used Ethereum wallet and browser extension. You need this to interact with dApps.", link:"https://metamask.io/", tag:"Essential", logo:metaMaskResourceLogo },
@@ -888,6 +888,25 @@ const RESOURCES_DATA = [
     { title:"Chainlist", desc:"Add any blockchain network to MetaMask with one click.", link:"https://chainlist.org/", tag:"Tool", logo:chainlistResourceLogo },
   ]},
 ];
+
+const BASE_TRACKS = TRACKS.map((track) => ({
+  ...track,
+  resources: Array.isArray(track.resources) ? [...track.resources] : [],
+}));
+const BASE_EVENTS = EVENTS.map((event) => ({ ...event }));
+const BASE_PAST_EVENTS = PAST_EVENTS.map((event) => ({ ...event }));
+const BASE_OPPS = OPPS.map((category) => ({
+  ...category,
+  items: Array.isArray(category.items) ? [...category.items] : [],
+}));
+const BASE_POSTS = POSTS.map((post) => ({ ...post }));
+const BASE_GALLERY_ITEMS = GALLERY_ITEMS.map((item) => ({ ...item }));
+const BASE_TEAM = TEAM.map((member) => ({ ...member }));
+const BASE_FAQS = FAQS.map((faq) => ({ ...faq }));
+const BASE_RESOURCES_DATA = RESOURCES_DATA.map((category) => ({
+  ...category,
+  items: Array.isArray(category.items) ? [...category.items] : [],
+}));
 
 const MARQUEE_TECH = [
   { name:"Ethereum", logo:ethereumResourceLogo, tint:"#4d6ff0" },
@@ -933,27 +952,213 @@ const STORAGE_KEYS = {
   theme: "dsug_theme",
 };
 
+const CMS_FLAG_RAW = String(import.meta.env.VITE_ENABLE_CMS ?? "").trim().toLowerCase();
+const CMS_ENABLED = ["", "1", "true", "yes", "on"].includes(CMS_FLAG_RAW);
+const CMS_POLL_MS = 30000;
+
+const normalizeMergeKey = (value) =>
+  String(value || "")
+    .normalize("NFKD")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const getMergeKey = (item, fields) => {
+  if (!item || typeof item !== "object") {
+    return "";
+  }
+
+  for (const field of fields) {
+    const value = item[field];
+    if (value !== undefined && value !== null && String(value).trim()) {
+      return normalizeMergeKey(value);
+    }
+  }
+
+  return "";
+};
+
+const mergeListWithFallback = (baseList, cmsList, keyFields) => {
+  if (!Array.isArray(baseList) || !baseList.length) {
+    return Array.isArray(cmsList) ? cmsList : [];
+  }
+  if (!Array.isArray(cmsList) || !cmsList.length) {
+    return [...baseList];
+  }
+
+  const baseMap = new Map();
+  const usedKeys = new Set();
+
+  for (const item of baseList) {
+    const key = getMergeKey(item, keyFields);
+    if (key) {
+      baseMap.set(key, item);
+    }
+  }
+
+  const merged = cmsList.map((item) => {
+    const key = getMergeKey(item, keyFields);
+    if (!key || !baseMap.has(key)) {
+      return item;
+    }
+    usedKeys.add(key);
+    return { ...baseMap.get(key), ...item };
+  });
+
+  for (const item of baseList) {
+    const key = getMergeKey(item, keyFields);
+    if (!key || !usedKeys.has(key)) {
+      merged.push(item);
+    }
+  }
+
+  const deduped = [];
+  const seen = new Set();
+  for (const item of merged) {
+    const key = getMergeKey(item, keyFields);
+    if (!key) {
+      deduped.push(item);
+      continue;
+    }
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    deduped.push(item);
+  }
+
+  return deduped;
+};
+
+const mergeCategoryDataWithFallback = (baseCategories, cmsCategories) => {
+  if (!Array.isArray(baseCategories) || !baseCategories.length) {
+    return Array.isArray(cmsCategories) ? cmsCategories : [];
+  }
+  if (!Array.isArray(cmsCategories) || !cmsCategories.length) {
+    return [...baseCategories];
+  }
+
+  const baseMap = new Map(baseCategories.map((category) => [normalizeMergeKey(category.cat), category]));
+  const used = new Set();
+
+  const merged = cmsCategories.map((category) => {
+    const key = normalizeMergeKey(category?.cat);
+    const base = baseMap.get(key);
+    if (!base) {
+      return category;
+    }
+
+    used.add(key);
+    return {
+      ...base,
+      ...category,
+      items: mergeListWithFallback(base.items || [], category.items || [], ["slug", "title", "url", "link"]),
+    };
+  });
+
+  for (const category of baseCategories) {
+    const key = normalizeMergeKey(category?.cat);
+    if (!key || !used.has(key)) {
+      merged.push(category);
+    }
+  }
+
+  return merged;
+};
+
 const toSlug = (value = "") => value
   .toLowerCase()
   .replace(/[^a-z0-9\s-]/g, "")
   .trim()
   .replace(/\s+/g, "-");
 
-const ALL_EVENTS = [...EVENTS, ...PAST_EVENTS].map((event) => ({
-  ...event,
-  slug: event.slug || toSlug(event.title),
-}));
+const getAllEvents = () =>
+  [...EVENTS, ...PAST_EVENTS].map((event) => ({
+    ...event,
+    slug: event.slug || toSlug(event.title),
+  }));
 
-const OPPORTUNITY_ITEMS = OPPS.flatMap((category) =>
-  category.items.map((item) => ({
-    ...item,
-    cat: category.cat,
-    color: category.color,
-    slug: item.slug || toSlug(item.title),
-  })),
-);
+const getOpportunityItems = () =>
+  OPPS.flatMap((category) =>
+    category.items.map((item) => ({
+      ...item,
+      cat: category.cat,
+      color: category.color,
+      slug: item.slug || toSlug(item.title),
+    })),
+  );
 
-const TRACKS_BY_SLUG = Object.fromEntries(TRACKS.map((track) => [track.slug || toSlug(track.title), track]));
+const getTracksBySlug = () =>
+  Object.fromEntries(TRACKS.map((track) => [track.slug || toSlug(track.title), track]));
+
+function applyCmsOverrides(content) {
+  if (!content || typeof content !== "object") {
+    return false;
+  }
+
+  let hasUpdates = false;
+
+  if (Array.isArray(content.tracks) && content.tracks.length) {
+    TRACKS = mergeListWithFallback(BASE_TRACKS, content.tracks, ["slug", "title", "label"]);
+    TRACKS = TRACKS.map((track) => {
+      const baseTrack = BASE_TRACKS.find(
+        (item) => getMergeKey(item, ["slug", "title", "label"]) === getMergeKey(track, ["slug", "title", "label"]),
+      );
+      if (!baseTrack) {
+        return track;
+      }
+      return {
+        ...baseTrack,
+        ...track,
+        resources: mergeListWithFallback(baseTrack.resources || [], track.resources || [], ["title", "url", "resourceTitle"]),
+      };
+    });
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.events) && content.events.length) {
+    EVENTS = mergeListWithFallback(BASE_EVENTS, content.events, ["slug", "title", "link"]);
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.pastEvents)) {
+    PAST_EVENTS = mergeListWithFallback(BASE_PAST_EVENTS, content.pastEvents, ["slug", "title", "link"]);
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.opportunitiesByCategory) && content.opportunitiesByCategory.length) {
+    OPPS = mergeCategoryDataWithFallback(BASE_OPPS, content.opportunitiesByCategory);
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.posts) && content.posts.length) {
+    POSTS = mergeListWithFallback(BASE_POSTS, content.posts, ["slug", "title", "id"]);
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.galleryItems) && content.galleryItems.length) {
+    GALLERY_ITEMS = mergeListWithFallback(BASE_GALLERY_ITEMS, content.galleryItems, ["title", "image", "date"]);
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.team) && content.team.length) {
+    TEAM = mergeListWithFallback(BASE_TEAM, content.team, ["name", "role"]);
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.faqs) && content.faqs.length) {
+    FAQS = mergeListWithFallback(BASE_FAQS, content.faqs, ["q", "question"]);
+    hasUpdates = true;
+  }
+
+  if (Array.isArray(content.resourcesMap) && content.resourcesMap.length) {
+    RESOURCES_DATA = mergeCategoryDataWithFallback(BASE_RESOURCES_DATA, content.resourcesMap);
+    hasUpdates = true;
+  }
+
+  return hasUpdates;
+}
 
 function getShareUrl(pathname) {
   const origin = typeof window !== "undefined" ? window.location.origin : SITE_URL;
@@ -1066,6 +1271,12 @@ img,svg{max-width:100%}
 .photo-item:hover{transform:translateY(-4px);filter:saturate(1.04)}
 .resources-head{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
 .resources-hero-image .image-zoom img{display:block;width:100%;height:100%;min-height:180px;object-fit:cover}
+.op-card{min-width:0}
+.op-card-head{min-width:0}
+.op-card-meta{min-width:0}
+.op-card-title,.op-card-desc{overflow-wrap:anywhere;word-break:break-word}
+.op-logo-wrap{max-width:120px;min-width:0}
+.op-logo{display:block;width:auto;height:auto;max-width:100%;max-height:40px;object-fit:contain}
 .tech-marquee-section{width:100%;background:var(--ds-bg2);border-top:1px solid var(--ds-border);border-bottom:1px solid var(--ds-border);padding:30px 0 32px;overflow:hidden}
 .tech-marquee-label{display:block;text-align:center;font:700 12px 'Outfit',sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--ds-blue);margin:0 0 16px}
 .tech-marquee-row{position:relative;overflow:hidden;padding:4px 0}
@@ -1521,7 +1732,9 @@ function Home({ setPage }) {
           {TRACKS.map((t, i) => (
             <div key={t.id} onClick={() => setPage("Learn")} className={`hover-card ${i===0?"home-track-featured":""}`} style={{ background:C.card, border:`1px solid ${C.border}`, borderRadius:16, padding:"clamp(20px,2.5vw,28px)", cursor:"pointer", position:"relative", overflow:"hidden", gridColumn:i===0?"span 2":"span 1" }}>
               <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:`linear-gradient(90deg,${t.color},${t.color}50)` }} />
-              <div style={{ fontSize:26, marginBottom:14, display:"inline-flex" }}><t.icon size={ICON.hero} /></div>
+              <div style={{ fontSize:26, marginBottom:14, display:"inline-flex", alignItems:"center", justifyContent:"center", minHeight:36 }}>
+                {t.icon ? <t.icon size={ICON.hero} /> : <span>{t.iconEmoji || "📚"}</span>}
+              </div>
               <div style={{ fontSize:10, fontWeight:700, color:t.color, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:5 }}>{t.label}</div>
               <div style={{ fontSize:17, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", marginBottom:3 }}>{t.title}</div>
               <div style={{ fontSize:12, color:C.textDim, fontFamily:"'Manrope',sans-serif", marginBottom:12 }}>{t.sub}</div>
@@ -1568,7 +1781,7 @@ function Home({ setPage }) {
             <h2 className="gallery-title" style={{ fontSize:"clamp(26px,4vw,42px)", lineHeight:1.08, margin:0, fontFamily:"'Space Grotesk',sans-serif", color:C.text }}>We show up</h2>
           </div>
           <div className="photo-masonry">
-            {FEATURED_GALLERY_ITEMS.map((item, i) => (
+            {getFeaturedGalleryItems().map((item, i) => (
               <figure key={item.title + i} className="photo-item" style={{ margin:0 }}>
                 <div className="image-zoom" style={{ borderRadius:12 }}>
                   <img src={item.image} alt={item.title} style={{ width:"100%", display:"block", borderRadius:12, objectFit:"cover" }} />
@@ -1764,7 +1977,9 @@ function Learn() {
           return (
             <div key={t.id} style={{ background:C.card, border:`1px solid ${isOpen?C.blue:C.border}`, borderRadius:16, overflow:"hidden", transition:"border-color .2s" }}>
               <button onClick={() => setOpen(isOpen ? null : t.id)} style={{ width:"100%", background:"none", border:"none", cursor:"pointer", padding:"clamp(16px,2.5vw,22px) clamp(18px,3vw,28px)", display:"flex", alignItems:"center", gap:14, textAlign:"left" }}>
-                <div style={{ width:46, height:46, borderRadius:12, background:`${t.color}15`, border:`1px solid ${t.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20, flexShrink:0 }}><t.icon size={ICON.xl} /></div>
+                <div style={{ width:46, height:46, borderRadius:12, background:`${t.color}15`, border:`1px solid ${t.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20, flexShrink:0 }}>
+                  {t.icon ? <t.icon size={ICON.xl} /> : <span>{t.iconEmoji || "📚"}</span>}
+                </div>
                 <div style={{ flex:1, minWidth:0 }}>
                   <div style={{ fontSize:10, fontWeight:700, color:t.color, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"2px", textTransform:"uppercase", marginBottom:3 }}>{t.label}</div>
                   <div style={{ fontSize:16, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{t.title} <span style={{ color:C.textDim, fontWeight:400, fontSize:13 }}>— {t.sub}</span></div>
@@ -1905,6 +2120,72 @@ function Events({ selectedSlug }) {
 function Opportunities({ selectedSlug }) {
   const oppRefs = useRef({});
 
+  const renderOpportunityCard = (item, cat, { featured = false, key }) => {
+    const oppSlug = item.slug || toSlug(item.title);
+    const isHighlighted = selectedSlug === oppSlug;
+
+    return (
+      <div
+        key={key || oppSlug}
+        ref={(node) => {
+          oppRefs.current[oppSlug] = node;
+        }}
+        className={`hover-card op-card ${featured ? "op-featured-card" : ""}`}
+        style={{
+          background: featured ? C.surface : C.card,
+          border: `1px solid ${isHighlighted ? C.blue : featured ? cat.color + "55" : C.border}`,
+          boxShadow: isHighlighted ? `0 0 0 2px ${C.blue}35` : "none",
+          borderRadius: 14,
+          padding: featured ? "26px 24px" : "22px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+          position: "relative",
+          overflow: "hidden",
+          alignSelf: "start",
+        }}
+      >
+        {featured && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: cat.color }} />}
+        {item.logo && <div className="op-logo-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", height: 40, marginBottom: 4 }}><img className="op-logo" src={item.logo} alt={item.title} style={{ maxHeight: 40, maxWidth: 100, objectFit: "contain" }} /></div>}
+        <div className="op-card-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
+          <h3 className="op-card-title" style={{ fontSize: 15, fontWeight: 700, color: C.text, fontFamily: "'Space Grotesk',sans-serif", margin: 0, lineHeight: 1.3, flex: 1 }}>{item.title}</h3>
+          <div className="op-card-meta" style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", justifyContent: "flex-end" }}>
+            {item.badge && (
+              <span style={{ fontSize: 11, fontWeight: 700, color: "#0f5132", background: "#22c55e22", border: "1px solid #22c55e66", padding: "3px 8px", borderRadius: 999, fontFamily: "'Space Grotesk',sans-serif", textTransform: "uppercase", letterSpacing: "0.6px" }}>
+                {item.badge}
+              </span>
+            )}
+            <Pill label={item.level} color={cat.color} small nowrap={false} />
+          </div>
+        </div>
+        <p className="op-card-desc" style={{ fontSize: 13, color: C.textSub, lineHeight: 1.65, fontFamily: "'Manrope',sans-serif", margin: 0 }}>{item.desc}</p>
+        {(item.prize || item.projectsFunded || item.audience) && (
+          <div style={{ display: "grid", gap: 6, padding: "10px 12px", border: `1px solid ${cat.color}30`, borderRadius: 10, background: `${cat.color}10` }}>
+            {item.prize && (
+              <div style={{ fontSize: 13, color: cat.color, fontFamily: "'Manrope',sans-serif", fontWeight: 800 }}>
+                Prize: {item.prize}
+              </div>
+            )}
+            {item.projectsFunded && (
+              <div style={{ fontSize: 12, color: C.textSub, fontFamily: "'Manrope',sans-serif", lineHeight: 1.6 }}>
+                Projects funded: {item.projectsFunded}
+              </div>
+            )}
+            {item.audience && (
+              <div style={{ fontSize: 12, color: C.textSub, fontFamily: "'Manrope',sans-serif", lineHeight: 1.6 }}>
+                Who it is for: {item.audience}
+              </div>
+            )}
+          </div>
+        )}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+          <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `${cat.color}12`, border: `1px solid ${cat.color}30`, color: cat.color, padding: "8px 16px", borderRadius: 8, fontSize: 12, fontWeight: 700, textDecoration: "none", fontFamily: "'Space Grotesk',sans-serif", alignSelf: "flex-start" }}>{item.ctaLabel || "Explore"} <BsArrowRight size={ICON.xxs} /></a>
+          <ShareLinkButton url={getShareUrl(`/opportunities/${oppSlug}`)} />
+        </div>
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (!selectedSlug) return;
     const node = oppRefs.current[selectedSlug];
@@ -1933,63 +2214,23 @@ function Opportunities({ selectedSlug }) {
         {OPPS.map((cat, ci) => (
           <div key={ci} className="fade-up">
             <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:18 }}>
-              <div style={{ width:42, height:42, borderRadius:11, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}><cat.icon size={ICON.lg} /></div>
+              <div style={{ width:42, height:42, borderRadius:11, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>
+                {cat.icon ? <cat.icon size={ICON.lg} /> : <span>{cat.iconEmoji || "✨"}</span>}
+              </div>
               <h2 style={{ fontSize:20, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0 }}>{cat.cat}</h2>
             </div>
-            <div className="op-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:12 }}>
-              {cat.items.map((item, ii) => {
-                const oppSlug = item.slug || toSlug(item.title);
-                const isHighlighted = selectedSlug === oppSlug;
-                return (
-                  <div
-                    key={ii}
-                    ref={(node) => {
-                      oppRefs.current[oppSlug] = node;
-                    }}
-                    className={`hover-card ${ii===0?"op-featured-card":""}`}
-                    style={{ background:ii===0?C.surface:C.card, border:`1px solid ${isHighlighted?C.blue:ii===0?cat.color+"55":C.border}`, boxShadow:isHighlighted?`0 0 0 2px ${C.blue}35`:"none", borderRadius:14, padding:ii===0?"26px 24px":"22px", display:"flex", flexDirection:"column", gap:12, gridColumn:ii===0?"span 2":"span 1", position:"relative", overflow:"hidden" }}
-                  >
-                    {ii===0 && <div style={{ position:"absolute", top:0, left:0, right:0, height:3, background:cat.color }} />}
-                    {item.logo && <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-start", height:40, marginBottom:4 }}><img src={item.logo} alt={item.title} style={{ maxHeight:40, maxWidth:100, objectFit:"contain" }} /></div>}
-                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:8 }}>
-                      <h3 style={{ fontSize:15, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0, lineHeight:1.3, flex:1 }}>{item.title}</h3>
-                      <div style={{ display:"flex", alignItems:"center", gap:6, flexWrap:"wrap", justifyContent:"flex-end" }}>
-                        {item.badge && (
-                          <span style={{ fontSize:11, fontWeight:700, color:"#0f5132", background:"#22c55e22", border:"1px solid #22c55e66", padding:"3px 8px", borderRadius:999, fontFamily:"'Space Grotesk',sans-serif", textTransform:"uppercase", letterSpacing:"0.6px" }}>
-                            {item.badge}
-                          </span>
-                        )}
-                        <Pill label={item.level} color={cat.color} small />
-                      </div>
-                    </div>
-                    <p style={{ fontSize:13, color:C.textSub, lineHeight:1.65, fontFamily:"'Manrope',sans-serif", margin:0, flex:1 }}>{item.desc}</p>
-                    {(item.prize || item.projectsFunded || item.audience) && (
-                      <div style={{ display:"grid", gap:6, padding:"10px 12px", border:`1px solid ${cat.color}30`, borderRadius:10, background:`${cat.color}10` }}>
-                        {item.prize && (
-                          <div style={{ fontSize:13, color:cat.color, fontFamily:"'Manrope',sans-serif", fontWeight:800 }}>
-                            Prize: {item.prize}
-                          </div>
-                        )}
-                        {item.projectsFunded && (
-                          <div style={{ fontSize:12, color:C.textSub, fontFamily:"'Manrope',sans-serif", lineHeight:1.6 }}>
-                            Projects funded: {item.projectsFunded}
-                          </div>
-                        )}
-                        {item.audience && (
-                          <div style={{ fontSize:12, color:C.textSub, fontFamily:"'Manrope',sans-serif", lineHeight:1.6 }}>
-                            Who it is for: {item.audience}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:10, flexWrap:"wrap" }}>
-                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${cat.color}12`, border:`1px solid ${cat.color}30`, color:cat.color, padding:"8px 16px", borderRadius:8, fontSize:12, fontWeight:700, textDecoration:"none", fontFamily:"'Space Grotesk',sans-serif", alignSelf:"flex-start" }}>{item.ctaLabel || "Explore"} <BsArrowRight size={ICON.xxs} /></a>
-                      <ShareLinkButton url={getShareUrl(`/opportunities/${oppSlug}`)} />
-                    </div>
+            {cat.items.length > 0 && (
+              <>
+                <div style={{ marginBottom:12 }}>
+                  {renderOpportunityCard(cat.items[0], cat, { featured: true, key: `${cat.cat}-featured` })}
+                </div>
+                {cat.items.length > 1 && (
+                  <div className="op-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:12, alignItems:"start" }}>
+                    {cat.items.slice(1).map((item, ii) => renderOpportunityCard(item, cat, { key: `${cat.cat}-${ii}` }))}
                   </div>
-                );
-              })}
-            </div>
+                )}
+              </>
+            )}
           </div>
         ))}
       </div>
@@ -2020,7 +2261,9 @@ function Resources() {
         {RESOURCES_DATA.map((cat, ci) => (
           <div key={ci} className="fade-up">
             <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:20 }}>
-              <div style={{ width:44, height:44, borderRadius:12, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20 }}><cat.icon size={ICON.xl} /></div>
+              <div style={{ width:44, height:44, borderRadius:12, background:`${cat.color}15`, border:`1px solid ${cat.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:20 }}>
+                {cat.icon ? <cat.icon size={ICON.xl} /> : <span>{cat.iconEmoji || "📦"}</span>}
+              </div>
               <h2 style={{ fontSize:21, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", margin:0 }}>{cat.cat}</h2>
             </div>
             <div className="res-grid" style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:14 }}>
@@ -2653,6 +2896,14 @@ function Footer({ setPage }) {
 export default function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [cmsRevision, setCmsRevision] = useState(0);
+  const [cmsStatus, setCmsStatus] = useState({
+    enabled: CMS_ENABLED,
+    loading: CMS_ENABLED,
+    updated: false,
+    lastSync: null,
+    error: null,
+  });
 
   const [theme, setTheme] = useState(() => {
     try {
@@ -2676,6 +2927,87 @@ export default function App() {
       document.body.style.color = C.text;
     }
   }, [theme]);
+
+  useEffect(() => {
+    if (!CMS_ENABLED) {
+      setCmsStatus({
+        enabled: false,
+        loading: false,
+        updated: false,
+        lastSync: null,
+        error: null,
+      });
+      return;
+    }
+
+    let cancelled = false;
+    let isSyncing = false;
+    let pollTimer = null;
+
+    const hydrateFromCms = async ({ showLoading = false } = {}) => {
+      if (isSyncing) {
+        return;
+      }
+
+      isSyncing = true;
+      if (showLoading) {
+        setCmsStatus((prev) => ({ ...prev, enabled: true, loading: true, error: null }));
+      }
+
+      try {
+        const cmsModule = await import("./sanityContent");
+        const content = await cmsModule.fetchCmsContent();
+        if (cancelled) {
+          isSyncing = false;
+          return;
+        }
+
+        const hasUpdates = applyCmsOverrides(content);
+        if (hasUpdates) {
+          setCmsRevision((value) => value + 1);
+        }
+        setCmsStatus({
+          enabled: true,
+          loading: false,
+          updated: hasUpdates,
+          lastSync: new Date().toISOString(),
+          error: null,
+        });
+      } catch (error) {
+        if (cancelled) {
+          isSyncing = false;
+          return;
+        }
+        console.error("CMS hydration failed; static fallback remains active.", error);
+        setCmsStatus({
+          enabled: true,
+          loading: false,
+          updated: false,
+          lastSync: null,
+          error: error?.message || "Unknown CMS fetch error",
+        });
+      } finally {
+        isSyncing = false;
+      }
+    };
+
+    hydrateFromCms({ showLoading: true });
+    pollTimer = window.setInterval(() => {
+      hydrateFromCms();
+    }, CMS_POLL_MS);
+
+    return () => {
+      cancelled = true;
+      if (pollTimer) {
+        window.clearInterval(pollTimer);
+      }
+    };
+  }, []);
+
+  const showCmsBadge = cmsStatus.loading || Boolean(cmsStatus.error);
+  const cmsBadgeText = cmsStatus.loading
+    ? "CMS: loading"
+    : `CMS fallback active (${cmsStatus.error || "fetch failed"})`;
 
   const toggleTheme = () => {
     setTheme(prev => (prev === "dark" ? "light" : "dark"));
@@ -2713,7 +3045,7 @@ export default function App() {
 
     if (pathname.startsWith("/events/")) {
       const slug = pathname.replace("/events/", "");
-      const event = ALL_EVENTS.find((item) => item.slug === slug);
+      const event = getAllEvents().find((item) => item.slug === slug);
       if (event) {
         return {
           title: `${event.title} | DigitalSphere Events`,
@@ -2727,7 +3059,7 @@ export default function App() {
     if (pathname.startsWith("/learn/")) {
       const match = pathname.match(/^\/learn\/([^/]+)/);
       const slug = match ? match[1] : "";
-      const track = TRACKS_BY_SLUG[slug];
+      const track = getTracksBySlug()[slug];
       if (track) {
         return {
           title: `${track.title} | DigitalSphere Learn`,
@@ -2740,7 +3072,7 @@ export default function App() {
 
     if (pathname.startsWith("/opportunities/")) {
       const slug = pathname.replace("/opportunities/", "");
-      const opportunity = OPPORTUNITY_ITEMS.find((item) => item.slug === slug);
+      const opportunity = getOpportunityItems().find((item) => item.slug === slug);
       if (opportunity) {
         return {
           title: `${opportunity.title} | DigitalSphere Opportunities`,
@@ -2809,7 +3141,7 @@ export default function App() {
     }
 
     return base;
-  }, [location.pathname]);
+  }, [location.pathname, cmsRevision]);
 
   const BlogPostRoute = () => {
     const { slug } = useParams();
@@ -2876,6 +3208,29 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+      {showCmsBadge && (
+        <div
+          style={{
+            position: "fixed",
+            right: 12,
+            bottom: 12,
+            zIndex: 9999,
+            background: cmsStatus.error ? "#7f1d1d" : C.card,
+            border: `1px solid ${cmsStatus.error ? "#ef4444" : C.border}`,
+            color: "#f8fafc",
+            padding: "8px 12px",
+            borderRadius: 8,
+            fontSize: 12,
+            fontFamily: "'Manrope',sans-serif",
+            boxShadow: "0 8px 24px rgba(0,0,0,.25)",
+            maxWidth: 360,
+          }}
+          role="status"
+          aria-live="polite"
+        >
+          {cmsBadgeText}
+        </div>
+      )}
       <Footer setPage={openPage} />
     </div>
   );

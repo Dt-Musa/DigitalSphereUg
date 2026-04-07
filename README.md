@@ -56,9 +56,10 @@ Typical flow:
 
 ## Troubleshooting
 
-### Dev server chooses another port
+### Dev server port
 
-If port 5173 is already in use, Vite automatically moves to another port (for example 5174 or 5176).
+The app is pinned to `http://localhost:5174` (`strictPort: true`) to match Sanity CORS for local CMS updates.
+If startup fails because port 5174 is in use, stop the process using that port, then run `npm run dev` again.
 
 ### Local changes not showing
 

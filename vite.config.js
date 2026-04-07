@@ -15,6 +15,8 @@ export default defineConfig({
     clearMocks: true,
   },
   server: {
+    port: 5174,
+    strictPort: true,
     headers: {
       'Cache-Control': 'no-store',
     },

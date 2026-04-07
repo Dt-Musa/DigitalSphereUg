@@ -1,0 +1,86 @@
+export default {
+  name: 'event',
+  title: 'Event',
+  type: 'document',
+  fields: [
+    {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      description: 'Event title shown on cards and detail links.',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'dateText',
+      title: 'Date',
+      type: 'string',
+      description: 'Example: June 27 2026',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'City, venue, or region.',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'tag',
+      title: 'Tag',
+      type: 'string',
+      description: 'Event type label.',
+      options: {
+        list: ['Conference', 'Meetup', 'Summit', 'Programme', 'Workshop', 'Community'],
+        layout: 'dropdown',
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 4,
+      description: 'Short event summary for card body.',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'registrationLink',
+      title: 'Registration Link',
+      type: 'url',
+      description: 'Event registration or info URL.',
+      validation: (Rule) => Rule.required().uri({allowRelative: false}),
+    },
+    {
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Shows featured badge and top accent bar.',
+    },
+    {
+      name: 'eventStatus',
+      title: 'Event Status',
+      type: 'string',
+      description: 'Controls whether event appears as upcoming or past.',
+      options: {
+        list: ['Upcoming', 'Ongoing', 'Past'],
+        layout: 'dropdown',
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      description: 'Event card image or flyer.',
+      options: {hotspot: true},
+    },
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'dateText',
+      media: 'image',
+    },
+  },
+}

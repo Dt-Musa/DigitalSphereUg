@@ -1,0 +1,85 @@
+export default {
+  name: 'siteSettings',
+  title: 'Site Settings',
+  type: 'document',
+  fields: [
+    {
+      name: 'siteTitle',
+      title: 'Site Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'siteDescription',
+      title: 'Site Description',
+      type: 'text',
+      rows: 3,
+      description: 'Primary SEO description for the website.',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'siteUrl',
+      title: 'Site URL',
+      type: 'url',
+      validation: (Rule) => Rule.required().uri({allowRelative: false}),
+    },
+    {
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      options: {hotspot: true},
+    },
+    {
+      name: 'founderName',
+      title: 'Founder Name',
+      type: 'string',
+    },
+    {
+      name: 'telegramLink',
+      title: 'Telegram Link',
+      type: 'url',
+      validation: (Rule) => Rule.uri({allowRelative: false}),
+    },
+    {
+      name: 'xLink',
+      title: 'X Link',
+      type: 'url',
+      validation: (Rule) => Rule.uri({allowRelative: false}),
+    },
+    {
+      name: 'whatsAppLink',
+      title: 'WhatsApp Link',
+      type: 'url',
+      validation: (Rule) => Rule.uri({allowRelative: false}),
+    },
+    {
+      name: 'communityMemberCount',
+      title: 'Community Member Count',
+      type: 'string',
+      description: 'Number shown in hero and community areas, e.g. 313+.',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'footerDisclaimerText',
+      title: 'Footer Disclaimer Text',
+      type: 'text',
+      rows: 3,
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'metaDescription',
+      title: 'Meta Description',
+      type: 'text',
+      rows: 3,
+      description: 'Used in dynamic page meta tags.',
+      validation: (Rule) => Rule.required(),
+    },
+  ],
+  preview: {
+    select: {
+      title: 'siteTitle',
+      subtitle: 'siteUrl',
+      media: 'logo',
+    },
+  },
+}
