@@ -119,6 +119,7 @@ const query = `{
   },
   "events": *[_type == "event"] | order(featured desc){
     title,
+    startDate,
     dateText,
     location,
     tag,
@@ -231,7 +232,9 @@ export const fetchCmsContent = async () => {
 
   const allEvents = (data.events || []).map((event) => ({
     title: event.title,
+    startDate: event.startDate,
     date: event.dateText,
+    status: event.eventStatus,
     location: event.location,
     tag: event.tag,
     color: EVENT_TAG_COLORS[event.tag] || '#4d6ff0',
@@ -240,11 +243,10 @@ export const fetchCmsContent = async () => {
     desc: event.description,
     recap: event.description,
     link: event.registrationLink,
-    status: event.eventStatus,
   }))
 
-  const events = allEvents.filter((event) => event.status !== 'Past')
-  const pastEvents = allEvents.filter((event) => event.status === 'Past')
+  const events = allEvents
+  const pastEvents = []
 
   const opportunityItems = (data.opportunities || []).filter((item) => item?.category && item.active !== false)
   const opportunityCategories = sortCategories(

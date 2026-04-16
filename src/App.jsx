@@ -171,17 +171,17 @@ let TRACKS = [
 ];
 
 let EVENTS = [
-  { title:"Blockchain DevFest Kampala 2026", slug:"blockchain-devfest-kampala-2026", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
+  { title:"Blockchain DevFest Kampala 2026", slug:"blockchain-devfest-kampala-2026", startDate:"2026-06-27T09:00:00+03:00", date:"June 27, 2026", location:"Kampala, Uganda", tag:"Conference", color:C.cyan, featured:true, image:devfestFlyerPhoto, imageFit:"contain", desc:"Africa's premier Web3 developer conference. Theme: Responsible Decentralized AI. Hackathon, workshops, and networking.", link:"https://devfestkampala.com" },
 ];
 
 let PAST_EVENTS = [
-  { title:"DeFi with Chainlink Oracles", slug:"defi-with-chainlink-oracles", date:"Ended — March 28, 2026", location:"CLB Board Room, Kyambogo University", tag:"University Session", color:C.cyan, image:chainlinkFlyerPhoto, recap:"Chainlink East Africa joined students for DeFi, oracles, and Web3 careers at Kyambogo. Read the DigitalSphereUg session recap.", link:"https://digitalsphereug.tech/blog/chainlink-digital-sphere-kyambogo" },
-  { title:"Kampala Blockchain Summit 2025", slug:"kampala-blockchain-summit-2026", date:"Ended — Nov 25, 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
-  { title:"ETHNile Kampala 2025", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
-  { title:"Chainlink Rooftop Session", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
-  { title:"BUIDL Africa Community Session", date:"2025", location:"Kampala, Uganda", tag:"Community", color:C.green, image:buildlSessionPhoto, recap:"Student-focused build session connecting learners to mentorship and project ideas.", link:"https://t.me/digitalsphereug" },
-  { title:"GDG Kampala Web3 Meetup", slug:"gdg-kampala-web3-meetup", date:"Ended — 2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, image:chainlinkStreetGroupPhoto, recap:"Regular Web3 meetups wrapped after a strong season of beginner-friendly talks, networking, and practical demos.", link:"https://gdg.community.dev/gdg-kampala/" },
-  { title:"BAU Youth Blockchain Innovation", slug:"bau-youth-blockchain-innovation", date:"Ended — 2026", location:"Uganda", tag:"Programme", color:C.purple, image:buildlSessionPhoto, recap:"BAU's youth innovation programme concluded after equipping local learners with blockchain foundations and growth pathways.", link:"https://bau.ug" },
+  { title:"DeFi with Chainlink Oracles", slug:"defi-with-chainlink-oracles", startDate:"2026-03-28T14:00:00+03:00", date:"March 28, 2026", location:"CLB Board Room, Kyambogo University", tag:"University Session", color:C.cyan, image:chainlinkFlyerPhoto, recap:"Chainlink East Africa joined students for DeFi, oracles, and Web3 careers at Kyambogo. Read the DigitalSphereUg session recap.", link:"https://digitalsphereug.tech/blog/chainlink-digital-sphere-kyambogo" },
+  { title:"Kampala Blockchain Summit 2025", slug:"kampala-blockchain-summit-2026", startDate:"2025-11-25T09:00:00+03:00", date:"Nov 25, 2025", location:"Kampala, Uganda", tag:"Summit", color:C.blueLt, image:"https://img.youtube.com/vi/U3uLtixzAYE/hqdefault.jpg", recap:"Summit session concluded. Watch the full live stream replay to catch talks and highlights.", link:"https://www.youtube.com/live/U3uLtixzAYE?si=bFh0jzv2tFgZwI-V" },
+  { title:"ETHNile Kampala 2025", startDate:"2025-10-12T09:00:00+03:00", date:"October 2025", location:"Kampala, Uganda", tag:"Conference", color:C.blueLt, image:ethnileGroupHero, recap:"First major Ethereum-focused community gatherings in Kampala, bringing builders and students together.", link:"https://ethnileug.xyz/" },
+  { title:"Chainlink Rooftop Session", startDate:"2026-02-15T09:00:00+03:00", date:"Early 2026", location:"Kampala, Uganda", tag:"Workshop", color:C.cyan, image:chainlinkRooftopPhoto, recap:"Hands-on learning session on oracles and practical DeFi use cases for local builders.", link:"https://x.com/Chainlink__EA" },
+  { title:"BUIDL Africa Community Session", startDate:"2025-07-01T09:00:00+03:00", date:"2025", location:"Kampala, Uganda", tag:"Community", color:C.green, image:buildlSessionPhoto, recap:"Student-focused build session connecting learners to mentorship and project ideas.", link:"https://t.me/digitalsphereug" },
+  { title:"GDG Kampala Web3 Meetup", slug:"gdg-kampala-web3-meetup", startDate:"2026-01-10T09:00:00+03:00", date:"2026", location:"Kampala, Uganda", tag:"Meetup", color:C.green, image:chainlinkStreetGroupPhoto, recap:"Regular Web3 meetups wrapped after a strong season of beginner-friendly talks, networking, and practical demos.", link:"https://gdg.community.dev/gdg-kampala/" },
+  { title:"BAU Youth Blockchain Innovation", slug:"bau-youth-blockchain-innovation", startDate:"2026-01-31T09:00:00+03:00", date:"2026", location:"Uganda", tag:"Programme", color:C.purple, image:buildlSessionPhoto, recap:"BAU's youth innovation programme concluded after equipping local learners with blockchain foundations and growth pathways.", link:"https://bau.ug" },
 ];
 
 let OPPS = [
@@ -1076,11 +1076,201 @@ const toSlug = (value = "") => value
   .trim()
   .replace(/\s+/g, "-");
 
-const getAllEvents = () =>
-  [...EVENTS, ...PAST_EVENTS].map((event) => ({
-    ...event,
-    slug: event.slug || toSlug(event.title),
-  }));
+const EVENT_TIME_TICK_MS = 60 * 1000;
+const MONTH_INDEX = {
+  january: 0,
+  february: 1,
+  march: 2,
+  april: 3,
+  may: 4,
+  june: 5,
+  july: 6,
+  august: 7,
+  september: 8,
+  october: 9,
+  november: 10,
+  december: 11,
+};
+
+const toEndOfDayEAT = (year, monthIndex, day) => Date.UTC(year, monthIndex, day, 20, 59, 59, 999);
+const toEndOfMonthEAT = (year, monthIndex) => Date.UTC(year, monthIndex + 1, 0, 20, 59, 59, 999);
+const toEndOfYearEAT = (year) => Date.UTC(year, 11, 31, 20, 59, 59, 999);
+
+const parseEventStartMs = (event) => {
+  if (!event || typeof event !== "object") {
+    return null;
+  }
+
+  const parseValue = (rawValue) => {
+    if (typeof rawValue !== "string" || !rawValue.trim()) {
+      return null;
+    }
+
+    const trimmedValue = rawValue.trim();
+
+    // Date-only values should remain upcoming for the full calendar day.
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmedValue)) {
+      const endOfDayEAT = Date.parse(`${trimmedValue}T23:59:59.999+03:00`);
+      return Number.isFinite(endOfDayEAT) ? endOfDayEAT : null;
+    }
+
+    // If timezone is omitted, normalize to East Africa time to avoid device-timezone drift.
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,3})?)?$/.test(trimmedValue)) {
+      const parsedWithoutZone = Date.parse(`${trimmedValue}+03:00`);
+      return Number.isFinite(parsedWithoutZone) ? parsedWithoutZone : null;
+    }
+
+    // Accept only ISO-like timestamps with explicit timezone to avoid ambiguous browser parsing.
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,3})?)?(Z|[+-]\d{2}:\d{2})$/.test(trimmedValue)) {
+      const parsed = Date.parse(trimmedValue);
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    return null;
+  };
+
+  const parseDateTextBoundary = (rawValue) => {
+    if (typeof rawValue !== "string" || !rawValue.trim()) {
+      return null;
+    }
+
+    let value = rawValue.trim();
+    value = value.replace(/^Ended\s*[—-]\s*/i, "").trim();
+
+    const dayRangeMatch = value.match(/^(\d{1,2})\s*[-–]\s*(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+    if (dayRangeMatch) {
+      const endDay = Number.parseInt(dayRangeMatch[2], 10);
+      const monthIndex = MONTH_INDEX[dayRangeMatch[3].toLowerCase()];
+      const year = Number.parseInt(dayRangeMatch[4], 10);
+      if (monthIndex !== undefined && Number.isFinite(endDay) && Number.isFinite(year)) {
+        return toEndOfDayEAT(year, monthIndex, endDay);
+      }
+    }
+
+    const dayRangeNoYearMatch = value.match(/^(\d{1,2})\s*[-–]\s*(\d{1,2})\s+([A-Za-z]+)$/);
+    if (dayRangeNoYearMatch) {
+      const endDay = Number.parseInt(dayRangeNoYearMatch[2], 10);
+      const monthIndex = MONTH_INDEX[dayRangeNoYearMatch[3].toLowerCase()];
+      const currentYear = new Date().getUTCFullYear();
+      if (monthIndex !== undefined && Number.isFinite(endDay)) {
+        return toEndOfDayEAT(currentYear, monthIndex, endDay);
+      }
+    }
+
+    const fullDateMatch = value.match(/^([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})$/);
+    if (fullDateMatch) {
+      const monthIndex = MONTH_INDEX[fullDateMatch[1].toLowerCase()];
+      const day = Number.parseInt(fullDateMatch[2], 10);
+      const year = Number.parseInt(fullDateMatch[3], 10);
+      if (monthIndex !== undefined && Number.isFinite(day) && Number.isFinite(year)) {
+        return toEndOfDayEAT(year, monthIndex, day);
+      }
+    }
+
+    const weekdayDateNoYearMatch = value.match(/^(?:[A-Za-z]+,\s*)?([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?$/);
+    if (weekdayDateNoYearMatch) {
+      const monthIndex = MONTH_INDEX[weekdayDateNoYearMatch[1].toLowerCase()];
+      const day = Number.parseInt(weekdayDateNoYearMatch[2], 10);
+      const currentYear = new Date().getUTCFullYear();
+      if (monthIndex !== undefined && Number.isFinite(day)) {
+        return toEndOfDayEAT(currentYear, monthIndex, day);
+      }
+    }
+
+    const monthYearMatch = value.match(/^([A-Za-z]+)\s+(\d{4})$/);
+    if (monthYearMatch) {
+      const monthIndex = MONTH_INDEX[monthYearMatch[1].toLowerCase()];
+      const year = Number.parseInt(monthYearMatch[2], 10);
+      if (monthIndex !== undefined && Number.isFinite(year)) {
+        return toEndOfMonthEAT(year, monthIndex);
+      }
+    }
+
+    const yearMatch = value.match(/^(\d{4})$/);
+    if (yearMatch) {
+      const year = Number.parseInt(yearMatch[1], 10);
+      if (Number.isFinite(year)) {
+        return toEndOfYearEAT(year);
+      }
+    }
+
+    return null;
+  };
+
+  return parseValue(event.startDate) ?? parseValue(event.date) ?? parseDateTextBoundary(event.date);
+};
+
+const classifyEventsByNow = (events, nowMs) => {
+  const upcomingEvents = [];
+  const pastEvents = [];
+
+  for (const event of events) {
+    const startMs = parseEventStartMs(event);
+    const hasEndedLabel = typeof event?.date === "string" && /ended\s*[—-]/i.test(event.date);
+    const statusLabel = typeof event?.status === "string" ? event.status.toLowerCase() : "";
+
+    if (startMs === null) {
+      if (hasEndedLabel || statusLabel === "past") {
+        pastEvents.push(event);
+      } else {
+        upcomingEvents.push(event);
+      }
+      continue;
+    }
+
+    if (startMs >= nowMs) {
+      upcomingEvents.push(event);
+      continue;
+    }
+    pastEvents.push(event);
+  }
+
+  upcomingEvents.sort((a, b) => (parseEventStartMs(a) ?? Number.MAX_SAFE_INTEGER) - (parseEventStartMs(b) ?? Number.MAX_SAFE_INTEGER));
+  pastEvents.sort((a, b) => (parseEventStartMs(b) ?? Number.MIN_SAFE_INTEGER) - (parseEventStartMs(a) ?? Number.MIN_SAFE_INTEGER));
+
+  return { upcomingEvents, pastEvents };
+};
+
+function useCurrentTime(tickMs = EVENT_TIME_TICK_MS) {
+  const [nowMs, setNowMs] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setNowMs(Date.now());
+    }, tickMs);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [tickMs]);
+
+  return nowMs;
+}
+
+const getAllEvents = () => {
+  const dedupedEvents = [];
+  const seenKeys = new Set();
+
+  for (const event of [...EVENTS, ...PAST_EVENTS]) {
+    const normalizedEvent = {
+      ...event,
+      slug: event.slug || toSlug(event.title),
+    };
+    const dedupeKey = getMergeKey(normalizedEvent, ["slug", "title", "link", "startDate", "date"]);
+
+    if (dedupeKey && seenKeys.has(dedupeKey)) {
+      continue;
+    }
+
+    if (dedupeKey) {
+      seenKeys.add(dedupeKey);
+    }
+
+    dedupedEvents.push(normalizedEvent);
+  }
+
+  return dedupedEvents;
+};
 
 const getOpportunityItems = () =>
   OPPS.flatMap((category) =>
@@ -1125,7 +1315,7 @@ function applyCmsOverrides(content) {
     hasUpdates = true;
   }
 
-  if (Array.isArray(content.pastEvents)) {
+  if (Array.isArray(content.pastEvents) && content.pastEvents.length) {
     PAST_EVENTS = mergeListWithFallback(BASE_PAST_EVENTS, content.pastEvents, ["slug", "title", "link"]);
     hasUpdates = true;
   }
@@ -1269,9 +1459,11 @@ img,svg{max-width:100%}
 .team-head{display:flex;align-items:center;gap:16px;min-width:0}
 .team-meta{min-width:0;flex:1}
 .team-role{max-width:100%;white-space:normal!important;line-height:1.3;text-transform:none!important;letter-spacing:.2px!important}
-.photo-masonry{columns:3 280px;column-gap:14px}
-.photo-item{break-inside:avoid;margin-bottom:14px;transition:transform .25s ease,filter .25s ease}
+.photo-masonry{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.photo-item{margin:0;transition:transform .25s ease,filter .25s ease}
 .photo-item:hover{transform:translateY(-4px);filter:saturate(1.04)}
+.gallery-page-masonry{display:block;columns:3 280px;column-gap:14px}
+.gallery-page-masonry .photo-item{break-inside:avoid;margin:0 0 14px}
 .resources-head{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
 .resources-hero-image .image-zoom img{display:block;width:100%;height:100%;min-height:180px;object-fit:cover}
 .op-card{min-width:0}
@@ -1318,7 +1510,8 @@ img,svg{max-width:100%}
   .team-head{align-items:flex-start}
   .team-meta{display:flex;flex-direction:column;gap:6px}
   .team-role{white-space:normal!important;line-height:1.35}
-  .photo-masonry{columns:1 240px}
+  .photo-masonry{grid-template-columns:1fr}
+  .gallery-page-masonry{columns:1 240px}
   .home-track-featured,.home-event-featured,.events-featured-card,.op-featured-card,.res-featured-card{grid-column:span 1!important}
   .op-grid,.res-grid{grid-template-columns:1fr!important}
   .tech-marquee-section{padding:24px 0 26px}
@@ -1334,6 +1527,10 @@ img,svg{max-width:100%}
   .subscribe-form input,.subscribe-form button{width:100%;height:40px;min-height:40px;max-height:40px}
   .subscribe-form input{line-height:40px;padding-block:0;padding-inline:12px;font-size:16px}
   .subscribe-form button{font-size:12px;padding:0 14px}
+}
+@media(max-width:1000px){
+  .photo-masonry{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gallery-page-masonry{columns:2 260px}
 }
 @media(max-width:420px){
   .brand-text{font-size:14px!important;letter-spacing:-0.2px!important}
@@ -1689,6 +1886,9 @@ function Nav({ theme, toggleTheme }) {
 
 // ─── Home ─────────────────────────────────────────────────────────
 function Home({ setPage }) {
+  const nowMs = useCurrentTime();
+  const { upcomingEvents } = classifyEventsByNow(getAllEvents(), nowMs);
+
   return (
     <div>
       <Hero setPage={setPage} />
@@ -1758,7 +1958,7 @@ function Home({ setPage }) {
           <button onClick={() => setPage("Events")} className="hover-lift" style={{ background:"none", border:`1px solid ${C.border}`, color:C.textSub, padding:"10px 22px", borderRadius:9, fontSize:13, fontWeight:600, cursor:"pointer", fontFamily:"'Space Grotesk',sans-serif", display:"inline-flex", alignItems:"center", gap:6 }}>All events <BsArrowRight size={ICON.xs} /></button>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:14 }}>
-          {EVENTS.filter(e => e && typeof e === "object").map((e, i) => {
+          {upcomingEvents.filter(e => e && typeof e === "object").map((e, i) => {
             const color = e.color || C.blueLt;
             const featured = Boolean(e.featured);
             const isFlyer = e.imageFit === "contain";
@@ -1878,9 +2078,9 @@ function Gallery({ setPage }) {
 
   return (
     <div className="section-appear" style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(90px,12vw,110px) clamp(16px,4vw,40px) 80px" }}>
-      <PageHero label="Community Archive" h1="Uganda Shows Up for Web3" sub="From campus sessions to major conferences, this is how DigitalSphereUg shows up." />
+      <PageHero label="Community Archive" h1="Africans Shows Up for Web3" sub="From campus sessions to major conferences, this is how DigitalSphere shows up." />
 
-      <div className="photo-masonry" style={{ marginBottom:40 }}>
+      <div className="photo-masonry gallery-page-masonry" style={{ marginBottom:40 }}>
         {GALLERY_ITEMS.map((item, i) => (
           <figure key={item.title + i} onClick={() => setActiveIndex(i)} className="photo-item" style={{ margin:0, cursor:"pointer" }}>
             <div className="image-zoom" style={{ borderRadius:12 }}>
@@ -2030,6 +2230,8 @@ function Learn() {
 // ─── Events ───────────────────────────────────────────────────────
 function Events({ selectedSlug }) {
   const eventRefs = useRef({});
+  const nowMs = useCurrentTime();
+  const { upcomingEvents, pastEvents } = classifyEventsByNow(getAllEvents(), nowMs);
 
   useEffect(() => {
     if (!selectedSlug) return;
@@ -2047,7 +2249,7 @@ function Events({ selectedSlug }) {
         </div>
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(290px,1fr))", gap:18, marginBottom:32 }}>
-        {EVENTS.filter(e => e && typeof e === "object").map((e, i) => {
+        {upcomingEvents.filter(e => e && typeof e === "object").map((e, i) => {
           const color = e.color || C.blueLt;
           const featured = Boolean(e.featured);
           const isFlyer = e.imageFit === "contain";
@@ -2082,7 +2284,7 @@ function Events({ selectedSlug }) {
         <h2 style={{ fontSize:"clamp(24px,3.8vw,36px)", fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.8px", marginBottom:10 }}>Past Events</h2>
         <p style={{ fontSize:13, color:C.textSub, lineHeight:1.7, fontFamily:"'Manrope',sans-serif", margin:"0 0 16px", maxWidth:640 }}>A quick look at sessions we have already hosted or attended. This archive helps newcomers see the momentum we are building.</p>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(270px,1fr))", gap:14 }}>
-          {PAST_EVENTS.map((event, i) => {
+          {pastEvents.map((event, i) => {
             const eventSlug = event.slug || toSlug(event.title);
             const isHighlighted = selectedSlug === eventSlug;
             return (

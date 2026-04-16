@@ -11,6 +11,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'startDate',
+      title: 'Start Date (ISO)',
+      type: 'datetime',
+      description: 'Exact event start in ISO format with timezone, for example 2026-06-27T09:00:00+03:00.',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'dateText',
       title: 'Date',
       type: 'string',
@@ -61,12 +68,11 @@ export default {
       name: 'eventStatus',
       title: 'Event Status',
       type: 'string',
-      description: 'Controls whether event appears as upcoming or past.',
+      description: 'Legacy display field. Event grouping now comes from startDate compared to current time.',
       options: {
         list: ['Upcoming', 'Ongoing', 'Past'],
         layout: 'dropdown',
       },
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'image',
