@@ -117,6 +117,8 @@ import celoProofOfShipOppLogo from "./assets/opportunities/celo-proof-of-ship.jp
 import Hero from "./Hero";
 import LessonDemoPage from "./LessonDemoPage";
 import { fetchCmsContent } from "./sanityContent";
+import brandLogoBlue from "./assets/logo/digital sphere logo blue.png";
+import brandLogoWhite from "./assets/logo/digital sphere transparent logo.png";
 
 // ─── Colors ───────────────────────────────────────────────────────
 const THEMES = {
@@ -1452,6 +1454,8 @@ img,svg{max-width:100%}
 .res-item:hover{background:var(--ds-card-hov)!important;border-color:var(--ds-blue-66)!important}
 .nav-btn{transition:all .15s;border-bottom:2px solid transparent}
 .nav-btn:hover{color:${C.text}!important}
+.brand-logo{height:56px;width:240px;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto;background:transparent}
+.brand-logo img{width:100%;height:auto;display:block;transform:scale(1.25);transform-origin:center}
 .faq-item{transition:all .2s}
 .social-btn:hover{transform:translateY(-2px);opacity:.85}
 .social-btn{transition:all .15s}
@@ -1494,6 +1498,8 @@ img,svg{max-width:100%}
 @media(max-width:640px){
   .hero-btns{flex-direction:column;align-items:center!important;width:100%}
   .hero-btns button{width:min(100%,320px);max-width:100%;justify-content:center}
+  .brand-logo{height:44px;width:180px;min-width:180px}
+  .brand-logo img{width:100%;height:auto;transform:scale(1.25);transform-origin:center}
   .stats-row{gap:24px!important}
   .home-tracks-head{grid-template-columns:1fr!important}
   .op-hero-grid{grid-template-columns:1fr!important}
@@ -1534,6 +1540,7 @@ img,svg{max-width:100%}
 }
 @media(max-width:420px){
   .brand-text{font-size:14px!important;letter-spacing:-0.2px!important}
+  .brand-logo{height:40px;width:160px;min-width:160px}
   .hero-shell{padding-right:0!important}
   .hero-btns button{width:100%!important}
   .stats-row{padding:12px!important;gap:14px!important}
@@ -1541,6 +1548,7 @@ img,svg{max-width:100%}
 }
 @media(max-width:360px){
   .brand-text{font-size:13px!important}
+  .brand-logo{height:36px;width:140px;min-width:140px}
   .hero-btns{gap:8px!important}
   .stats-row{gap:10px!important}
 }
@@ -1780,6 +1788,7 @@ function Nav({ theme, toggleTheme }) {
   const location = useLocation();
   const navigate = useNavigate();
   const activePage = getActiveNavLabel(location.pathname);
+  const brandLogoSrc = theme === "dark" ? brandLogoWhite : brandLogoBlue;
 
   const goMobile = (page) => {
     navigate(getPathFromPage(page));
@@ -1832,13 +1841,11 @@ function Nav({ theme, toggleTheme }) {
         />
       )}
       <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:mob ? 5000 : 300, background:C.surface, backdropFilter:"blur(24px)", borderBottom:`1px solid ${C.border}` }}>
-        <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,4vw,40px)", display:"flex", alignItems:"center", justifyContent:"space-between", height:64 }}>
-          <Link to={getPathFromPage("Home")} onClick={() => setMob(false)} style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10, textDecoration:"none", WebkitTapHighlightColor:"transparent" }}>
-            {/* Logo image is temporarily disabled. Replace this placeholder with your SVG logo later. */}
-            <div style={{ width:48, height:48, borderRadius:10, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:12, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif" }}>
-              DS
-            </div>
-            <span className="brand-text" style={{ fontSize:17, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"-0.5px" }}>DigitalSphere{/* <span style={{ color:C.blueLt }}>Ug</span> */}</span>
+        <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,4vw,40px)", display:"flex", alignItems:"center", justifyContent:"space-between", height:84 }}>
+          <Link to={getPathFromPage("Home")} onClick={() => { setMob(false); if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" }); }} aria-label="DigitalSphere home" style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:10, textDecoration:"none", WebkitTapHighlightColor:"transparent" }}>
+            <span className="brand-logo" aria-hidden="true">
+              <img src={brandLogoSrc} alt="" />
+            </span>
           </Link>
           <div className="desktop-nav" style={{ display:"flex", gap:1, alignItems:"center" }}>
             {NAV_LINKS.map((item) => (
@@ -3040,7 +3047,11 @@ function About({ setPage }) {
 }
 
 // ─── Footer ───────────────────────────────────────────────────────
-function Footer({ setPage }) {
+function Footer({ setPage, theme }) {
+  const brandLogoSrc = theme === "dark" ? brandLogoWhite : brandLogoBlue;
+  const scrollTop = () => {
+    if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <footer className="section-appear" style={{ borderTop:`1px solid ${C.border}`, background:C.surface }}>
       <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(36px,5vw,56px) clamp(16px,4vw,40px) clamp(20px,3vw,32px)" }}>
@@ -3048,13 +3059,11 @@ function Footer({ setPage }) {
 
           {/* Brand + social */}
           <div>
-            <button onClick={() => setPage("Home")} className="hover-lift" style={{ display:"flex", alignItems:"center", gap:10, marginBottom:14, background:"none", border:"none", cursor:"pointer", padding:0 }}>
-              {/* Logo image is temporarily disabled. Replace this placeholder with your SVG logo later. */}
-              <div style={{ width:40, height:40, borderRadius:8, display:"inline-flex", alignItems:"center", justifyContent:"center", background:C.surface, border:`1px solid ${C.border}`, color:C.blue, fontSize:11, fontWeight:800, fontFamily:"'Space Grotesk',sans-serif", flexShrink:0 }}>
-                DS
-              </div>
-              <span style={{ fontSize:16, fontWeight:800, color:C.text, fontFamily:"'Space Grotesk',sans-serif", whiteSpace:"nowrap" }}>DigitalSphere{/* <span style={{ color:C.blueLt }}>Ug</span> */}</span>
-            </button>
+            <Link to={getPathFromPage("Home")} onClick={scrollTop} aria-label="DigitalSphere home" className="hover-lift" style={{ display:"inline-flex", alignItems:"center", gap:10, marginBottom:14, textDecoration:"none", padding:0 }}>
+              <span className="brand-logo" aria-hidden="true">
+                <img src={brandLogoSrc} alt="" />
+              </span>
+            </Link>
             <p style={{ fontSize:13, color:C.textSub, lineHeight:1.75, fontFamily:"'Manrope',sans-serif", margin:"0 0 20px", maxWidth:240 }}>Always Free. Built For Everyone. Web3-ready.</p>
             {/* Social links in footer */}
             <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
@@ -3438,7 +3447,7 @@ export default function App() {
           {cmsBadgeText}
         </div>
       )}
-      <Footer setPage={openPage} />
+      <Footer setPage={openPage} theme={theme} />
     </div>
   );
 }
