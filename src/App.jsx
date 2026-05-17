@@ -3055,7 +3055,7 @@ function Footer({ setPage, theme }) {
   return (
     <footer className="section-appear" style={{ borderTop:`1px solid ${C.border}`, background:C.surface }}>
       <div style={{ maxWidth:1280, margin:"0 auto", padding:"clamp(36px,5vw,56px) clamp(16px,4vw,40px) clamp(20px,3vw,32px)" }}>
-        <div className="footer-grid" style={{ display:"grid", gridTemplateColumns:"2fr 1fr 1fr", gap:"clamp(28px,5vw,52px)", marginBottom:40 }}>
+        <div className="footer-grid" style={{ display:"grid", gridTemplateColumns:"2fr 1fr", gap:"clamp(28px,5vw,52px)", marginBottom:40 }}>
 
           {/* Brand + social */}
           <div>
@@ -3081,19 +3081,6 @@ function Footer({ setPage, theme }) {
             ))}
           </div>
 
-          {/* Resources links */}
-          <div>
-            <div style={{ fontSize:12, fontWeight:700, color:C.text, fontFamily:"'Space Grotesk',sans-serif", letterSpacing:"1.5px", textTransform:"uppercase", marginBottom:14 }}>Resources</div>
-            {[
-              { l:"BAU Uganda", h:"https://bau.ug" },
-              { l:"DevFest Kampala", h:"https://devfestkampala.com" },
-              { l:"Alchemy University", h:"https://university.alchemy.com" },
-              { l:"Cyfrin Updraft", h:"https://updraft.cyfrin.io" },
-              { l:"CryptoZombies", h:"https://cryptozombies.io" },
-            ].map(lk => (
-              <a key={lk.l} href={lk.h} target="_blank" rel="noopener noreferrer" className="hover-lift" style={{ display:"block", padding:"5px 0", color:C.textSub, fontSize:13, fontFamily:"'Manrope',sans-serif", textDecoration:"none" }}>{lk.l}</a>
-            ))}
-          </div>
         </div>
 
         <div style={{ marginTop:18, marginBottom:14, paddingTop:14, borderTop:`1px solid ${C.border}` }}>
